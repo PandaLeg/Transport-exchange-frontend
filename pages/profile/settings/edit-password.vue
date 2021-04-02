@@ -176,12 +176,11 @@
                 this.$store.dispatch('settings/updatePasswordAction', body)
                     .then(
                         () => {
-                            console.log("COOKIES USER", this.$cookies.get('user'));
+                            this.$router.push('/profile/settings')
                         }, error => {
                             console.log(error);
                         }
                     );
-                this.$router.push('/profile/settings')
             }
         }
     }

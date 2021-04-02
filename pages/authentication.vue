@@ -90,21 +90,36 @@
         },
         layout: 'auth',
         methods: {
-            handleLogin() {
+            async handleLogin() {
                 this.loading = true;
+                let checkLog = false;
+
                 if (this.email && this.password) {
-                    this.$store.dispatch('login', {
+                    await this.$store.dispatch('login', {
                         email: this.email,
                         password: this.password
                     })
                         .then(
                             () => {
-                                this.$router.push('/');
+                                checkLog = true;
                             }, error => {
                                 console.log(error);
                                 this.loading = false;
                             }
-                        )
+                        );
+
+                    if (checkLog) {
+                        const token = this.$cookies.get('token');
+                        await this.$store.dispatch('getUserAction', token)
+                            .then(
+                                () => {
+                                    this.$router.push('/');
+                                }, error => {
+                                    console.log(error);
+                                    this.loading = false;
+                                }
+                            );
+                    }
                 }
             },
         }

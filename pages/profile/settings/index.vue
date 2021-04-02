@@ -34,7 +34,7 @@
             },
 
             checkUserRole() {
-                return this.getUser.roles.includes('ROLE_USER')
+                return this.getUser.roles.map(item => item.name).includes('ROLE_USER')
             }
         }
     }

@@ -241,12 +241,17 @@
             faUserEdit() {
                 return faUserEdit
             },
+
             getUser() {
                 return this.$store.getters['getUser']
             },
 
+            getToken() {
+                return this.$store.getters['getToken']
+            },
+
             profilePicture() {
-                return this.photoProfile ? this.photoUrl  : 'https://picsum.photos/510/300?random'
+                return this.photoProfile ? this.photoUrl : 'https://picsum.photos/510/300?random'
             },
         },
         methods: {
@@ -254,8 +259,9 @@
                 this.$router.push('/profile/settings')
             },
 
-            redirectSettings() {
+            async redirectSettings() {
                 this.formData = new FormData();
+                let checkUpdate = false;
 
                 const personalData = {
                     id: this.getUser.id,
@@ -270,21 +276,29 @@
                 this.formData.append("personalData", new Blob([JSON.stringify(personalData)],
                     {type: "application/json"}));
 
-                this.$store.dispatch('settings/updatePersonalDataAction', {store: this.$store, formData: this.formData,
-                    user: this.getUser})
+                await this.$store.dispatch('settings/updatePersonalDataAction', {
+                    store: this.$store, formData: this.formData, user: this.getUser, token: this.getToken
+                })
                     .then(
-                        data => {
-                            this.$cookies.set('user', JSON.stringify(data), {
-                                path: '/profile/settings',
-                                maxAge: 86400
-                            });
-                            this.$store.commit('loginSuccess', data);
-                            console.log("COOKIES USER", this.$cookies.get('user'));
+                        () => {
+                            this.$store.commit('loginSuccess', this.getToken);
+                            checkUpdate = true;
                         }, error => {
                             console.log(error);
                         }
                     );
-                this.$router.push('/profile/settings')
+
+                if (checkUpdate) {
+                    const token = this.$cookies.get('token');
+                    await this.$store.dispatch('getUserAction', token)
+                        .then(
+                            () => {
+                                this.$router.push('/profile/settings')
+                            }, error => {
+                                console.log(error);
+                            }
+                        );
+                }
             },
 
             onLoadingPhoto() {
@@ -317,7 +331,7 @@
 </script>
 
 <style scoped>
-  .avatar-profile-and-name{
+  .avatar-profile-and-name {
     text-align: center;
   }
 </style>

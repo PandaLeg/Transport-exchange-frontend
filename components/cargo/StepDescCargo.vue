@@ -971,13 +971,10 @@
 </template>
 
 <script>
-    import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
-    import {faFlag} from '@fortawesome/free-solid-svg-icons'
-    import {faTruckMoving} from '@fortawesome/free-solid-svg-icons'
+    import {faArrowAltCircleRight, faFlag, faTruckMoving} from '@fortawesome/free-solid-svg-icons'
     import {names} from '@/json/cargo.name.json'
     import {validationMixin} from 'vuelidate'
     import {required} from 'vuelidate/lib/validators'
-    import {Search} from "../../service/realizationSearch";
 
     export default {
         mixins: [validationMixin],
@@ -1174,7 +1171,7 @@
         },
         watch: {
             firstLoadingPoint() {
-                if(this.firstLoadingPoint && this.firstUnloadingPoint && this.countOpenedField !== 6){
+                if (this.firstLoadingPoint && this.firstUnloadingPoint && this.countOpenedField !== 6) {
                     this.checkFilledTwoPointLoading = true;
                     this.checkFilledTwoPointUnloading = true;
                 }
@@ -1197,7 +1194,7 @@
             },
 
             firstUnloadingPoint() {
-                if(this.firstLoadingPoint && this.firstUnloadingPoint && this.countOpenedField !== 6){
+                if (this.firstLoadingPoint && this.firstUnloadingPoint && this.countOpenedField !== 6) {
                     this.checkFilledTwoPointLoading = true;
                     this.checkFilledTwoPointUnloading = true;
                 }
@@ -1659,40 +1656,50 @@
 
                 let places = [
                     {
-                        cityFrom: this.firstLoadingPoint.fields.name, countryFrom: this.firstLoadingPoint.fields.country,
-                        cityTo: this.firstUnloadingPoint.fields.name, countryTo: this.firstUnloadingPoint.fields.country,
+                        cityFrom: this.firstLoadingPoint.fields.name,
+                        countryFrom: this.firstLoadingPoint.fields.country,
+                        cityTo: this.firstUnloadingPoint.fields.name,
+                        countryTo: this.firstUnloadingPoint.fields.country,
                         latFirstPoint: this.firstLoadingPoint.fields.coordinates[0],
                         lngFirstPoint: this.firstLoadingPoint.fields.coordinates[1],
                         latSecondPoint: this.firstUnloadingPoint.fields.coordinates[0],
                         lngSecondPoint: this.firstUnloadingPoint.fields.coordinates[1]
                     },
                     {
-                        cityFrom: this.secondLoadingPoint?.fields.name, countryFrom: this.secondLoadingPoint?.fields.country,
-                        cityTo: this.secondUnloadingPoint?.fields.name, countryTo: this.secondUnloadingPoint?.fields.country,
+                        cityFrom: this.secondLoadingPoint?.fields.name,
+                        countryFrom: this.secondLoadingPoint?.fields.country,
+                        cityTo: this.secondUnloadingPoint?.fields.name,
+                        countryTo: this.secondUnloadingPoint?.fields.country,
                         latFirstPoint: this.secondLoadingPoint?.fields.coordinates[0],
                         lngFirstPoint: this.secondLoadingPoint?.fields.coordinates[1],
                         latSecondPoint: this.secondUnloadingPoint?.fields.coordinates[0],
                         lngSecondPoint: this.secondUnloadingPoint?.fields.coordinates[1]
                     },
                     {
-                        cityFrom: this.thirdLoadingPoint?.fields.name, countryFrom: this.thirdLoadingPoint?.fields.country,
-                        cityTo: this.thirdUnloadingPoint?.fields.name, countryTo: this.thirdUnloadingPoint?.fields.country,
+                        cityFrom: this.thirdLoadingPoint?.fields.name,
+                        countryFrom: this.thirdLoadingPoint?.fields.country,
+                        cityTo: this.thirdUnloadingPoint?.fields.name,
+                        countryTo: this.thirdUnloadingPoint?.fields.country,
                         latFirstPoint: this.thirdLoadingPoint?.fields.coordinates[0],
                         lngFirstPoint: this.thirdLoadingPoint?.fields.coordinates[1],
                         latSecondPoint: this.thirdUnloadingPoint?.fields.coordinates[0],
                         lngSecondPoint: this.thirdUnloadingPoint?.fields.coordinates[1]
                     },
                     {
-                        cityFrom: this.fourthLoadingPoint?.fields.name, countryFrom: this.fourthLoadingPoint?.fields.country,
-                        cityTo: this.fourthUnloadingPoint?.fields.name, countryTo: this.fourthUnloadingPoint?.fields.country,
+                        cityFrom: this.fourthLoadingPoint?.fields.name,
+                        countryFrom: this.fourthLoadingPoint?.fields.country,
+                        cityTo: this.fourthUnloadingPoint?.fields.name,
+                        countryTo: this.fourthUnloadingPoint?.fields.country,
                         latFirstPoint: this.fourthLoadingPoint?.fields.coordinates[0],
                         lngFirstPoint: this.fourthLoadingPoint?.fields.coordinates[1],
                         latSecondPoint: this.fourthUnloadingPoint?.fields.coordinates[0],
                         lngSecondPoint: this.fourthUnloadingPoint?.fields.coordinates[1]
                     },
                     {
-                        cityFrom: this.fifthLoadingPoint?.fields.name, countryFrom: this.fifthLoadingPoint?.fields.country,
-                        cityTo: this.fifthUnloadingPoint?.fields.name, countryTo: this.fifthUnloadingPoint?.fields.country,
+                        cityFrom: this.fifthLoadingPoint?.fields.name,
+                        countryFrom: this.fifthLoadingPoint?.fields.country,
+                        cityTo: this.fifthUnloadingPoint?.fields.name,
+                        countryTo: this.fifthUnloadingPoint?.fields.country,
                         latFirstPoint: this.fifthLoadingPoint?.fields.coordinates[0],
                         lngFirstPoint: this.fifthLoadingPoint?.fields.coordinates[1],
                         latSecondPoint: this.fifthUnloadingPoint?.fields.coordinates[0],

@@ -28,7 +28,7 @@ export const mutations = {
 
 export const actions = {
   async getCountCargoAction({commit}, body) {
-    let checkUserRole = body.user.roles.includes('ROLE_USER');
+    let checkUserRole = body.user.roles.map(item => item.name).includes('ROLE_USER');
 
     const response = await this.$axios.get(API_CARGO + 'get-count-cargo/' + body.user.id,
       {
@@ -44,7 +44,7 @@ export const actions = {
   },
 
   async getCountTransportAction({commit}, body) {
-    let checkUserRole = body.user.roles.includes('ROLE_USER');
+    let checkUserRole = body.user.roles.map(item => item.name).includes('ROLE_USER');
 
     const response = await this.$axios.get(API_TRANSPORT + 'get-count-transports/' + body.user.id,
       {

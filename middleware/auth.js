@@ -1,13 +1,13 @@
 const API_URL = 'http://localhost:9090/auth/';
 
 export default function ({store, redirect, $axios}) {
-  let user = store.state.initialState.user;
-  let hasToken = store.getters['hasToken'];
-  if (user) {
-    $axios.post(API_URL + 'validate-user', {}, {params: {token: user.token}}).then(response => {
+  let token = store.state.initialState.token;
+  let hasToken = store.state.initialState.loggedIn;
+  if (token) {
+    $axios.post(API_URL + 'validate-user', {}, {params: {token: token}}).then(response => {
       console.log('Validate user', response.data);
       console.log('TRUE REQUEST');
-      store.commit('loginSuccess', user);
+      store.commit('loginSuccess', token);
 
     }, error => {
       console.log('FALSE REQUEST');

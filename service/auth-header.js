@@ -1,8 +1,8 @@
 export default function authHeader(store) {
-  let user = store.state.initialState.user;
+  let token = store.state.initialState.token;
 
-  if (user && user.token) {
-    return {Authorization: 'Bearer ' + user.token}
+  if (token) {
+    return {Authorization: 'Bearer ' + token}
   } else {
     return {};
   }

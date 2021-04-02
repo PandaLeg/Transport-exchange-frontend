@@ -3,20 +3,25 @@ import AuthService from '../service/auth.service'
 const cookieparser = process.server ? require('cookieparser') : undefined;
 
 const API_URL = 'http://localhost:9090/auth/';
+const API_USER_URL = 'http://localhost:9090/user/';
 
 export const state = () => ({
   initialState: {
     loggedIn: false,
-    user: null
+    user: null,
+    token: null
   }
 });
 
 export const mutations = {
-  loginSuccess(state, user) {
+  loginSuccess(state, token) {
     state.initialState.loggedIn = true;
-    state.initialState.user = user;
+    state.initialState.token = token;
+  },
 
-    console.log("LOGINSUCCES", user);
+  setUser(state, user) {
+    state.initialState.user = user;
+    console.log("Set User", user);
   },
 
   loginFailure(state) {
@@ -31,20 +36,22 @@ export const mutations = {
 };
 
 export const actions = {
-  nuxtServerInit({commit}, {req}) {
-    let user = null;
+  async nuxtServerInit({commit, dispatch}, {req}) {
+    let token = null;
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie);
       try {
-        user = JSON.parse(parsed.user);
-        console.log(user);
+        token = JSON.parse(parsed.token);
+        console.log(token);
       } catch (err) {
         // No valid cookie found
       }
     }
-    if (user) {
+
+    if (token) {
+      await dispatch('getUserAction', token);
       console.log("nuxtServerInit");
-      commit('loginSuccess', user)
+      commit('loginSuccess', token)
     }
   },
 
@@ -56,12 +63,12 @@ export const actions = {
 
     const data = await response.data;
 
-    console.log(data);
-    if (data.token) {
-      this.$cookies.set('user', JSON.stringify(data), {
+    console.log("DATA AUTH", data);
+    if (data) {
+      this.$cookies.set('token', JSON.stringify(data), {
         path: '/',
         maxAge: 86400
-      })
+      });
     }
 
     if (data) {
@@ -74,17 +81,25 @@ export const actions = {
   },
 
   logout({commit}) {
-    this.$cookies.remove('user', {
+    this.$cookies.remove('token', {
       path: '/'
     });
-    this.$cookies.remove('user', {
-      path: '/profile/settings'
-    });
     commit('logout');
+  },
+
+  async getUserAction({commit}, token) {
+    const response = await this.$axios.get(API_USER_URL + 'get-user', {params: {jwtToken: token}});
+
+    const data = await response.data;
+
+    if (data) {
+      commit('setUser', data)
+    }
   }
 };
 
 export const getters = {
   hasToken: state => state.initialState.loggedIn,
-  getUser: state => state.initialState.user
+  getUser: state => state.initialState.user,
+  getToken: state => state.initialState.token,
 };
