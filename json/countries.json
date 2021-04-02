@@ -1,0 +1,504 @@
+{
+  "countries": [
+    {
+      "id": "f6416be50ed3f25165c04c3d48a1c5ed20efa43e",
+      "ruName": "Норвегия",
+      "enName": "Norway"
+    },
+    {
+      "id": "bb55be8fa32eda06481a4dfe89abd5573d0bddb9",
+      "ruName": "Швейцария",
+      "enName": "Switzerland"
+    },
+    {
+      "id": "d34890d5bf383cb5de27e0d78bd4a142232e4f66",
+      "ruName": "Индия",
+      "enName": "India"
+    },
+    {
+      "id": "902d74358f22154ce402f890652d2aec6675eb95",
+      "ruName": "Никарагуа",
+      "enName": "Nicaragua"
+    },
+    {
+      "id": "5d82b4898d63ad94247898b3992ed5294c57b9eb",
+      "ruName": "Хорватия",
+      "enName": "Croatia"
+    },
+    {
+      "id": "8f096d7559734cc3e623fd0c2fcb35d8c4ec08d3",
+      "ruName": "Греция",
+      "enName": "Greece"
+    },
+    {
+      "id": "424a3396ada3d102ca56c0e9478b1fc36973d216",
+      "ruName": "Коста-Рика",
+      "enName": "Costa Rica"
+    },
+    {
+      "id": "62e171492b6e0591b0b7f021cd5cc2573d8101c5",
+      "ruName": "Дания",
+      "enName": "Denmark"
+    },
+    {
+      "id": "4742370e1af6fe79b25c6eb23bda00e71968dc35",
+      "ruName": "Латвия",
+      "enName": "Latvia"
+    },
+    {
+      "id": "fc8a5f88c3bae22f88d36892cc885080ec1adcbd",
+      "ruName": "Армения",
+      "enName": "Armenia"
+    },
+    {
+      "id": "c5c2975ced2e4c41556fafaf0219ac86d2558cf2",
+      "ruName": "Чехия",
+      "enName": "Czech Republic"
+    },
+    {
+      "id": "cdb9fbbf991e54fd554b3818e56977efc2380788",
+      "ruName": "Грузия",
+      "enName": "Georgia"
+    },
+    {
+      "id": "3153b3a5998e3c0c44274defe29dccbd6ab5ef05",
+      "ruName": "Сербия",
+      "enName": "Serbia"
+    },
+    {
+      "id": "89bedf37ad9a2df319b49fe574423062caf6b6f0",
+      "ruName": "Черногория",
+      "enName": "Montenegro"
+    },
+    {
+      "id": "70d6d49c5056902ae51a8583dcca1b44a8a8a13b",
+      "ruName": "Великобритания",
+      "enName": "United Kingdom"
+    },
+    {
+      "id": "e6ac209b9b229bd5dbd808647e8d81745f25da0c",
+      "ruName": "Лихтенштейн",
+      "enName": "Liechtenstein"
+    },
+    {
+      "id": "1ae60338be3ba9b81538715c26f073c71cd72065",
+      "ruName": "Македония",
+      "enName": "Macedonia, The former Yugoslav Rep. of"
+    },
+    {
+      "id": "9e0aeb01e939b6ecc8ad93f60c03d1e4233cf0eb",
+      "ruName": "Франция",
+      "enName": "France"
+    },
+    {
+      "id": "96d42a1f94961c367593b569d6c7f66d50f6fb72",
+      "ruName": "Монголия",
+      "enName": "Mongolia"
+    },
+    {
+      "id": "26b418a98fdc5428774bc73f939d92cdcf89e1b7",
+      "ruName": "Португалия",
+      "enName": "Portugal"
+    },
+    {
+      "id": "720288418c5cd9bdf165855dc45a815883889743",
+      "ruName": "Венгрия",
+      "enName": "Hungary"
+    },
+    {
+      "id": "c6aac7361ca0f5184d088cc3aa0b5e3c451c33d6",
+      "ruName": "Боливия",
+      "enName": "Bolivia"
+    },
+    {
+      "id": "fe69c7e480e83356f978311a32a3ea2bf04d0863",
+      "ruName": "Турция",
+      "enName": "Turkey"
+    },
+    {
+      "id": "53401d0b2bd912491a29af8ce25a1b81e48450a0",
+      "ruName": "Молдавия",
+      "enName": "Moldova, Republic of"
+    },
+    {
+      "id": "f845b5bd8acce77fde225b0507c4d3b66aff90ae",
+      "ruName": "Китай",
+      "enName": "China"
+    },
+    {
+      "id": "4b8996522ea11226d8a1fc7ab2c86a14db4f2fee",
+      "ruName": "Бахрейн",
+      "enName": "Bahrain"
+    },
+    {
+      "id": "ee61c596e9ecb8a3176499624d98858fb7060fc3",
+      "ruName": "Словения",
+      "enName": "Slovenia"
+    },
+    {
+      "id": "2880b292fc201d9f3c522f4d4dbf0eec8e89a506",
+      "ruName": "Австрия",
+      "enName": "Austria"
+    },
+    {
+      "id": "c78d742eddc220287a1a43c4a7f29b6152e6bb0e",
+      "ruName": "Киргизия",
+      "enName": "Kyrgyzstan"
+    },
+    {
+      "id": "de6ec3d98c0fdf5e6381e6c29f6197957847473e",
+      "ruName": "Сирия",
+      "enName": "Syrian Arab Republic"
+    },
+    {
+      "id": "cbb3abe8821b9e0762e4eff45286c92f44dc220f",
+      "ruName": "Южная Корея",
+      "enName": "Korea, Republic of"
+    },
+    {
+      "id": "7eeb552c0777b902cf1bc25997a2d31140f4db97",
+      "ruName": "Болгария",
+      "enName": "Bulgaria"
+    },
+    {
+      "id": "37eb4fa3f626686ce3d1628ba662fdd6539ece6f",
+      "ruName": "Объединенные Арабские Эмираты",
+      "enName": "United Arab Emirates"
+    },
+    {
+      "id": "5e023c8298bdf1d66ed0a4e0336d0cadc0c45702",
+      "ruName": "Словакия",
+      "enName": "Slovakia"
+    },
+    {
+      "id": "17a2ac9042b3fb8a5309b7544ebffaaf557725b8",
+      "ruName": "Казахстан",
+      "enName": "Kazakhstan"
+    },
+    {
+      "id": "e7ef0c9eed5eeb3f7dd107fc6a6b3d6c0f3c566d",
+      "ruName": "Таджикистан",
+      "enName": "Tajikistan"
+    },
+    {
+      "id": "134ecda9a14ca999a3ef91dfa8ceafba7209f9a6",
+      "ruName": "Кипр",
+      "enName": "Cyprus"
+    },
+    {
+      "id": "fa6b071cffc1a7d31371c95b464ce39e1b3b7090",
+      "ruName": "Ирак",
+      "enName": "Iraq"
+    },
+    {
+      "id": "3645914a8cec07976f10f2d3399ab49c06ae6337",
+      "ruName": "Испания",
+      "enName": "Spain"
+    },
+    {
+      "id": "f223acee3b20fc20594a1f4eed95584992dad154",
+      "ruName": "Северная Корея",
+      "enName": "Korea, Dem. People's Rep. of"
+    },
+    {
+      "id": "6129c25a6540620a1929df60554dcf14dc060d9c",
+      "ruName": "Босния и Герцеговина",
+      "enName": "Bosnia and Herzegovina"
+    },
+    {
+      "id": "18761a64cf6ffa37cd6647dc0a8301e4ec331a22",
+      "ruName": "Непал",
+      "enName": "Nepal"
+    },
+    {
+      "id": "47d01182d5f3faa0d77baafafb36d7da35b9a3f8",
+      "ruName": "Уругвай",
+      "enName": "Uruguay"
+    },
+    {
+      "id": "5699c9c1ea3e113d6426c18df978755418a82444",
+      "ruName": "Азербайджан",
+      "enName": "Azerbaijan"
+    },
+    {
+      "id": "6a870d321ceea95c92a50b8c43e3908bfae8dc4d",
+      "ruName": "Аргентина",
+      "enName": "Argentina"
+    },
+    {
+      "id": "3bc85efb128013656ae5a759519357867a0e17d5",
+      "ruName": "Сингапур",
+      "enName": "Singapore"
+    },
+    {
+      "id": "b99647514d568967a834910cab25d859ab8a66cb",
+      "ruName": "Венесуэла",
+      "enName": "Venezuela, Bolivarian Rep. of"
+    },
+    {
+      "id": "430a13088b3d5c83446e973a284bb3ba4578b41d",
+      "ruName": "Ливан",
+      "enName": "Lebanon"
+    },
+    {
+      "id": "5d1e2e3dec4ea2c7638a98e8a61e2873a73aa69f",
+      "ruName": "Сан-Марино",
+      "enName": "San Marino"
+    },
+    {
+      "id": "8b65a685f27ed8ee04c24272be7a6b799843781d",
+      "ruName": "Иран",
+      "enName": "Iran, Islamic Rep. of"
+    },
+    {
+      "id": "7546d0fb98136014ea3b6186e0108e43a9875bbb",
+      "ruName": "Йемен",
+      "enName": "Yemen"
+    },
+    {
+      "id": "b0f53ce68395308daacff40f2da78a5a1df396a9",
+      "ruName": "Швеция",
+      "enName": "Sweden"
+    },
+    {
+      "id": "0acaa11b41a472d8d331f055cee37d2048a3efd7",
+      "ruName": "Пакистан",
+      "enName": "Pakistan"
+    },
+    {
+      "id": "b17d4a8d92b3914e773ebdf53e38812e472da69c",
+      "ruName": "Мальта",
+      "enName": "Malta"
+    },
+    {
+      "id": "a25c1513a799d30722186aae9d328fb32f3b00f4",
+      "ruName": "Ирландия",
+      "enName": "Ireland"
+    },
+    {
+      "id": "b1e9de43cb1ee6f42ff213ebdecde4343e56d71b",
+      "ruName": "Алжир",
+      "enName": "Algeria"
+    },
+    {
+      "id": "50dfec1db8c98a61e582a115d2c737fb44666ac0",
+      "ruName": "Бразилия",
+      "enName": "Brazil"
+    },
+    {
+      "id": "e58e11da3d378bb4d520ea1fe866c7c50545ae75",
+      "ruName": "Бельгия",
+      "enName": "Belgium"
+    },
+    {
+      "id": "c48af5d39774cd4693a351a9cfb616a0fb5efc00",
+      "ruName": "Оман",
+      "enName": "Oman"
+    },
+    {
+      "id": "608005a350f000955c52085df9080c2962fe17e4",
+      "ruName": "Вьетнам",
+      "enName": "Viet Nam"
+    },
+    {
+      "id": "a3447d28a1a01d16f8226c01c632f6f142714865",
+      "ruName": "Австралия",
+      "enName": "Australia"
+    },
+    {
+      "id": "eba40667c1048f08726377f37f3272bdea086dec",
+      "ruName": "Польша",
+      "enName": "Poland"
+    },
+    {
+      "id": "3d60fd06ad28e4a1ed854741c893e169468d8c2f",
+      "ruName": "Исландия",
+      "enName": "Iceland"
+    },
+    {
+      "id": "8063d28955ce1858ca5a01d127a7e1a48932133e",
+      "ruName": "Парагвай",
+      "enName": "Paraguay"
+    },
+    {
+      "id": "35a2973ad0c8b40264ff40a83c816cdcec5b032b",
+      "ruName": "Шри-Ланка",
+      "enName": "Sri Lanka"
+    },
+    {
+      "id": "1af7338b15b8a24029658730e54edce572a816a4",
+      "ruName": "Румыния",
+      "enName": "Romania"
+    },
+    {
+      "id": "5aba8bbc89bdcd86d20d0f2ba8aa8cd59c513eed",
+      "ruName": "Бутан",
+      "enName": "Bhutan"
+    },
+    {
+      "id": "cfb9e9ca0d931b3ed830472643b391b44f1a6a77",
+      "ruName": "Канада",
+      "enName": "Canada"
+    },
+    {
+      "id": "da0f020ac944571242af1a8f904ec7569a93fb46",
+      "ruName": "Туркменистан",
+      "enName": "Turkmenistan"
+    },
+    {
+      "id": "35a2973ad0c8b40264ff40a83c816cdcec5b032b",
+      "ruName": "Шри-Ланка",
+      "enName": "Sri Lanka"
+    },
+    {
+      "id": "accc15da5995b328e48ab9744d51fd9ba2fd9d7d",
+      "ruName": "Эстония",
+      "enName": "Estonia"
+    },
+    {
+      "id": "952917822adf843668cb5380f3429a6b86420f05",
+      "ruName": "Германия",
+      "enName": "Germany"
+    },
+    {
+      "id": "b9e5971078f44516aae71c0bf0676c52a506e000",
+      "ruName": "Украина",
+      "enName": "Ukraine"
+    },
+    {
+      "id": "2fa5f9a146dafacaaf05f7b747fc0e65095fb569",
+      "ruName": "Литва",
+      "enName": "Lithuania"
+    },
+    {
+      "id": "8f09821c94576561127487d16a4021586483d6cf",
+      "ruName": "Тайланд",
+      "enName": "Thailand"
+    },
+    {
+      "id": "e0916455ae6b8e73d0a1467fb2929aeb4462f6dc",
+      "ruName": "Финляндия",
+      "enName": "Finland"
+    },
+    {
+      "id": "4ad4ce6160dbacd79c39f05aa2eba374785e9889",
+      "ruName": "Монако",
+      "enName": "Monaco"
+    },
+    {
+      "id": "abe6263b16541c9fabef63d15d35956a609801fc",
+      "ruName": "Люксембург",
+      "enName": "Luxembourg"
+    },
+    {
+      "id": "e4132734a910bb32fa4902b8b2c4103158cefc44",
+      "ruName": "Италия",
+      "enName": "Italy"
+    },
+    {
+      "id": "02a3a402b317f86f7d438241f47812b3a41103cf",
+      "ruName": "Узбекистан",
+      "enName": "Uzbekistan"
+    },
+    {
+      "id": "3d4c65a4460aacaa70c4f61843189adff5e8d687",
+      "ruName": "Гонконг",
+      "enName": "Hong Kong, China"
+    },
+    {
+      "id": "34a17f2aa0b8d747ed45109822ee91c9167b4c5b",
+      "ruName": "Япония",
+      "enName": "Japan"
+    },
+    {
+      "id": "342f580fcac47e7da2843852d218cf1ecb574557",
+      "ruName": "Саудовская Аравия",
+      "enName": "Saudi Arabia"
+    },
+    {
+      "id": "78cedacff83b3f722d0aaaf36b94b4c86fee4eb2",
+      "ruName": "Колумбия",
+      "enName": "Colombia"
+    },
+    {
+      "id": "48c2cf98bc0100f14e80e2051d669514c15a5843",
+      "ruName": "Албания",
+      "enName": "Albania"
+    },
+    {
+      "id": "2498a6c3ac16c72b05f7387ad486cdf0d9f6866d",
+      "ruName": "Бангладеш",
+      "enName": "Bangladesh"
+    },
+    {
+      "id": "9c6ef2065aa7cc7222e38b4fd0224afa333e63e7",
+      "ruName": "Андорра",
+      "enName": "Andorra"
+    },
+    {
+      "id": "4d6a2b91b9061eaf9efc483ce4e1456c77d540e4",
+      "ruName": "Соединенные Штаты Америки",
+      "enName": "United States"
+    },
+    {
+      "id": "e9ca6edfed5f8a6f4f046fae9d1d6f01836a919c",
+      "ruName": "Израиль",
+      "enName": "Israel"
+    },
+    {
+      "id": "dfbc1a84a8e45c578f853e23821a00001edd659f",
+      "ruName": "Египет",
+      "enName": "Egypt"
+    },
+    {
+      "id": "24c78f4b4941106e13708779d04358d851a848d9",
+      "ruName": "Куба",
+      "enName": "Cuba"
+    },
+    {
+      "id": "f5cde0e459cc79abf0e221b575fb92b63a036e00",
+      "ruName": "Бруней",
+      "enName": "Brunei Darussalam"
+    },
+    {
+      "id": "f5cde0e459cc79abf0e221b575fb92b63a036e00",
+      "ruName": "Нидерланды",
+      "enName": "Netherlands"
+    },
+    {
+      "id": "75c068b2567e889d669e3308e99225e3b1729313",
+      "ruName": "Камбоджа",
+      "enName": "Cambodia"
+    },
+    {
+      "id": "e311535419ee82365d34ffd2b3bd7da39853385d",
+      "ruName": "Россия",
+      "enName": "Russian Federation"
+    },
+    {
+      "id": "7ec9e0d96a95a676767e6e453769eb4b0e692105",
+      "ruName": "Малайзия",
+      "enName": "Malaysia"
+    },
+    {
+      "id": "072755bcf0884760bd0ba250aa2bf3f79a3cfc43",
+      "ruName": "Афганистан",
+      "enName": "Afghanistan"
+    },
+    {
+      "id": "dde9239882f214734a037764aa029e536a8a4d14",
+      "ruName": "Мексика",
+      "enName": "Mexico"
+    },
+    {
+      "id": "7b21907c07a88d756c0dd16cf3a64c68fa829452",
+      "ruName": "Беларусь",
+      "enName": "Belarus"
+    },
+    {
+      "id": "a6aea8c37bc4eafebf384b8025a85296c17a23ab",
+      "ruName": "Гватемала",
+      "enName": "Guatemala"
+    }
+  ]
+}

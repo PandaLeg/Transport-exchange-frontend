@@ -1,0 +1,164 @@
+{
+  "typesBody": [
+    {
+      "id": "1",
+      "name": "Бортовой",
+      "check": "open"
+    },
+    {
+      "id": "2",
+      "name": "Платформа",
+      "check": "open"
+    },
+    {
+      "id": "3",
+      "name": "Самосвал",
+      "check": "open"
+    },
+    {
+      "id": "4",
+      "name": "Низкорамный трал",
+      "check": "open"
+    },
+    {
+      "id": "5",
+      "name": "Манипулятор",
+      "check": "open"
+    },
+    {
+      "id": "6",
+      "name": "Контейнеровоз",
+      "check": "open"
+    },
+    {
+      "id": "7",
+      "name": "Металловоз",
+      "check": "open"
+    },
+    {
+      "id": "8",
+      "name": "Плитовоз",
+      "check": "open"
+    },
+    {
+      "id": "9",
+      "name": "Тент",
+      "check": "closed"
+    },
+    {
+      "id": "10",
+      "name": "Рефрижератор",
+      "check": "closed"
+    },
+    {
+      "id": "11",
+      "name": "Изотермический",
+      "check": "closed"
+    },
+    {
+      "id": "12",
+      "name": "Цельнометаллический",
+      "check": "closed"
+    },
+    {
+      "id": "13",
+      "name": "Химическая автоцистерна",
+      "check": "closed"
+    },
+    {
+      "id": "14",
+      "name": "Микроавтобус",
+      "check": "closed"
+    },
+    {
+      "id": "15",
+      "name": "Автоцистерна",
+      "check": "cistern"
+    },
+    {
+      "id": "16",
+      "name": "Бензовоз",
+      "check": "cistern"
+    },
+    {
+      "id": "17",
+      "name": "Газовоз",
+      "check": "cistern"
+    },
+    {
+      "id": "18",
+      "name": "Мазутовоз",
+      "check": "cistern"
+    },
+    {
+      "id": "19",
+      "name": "Битумовоз",
+      "check": "cistern"
+    },
+    {
+      "id": "20",
+      "name": "Цементовоз",
+      "check": "cistern"
+    },
+    {
+      "id": "21",
+      "name": "Масловоз",
+      "check": "cistern"
+    },
+    {
+      "id": "22",
+      "name": "Молоковоз",
+      "check": "cistern"
+    },
+    {
+      "id": "23",
+      "name": "Водовоз",
+      "check": "cistern"
+    },
+    {
+      "id": "24",
+      "name": "Кормовоз",
+      "check": "cistern"
+    },
+    {
+      "id": "25",
+      "name": "Автовоз",
+      "check": "spec_equipment"
+    },
+    {
+      "id": "26",
+      "name": "Лесовоз",
+      "check": "spec_equipment"
+    },
+    {
+      "id": "27",
+      "name": "Автокран",
+      "check": "spec_equipment"
+    },
+    {
+      "id": "28",
+      "name": "Мусоровоз",
+      "check": "spec_equipment"
+    },
+    {
+      "id": "29",
+      "name": "Яхтовоз",
+      "check": "spec_equipment"
+    },
+    {
+      "id": "30",
+      "name": "Скотовоз",
+      "check": "spec_equipment"
+    },
+    {
+      "id": "31",
+      "name": "Зерновоз",
+      "check": "spec_equipment"
+    },
+    {
+      "id": "32",
+      "name": "Тягач",
+      "check": "spec_equipment"
+    }
+  ]
+}
