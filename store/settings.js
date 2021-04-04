@@ -13,6 +13,23 @@ export const actions = {
     const response = await this.$axios.post(API_CARGO + 'edit-personal-data', body.formData,
       {
         headers: Object.assign(authHeader(body.store), {"Content-Type": undefined}),
+        params: {role: checkUserRole ? 'ROLE_USER' : 'ROLE_LEGAL_USER'}
+      });
+    const data = await response.data;
+
+    if (data) {
+      return Promise.resolve(data);
+    } else {
+      return Promise.reject(error);
+    }
+  },
+
+  async updateBackgroundProfileAction({commit}, body) {
+    let checkUserRole = body.user.roles.map(item => item.name).includes('ROLE_USER');
+
+    const response = await this.$axios.post(API_CARGO + 'edit-background-profile', body.formData,
+      {
+        headers: Object.assign(authHeader(body.store), {"Content-Type": undefined}),
         params: {role: checkUserRole ? 'ROLE_USER' : 'ROLE_LEGAL_USER', jwt: body.token}
       });
     const data = await response.data;
@@ -27,7 +44,7 @@ export const actions = {
   async updatePasswordAction({commit}, body) {
     let checkUserRole = body.user.roles.map(item => item.name).includes('ROLE_USER');
 
-    const response = await this.$axios.put(API_CARGO + 'edit-password/', body.personalData,
+    const response = await this.$axios.put(API_CARGO + 'edit-password', body.personalData,
       {
         headers: Object.assign(authHeader(body.store)),
         params: {role: checkUserRole ? 'ROLE_USER' : 'ROLE_LEGAL_USER'}

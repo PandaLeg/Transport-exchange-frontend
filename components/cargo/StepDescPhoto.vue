@@ -233,6 +233,10 @@
                 return this.$store.getters['getUser']
             },
 
+            getToken() {
+                return this.$store.getters['getToken']
+            },
+
             getInitialCargo() {
                 return this.$store.getters['cargo/getInitialCargo']
             },
@@ -277,7 +281,7 @@
                     {type: "application/json"}));
 
                 await this.$store.dispatch('cargo/addCargoAction', {store: this.$store, formData: this.formData,
-                userToken: this.getUser.token})
+                userToken: this.getToken})
             },
 
             onLoadingPhoto() {

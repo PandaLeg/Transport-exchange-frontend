@@ -233,6 +233,10 @@
                 return this.$store.getters['getUser']
             },
 
+            getToken() {
+                return this.$store.getters['getToken']
+            },
+
             getInitialTransport() {
                 return this.$store.getters['transport/getInitialTransport']
             },
@@ -276,7 +280,7 @@
                     {type: "application/json"}));
 
                 await this.$store.dispatch('transport/addTransportAction', {store: this.$store, formData: this.formData,
-                    userToken: this.getUser.token})
+                    userToken: this.getToken})
             },
 
             onLoadingPhoto() {

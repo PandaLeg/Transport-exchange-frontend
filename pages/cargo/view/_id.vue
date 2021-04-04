@@ -569,7 +569,7 @@
       <v-col
         lg="4"
       >
-        <v-card>
+        <v-card v-if="checkUser">
           <v-card-title>
             <nuxt-link :to="{path: getPathToSearch, query: queryResultSearch}"
                        class="subtitle-font nuxt-link-active">
@@ -578,6 +578,68 @@
           </v-card-title>
           <v-divider></v-divider>
           <v-card-title class="photo-font">Контактная информация</v-card-title>
+
+          <v-card-text>
+            <div class="subtitle-font mt-3">
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  lg="4"
+                >
+                  ФИО:
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="8"
+                  lg="8"
+                >
+                <span class="spectral-font text--primary">
+                  {{ userFromCargo.firstName }}
+                  {{ userFromCargo.lastName }}
+                  {{ userFromCargo.patronymic }}
+                </span>
+                </v-col>
+              </v-row>
+            </div>
+            <div class="subtitle-font mt-3">
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  lg="4"
+                >
+                  Эл. почта:
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="8"
+                  lg="8"
+                >
+                  <span class="spectral-font text--primary">{{ userFromCargo.email }}</span>
+                </v-col>
+              </v-row>
+            </div>
+
+            <div class="subtitle-font mt-3">
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  lg="4"
+                >
+                  Местоположение:
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="8"
+                  lg="8"
+                >
+                  <span class="spectral-font text--primary">{{ userFromCargo.city }}, {{ userFromCargo.country }}</span>
+                </v-col>
+              </v-row>
+            </div>
+          </v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -598,12 +660,10 @@
             if (Object.keys(store.getters['cargo/getCargoView']).length !== 0) {
                 if (store.getters['cargo/getCargoView'].id !== Number(params.id)) {
                     await store.dispatch('cargo/getCargoAction', params.id);
-                    await store.dispatch('cargo/getPlacesCargoAction', params.id);
                     await store.dispatch('cargo/getPhotoCargoAction', params.id);
                 }
             } else {
                 await store.dispatch('cargo/getCargoAction', params.id);
-                await store.dispatch('cargo/getPlacesCargoAction', params.id);
                 await store.dispatch('cargo/getPhotoCargoAction', params.id);
             }
         },
@@ -643,6 +703,14 @@
         computed: {
             cargoView() {
                 return this.$store.getters['cargo/getCargoView']
+            },
+
+            userFromCargo() {
+                return this.$store.getters['cargo/getUserFromCargo']
+            },
+
+            checkUser() {
+                return this.$store.getters['cargo/checkUser']
             },
 
             faAngleLeft() {

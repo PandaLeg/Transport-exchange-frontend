@@ -150,6 +150,54 @@
         </v-list>
       </v-menu>
 
+      <!-- Offer -->
+      <v-menu
+        open-on-hover
+        offset-y
+        rounded
+        origin="center center"
+        transition="scale-transition"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            v-bind="attrs"
+            v-on="on"
+            class="mr-5"
+            text
+          >
+            Offer
+          </v-btn>
+        </template>
+
+        <v-list
+          min-width="250"
+        >
+          <v-list-item
+            link
+            @click="redirectCargoOffer"
+          >
+            <v-list-item-icon>
+              <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-subtitle>Cargo offer</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item
+            link
+            @click="redirectTransportOffer"
+          >
+            <v-list-item-icon>
+              <fa-icon :icon="faSearch" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-subtitle>Transport offer</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
       <v-spacer></v-spacer>
 
       <!-- Account -->
@@ -350,7 +398,7 @@
                 this.$router.push('/profile')
             },
 
-            redirectProfileSettings(){
+            redirectProfileSettings() {
                 this.$router.push('/profile/settings')
             },
 
@@ -372,6 +420,14 @@
 
             redirectSearchTransport() {
                 this.$router.push("/transport/search-transport")
+            },
+
+            redirectCargoOffer() {
+                this.$router.push("/offer/cargo")
+            },
+
+            redirectTransportOffer() {
+                this.$router.push("/offer/transport")
             }
         }
     }

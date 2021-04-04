@@ -277,7 +277,7 @@
                     {type: "application/json"}));
 
                 await this.$store.dispatch('settings/updatePersonalDataAction', {
-                    store: this.$store, formData: this.formData, user: this.getUser, token: this.getToken
+                    store: this.$store, formData: this.formData, user: this.getUser
                 })
                     .then(
                         () => {

@@ -171,6 +171,23 @@
             </v-img>
           </v-col>
         </v-row>
+        <div class="list-title-information-font ml-5 mt-3">
+          <v-row>
+            <v-col
+              cols="12"
+              md="3"
+              lg="3"
+            >
+              <v-btn
+                color="primary"
+                @click="redirectEditBackgroundProfile"
+              >
+                Редактировать
+                <fa-icon :icon="faUserEdit" class="ml-1"/>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </div>
       </v-card>
     </v-col>
   </v-row>
@@ -211,6 +228,10 @@
         methods:{
             redirectEditPersonalData(){
                 this.$router.push('/profile/settings/edit-personal-data')
+            },
+
+            redirectEditBackgroundProfile(){
+                this.$router.push('/profile/settings/edit-background')
             },
 
             redirectEditPassword(){

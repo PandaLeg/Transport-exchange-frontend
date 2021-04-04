@@ -14,6 +14,8 @@ export const state = () => ({
   listPointsCargo: [],
   listPhotoCargo: [],
   cargoView: {},
+  user: {},
+  checkUser: false,
   resultSearch: {},
   pathToSearch: '',
   currentPage: 1,
@@ -122,6 +124,11 @@ export const mutations = {
     }
   },
 
+  setUserCargo(state, data){
+    state.user = data;
+    state.checkUser = state.user.roles.map(item => item.name).includes('ROLE_USER')
+  },
+
   setPointsAllCargo(state, data) {
     state.listPointsAllCargo = data;
   },
@@ -170,17 +177,9 @@ export const actions = {
 
     console.log("CARGO", data);
     if (data) {
-      commit('setCargoView', data)
-    }
-  },
-
-  async getPlacesCargoAction({commit}, id) {
-    const response = await this.$axios.get(API_URL + 'get-points-cargo', {params: {id}});
-    const data = await response.data;
-
-    console.log(data);
-    if (data) {
-      commit('setPointsCargo', data);
+      commit('setCargoView', data.cargo);
+      commit('setPointsCargo', data.pointsLUCargo);
+      commit('setUserCargo', data.user);
     }
   },
 
@@ -209,6 +208,14 @@ export const getters = {
 
   getCargoView: state => {
     return state.cargoView
+  },
+
+  getUserFromCargo: state => {
+    return state.user
+  },
+
+  checkUser: state => {
+    return state.checkUser
   },
 
   getDataResultSearch: state => {

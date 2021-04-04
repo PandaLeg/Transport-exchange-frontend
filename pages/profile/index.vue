@@ -7,7 +7,7 @@
         class="background-image"
         max-height="800"
         :height="height"
-        :src="backgroundImageClub"
+        :src="backgroundImageProfile"
       >
         <v-row
           align="center"
@@ -24,7 +24,7 @@
               size="150"
             >
               <v-img
-                :src="avatarInstitute"
+                :src="avatarProfile"
               >
               </v-img>
             </v-avatar>
@@ -117,34 +117,89 @@
         class="mt-12 mb-10"
       >
         <v-card
-          height="220"
-          max-height="250"
+          max-height="400"
         >
           <v-card-title class="blue white--text text-center">
             <span class="title-information-font">Контактная информация</span>
           </v-card-title>
           <div class="list-title-information-font ml-5 mt-3">
-            ФИО:
-            <span class="list-subtitle-information-font">
-              {{ getUser.firstName }}
-              {{ getUser.lastName }}
-              {{ getUser.patronymic }}
-            </span>
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+                lg="4"
+              >
+                ФИО:
+              </v-col>
+              <v-col
+                cols="12"
+                md="8"
+                lg="8"
+              >
+                <span class="list-subtitle-information-font">
+                  {{ getUser.firstName }}
+                  {{ getUser.lastName }}
+                  {{ getUser.patronymic }}
+                </span>
+              </v-col>
+            </v-row>
           </div>
 
           <div class="list-title-information-font ml-5 mt-3">
-            Email:
-            <span class="list-subtitle-information-font">{{ getUser.email }}</span>
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+                lg="4"
+              >
+                Эл. почта:
+              </v-col>
+              <v-col
+                cols="12"
+                md="8"
+                lg="8"
+              >
+                <span class="list-subtitle-information-font">{{ getUser.email }}</span>
+              </v-col>
+            </v-row>
           </div>
 
           <div class="list-title-information-font ml-5 mt-3">
-            Номер:
-            <span class="list-subtitle-information-font">{{ getUser.phone }}</span>
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+                lg="4"
+              >
+                Номер:
+              </v-col>
+              <v-col
+                cols="12"
+                md="8"
+                lg="8"
+              >
+                <span class="list-subtitle-information-font">{{ getUser.phone }}</span>
+              </v-col>
+            </v-row>
           </div>
 
           <div class="list-title-information-font ml-5 mt-3">
-            Последнее посещение:
-            <span class="list-subtitle-information-font">28.03.21 18:00</span>
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+                lg="4"
+              >
+                Последнее посещение:
+              </v-col>
+              <v-col
+                cols="12"
+                md="8"
+                lg="8"
+              >
+                <span class="list-subtitle-information-font">28.03.21 18:00</span>
+              </v-col>
+            </v-row>
           </div>
         </v-card>
       </v-col>
@@ -157,30 +212,75 @@
         class="mt-12 mb-10"
       >
         <v-card
-          height="220"
-          max-height="250"
+          max-height="400"
         >
           <v-card-title class="blue white--text text-center">
             <span class="title-information-font">Информация о предприятии</span>
           </v-card-title>
 
           <div class="list-title-information-font ml-5 mt-3">
-            Наименование:
-            <span class="list-subtitle-information-font">
-              {{ getUser.firstName }}
-              {{ getUser.lastName }}
-              {{ getUser.patronymic }}
-            </span>
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+                lg="4"
+              >
+                Наименование:
+              </v-col>
+              <v-col
+                cols="12"
+                md="8"
+                lg="8"
+              >
+                <span class="list-subtitle-information-font">
+                  {{ getUser.firstName }}
+                  {{ getUser.lastName }}
+                  {{ getUser.patronymic }}
+                </span>
+              </v-col>
+            </v-row>
           </div>
 
-          <div class="list-title-information-font ml-5 mt-8">
-            Страна:
-            <span class="list-subtitle-information-font">{{ getUser.country }}</span>
+          <div class="list-title-information-font ml-5 mt-3">
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+                lg="4"
+              >
+                Страна:
+              </v-col>
+              <v-col
+                cols="12"
+                md="8"
+                lg="8"
+              >
+                <span class="list-subtitle-information-font">
+                  {{ getUser.country }}
+                </span>
+              </v-col>
+            </v-row>
           </div>
 
-          <div class="list-title-information-font ml-5 mt-8">
-            Город:
-            <span class="list-subtitle-information-font">{{ getUser.city }}</span>
+          <div class="list-title-information-font ml-5 mt-3">
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+                lg="4"
+              >
+                Город:
+              </v-col>
+              <v-col
+                cols="12"
+                md="8"
+                lg="8"
+              >
+                <span class="list-subtitle-information-font">
+                  {{ getUser.city }}
+                </span>
+              </v-col>
+            </v-row>
           </div>
         </v-card>
       </v-col>
@@ -207,8 +307,6 @@
         },
         data() {
             return {
-                avatarInstitute: profilePageAvatar,
-                backgroundImageClub: backgroundImageClub,
                 users: [
                     {
                         name: 'Kurt',
@@ -242,6 +340,14 @@
 
             getCountTransports() {
                 return this.$store.getters['profile/getCountTransports']
+            },
+
+            avatarProfile() {
+                return this.getUser.profilePicture ? this.getUser.profilePicture : profilePageAvatar
+            },
+
+            backgroundImageProfile() {
+                return this.getUser.profileBackground ? this.getUser.profileBackground : backgroundImageClub
             },
 
             height() {
