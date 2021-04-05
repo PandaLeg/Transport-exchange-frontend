@@ -36,6 +36,15 @@
         vertical
       ></v-divider>
 
+      <!-- MAIN -->
+      <v-btn
+        class="mr-5"
+        text
+        @click="redirectMain"
+      >
+        Main
+      </v-btn>
+
       <!-- CARGO -->
       <v-menu
         open-on-hover
@@ -197,6 +206,15 @@
           </v-list-item>
         </v-list>
       </v-menu>
+
+      <!-- Chat -->
+      <v-btn
+        class="mr-5"
+        text
+        @click="redirectChat"
+      >
+        Chat
+      </v-btn>
 
       <v-spacer></v-spacer>
 
@@ -381,6 +399,10 @@
             }
         },
         methods: {
+            redirectMain() {
+                this.$router.push('/')
+            },
+
             redirectAbout() {
                 this.$router.push('/about')
             },
@@ -428,6 +450,10 @@
 
             redirectTransportOffer() {
                 this.$router.push("/offer/transport")
+            },
+
+            redirectChat() {
+                this.$router.push("/chat")
             }
         }
     }

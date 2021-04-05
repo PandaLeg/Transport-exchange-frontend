@@ -16,6 +16,7 @@ export const state = () => ({
   cargoView: {},
   user: {},
   checkUser: false,
+  checkUserFromOffer: false,
   resultSearch: {},
   pathToSearch: '',
   currentPage: 1,
@@ -124,7 +125,7 @@ export const mutations = {
     }
   },
 
-  setUserCargo(state, data){
+  setUserCargo(state, data) {
     state.user = data;
     state.checkUser = state.user.roles.map(item => item.name).includes('ROLE_USER')
   },
@@ -139,6 +140,21 @@ export const mutations = {
 
   setPhotosCargo(state, data) {
     state.listPhotoCargo = data;
+  },
+
+  checkUserFromOffer(state, data) {
+    console.log("CARGO FROM OFFER", data.idCargo);
+    data.cargo.map(item => {
+      if (item.id === data.idCargo) {
+        state.checkUserFromOffer = true;
+      }
+    });
+    console.log("CARGO FROM OFFER", data.cargo);
+    console.log("CHECK USER FROM OFFER", state.checkUserFromOffer);
+  },
+
+  setCheckUserFromOffer(state){
+    state.checkUserFromOffer = false;
   }
 };
 
@@ -175,7 +191,6 @@ export const actions = {
     const response = await this.$axios.get(API_URL + 'get-cargo/' + id);
     const data = await response.data;
 
-    console.log("CARGO", data);
     if (data) {
       commit('setCargoView', data.cargo);
       commit('setPointsCargo', data.pointsLUCargo);
@@ -190,7 +205,25 @@ export const actions = {
     if (data) {
       commit('setPhotosCargo', data);
     }
+  },
+
+  async checkUserSentOfferAction({commit}, body) {
+    let checkUserRole = body.user.roles.map(item => item.name).includes('ROLE_USER');
+
+    const response = await this.$axios.get(API_URL + 'get-sent-offers-cargo/' + body.user.id, {
+      params: {
+        headers: Object.assign(authHeader(body.store)),
+        role: checkUserRole ? 'ROLE_USER' : 'ROLE_LEGAL_USER'
+      }
+    });
+    const data = await response.data;
+
+    if (data) {
+      commit('checkUserFromOffer', {cargo: data, idCargo: body.idCargo});
+    }
   }
+
+
 };
 
 export const getters = {
@@ -248,6 +281,10 @@ export const getters = {
 
   getDataForSearchCargo: state => {
     return state.dataForSearchCargo
+  },
+
+  getCheckUserFromOffer: state => {
+    return state.checkUserFromOffer
   },
 
   getCurrentPage: state => {

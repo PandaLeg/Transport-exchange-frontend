@@ -16,9 +16,12 @@
                 Все
               </v-tab>
               <v-tab href="#two" class="grey--text">
+                Отправленные
+              </v-tab>
+              <v-tab href="#three" class="grey--text">
                 Активные
               </v-tab>
-              <v-tab href="#two" class="grey--text">
+              <v-tab href="#four" class="grey--text">
                 Завершённые
               </v-tab>
               <v-tabs-slider color="indigo"></v-tabs-slider>
@@ -79,8 +82,103 @@
     </v-row>
 
     <v-row v-if="tabs === 'two'">
-      <v-col cols="12" lg="6">
-
+      <v-col cols="12" lg="12">
+        <v-data-table
+          :headers="headers"
+          :items="sentCargo"
+          sort-by="calories"
+          class="elevation-1"
+        >
+          <template v-slot:top>
+            <v-toolbar
+              flat
+            >
+              <v-toolbar-title>Отправленные заявки</v-toolbar-title>
+              <v-divider
+                class="mx-4"
+                inset
+                vertical
+              ></v-divider>
+              <v-spacer></v-spacer>
+              <v-dialog v-model="dialogDelete" max-width="500px">
+                <v-card>
+                  <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="">Cancel</v-btn>
+                    <v-btn color="blue darken-1" text @click="">OK</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-toolbar>
+          </template>
+          <template v-slot:item.actions="{ item }">
+            <v-icon
+              small
+              class="mr-2"
+              @click=""
+            >
+              mdi-pencil
+            </v-icon>
+            <v-icon
+              small
+              @click=""
+            >
+              mdi-delete
+            </v-icon>
+          </template>
+        </v-data-table>
+      </v-col>
+    </v-row>
+    <v-row v-if="tabs === 'three'">
+      <v-col cols="12" lg="12">
+        <v-data-table
+          :headers="headers"
+          :items="activeCargo"
+          sort-by="calories"
+          class="elevation-1"
+        >
+          <template v-slot:top>
+            <v-toolbar
+              flat
+            >
+              <v-toolbar-title>Активные заявки</v-toolbar-title>
+              <v-divider
+                class="mx-4"
+                inset
+                vertical
+              ></v-divider>
+              <v-spacer></v-spacer>
+              <v-dialog v-model="dialogDelete" max-width="500px">
+                <v-card>
+                  <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="">Cancel</v-btn>
+                    <v-btn color="blue darken-1" text @click="">OK</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-toolbar>
+          </template>
+          <template v-slot:item.actions="{ item }">
+            <v-icon
+              small
+              class="mr-2"
+              @click=""
+            >
+              mdi-pencil
+            </v-icon>
+            <v-icon
+              small
+              @click=""
+            >
+              mdi-delete
+            </v-icon>
+          </template>
+        </v-data-table>
       </v-col>
     </v-row>
   </div>
@@ -92,13 +190,15 @@
     export default {
         name: "cargo",
         async fetch({store}) {
-            if (Object.keys(store.getters['offer/getAllOfferCargo']).length === 0) {
+            if (Object.keys(store.getters['offer/getAllOfferCargo']).length === 0 ||
+                store.getters['offer/getAllOfferCargo'] === null) {
                 let body = {
                     user: store.getters['getUser'],
                     store: store
                 };
 
-                await store.dispatch('offer/getAllOfferCargoAction', body)
+                await store.dispatch('offer/getAllOfferCargoAction', body);
+                await store.dispatch('offer/getActiveAndSentOffersCargoAction', body)
             }
         },
         data() {
@@ -112,14 +212,16 @@
                         sortable: false,
                         value: 'name',
                     },
-                    {text: 'Откуда', value: 'loadingDateFrom'},
-                    {text: 'Куда', value: 'loadingDateBy'},
+                    {text: 'Откуда', value: 'loadingPointFrom'},
+                    {text: 'Куда', value: 'loadingPointBy'},
                     {text: 'Дата', value: 'data'},
                     {text: 'Транспорт', value: 'bodyType'},
                     {text: 'Оплата', value: 'payment'},
                     {text: 'Actions', value: 'actions', sortable: false},
                 ],
                 offerCargo: [],
+                sentCargo: [],
+                activeCargo: [],
                 editedIndex: -1,
                 editedItem: {
                     name: '',
@@ -140,7 +242,9 @@
             }
         },
         created() {
-            this.filledAllOfferCargo();
+            this.filledAllOfferCargo(this.allOfferCargo, this.getPointsCargo, this.offerCargo);
+            this.filledAllOfferCargo(this.allSentCargo, this.getPointsAllSentCargo, this.sentCargo);
+            this.filledAllOfferCargo(this.allActiveCargo, this.getPointsAllActiveCargo, this.activeCargo);
         },
         computed: {
             allOfferCargo() {
@@ -150,9 +254,25 @@
             getPointsCargo() {
                 return this.$store.getters['offer/getPointsAllCargo']
             },
+
+            allSentCargo() {
+                return this.$store.getters['offer/getAllSentCargo']
+            },
+
+            getPointsAllSentCargo() {
+                return this.$store.getters['offer/getPointsAllSentCargo']
+            },
+
+            allActiveCargo() {
+                return this.$store.getters['offer/getAllActiveCargo']
+            },
+
+            getPointsAllActiveCargo() {
+                return this.$store.getters['offer/getPointsAllActiveCargo']
+            },
         },
         methods: {
-            filledAllOfferCargo() {
+            filledAllOfferCargo(allCargo, allPoints, resultCargo) {
                 let paymentForm = '';
                 let paymentTime = '';
                 let data = '';
@@ -166,30 +286,28 @@
                     payment: ''
                 };
 
-                console.log(this.getPointsCargo);
-
-                for (let i = 0; i < this.allOfferCargo.length; i++) {
-                    this.allOfferCargo[i].propertiesCargo.map(item => {
+                for (let i = 0; i < allCargo.length; i++) {
+                    allCargo[i].propertiesCargo.map(item => {
                         if (item.property === 'paymentForm') {
                             paymentForm = item.ruName
                         }
                     });
 
-                    this.allOfferCargo[i].propertiesCargo.map(item => {
+                    allCargo[i].propertiesCargo.map(item => {
                         if (item.property === 'paymentTime') {
                             paymentTime = item.ruName
                         }
                     });
 
-                    data = parseCargoDate.parseDate(this.allOfferCargo[i].loadingDateFrom,
-                        this.allOfferCargo[i].loadingDateBy);
+                    data = parseCargoDate.parseDate(allCargo[i].loadingDateFrom,
+                        allCargo[i].loadingDateBy);
 
                     cargo = Object.assign({},
-                        {name: this.allOfferCargo[i].name},
-                        {loadingDateBy: this.getPointsCargo[i].cityTo + ', ' + this.getPointsCargo[i].countryTo},
-                        {loadingDateFrom: this.getPointsCargo[i].cityFrom + ', ' + this.getPointsCargo[i].countryFrom},
+                        {name: allCargo[i].name},
+                        {loadingPointBy: allPoints[i].cityTo + ', ' + allPoints[i].countryTo},
+                        {loadingPointFrom: allPoints[i].cityFrom + ', ' + allPoints[i].countryFrom},
                         {data: 'с ' + data.loadingDateFrom + ' по ' + data.loadingDateBy},
-                        {bodyType: this.allOfferCargo[i].bodyType}
+                        {bodyType: allCargo[i].bodyType}
                     );
 
                     if (paymentForm && !paymentTime) {
@@ -199,7 +317,8 @@
                     } else {
                         Object.assign(cargo, {payment: paymentForm + ', ' + paymentTime})
                     }
-                    this.offerCargo.push(cargo)
+
+                    resultCargo.push(cargo)
                 }
             }
         }

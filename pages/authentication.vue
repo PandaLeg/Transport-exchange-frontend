@@ -77,9 +77,6 @@
     export default {
         // Если мы используем store, то в nuxt присутствует другой метод для server side rendering, под названием fetch
         // который аналогичен asyncData()
-        async fetch({store}) {
-
-        },
         data() {
             return {
                 showPassword: false,

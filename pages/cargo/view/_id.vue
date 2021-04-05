@@ -19,17 +19,114 @@
             >
               <v-card-subtitle class="spectral-font">Заявка опубликована - 13 марта</v-card-subtitle>
             </v-col>
+
             <v-col
               lg="4"
+              v-if="userFromCargo.id !== getUser.id && !getCheckUserFromOffer"
             >
-              <v-btn
-                outlined
-                color="red accent-2"
-                class="white--text subtitle-font mt-2"
-                @click=""
+              <v-dialog
+                v-model="dialogSendingOffer"
+                persistent
+                max-width="600px"
               >
-                Откликнуться
-              </v-btn>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    outlined
+                    color="red accent-2"
+                    class="white--text subtitle-font mt-2"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    Откликнуться
+                  </v-btn>
+                </template>
+
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">Заявка на груз</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-text-field
+                            v-model="lastName"
+                            label="Фамилия"
+                            disabled
+                          ></v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-text-field
+                            v-model="firstName"
+                            label="Имя"
+                            disabled
+                          ></v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-text-field
+                            v-model="patronymic"
+                            label="Отчество"
+                            disabled
+                          ></v-text-field>
+                        </v-col>
+
+                        <v-col
+                          cols="12"
+                          sm="12"
+                          md="12"
+                        >
+                          <v-text-field
+                            v-model="email"
+                            label="Email"
+                            disabled
+                          ></v-text-field>
+                        </v-col>
+
+                        <v-col
+                          cols="12"
+                          sm="12"
+                          md="12"
+                        >
+                          <v-textarea
+                            v-model="additional"
+                            label="Пожелания"
+                            outlined
+                          ></v-textarea>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue darken-1"
+                      plain
+                      @click="dialogSendingOffer = false"
+                    >
+                      Закрыть
+                    </v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      dark
+                      @click="sendOffer"
+                    >
+                      Отправить
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </v-col>
           </v-row>
           <v-card-title class="name-font">{{ cargoView.name }}</v-card-title>
@@ -640,6 +737,65 @@
               </v-row>
             </div>
           </v-card-text>
+          <v-card-actions>
+            <v-dialog
+              v-if="userFromCargo.id !== getUser.id && getCheckUserFromOffer"
+              v-model="dialogSendingMessage"
+              persistent
+              max-width="600px"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  outlined
+                  color="red accent-2"
+                  class="white--text subtitle-font mt-2"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  Написать
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">Сообщение</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        sm="12"
+                        md="12"
+                      >
+                        <v-textarea
+                          v-model="message"
+                          label="Сообщение"
+                          outlined
+                        ></v-textarea>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    plain
+                    @click="dialogSendingMessage = false"
+                  >
+                    Закрыть
+                  </v-btn>
+                  <v-btn
+                    color="blue darken-1"
+                    dark
+                    @click="sendMessage"
+                  >
+                    Отправить
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -657,6 +813,12 @@
             return /^\d+$/.test(params.id);
         },
         async fetch({store, params}) {
+            let body = {
+                idCargo: Number(params.id),
+                user: store.getters['getUser'],
+                store: store
+            };
+
             if (Object.keys(store.getters['cargo/getCargoView']).length !== 0) {
                 if (store.getters['cargo/getCargoView'].id !== Number(params.id)) {
                     await store.dispatch('cargo/getCargoAction', params.id);
@@ -666,10 +828,19 @@
                 await store.dispatch('cargo/getCargoAction', params.id);
                 await store.dispatch('cargo/getPhotoCargoAction', params.id);
             }
+
+            await store.commit('cargo/setCheckUserFromOffer');
+            await store.dispatch('cargo/checkUserSentOfferAction', body);
         },
         data() {
             return {
                 id: '',
+                firstName: '',
+                lastName: '',
+                patronymic: '',
+                email: '',
+                additional: '',
+                message: '',
                 checkLoading: false,
                 checkUnloading: false,
                 checkPermissionType: false,
@@ -678,6 +849,8 @@
                 checkPaymentForm: false,
                 checkPaymentTime: false,
                 dialog: false,
+                dialogSendingOffer: false,
+                dialogSendingMessage: false,
                 queryResultSearch: {},
                 distance: 0,
                 center: {lat: 55.75222, lng: 37.61556},
@@ -701,6 +874,10 @@
             }
         },
         computed: {
+            getUser() {
+                return this.$store.getters['getUser']
+            },
+
             cargoView() {
                 return this.$store.getters['cargo/getCargoView']
             },
@@ -740,10 +917,18 @@
                 return this.$store.getters['cargo/getPhotoCargo']
             },
 
+            getCheckUserFromOffer() {
+                return this.$store.getters['cargo/getCheckUserFromOffer']
+            },
+
             google: VueGoogleMaps.gmapApi,
         },
         created() {
             this.$store.commit('cargo/setResultDataSearch');
+            this.firstName = this.getUser.firstName;
+            this.lastName = this.getUser.lastName;
+            this.patronymic = this.getUser.patronymic;
+            this.email = this.getUser.email;
         },
         methods: {
             checkFullnessProperties() {
@@ -856,8 +1041,48 @@
                         map: this.map
                     })
                 });
+            },
+
+            async sendOffer() {
+                const cargoOffer = Object.assign({}, {
+                    additional: this.additional
+                });
+
+                const body = {
+                    id: this.$route.params.id,
+                    user: this.getUser,
+                    cargoOffer: cargoOffer,
+                    store: this.$store
+                };
+
+                await this.$store.dispatch('offer/sendCargoOfferAction', body);
+
+                this.dialogSendingOffer = false;
+                this.additional = '';
+            },
+
+            async sendMessage() {
+                const userMessage = Object.assign({}, {
+                    message: this.message
+                });
+
+                const body = {
+                    id: this.$route.params.id,
+                    user: this.getUser,
+                    userMessage: userMessage,
+                    store: this.$store
+                };
+
+                if (this.message !== '' && this.message !== null) {
+                    console.log('MESSAGE SENDING');
+                    await this.$store.dispatch('offer/sendCargoOfferAction', body);
+                }
+
+                this.dialogSendingMessage = false;
+                this.message = '';
             }
         },
+
         mounted() {
             const resultData = this.$store.getters['cargo/getDataResultSearch'];
             const data = {...resultData.data};
