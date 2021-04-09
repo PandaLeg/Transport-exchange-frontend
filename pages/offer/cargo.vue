@@ -190,16 +190,15 @@
     export default {
         name: "cargo",
         async fetch({store}) {
-            if (Object.keys(store.getters['offer/getAllOfferCargo']).length === 0 ||
-                store.getters['offer/getAllOfferCargo'] === null) {
-                let body = {
-                    user: store.getters['getUser'],
-                    store: store
-                };
+            await store.commit('offer/clearOffers');
 
-                await store.dispatch('offer/getAllOfferCargoAction', body);
-                await store.dispatch('offer/getActiveAndSentOffersCargoAction', body)
-            }
+            let body = {
+                user: store.getters['getUser'],
+                store: store
+            };
+
+            await store.dispatch('offer/getAllOfferCargoAction', body);
+            await store.dispatch('offer/getActiveAndSentOffersCargoAction', body)
         },
         data() {
             return {

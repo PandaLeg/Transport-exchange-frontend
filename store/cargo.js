@@ -153,7 +153,7 @@ export const mutations = {
     console.log("CHECK USER FROM OFFER", state.checkUserFromOffer);
   },
 
-  setCheckUserFromOffer(state){
+  setCheckUserFromOffer(state) {
     state.checkUserFromOffer = false;
   }
 };
@@ -176,7 +176,10 @@ export const actions = {
 
   async searchCargoAction({commit}, body) {
     const response = await this.$axios.post(API_URL + 'search-cargo', body.data,
-      {headers: authHeader(body.store), params: {page: body.page, pageSize: body.pageSize}});
+      {
+        headers: authHeader(body.store),
+        params: {page: body.page, pageSize: body.pageSize}
+      });
     const data = await response.data;
 
     if (data) {

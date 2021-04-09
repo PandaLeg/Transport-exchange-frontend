@@ -35,6 +35,15 @@ export const mutations = {
   setPointsAllActiveCargo(state, data) {
     state.listPointsAllActiveCargo = data;
   },
+
+  clearOffers(state){
+    state.allCargo = {};
+    state.listPointsAllCargo = [];
+    state.allSentCargo = {};
+    state.listPointsAllSentCargo = [];
+    state.allActiveCargo = {};
+    state.listPointsAllActiveCargo = [];
+  }
 };
 
 export const actions = {

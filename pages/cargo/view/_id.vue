@@ -1062,20 +1062,20 @@
             },
 
             async sendMessage() {
-                const userMessage = Object.assign({}, {
+                const chatMessage = Object.assign({}, {
                     message: this.message
                 });
 
                 const body = {
-                    id: this.$route.params.id,
                     user: this.getUser,
-                    userMessage: userMessage,
+                    userCompanion: this.userFromCargo,
+                    chatMessage: chatMessage,
                     store: this.$store
                 };
 
                 if (this.message !== '' && this.message !== null) {
                     console.log('MESSAGE SENDING');
-                    await this.$store.dispatch('offer/sendCargoOfferAction', body);
+                    await this.$store.dispatch('chat/sendMessageAction', body);
                 }
 
                 this.dialogSendingMessage = false;
