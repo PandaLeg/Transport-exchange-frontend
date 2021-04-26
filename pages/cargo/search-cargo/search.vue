@@ -142,9 +142,13 @@
                     pageSize: query.pageSize
                 };
 
-                store.commit('cargo/setDataForSearchCargo', {data, page: query.page, pageSize: query.pageSize});
+                console.log("PAGE SIZE FETCH", query.pageSize);
+                store.commit('cargo/setDataForSearchCargo', {data, page: query.page});
 
-                store.commit('cargo/setCookieResultSearch', {data, page: query.page, pageSize: query.pageSize});
+                store.commit('cargo/setPageSize', query.pageSize);
+
+                store.commit('cargo/setCookieResultSearch', {data, page: query.page, pageSize:
+                        query.pageSize ? query.pageSize : 3});
                 store.commit('cargo/setResultDataSearch');
 
                 store.commit('cargo/clearCargoAfterSearch');
@@ -156,6 +160,14 @@
                 page: 1,
                 quantityItems: [3, 10, 20, 40, 50],
                 pageSize: 3
+            }
+        },
+        created() {
+            this.page = this.getCurrentPage;
+            if (this.getPageSize !== undefined) {
+                this.pageSize = this.getPageSize;
+            } else {
+                this.pageSize = 3;
             }
         },
         computed: {
@@ -184,14 +196,6 @@
                 return this.$store.getters['cargo/getPointsAllCargo']
             }
         },
-        created() {
-            this.page = this.getCurrentPage;
-            if (this.getPageSize !== undefined) {
-                this.pageSize = JSON.parse(this.getPageSize);
-            } else {
-                this.pageSize = 3;
-            }
-        },
         methods: {
             redirectCargoViewPage(id) {
                 this.$router.push('/cargo/view/' + id);
@@ -212,6 +216,8 @@
                     data: {...this.getDataForSearchCargo},
                     page: this.page, pageSize: this.pageSize
                 });
+
+                this.$store.commit('cargo/setPageSize', this.pageSize);
                 this.$store.commit('cargo/setResultDataSearch');
 
                 await this.$store.dispatch('cargo/searchCargoAction', body);
@@ -229,9 +235,6 @@
                 this.pageSize = value;
                 this.nextPage();
             }
-        },
-        mounted() {
-            console.log(this.getPointsAllCargo);
         }
     }
 </script>

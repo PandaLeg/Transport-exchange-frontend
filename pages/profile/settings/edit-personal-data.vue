@@ -25,7 +25,7 @@
             text
             @click="redirectSettings"
           >
-            Save
+            Сохранить
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
@@ -212,6 +212,7 @@
 
 <script>
     import {faUserEdit} from '@fortawesome/free-solid-svg-icons'
+    import profilePageAvatar from '../../../assets/AllisonProfilePage.jpg'
 
     export default {
         name: "edit-personal-data",
@@ -236,6 +237,7 @@
             this.patronymic = this.getUser.patronymic;
             this.phone = this.getUser.phone;
             this.email = this.getUser.email;
+            this.photoUrl = this.getUser.profilePicture ? this.getUser.profilePicture : profilePageAvatar
         },
         computed: {
             faUserEdit() {
@@ -251,7 +253,7 @@
             },
 
             profilePicture() {
-                return this.photoProfile ? this.photoUrl : 'https://picsum.photos/510/300?random'
+                return this.photoUrl
             },
         },
         methods: {

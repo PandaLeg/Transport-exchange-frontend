@@ -47,6 +47,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
+    'nuxt-i18n',
     'nuxt-material-design-icons-iconfont',
     'nuxt-material-design-icons'
   ],
@@ -65,6 +66,27 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
+        }
+      }
+    }
+  },
+
+  i18n: {
+    locales: [
+      {code: 'ru', file}
+    ],
+    defaultLocale: 'en',
+    vueI18n: {
+      fallbackLocale: 'en',
+      messages: {
+        ru: {
+          main: 'Главная'
+        },
+        en: {
+          main: 'Main'
+        },
+        ua: {
+          main: 'Головна'
         }
       }
     }

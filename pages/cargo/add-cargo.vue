@@ -12,13 +12,13 @@
                 editable
               >
                 <div v-if="n === 1">
-                  Cargo & Date
+                  Груз & Дата
                 </div>
                 <div v-else-if="n === 2">
-                  Transport & Payment
+                  Транспорт & Оплата
                 </div>
                 <div v-else>
-                  Photo & Additional
+                  Дополнительно & Фото
                 </div>
               </v-stepper-step>
 

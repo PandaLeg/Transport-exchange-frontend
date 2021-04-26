@@ -1,28 +1,145 @@
 <template>
   <div>
-    <v-row>
-      <v-col cols="12" sm="12" md="12" lg="12">
-        <v-card>
-          <v-img
-            class="subheading white--text"
-            :src="backgroundImage"
-            aspect-ratio="2.5"
+    <v-card
+      class="mx-auto"
+    >
+      <v-img
+        class="background-image"
+        max-height="800"
+        :height="height"
+        :src="backgroundImage"
+      >
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <v-col
+            justify="center"
+            class="mt-16"
+            cols="12"
           >
-          </v-img>
-        </v-card>
-      </v-col>
-    </v-row>
+            <span class="title-main title-information-font">
+              CARGO&TRANSPORT - сервис международных перевозок. <br>
+            </span>
+          </v-col>
+        </v-row>
+
+        <v-row
+          align="center"
+          justify="center"
+          class="fill-height"
+        >
+          <v-col
+            justify="center"
+            cols="4"
+          >
+            <v-card
+              dark
+              class="statistics-card title-information-font"
+              max-width="300"
+            >
+              <v-list>
+                <v-list-item>
+                  <v-list-item-avatar>
+                    <fa-icon
+                      :icon="faBox"
+                      dark
+                    >
+                    </fa-icon>
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title class="card-statistics-font">{{ getCountCargo }}</v-list-item-title>
+                    <v-list-item-subtitle v-text="'Заявок по грузу'"></v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+
+          <v-col
+            justify="center"
+            cols="4"
+          >
+            <v-card
+              dark
+              class="statistics-card title-information-font"
+              max-width="300"
+            >
+              <v-list>
+                <v-list-item>
+                  <v-list-item-avatar>
+                    <fa-icon
+                      :icon="faTruckMoving"
+                      dark
+                    >
+                    </fa-icon>
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title class="card-statistics-font">{{ getCountTransports }}</v-list-item-title>
+                    <v-list-item-subtitle v-text="'Заявок по транспорту'"></v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-img>
+    </v-card>
   </div>
 </template>
 
 <script>
     import mainPhoto from '../assets/main_photo.jpg'
+    import profilePageAvatar from '../assets/AllisonProfilePage.jpg'
+    import {faBox, faTruckMoving} from '@fortawesome/free-solid-svg-icons'
 
     export default {
+        async fetch({store}) {
+            await store.dispatch('getCountCargoAndTransportsAction')
+        },
         data() {
             return {
                 pageTitle: 'Main Page',
-                backgroundImage: mainPhoto
+                backgroundImage: mainPhoto,
+                avatarProfile: profilePageAvatar
+            }
+        },
+        computed: {
+            getUser() {
+                return this.$store.getters['getUser']
+            },
+
+            getCountCargo() {
+                return this.$store.getters['getCountCargo']
+            },
+
+            getCountTransports() {
+                return this.$store.getters['getCountTransports']
+            },
+
+            faBox() {
+                return faBox
+            },
+
+            faTruckMoving() {
+                return faTruckMoving
+            },
+
+            height() {
+                switch (this.$vuetify.breakpoint.name) {
+                    case 'xs':
+                        return 450;
+                    case 'sm':
+                        return 700;
+                    case 'md':
+                        return 500;
+                    case 'lg':
+                        return 640;
+                    case 'xl':
+                        return 700;
+                }
             }
         }
     }
@@ -30,4 +147,54 @@
 
 
 <style scoped>
+  .title-information-font {
+    font-family: 'Merriweather', sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+  }
+
+  .card-statistics-font {
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+    font-size: 32px;
+  }
+
+  .background-image {
+    border-radius: 4px;
+    background: center no-repeat;
+    background-size: cover;
+  }
+
+  .background-image:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .4);
+    z-index: 2;
+  }
+
+  .title-main {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 3;
+    color: #fff;
+  }
+
+  .statistics-card {
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 3;
+    color: #fff;
+  }
+
 </style>

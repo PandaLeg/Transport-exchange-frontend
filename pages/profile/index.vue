@@ -43,7 +43,6 @@
                 <v-list-item-title class="title-information-font">
                   {{ getUser.firstName }} {{ getUser.lastName }} {{ getUser.patronymic}}
                 </v-list-item-title>
-                <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-col>
@@ -61,7 +60,7 @@
                 <v-list-item-title class="title">
                   {{ getCountCargo }}
                 </v-list-item-title>
-                <v-list-item-subtitle>Заявок по грузу</v-list-item-subtitle>
+                <v-list-item-subtitle>Заявки по грузу</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-col>
@@ -80,7 +79,7 @@
                 <v-list-item-title class="title">
                   {{ getCountTransports }}
                 </v-list-item-title>
-                <v-list-item-subtitle>Заявок по транспорту</v-list-item-subtitle>
+                <v-list-item-subtitle>Заявка по транспорту</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-col>
@@ -96,7 +95,7 @@
             >
               <v-list-item-content class="avatar-profile-and-name title-information-font">
                 <v-list-item-title class="title">
-                  26
+                  0
                 </v-list-item-title>
                 <v-list-item-subtitle>Успешных</v-list-item-subtitle>
               </v-list-item-content>
@@ -233,9 +232,7 @@
                 lg="8"
               >
                 <span class="list-subtitle-information-font">
-                  {{ getUser.firstName }}
-                  {{ getUser.lastName }}
-                  {{ getUser.patronymic }}
+                  {{ getUser.companyName }}
                 </span>
               </v-col>
             </v-row>

@@ -2,15 +2,18 @@ import AuthService from '../service/auth.service'
 
 const cookieparser = process.server ? require('cookieparser') : undefined;
 
-const API_URL = 'http://localhost:9090/auth/';
+const API_URL_AUTH = 'http://localhost:9090/auth/';
 const API_USER_URL = 'http://localhost:9090/user/';
+const API_URL = 'http://localhost:9090/';
 
 export const state = () => ({
   initialState: {
     loggedIn: false,
     user: null,
-    token: null
-  }
+    token: null,
+  },
+  countCargo: 0,
+  countTransports: 0
 });
 
 export const mutations = {
@@ -32,6 +35,14 @@ export const mutations = {
   logout(state) {
     state.initialState.loggedIn = false;
     state.initialState.user = null;
+  },
+
+  setCountCargo(state, data){
+    state.countCargo = data;
+  },
+
+  setCountTransports(state, data){
+    state.countTransports = data;
   }
 };
 
@@ -56,7 +67,7 @@ export const actions = {
   },
 
   async login({commit, app}, user) {
-    const response = await this.$axios.post(API_URL + 'sign-in-user', {
+    const response = await this.$axios.post(API_URL_AUTH + 'sign-in-user', {
       email: user.email,
       password: user.password
     });
@@ -95,6 +106,16 @@ export const actions = {
     if (data) {
       commit('setUser', data)
     }
+  },
+
+  async getCountCargoAndTransportsAction({commit}) {
+    const response = await this.$axios.get(API_URL + 'get-count-cargo-transports');
+    const data = await response.data;
+
+    if (data) {
+      commit('setCountCargo', data.countCargo);
+      commit('setCountTransports', data.countTransports);
+    }
   }
 };
 
@@ -102,4 +123,6 @@ export const getters = {
   hasToken: state => state.initialState.loggedIn,
   getUser: state => state.initialState.user,
   getToken: state => state.initialState.token,
+  getCountCargo: state => state.countCargo,
+  getCountTransports: state => state.countTransports,
 };

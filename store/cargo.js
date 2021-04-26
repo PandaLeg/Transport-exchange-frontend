@@ -82,7 +82,6 @@ export const mutations = {
   setDataForSearchCargo(state, dataForQuery) {
     state.dataForSearchCargo = dataForQuery.data;
     state.currentPage = dataForQuery.page;
-    state.pageSize = dataForQuery.pageSize;
   },
 
   setCargoView(state, cargoView) {
@@ -97,16 +96,22 @@ export const mutations = {
     state.totalPages = totalPages;
   },
 
+  setPageSize(state, pageSize) {
+    if (pageSize === undefined) {
+      state.pageSize = 3;
+    } else {
+      state.pageSize = Number(pageSize);
+    }
+    console.log("RESULT SEARCH PAGE NON UNDEFINED", state.pageSize);
+  },
+
   clearCargoAfterSearch(state) {
     state.cargoAfterSearch = [];
   },
 
   // Следующие два метода используются для сохранения пути, для возврата со странички заявки груза
   setCookieResultSearch(state, resultSearch) {
-    const data = this.$cookies.get('resultCargoDataSearch');
-    if (data === null || data === undefined) {
-      this.$cookies.set('resultCargoDataSearch', resultSearch, {maxAge: 100000});
-    }
+    this.$cookies.set('resultCargoDataSearch', resultSearch, {maxAge: 100000});
   },
 
   setResultDataSearch(state) {
@@ -115,11 +120,6 @@ export const mutations = {
     if (data !== null && data !== undefined) {
       state.resultSearch = data;
       state.pathToSearch = '/cargo/search-cargo/search';
-      if (data.pageSize === undefined) {
-        state.pageSize = 3;
-      } else {
-        state.pageSize = data.pageSize;
-      }
     } else {
       state.pathToSearch = '/cargo/search-cargo';
     }
@@ -149,7 +149,6 @@ export const mutations = {
         state.checkUserFromOffer = true;
       }
     });
-    console.log("CARGO FROM OFFER", data.cargo);
     console.log("CHECK USER FROM OFFER", state.checkUserFromOffer);
   },
 
@@ -225,8 +224,6 @@ export const actions = {
       commit('checkUserFromOffer', {cargo: data, idCargo: body.idCargo});
     }
   }
-
-
 };
 
 export const getters = {
@@ -248,6 +245,10 @@ export const getters = {
 
   getUserFromCargo: state => {
     return state.user
+  },
+
+  getCheckUserFromOffer: state => {
+    return state.checkUserFromOffer
   },
 
   checkUser: state => {
@@ -284,10 +285,6 @@ export const getters = {
 
   getDataForSearchCargo: state => {
     return state.dataForSearchCargo
-  },
-
-  getCheckUserFromOffer: state => {
-    return state.checkUserFromOffer
   },
 
   getCurrentPage: state => {

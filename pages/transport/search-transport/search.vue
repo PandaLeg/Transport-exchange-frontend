@@ -143,9 +143,12 @@
                     pageSize: query.pageSize
                 };
 
-                store.commit('transport/setDataForSearchTransport', {data, page: query.page, pageSize: query.pageSize});
+                store.commit('transport/setDataForSearchTransport', {data, page: query.page});
 
-                store.commit('transport/setCookieResultSearch', {data, page: query.page, pageSize: query.pageSize});
+                store.commit('transport/setPageSize', query.pageSize);
+
+                store.commit('transport/setCookieResultSearch', {data, page: query.page, pageSize:
+                        query.pageSize ? query.pageSize : 3});
                 store.commit('transport/setResultDataSearch');
 
                 store.commit('transport/clearTransportsAfterSearch');
@@ -157,6 +160,15 @@
                 page: 1,
                 quantityItems: [3, 10, 20, 40, 50],
                 pageSize: 3
+            }
+        },
+        created() {
+            this.page = this.getCurrentPage;
+            if (this.getPageSize !== undefined) {
+                console.log("PAGE SIZE CREATED", this.getPageSize);
+                this.pageSize = this.getPageSize;
+            } else {
+                this.pageSize = 3;
             }
         },
         computed: {
@@ -203,6 +215,8 @@
                     data: {...this.getDataForSearchCargo},
                     page: this.page, pageSize: this.pageSize
                 });
+
+                this.$store.commit('cargo/setPageSize', this.pageSize);
                 this.$store.commit('transport/setResultDataSearch');
 
                 await this.$store.dispatch('transport/searchTransportAction', body);
@@ -218,14 +232,6 @@
                 this.page = 1;
                 this.pageSize = value;
                 this.nextPage();
-            }
-        },
-        created() {
-            this.page = this.getCurrentPage;
-            if (this.getPageSize !== undefined) {
-                this.pageSize = JSON.parse(this.getPageSize);
-            } else {
-                this.pageSize = 3;
             }
         },
         mounted() {

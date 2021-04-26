@@ -666,7 +666,7 @@
       <v-col
         lg="4"
       >
-        <v-card v-if="checkUser">
+        <v-card>
           <v-card-title>
             <nuxt-link :to="{path: getPathToSearch, query: queryResultSearch}"
                        class="subtitle-font nuxt-link-active">
@@ -886,6 +886,10 @@
                 return this.$store.getters['cargo/getUserFromCargo']
             },
 
+            getCheckUserFromOffer() {
+                return this.$store.getters['cargo/getCheckUserFromOffer']
+            },
+
             checkUser() {
                 return this.$store.getters['cargo/checkUser']
             },
@@ -917,14 +921,15 @@
                 return this.$store.getters['cargo/getPhotoCargo']
             },
 
-            getCheckUserFromOffer() {
-                return this.$store.getters['cargo/getCheckUserFromOffer']
+            getDataResultSearch() {
+                return this.$store.getters['cargo/getDataResultSearch']
             },
 
-            google: VueGoogleMaps.gmapApi,
+            google: VueGoogleMaps.gmapApi
         },
         created() {
             this.$store.commit('cargo/setResultDataSearch');
+            this.$store.commit('cargo/setPageSize', 3);
             this.firstName = this.getUser.firstName;
             this.lastName = this.getUser.lastName;
             this.patronymic = this.getUser.patronymic;
@@ -1084,14 +1089,15 @@
         },
 
         mounted() {
-            const resultData = this.$store.getters['cargo/getDataResultSearch'];
+            const resultData = this.getDataResultSearch;
             const data = {...resultData.data};
-            this.queryResultSearch = Object.assign({}, {page: resultData.page}, {pageSize: resultData.pageSize}, data);
+            this.queryResultSearch = Object.assign({}, {page: resultData.page}, {pageSize: 3}, data);
+            this.$store.commit('cargo/setPageSize', 3);
+
             this.parseDate;
             this.checkFullnessProperties();
+
             this.initMap();
-            /*this.setMarker({lat: this.cargoView.latFirst, lng: this.cargoView.lngFirst});
-            this.setMarker({lat: this.cargoView.latSecond, lng: this.cargoView.lngSecond});*/
         }
     }
 </script>

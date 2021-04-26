@@ -10,7 +10,7 @@
     >
       <v-col class="text-center">
         <h3 class="headline">
-          Cargo and Date
+          Груз и Дата
         </h3>
       </v-col>
     </v-row>

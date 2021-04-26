@@ -16,6 +16,7 @@
     "cookieparser": "^0.1.0",
     "core-js": "^3.8.2",
     "nuxt": "^2.14.12",
+    "nuxt-i18n": "^6.26.0",
     "nuxt-material-design-icons": "^1.0.4",
     "nuxt-material-design-icons-iconfont": "^1.0.2",
     "sockjs-client": "^1.5.1",

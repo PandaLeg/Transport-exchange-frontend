@@ -22,6 +22,9 @@
                 Активные
               </v-tab>
               <v-tab href="#four" class="grey--text">
+                В обработке
+              </v-tab>
+              <v-tab href="#five" class="grey--text">
                 Завершённые
               </v-tab>
               <v-tabs-slider color="indigo"></v-tabs-slider>
@@ -164,19 +167,141 @@
             </v-toolbar>
           </template>
           <template v-slot:item.actions="{ item }">
-            <v-icon
-              small
-              class="mr-2"
+            <v-dialog
+              v-model="dialog"
+              width="500"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <fa-icon
+                    :icon="faPlus"
+                    small
+                  >
+                  </fa-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title class="headline grey lighten-2">
+                  Подтверждение
+                </v-card-title>
+
+                <v-card-text>
+                  <span>
+                    После принятия заявки, она поступит в обработку.
+                  </span>
+                  <br>
+                  <span>
+                    Вы уверены, что хотите принять её?
+                  </span>
+                </v-card-text>
+
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="primary"
+                    text
+                    @click="dialog = false"
+                  >
+                    Отменить
+                  </v-btn>
+                  <v-btn
+                    color="primary"
+                    text
+                    @click="addToProcessing(item)"
+                  >
+                    Принять
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+            <v-btn
+              icon
               @click=""
             >
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              small
+              <fa-icon
+                :icon="faEdit"
+                small
+              >
+              </fa-icon>
+            </v-btn>
+
+            <v-btn
+              icon
               @click=""
             >
-              mdi-delete
-            </v-icon>
+              <fa-icon
+                :icon="faTrash"
+                small
+              >
+              </fa-icon>
+            </v-btn>
+          </template>
+        </v-data-table>
+      </v-col>
+    </v-row>
+    <v-row v-if="tabs === 'four'">
+      <v-col cols="12" lg="12">
+        <v-data-table
+          :headers="headersInProcessing"
+          :items="inProcessingCargo"
+          sort-by="calories"
+          class="elevation-1"
+        >
+          <template v-slot:top>
+            <v-toolbar
+              flat
+            >
+              <v-toolbar-title>В обработке</v-toolbar-title>
+              <v-divider
+                class="mx-4"
+                inset
+                vertical
+              ></v-divider>
+            </v-toolbar>
+          </template>
+          <template v-slot:item.actions="{ item }">
+            <v-btn
+              icon
+              @click="redirectToCargoOffer(item)"
+            >
+              <fa-icon
+                :icon="faArrowAltCircleRight"
+                class="icons__btn"
+              >
+              </fa-icon>
+            </v-btn>
+          </template>
+        </v-data-table>
+      </v-col>
+    </v-row>
+    <v-row v-if="tabs === 'five'">
+      <v-col cols="12" lg="12">
+        <v-data-table
+          :headers="headersInProcessing"
+          :items="completeCargo"
+          sort-by="calories"
+          class="elevation-1"
+        >
+          <template v-slot:top>
+            <v-toolbar
+              flat
+            >
+              <v-toolbar-title>Завершённые</v-toolbar-title>
+              <v-divider
+                class="mx-4"
+                inset
+                vertical
+              ></v-divider>
+            </v-toolbar>
+          </template>
+          <template v-slot:item.actions="{ item }">
+
           </template>
         </v-data-table>
       </v-col>
@@ -185,10 +310,11 @@
 </template>
 
 <script>
-    import {parseCargoDate} from "../../service/cargo/parseDate";
+    import {parseCargoDate} from "../../../service/cargo/parseDate";
+    import {faPlus, faEdit, faTrash, faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
 
     export default {
-        name: "cargo",
+        name: "offer-cargo",
         async fetch({store}) {
             await store.commit('offer/clearOffers');
 
@@ -216,26 +342,29 @@
                     {text: 'Дата', value: 'data'},
                     {text: 'Транспорт', value: 'bodyType'},
                     {text: 'Оплата', value: 'payment'},
-                    {text: 'Actions', value: 'actions', sortable: false},
+                    {text: 'Действия', value: 'actions', sortable: false}
+                ],
+                headersInProcessing: [
+                    {
+                        text: 'Груз',
+                        align: 'start',
+                        sortable: false,
+                        value: 'name',
+                    },
+                    {text: 'Откуда', value: 'loadingPointFrom'},
+                    {text: 'Куда', value: 'loadingPointBy'},
+                    {text: 'Дата', value: 'data'},
+                    {text: 'Транспорт', value: 'bodyType'},
+                    {text: 'Оплата', value: 'payment'},
+                    {text: 'Статус', value: 'status'},
+                    {text: 'Действия', value: 'actions', sortable: false}
                 ],
                 offerCargo: [],
                 sentCargo: [],
                 activeCargo: [],
+                inProcessingCargo: [],
+                completeCargo: [],
                 editedIndex: -1,
-                editedItem: {
-                    name: '',
-                    calories: 0,
-                    fat: 0,
-                    carbs: 0,
-                    protein: 0,
-                },
-                defaultItem: {
-                    name: '',
-                    calories: 0,
-                    fat: 0,
-                    carbs: 0,
-                    protein: 0,
-                },
                 tabs: null,
                 tabsClub: null
             }
@@ -244,8 +373,30 @@
             this.filledAllOfferCargo(this.allOfferCargo, this.getPointsCargo, this.offerCargo);
             this.filledAllOfferCargo(this.allSentCargo, this.getPointsAllSentCargo, this.sentCargo);
             this.filledAllOfferCargo(this.allActiveCargo, this.getPointsAllActiveCargo, this.activeCargo);
+            this.filledAllOfferCargo(this.allCargoInProcessing, this.getPointsAllCargoInProcessing, this.inProcessingCargo);
+            this.filledAllOfferCargo(this.allCargoComplete, this.getPointsAllCargoComplete, this.completeCargo);
         },
         computed: {
+            faPlus() {
+                return faPlus
+            },
+
+            faEdit() {
+                return faEdit
+            },
+
+            faTrash() {
+                return faTrash
+            },
+
+            faArrowAltCircleRight() {
+                return faArrowAltCircleRight
+            },
+
+            getUser() {
+                return this.$store.getters['getUser']
+            },
+
             allOfferCargo() {
                 return this.$store.getters['offer/getAllOfferCargo']
             },
@@ -268,6 +419,22 @@
 
             getPointsAllActiveCargo() {
                 return this.$store.getters['offer/getPointsAllActiveCargo']
+            },
+
+            allCargoInProcessing() {
+                return this.$store.getters['offer/getAllCargoInProcessing']
+            },
+
+            getPointsAllCargoInProcessing() {
+                return this.$store.getters['offer/getPointsAllCargoInProcessing']
+            },
+
+            allCargoComplete() {
+                return this.$store.getters['offer/getAllCargoComplete']
+            },
+
+            getPointsAllCargoComplete() {
+                return this.$store.getters['offer/getPointsAllCargoComplete']
             },
         },
         methods: {
@@ -302,11 +469,13 @@
                         allCargo[i].loadingDateBy);
 
                     cargo = Object.assign({},
+                        {id: allCargo[i].id},
                         {name: allCargo[i].name},
                         {loadingPointBy: allPoints[i].cityTo + ', ' + allPoints[i].countryTo},
                         {loadingPointFrom: allPoints[i].cityFrom + ', ' + allPoints[i].countryFrom},
                         {data: 'с ' + data.loadingDateFrom + ' по ' + data.loadingDateBy},
-                        {bodyType: allCargo[i].bodyType}
+                        {bodyType: allCargo[i].bodyType},
+                        {status: allCargo[i].status},
                     );
 
                     if (paymentForm && !paymentTime) {
@@ -319,11 +488,33 @@
 
                     resultCargo.push(cargo)
                 }
+            },
+            async addToProcessing(cargo) {
+                let body = {
+                    cargo: cargo,
+                    checkChangeStatus: true,
+                    store: this.$store
+                };
+
+                let itemIndex = this.activeCargo.indexOf(cargo);
+                this.activeCargo.splice(itemIndex, 1);
+
+                await this.$store.dispatch('offer/changeStatusCargoAction', body);
+
+                this.inProcessingCargo = this.allCargoInProcessing;
+            },
+
+            redirectToCargoOffer(cargo) {
+                this.$router.push('/offer/cargo/' + cargo.id)
             }
         }
     }
 </script>
 
 <style scoped>
+  .icons__btn {
+    color: deepskyblue;
+    font-size: 18px;
+  }
 
 </style>

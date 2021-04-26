@@ -20,17 +20,114 @@
             >
               <v-card-subtitle class="spectral-font">Заявка опубликована - 13 марта</v-card-subtitle>
             </v-col>
+
             <v-col
               lg="4"
+              v-if="userFromTransport.id !== getUser.id && !getCheckUserFromOffer"
             >
-              <v-btn
-                outlined
-                color="red accent-2"
-                class="white--text subtitle-font mt-2"
-                @click=""
+              <v-dialog
+                v-model="dialogSendingOffer"
+                persistent
+                max-width="600px"
               >
-                Откликнуться
-              </v-btn>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    outlined
+                    color="red accent-2"
+                    class="white--text subtitle-font mt-2"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    Откликнуться
+                  </v-btn>
+                </template>
+
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">Заявка на груз</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-text-field
+                            v-model="lastName"
+                            label="Фамилия"
+                            disabled
+                          ></v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-text-field
+                            v-model="firstName"
+                            label="Имя"
+                            disabled
+                          ></v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          sm="6"
+                          md="4"
+                        >
+                          <v-text-field
+                            v-model="patronymic"
+                            label="Отчество"
+                            disabled
+                          ></v-text-field>
+                        </v-col>
+
+                        <v-col
+                          cols="12"
+                          sm="12"
+                          md="12"
+                        >
+                          <v-text-field
+                            v-model="email"
+                            label="Email"
+                            disabled
+                          ></v-text-field>
+                        </v-col>
+
+                        <v-col
+                          cols="12"
+                          sm="12"
+                          md="12"
+                        >
+                          <v-textarea
+                            v-model="additional"
+                            label="Пожелания"
+                            outlined
+                          ></v-textarea>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      color="blue darken-1"
+                      plain
+                      @click="dialogSendingOffer = false"
+                    >
+                      Закрыть
+                    </v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      dark
+                      @click="sendOffer"
+                    >
+                      Отправить
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </v-col>
           </v-row>
           <v-card-title class="name-font">{{ transportView.bodyType }}</v-card-title>
@@ -560,6 +657,127 @@
           </v-card-title>
           <v-divider></v-divider>
           <v-card-title class="photo-font">Контактная информация</v-card-title>
+
+          <v-card-text>
+            <div class="subtitle-font mt-3">
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  lg="4"
+                >
+                  ФИО:
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="8"
+                  lg="8"
+                >
+                <span class="spectral-font text--primary">
+                  {{ userFromTransport.firstName }}
+                  {{ userFromTransport.lastName }}
+                  {{ userFromTransport.patronymic }}
+                </span>
+                </v-col>
+              </v-row>
+            </div>
+            <div class="subtitle-font mt-3">
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  lg="4"
+                >
+                  Эл. почта:
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="8"
+                  lg="8"
+                >
+                  <span class="spectral-font text--primary">{{ userFromTransport.email }}</span>
+                </v-col>
+              </v-row>
+            </div>
+
+            <div class="subtitle-font mt-3">
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="4"
+                  lg="4"
+                >
+                  Местоположение:
+                </v-col>
+                <v-col
+                  cols="12"
+                  md="8"
+                  lg="8"
+                >
+                  <span class="spectral-font text--primary">{{ userFromTransport.city }}, {{ userFromTransport.country }}</span>
+                </v-col>
+              </v-row>
+            </div>
+          </v-card-text>
+          <v-card-actions>
+            <v-dialog
+              v-if="userFromTransport.id !== getUser.id && getCheckUserFromOffer"
+              v-model="dialogSendingMessage"
+              persistent
+              max-width="600px"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  outlined
+                  color="red accent-2"
+                  class="white--text subtitle-font mt-2"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  Написать
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">Сообщение</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        sm="12"
+                        md="12"
+                      >
+                        <v-textarea
+                          v-model="message"
+                          label="Сообщение"
+                          outlined
+                        ></v-textarea>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="blue darken-1"
+                    plain
+                    @click="dialogSendingMessage = false"
+                  >
+                    Закрыть
+                  </v-btn>
+                  <v-btn
+                    color="blue darken-1"
+                    dark
+                    @click="sendMessage"
+                  >
+                    Отправить
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -577,21 +795,34 @@
             return /^\d+$/.test(params.id);
         },
         async fetch({store, params}) {
+            let body = {
+                idTransport: Number(params.id),
+                user: store.getters['getUser'],
+                store: store
+            };
+
             if (Object.keys(store.getters['transport/getTransportView']).length !== 0) {
                 if (store.getters['transport/getTransportView'].id !== Number(params.id)) {
                     await store.dispatch('transport/getTransportAction', params.id);
-                    await store.dispatch('transport/getPlacesTransportAction', params.id);
                     await store.dispatch('transport/getPhotosTransportAction', params.id);
                 }
             } else {
                 await store.dispatch('transport/getTransportAction', params.id);
-                await store.dispatch('transport/getPlacesTransportAction', params.id);
                 await store.dispatch('transport/getPhotosTransportAction', params.id);
             }
+
+            await store.commit('transport/setCheckUserFromOffer');
+            await store.dispatch('transport/checkUserSentOfferAction', body);
         },
         data() {
             return {
                 id: '',
+                firstName: '',
+                lastName: '',
+                patronymic: '',
+                email: '',
+                additional: '',
+                message: '',
                 checkLoading: false,
                 checkUnloading: false,
                 checkPermissionType: false,
@@ -600,6 +831,8 @@
                 checkPaymentForm: false,
                 checkPaymentTime: false,
                 dialog: false,
+                dialogSendingOffer: false,
+                dialogSendingMessage: false,
                 queryResultSearch: {},
                 distance: 0,
                 center: {lat: 55.75222, lng: 37.61556},
@@ -624,10 +857,31 @@
         },
         created() {
             this.$store.commit('transport/setResultDataSearch');
+            this.$store.commit('transport/setPageSize', 3);
+            this.firstName = this.getUser.firstName;
+            this.lastName = this.getUser.lastName;
+            this.patronymic = this.getUser.patronymic;
+            this.email = this.getUser.email;
         },
         computed: {
+            getUser() {
+                return this.$store.getters['getUser']
+            },
+
             transportView() {
                 return this.$store.getters['transport/getTransportView']
+            },
+
+            userFromTransport() {
+                return this.$store.getters['transport/getUserFromTransport']
+            },
+
+            getCheckUserFromOffer() {
+                return this.$store.getters['transport/getCheckUserFromOffer']
+            },
+
+            checkUser() {
+                return this.$store.getters['transport/checkUser']
             },
 
             faAngleLeft() {
@@ -657,20 +911,7 @@
                 return this.$store.getters['transport/getPhotosTransport']
             },
 
-            google: VueGoogleMaps.gmapApi,
-
-            origin() {
-                return {query: this.transportView.cityFirstLoadingPoint};
-            },
-
-            destination() {
-                return {query: this.transportView.cityFirstUnloadingPoint};
-            }
-        },
-        watch: {
-            distance(val) {
-                this.distance = val;
-            }
+            google: VueGoogleMaps.gmapApi
         },
         methods: {
             checkFullnessProperties() {
@@ -783,23 +1024,56 @@
                         map: this.map
                     })
                 });
+            },
+
+            async sendOffer() {
+                const transportOffer = Object.assign({}, {
+                    additional: this.additional
+                });
+
+                const body = {
+                    id: this.$route.params.id,
+                    user: this.getUser,
+                    transportOffer: transportOffer,
+                    store: this.$store
+                };
+
+                await this.$store.dispatch('offer/sendTransportOfferAction', body);
+
+                this.dialogSendingOffer = false;
+                this.additional = '';
+            },
+
+            async sendMessage() {
+                const chatMessage = Object.assign({}, {
+                    message: this.message
+                });
+
+                const body = {
+                    user: this.getUser,
+                    userCompanion: this.userFromTransport,
+                    chatMessage: chatMessage,
+                    store: this.$store
+                };
+
+                if (this.message !== '' && this.message !== null) {
+                    console.log('MESSAGE SENDING');
+                    await this.$store.dispatch('chat/sendMessageAction', body);
+                }
+
+                this.dialogSendingMessage = false;
+                this.message = '';
             }
         },
         mounted() {
             const resultData = this.$store.getters['transport/getDataResultSearch'];
             const data = {...resultData.data};
-            this.queryResultSearch = Object.assign({}, {page: resultData.page}, {pageSize: resultData.pageSize}, data);
+            this.queryResultSearch = Object.assign({}, {page: resultData.page}, {pageSize: 3}, data);
+
             this.parseDate;
             this.checkFullnessProperties();
+
             this.initMap();
-            /*this.setMarker({
-                lat: this.getPointsTransport[0].latFirstPoint,
-                lng: this.getPointsTransport[0].lngFirstPoint
-            });
-            this.setMarker({
-                lat: this.getPointsTransport[0].latSecondPoint,
-                lng: this.getPointsTransport[0].lngSecondPoint
-            });*/
         }
     }
 </script>

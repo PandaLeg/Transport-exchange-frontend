@@ -4,11 +4,11 @@
       <v-col cols="12" lg="8" md="8">
         <v-card
         >
-          <v-card-title class="headline red accent-2 white--text">
+          <v-card-title class="headline primary white--text">
             <fa-icon :icon="faTruckLoading" class="mr-6">
               search
             </fa-icon>
-            <span class="title-font">Search Cargo</span>
+            <span class="title-font">Поиск груза</span>
           </v-card-title>
           <v-container>
             <v-row>
@@ -452,7 +452,7 @@
               outlined
               @click="searchCargo"
             >
-              Search
+              Поиск
             </v-btn>
           </v-card-actions>
         </v-card>

@@ -11,6 +11,9 @@ export const state = () => ({
   transportsAfterSearch: [],
   dataForSearchTransport: {},
   transportView: {},
+  user: {},
+  checkUser: false,
+  checkUserFromOffer: false,
   listPointsTransports: [],
   listPointsTransport: [],
   listPhotoTransport: [],
@@ -87,16 +90,22 @@ export const mutations = {
     state.totalPages = totalPages;
   },
 
+  setPageSize(state, pageSize) {
+    if (pageSize === undefined) {
+      state.pageSize = 3;
+    } else {
+      state.pageSize = Number(pageSize);
+    }
+    console.log("RESULT SEARCH PAGE NON UNDEFINED", state.pageSize);
+  },
+
   clearTransportsAfterSearch(state) {
     state.transportsAfterSearch = [];
   },
 
   // Следующие два метода используются для сохранения пути, для возврата со странички заявки транспорт
   setCookieResultSearch(state, resultSearch) {
-    const data = this.$cookies.get('resultTransportDataSearch');
-    if (data === null || data === undefined) {
-      this.$cookies.set('resultTransportDataSearch', resultSearch, {maxAge: 100000});
-    }
+    this.$cookies.set('resultTransportDataSearch', resultSearch, {maxAge: 100000});
   },
 
   setResultDataSearch(state) {
@@ -105,14 +114,14 @@ export const mutations = {
     if (data !== null && data !== undefined) {
       state.resultSearch = data;
       state.pathToSearch = '/transport/search-transport/search';
-      if (data.pageSize === undefined) {
-        state.pageSize = 3;
-      } else {
-        state.pageSize = data.pageSize;
-      }
     } else {
       state.pathToSearch = '/transport/search-transport';
     }
+  },
+
+  setUserTransport(state, data) {
+    state.user = data;
+    state.checkUser = state.user.roles.map(item => item.name).includes('ROLE_USER')
   },
 
   setPointsTransports(state, data) {
@@ -125,6 +134,20 @@ export const mutations = {
 
   setPhotosTransport(state, data) {
     state.listPhotoTransport = data;
+  },
+
+  checkUserFromOffer(state, data) {
+    console.log("TRANSPORT FROM OFFER", data.idTransport);
+    data.transports.map(item => {
+      if (item.id === data.idTransport) {
+        state.checkUserFromOffer = true;
+      }
+    });
+    console.log("CHECK USER FROM OFFER", state.checkUserFromOffer);
+  },
+
+  setCheckUserFromOffer(state) {
+    state.checkUserFromOffer = false;
   }
 };
 
@@ -162,16 +185,9 @@ export const actions = {
     const data = await response.data;
 
     if (data) {
-      commit('setTransportView', data)
-    }
-  },
-
-  async getPlacesTransportAction({commit}, id) {
-    const response = await this.$axios.get(API_URL + 'get-points-transport', {params: {id}});
-    const data = await response.data;
-
-    if (data) {
-      commit('setPointsTransport', data);
+      commit('setTransportView', data.transport);
+      commit('setPointsTransport', data.pointsLUTransport);
+      commit('setUserTransport', data.user);
     }
   },
 
@@ -182,8 +198,23 @@ export const actions = {
     if (data) {
       commit('setPhotosTransport', data);
     }
-  }
+  },
 
+  async checkUserSentOfferAction({commit}, body) {
+    let checkUserRole = body.user.roles.map(item => item.name).includes('ROLE_USER');
+
+    const response = await this.$axios.get(API_URL + 'get-sent-offers-transports/' + body.user.id, {
+      params: {
+        headers: Object.assign(authHeader(body.store)),
+        role: checkUserRole ? 'ROLE_USER' : 'ROLE_LEGAL_USER'
+      }
+    });
+    const data = await response.data;
+
+    if (data) {
+      commit('checkUserFromOffer', {transports: data, idTransport: body.idTransport});
+    }
+  }
 };
 
 export const getters = {
@@ -209,6 +240,18 @@ export const getters = {
 
   getTransportView: state => {
     return state.transportView
+  },
+
+  getUserFromTransport: state => {
+    return state.user
+  },
+
+  checkUser: state => {
+    return state.checkUser
+  },
+
+  getCheckUserFromOffer: state => {
+    return state.checkUserFromOffer
   },
 
   getDataResultSearch: state => {

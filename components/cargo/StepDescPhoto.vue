@@ -10,7 +10,7 @@
     >
       <v-col class="text-center">
         <h3 class="headline">
-          Photo and Additional
+          Дополнительно и Фото
         </h3>
       </v-col>
     </v-row>
@@ -281,7 +281,7 @@
                     {type: "application/json"}));
 
                 await this.$store.dispatch('cargo/addCargoAction', {store: this.$store, formData: this.formData,
-                userToken: this.getToken})
+                userToken: this.getToken});
             },
 
             onLoadingPhoto() {

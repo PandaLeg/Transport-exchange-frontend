@@ -217,13 +217,17 @@
         components: {
             MessageRow
         },
-        async fetch({store}) {
+        async fetch({store, app}) {
             let body = {
                 user: store.getters['getUser'],
                 store: store
             };
             console.log("BODY USER", body.user);
             await store.dispatch('chat/getUsersOfChatsAction', body);
+
+            if (body.user.chats.length === 0) {
+                await store.dispatch('getUserAction', app.$cookies.get('token'));
+            }
         },
         data() {
             return {
@@ -236,11 +240,12 @@
             connect();
             addHandler(data => {
                 if (data.objectType === 'MESSAGE') {
-                    let index = this.$store.getters['chat/listMessages'].indexOf(data.body);
+                    let index = this.$store.getters['chat/listMessages'].find((i) => i.id === data.body.id);
 
+                    console.log("INDEX MESSAGE", index);
                     switch (data.eventType) {
                         case 'CREATE':
-                            if (index < 0) {
+                            if (index === undefined) {
                                 this.$store.commit('chat/addMessage', data.body);
                             }
                             break;
@@ -289,6 +294,8 @@
                     }
                 }
 
+                console.log("GET USER", this.getUser);
+                console.log("GET USER", user);
                 const body = {
                     user: this.getUser,
                     userCompanion: user,

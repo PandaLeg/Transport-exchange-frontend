@@ -14,6 +14,7 @@ export const mutations = {
   setMessages(state, data) {
     state.user = {};
     state.userCompanion = {};
+    state.messages = [];
 
     state.messages = data.messages;
     state.user = data.user;
@@ -21,11 +22,7 @@ export const mutations = {
   },
 
   addMessage(state, message) {
-    state.messages = [
-      ...state.messages,
-      message
-    ];
-
+    state.messages.push(message);
     console.log("ADD HANDLER", state.messages);
   },
 

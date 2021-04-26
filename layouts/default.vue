@@ -42,7 +42,7 @@
         text
         @click="redirectMain"
       >
-        Main
+        Главная
       </v-btn>
 
       <!-- CARGO -->
@@ -60,7 +60,7 @@
             class="mr-5"
             text
           >
-            Cargo
+            Груз
           </v-btn>
         </template>
 
@@ -75,7 +75,7 @@
               <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Add cargo</v-list-item-subtitle>
+              <v-list-item-subtitle>Добавить груз</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -87,7 +87,7 @@
               <fa-icon :icon="faSearch" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Search cargo</v-list-item-subtitle>
+              <v-list-item-subtitle>Поиск груза</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -96,7 +96,7 @@
               <fa-icon :icon="faChartLine" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Statistics</v-list-item-subtitle>
+              <v-list-item-subtitle>Статистика</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -117,7 +117,7 @@
             class="mr-5"
             text
           >
-            Transport
+            Транспорт
           </v-btn>
         </template>
 
@@ -132,7 +132,7 @@
               <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Add transport</v-list-item-subtitle>
+              <v-list-item-subtitle>Добавить транспорт</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -144,7 +144,7 @@
               <fa-icon :icon="faSearch" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Search transport</v-list-item-subtitle>
+              <v-list-item-subtitle>Поиск транспорта</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -153,7 +153,7 @@
               <fa-icon :icon="faChartLine" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Statistics</v-list-item-subtitle>
+              <v-list-item-subtitle>Статистика</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -174,7 +174,7 @@
             class="mr-5"
             text
           >
-            Offer
+            Заявки
           </v-btn>
         </template>
 
@@ -189,7 +189,7 @@
               <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Cargo offer</v-list-item-subtitle>
+              <v-list-item-subtitle>Заявки по грузу</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -201,7 +201,7 @@
               <fa-icon :icon="faSearch" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Transport offer</v-list-item-subtitle>
+              <v-list-item-subtitle>Заявки по транспорту</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -213,8 +213,46 @@
         text
         @click="redirectChat"
       >
-        Chat
+        Чат
       </v-btn>
+
+
+      <!-- Additional -->
+      <v-menu
+        open-on-hover
+        offset-y
+        rounded
+        origin="center center"
+        transition="scale-transition"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            v-bind="attrs"
+            v-on="on"
+            class="mr-5"
+            text
+          >
+            Дополнительно
+          </v-btn>
+        </template>
+
+        <v-list
+          min-width="250"
+        >
+          <v-list-item
+            link
+            @click="redirectDistanceCalculation"
+          >
+            <v-list-item-icon>
+              <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-subtitle>Расчёт расстояния</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
 
       <v-spacer></v-spacer>
 
@@ -267,7 +305,7 @@
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Profile</v-list-item-subtitle>
+              <v-list-item-subtitle>Профиль</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -279,7 +317,7 @@
               <v-icon>settings</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Settings</v-list-item-subtitle>
+              <v-list-item-subtitle>Настройки</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -291,7 +329,7 @@
               <v-icon>exit_to_app</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Sign Out</v-list-item-subtitle>
+              <v-list-item-subtitle>Выйти</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -309,7 +347,7 @@
               <v-icon>exit_to_app</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Authorization</v-list-item-subtitle>
+              <v-list-item-subtitle>Авторизация</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -369,7 +407,7 @@
                 miniVariant: false,
                 right: true,
                 rightDrawer: false,
-                title: 'CARGO&SUPPLIERS'
+                title: 'CARGO&TRANSPORT'
             }
         },
         computed: {
@@ -453,6 +491,10 @@
 
             redirectChat() {
                 this.$router.push("/chat")
+            },
+
+            redirectDistanceCalculation() {
+                this.$router.push("/additional/distance-calculation")
             }
         }
     }
