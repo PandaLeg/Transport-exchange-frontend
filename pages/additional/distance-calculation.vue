@@ -32,8 +32,8 @@
                         clearable
                         item-text="fields.alternate_names"
                         item-value="recordid"
-                        label="Откуда"
-                        placeholder="Пункт №1"
+                        :label="$t('calculateDistance.fromWhere')"
+                        :placeholder="$t('calculateDistance.pointOne')"
                         filled
                         return-object
                       >
@@ -70,8 +70,8 @@
                         clearable
                         item-text="fields.alternate_names"
                         item-value="recordid"
-                        label="Выберите место загрузки"
-                        placeholder="Пункт №2"
+                        :label="$t('calculateDistance.fromWhere')"
+                        :placeholder="$t('calculateDistance.pointTwo')"
                         filled
                         return-object
                       >
@@ -115,7 +115,7 @@
                         class="marg-b ma-2 white--text"
                         @click="addNextFieldPointFrom"
                       >
-                        Добавить
+                        {{ $t('calculateDistance.add') }}
                         <v-icon
                           right
                           white
@@ -143,8 +143,8 @@
                         clearable
                         item-text="fields.alternate_names"
                         item-value="recordid"
-                        label="Куда"
-                        placeholder="Пункт №1"
+                        :label="$t('calculateDistance.whereTo')"
+                        :placeholder="$t('calculateDistance.pointTwo')"
                         filled
                         return-object
                       >
@@ -173,7 +173,7 @@
                     md="12"
                     lg="12"
                   >
-                    <span class="subtitle-font">Расстояние:</span>
+                    <span class="subtitle-font">{{ $t('calculateDistance.distance') }}:</span>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -265,7 +265,7 @@
                   color="primary"
                   @click="calcRoute"
                 >
-                  Расчитать
+                  {{ $t('calculateDistance.calculate') }}
                 </v-btn>
               </v-container>
             </v-col>

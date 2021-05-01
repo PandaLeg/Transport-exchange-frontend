@@ -24,7 +24,7 @@
                   md="2"
                   lg="2"
                 >
-                  <span>Откуда:</span>
+                  <span>{{ $t('searchTransport.fromWhere') }}:</span>
                 </v-col>
                 <v-col
                   cols="12"
@@ -49,7 +49,7 @@
                   md="2"
                   lg="2"
                 >
-                  <span>Куда:</span>
+                  <span>{{ $t('searchTransport.whereTo') }}:</span>
                 </v-col>
 
                 <v-col
@@ -74,7 +74,7 @@
                   md="2"
                   lg="2"
                 >
-                  <span>Дата:</span>
+                  <span>{{ $t('searchTransport.date') }}:</span>
                 </v-col>
 
                 <v-col
@@ -137,21 +137,25 @@
                     volumeFrom: query.volumeFrom, volumeUpTo: query.volumeUpTo, bodyType: query.bodyType,
                     paymentForm: query.paymentForm, paymentTime: query.paymentTime
                 };
+
                 let body = {
                     data, store,
                     page: query.page - 1,
-                    pageSize: query.pageSize
+                    pageSize: query.pageSize === undefined ? 3 : query.pageSize
                 };
 
                 store.commit('transport/setDataForSearchTransport', {data, page: query.page});
 
                 store.commit('transport/setPageSize', query.pageSize);
 
-                store.commit('transport/setCookieResultSearch', {data, page: query.page, pageSize:
-                        query.pageSize ? query.pageSize : 3});
+                store.commit('transport/setCookieResultSearch', {
+                    data, page: query.page, pageSize:
+                        query.pageSize ? query.pageSize : 3
+                });
                 store.commit('transport/setResultDataSearch');
 
                 store.commit('transport/clearTransportsAfterSearch');
+
                 await store.dispatch('transport/searchTransportAction', body);
             }
         },
@@ -163,10 +167,10 @@
             }
         },
         created() {
-            this.page = this.getCurrentPage;
+            this.page = Number(this.getCurrentPage);
             if (this.getPageSize !== undefined) {
                 console.log("PAGE SIZE CREATED", this.getPageSize);
-                this.pageSize = this.getPageSize;
+                this.pageSize = Number(this.getPageSize);
             } else {
                 this.pageSize = 3;
             }
@@ -199,10 +203,13 @@
         },
         methods: {
             redirectTransportViewPage(id) {
-                this.$router.push('/transport/view/' + id);
+                this.$router.push((this.$i18n.localeProperties.code !== 'ru' ? '/' + this.$i18n.localeProperties.code : '') +
+                    '/transport/view/' + id);
             },
 
             async nextPage() {
+                this.$store.commit('transport/clearTransportsAfterSearch');
+
                 const transport = Object.assign({}, {page: this.page}, {pageSize: this.pageSize},
                     {...this.getDataForSearchTransport});
                 let body = {
@@ -220,7 +227,9 @@
                 this.$store.commit('transport/setResultDataSearch');
 
                 await this.$store.dispatch('transport/searchTransportAction', body);
-                await this.$router.push({path: '/transport/search-transport/search', query: transport})
+
+                await this.$router.push({path: (this.$i18n.localeProperties.code !== 'ru' ? '/' +
+                        this.$i18n.localeProperties.code : '') + '/transport/search-transport/search', query: transport})
             },
 
             pageChange(value) {
@@ -233,9 +242,6 @@
                 this.pageSize = value;
                 this.nextPage();
             }
-        },
-        mounted() {
-            console.log("TRANSPORTS", this.$store.getters['transport/getTransportsAfterSearch']);
         }
     }
 </script>

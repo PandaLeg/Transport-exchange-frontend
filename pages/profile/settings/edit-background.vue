@@ -25,7 +25,7 @@
             text
             @click="redirectSettings"
           >
-            Save
+            {{ $t('settings.save') }}
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
@@ -59,7 +59,7 @@
                   :loading="isSelecting"
                   @click="onLoadingPhoto"
                 >
-                  Добавить
+                  {{ $t('settings.add') }}
                 </v-btn>
                 <input
                   ref="image"
@@ -77,7 +77,7 @@
                 plain
                 @click="closeDialog"
               >
-                Отменить
+                {{ $t('settings.cancel') }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -89,7 +89,7 @@
 
 <script>
     export default {
-        name: "edit-background",
+        name: "profile-settings-edit-background",
         data() {
             return {
                 isSelecting: false,
@@ -130,7 +130,7 @@
         },
         methods: {
             closeDialog() {
-                this.$router.push('/profile/settings')
+                this.$router.push(this.localePath({name: 'profile-settings'}));
             },
 
             async redirectSettings() {
@@ -156,7 +156,7 @@
                     await this.$store.dispatch('getUserAction', token)
                         .then(
                             () => {
-                                this.$router.push('/profile/settings')
+                                this.$router.push(this.localePath({name: 'profile-settings'}));
                             }, error => {
                                 console.log(error);
                             }

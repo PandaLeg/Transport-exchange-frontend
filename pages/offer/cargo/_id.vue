@@ -19,10 +19,10 @@
           <v-card
           >
             <v-card-title class="title red accent-2 white--text">
-              Загрузка
+              {{ $t('offerExecution.loading') }}
             </v-card-title>
             <v-card-text class="white text--primary">
-              <p>Этот статус обозначает, момент, когда машина едет на загрузку в первоначальную точку.</p>
+              <p>{{ $t('offerExecution.loadingText') }}</p>
             </v-card-text>
             <v-card-actions>
               <v-btn
@@ -31,7 +31,7 @@
                 class="mx-0 white--text"
                 @click="changeStatus"
               >
-                Завершить
+                {{ $t('offerExecution.completeBtn') }}
               </v-btn>
               <v-btn
                 v-else
@@ -39,7 +39,7 @@
                 class="mx-0 white--text"
                 disabled
               >
-                Завершить
+                {{ $t('offerExecution.completeBtn') }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -55,10 +55,10 @@
           <v-card
           >
             <v-card-title class="title amber accent-2 white--text">
-              В пути
+              {{ $t('offerExecution.inWay') }}
             </v-card-title>
             <v-card-text class="white text--primary">
-              <p>Этот статус обозначает, момент, когда машина находится в пути, к конечной точке выгрузки.</p>
+              <p>{{ $t('offerExecution.inWayText') }}</p>
             </v-card-text>
             <v-card-actions>
               <v-btn
@@ -67,7 +67,7 @@
                 class="mx-0 white--text"
                 @click="changeStatus"
               >
-                Завершить
+                {{ $t('offerExecution.completeBtn') }}
               </v-btn>
               <v-btn
                 v-else
@@ -75,7 +75,7 @@
                 class="mx-0 white--text"
                 disabled
               >
-                Завершить
+                {{ $t('offerExecution.completeBtn') }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -91,11 +91,10 @@
           <v-card
           >
             <v-card-title class="title green accent-3 white--text">
-              Выгрузка
+              {{ $t('offerExecution.complete') }}
             </v-card-title>
             <v-card-text class="white text--primary">
-              <p>Этот статус обозначает, момент, когда машина приехала на выгрузку в конечную точку и можно завершить
-                выполнение заказа.</p>
+              <p>{{ $t('offerExecution.completeText') }}</p>
             </v-card-text>
             <v-card-actions>
               <v-btn
@@ -104,7 +103,7 @@
                 class="mx-0 white--text"
                 @click="changeStatus"
               >
-                Завершить
+                {{ $t('offerExecution.completeBtn') }}
               </v-btn>
               <v-btn
                 v-else
@@ -112,7 +111,7 @@
                 class="mx-0 white--text"
                 disabled
               >
-                Завершить
+                {{ $t('offerExecution.completeBtn') }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -126,7 +125,7 @@
       lg="4"
     >
       <v-card>
-        <v-card-title>Краткая информация</v-card-title>
+        <v-card-title>{{ $t('offerExecution.briefInformation') }}</v-card-title>
         <v-card-text>
           <span>
             {{ cargoView.name }}

@@ -12,13 +12,13 @@
                 editable
               >
                 <div v-if="n === 1">
-                  Date & Place
+                  {{ $t('addTransport.date&Place') }}
                 </div>
                 <div v-else-if="n === 2">
-                  Transport & Payment
+                  {{ $t('addTransport.transport&Payment') }}
                 </div>
                 <div v-else>
-                  Photo & Additional
+                  {{ $t('addTransport.additional&Photo') }}
                 </div>
               </v-stepper-step>
 

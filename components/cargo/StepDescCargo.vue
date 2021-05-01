@@ -10,7 +10,7 @@
     >
       <v-col class="text-center">
         <h3 class="headline">
-          Груз и Дата
+          {{ $t('addCargo.cargoAndDate') }}
         </h3>
       </v-col>
     </v-row>
@@ -24,7 +24,7 @@
         <v-row>
           <v-col>
             <v-subheader inset class="text--white">
-              Груз
+              {{ $t('addCargo.cargo') }}
             </v-subheader>
             <v-divider inset></v-divider>
           </v-col>
@@ -36,7 +36,7 @@
             lg="2"
           >
             <v-subheader>
-              Наименование
+              {{ $t('addCargo.nameCargo') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -56,8 +56,8 @@
               clearable
               item-text="name"
               item-value="id"
-              label="Выберите наименование груза"
-              placeholder="Поиск"
+              :label="$t('addCargo.selectNameCargo')"
+              :placeholder="$t('addCargo.search')"
               filled
               required
               @change="$v.name.$touch()"
@@ -83,7 +83,7 @@
             lg="2"
           >
             <v-subheader>
-              Масса(т)
+              {{ $t('addCargo.weight') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -95,7 +95,7 @@
               v-model="weightFrom"
               :error-messages="weightFromErrors"
               color="blue-grey lighten-2"
-              label="От"
+              :label="$t('addCargo.from')"
               filled
               clearable
             ></v-text-field>
@@ -109,7 +109,7 @@
               v-model="weightUpTo"
               :error-messages="weightUpToErrors"
               color="blue-grey lighten-2"
-              label="До"
+              :label="$t('addCargo.before')"
               filled
               clearable
             ></v-text-field>
@@ -122,7 +122,7 @@
             lg="2"
           >
             <v-subheader>
-              Объём(м3)
+              {{ $t('addCargo.volume') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -135,7 +135,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="От"
+              :label="$t('addCargo.from')"
             ></v-text-field>
           </v-col>
           <v-col
@@ -148,7 +148,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="До"
+              :label="$t('addCargo.before')"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -160,7 +160,7 @@
             lg="1"
           >
             <v-subheader>
-              Габариты
+              {{ $t('addCargo.dimensions') }}
             </v-subheader>
           </v-col>
 
@@ -175,7 +175,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="Длинна"
+              :label="$t('addCargo.length')"
             ></v-text-field>
           </v-col>
 
@@ -189,7 +189,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="Ширина"
+              :label="$t('addCargo.width')"
             ></v-text-field>
           </v-col>
 
@@ -203,7 +203,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="Высота"
+              :label="$t('addCargo.height')"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -227,7 +227,7 @@
               v-model="adr"
               :items="getListArg"
               :menu-props="{ bottom: true, offsetY: true }"
-              hint="Выберите ADR"
+              :hint="$t('addCargo.selectAdr')"
               persistent-hint
               filled
               clearable
@@ -238,7 +238,7 @@
         <v-row>
           <v-col>
             <v-subheader inset>
-              Дата и место
+              {{ $t('addCargo.dateAndPlace') }}
             </v-subheader>
             <v-divider inset></v-divider>
           </v-col>
@@ -250,7 +250,7 @@
             lg="2"
           >
             <v-subheader>
-              Дата загрузки
+              {{ $t('addCargo.dateLoading') }}
             </v-subheader>
           </v-col>
 
@@ -271,7 +271,7 @@
                 <v-text-field
                   v-model="loadingDateFrom"
                   :error-messages="loadingDateFromErrors"
-                  label="Выберите дату с"
+                  :label="$t('addCargo.selectDateFrom')"
                   prepend-icon="mdi-calendar"
                   readonly
                   v-bind="attrs"
@@ -302,7 +302,7 @@
                 <v-text-field
                   v-model="loadingDateBy"
                   :error-messages="loadingDateByErrors"
-                  label="Выберите дату по"
+                  :label="$t('addCargo.selectDateBy')"
                   prepend-icon="mdi-calendar"
                   readonly
                   v-bind="attrs"
@@ -324,7 +324,7 @@
             lg="2"
           >
             <v-subheader>
-              Загрузка
+              {{ $t('addCargo.loading') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -344,8 +344,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место загрузки"
-              placeholder="Поиск"
+              :label="$t('addCargo.selectPlaceLoading')"
+              :placeholder="$t('addCargo.search')"
               filled
               return-object
             >
@@ -372,7 +372,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 2
+              {{ $t('addCargo.pointTwo') }}
             </v-subheader>
           </v-col>
 
@@ -392,8 +392,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место загрузки"
-              placeholder="Поиск"
+              :label="$t('addCargo.selectPlaceLoading')"
+              :placeholder="$t('addCargo.search')"
               filled
               return-object
             >
@@ -434,7 +434,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 3
+              {{ $t('addCargo.pointThree') }}
             </v-subheader>
           </v-col>
 
@@ -455,8 +455,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место загрузки"
-              placeholder="Поиск"
+              :label="$t('addCargo.selectPlaceLoading')"
+              :placeholder="$t('addCargo.search')"
               filled
               return-object
             >
@@ -497,7 +497,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 4
+              {{ $t('addCargo.pointFour') }}
             </v-subheader>
           </v-col>
 
@@ -518,8 +518,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место загрузки"
-              placeholder="Поиск"
+              :label="$t('addCargo.selectPlaceLoading')"
+              :placeholder="$t('addCargo.search')"
               filled
               return-object
             >
@@ -560,7 +560,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 5
+              {{ $t('addCargo.pointFive') }}
             </v-subheader>
           </v-col>
 
@@ -581,8 +581,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место загрузки"
-              placeholder="Поиск"
+              :label="$t('addCargo.selectPlaceLoading')"
+              :placeholder="$t('addCargo.search')"
               filled
               return-object
             >
@@ -625,7 +625,7 @@
               class="marg-b ma-2 white--text"
               @click="addNextFieldPointFrom"
             >
-              Добавить
+              {{ $t('addCargo.add') }}
               <v-icon
                 right
                 white
@@ -643,7 +643,7 @@
             lg="2"
           >
             <v-subheader>
-              Выгрузка
+              {{ $t('addCargo.unloading') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -663,8 +663,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место выгрузки"
-              placeholder="Поиск"
+              :label="$t('addCargo.selectPlaceUnloading')"
+              :placeholder="$t('addCargo.search')"
               filled
               return-object
             >
@@ -691,7 +691,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 2
+              {{ $t('addCargo.pointTwo') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -711,8 +711,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место выгрузки"
-              placeholder="Поиск"
+              :label="$t('addCargo.selectPlaceUnloading')"
+              :placeholder="$t('addCargo.search')"
               filled
               return-object
             >
@@ -753,7 +753,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 3
+              {{ $t('addCargo.pointThree') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -773,8 +773,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место выгрузки"
-              placeholder="Поиск"
+              :label="$t('addCargo.selectPlaceUnloading')"
+              :placeholder="$t('addCargo.search')"
               filled
               return-object
             >
@@ -815,7 +815,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 4
+              {{ $t('addCargo.pointFour') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -835,8 +835,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место выгрузки"
-              placeholder="Поиск"
+              :label="$t('addCargo.selectPlaceUnloading')"
+              :placeholder="$t('addCargo.search')"
               filled
               return-object
             >
@@ -877,7 +877,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 5
+              {{ $t('addCargo.pointFive') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -897,8 +897,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место выгрузки"
-              placeholder="Поиск"
+              :label="$t('addCargo.selectPlaceUnloading')"
+              :placeholder="$t('addCargo.search')"
               filled
               return-object
             >
@@ -942,7 +942,7 @@
               class="marg-b ma-2 white--text"
               @click="addNextFieldPointTo"
             >
-              Добавить
+              {{ $t('addCargo.add') }}
               <v-icon
                 right
                 white

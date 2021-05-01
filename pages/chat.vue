@@ -12,7 +12,7 @@
         flat
       >
         <v-toolbar-title>
-          Чат
+          {{ $t('chat.title') }}
         </v-toolbar-title>
       </v-toolbar>
       <v-divider></v-divider>
@@ -24,7 +24,7 @@
             >
               <v-text-field
                 class="ml-3 mt-8"
-                label="Поиск"
+                :label="$t('chat.search')"
                 prepend-inner-icon="search"
                 outlined
                 dense
@@ -97,7 +97,7 @@
                 height="486"
                 max-height="550"
               >
-                Нет сообщений
+                {{ $t('chat.selectUser') }}
               </v-card>
             </div>
 
@@ -187,7 +187,7 @@
               <v-card-text>
                 <v-text-field
                   v-model="message"
-                  label="Написать"
+                  :label="$t('chat.writeMessage')"
                   type="text"
                   no-details
                   dense

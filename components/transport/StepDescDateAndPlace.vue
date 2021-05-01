@@ -10,7 +10,7 @@
     >
       <v-col class="text-center">
         <h3 class="headline">
-          Place and Date
+          {{ $t('addTransport.dateAndPlaceTitle') }}
         </h3>
       </v-col>
     </v-row>
@@ -25,7 +25,7 @@
         <v-row>
           <v-col>
             <v-subheader inset>
-              Дата и место
+              {{ $t('addTransport.dateAndPlaceTitle') }}
             </v-subheader>
             <v-divider inset></v-divider>
           </v-col>
@@ -37,7 +37,7 @@
             lg="2"
           >
             <v-subheader>
-              Дата загрузки
+              {{ $t('addTransport.loadingDate') }}
             </v-subheader>
           </v-col>
 
@@ -58,7 +58,7 @@
                 <v-text-field
                   v-model="loadingDateFrom"
                   :error-messages="loadingDateFromErrors"
-                  label="Выберите дату с"
+                  :label="$t('addTransport.selectDateFrom')"
                   prepend-icon="mdi-calendar"
                   readonly
                   v-bind="attrs"
@@ -89,7 +89,7 @@
                 <v-text-field
                   v-model="loadingDateBy"
                   :error-messages="loadingDateByErrors"
-                  label="Выберите дату по"
+                  :label="$t('addTransport.selectDateBy')"
                   prepend-icon="mdi-calendar"
                   readonly
                   v-bind="attrs"
@@ -111,7 +111,7 @@
             lg="2"
           >
             <v-subheader>
-              Загрузка
+              {{ $t('addTransport.loading') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -131,8 +131,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место загрузки"
-              placeholder="Поиск"
+              :label="$t('addTransport.selectPlaceLoading')"
+              :placeholder="$t('addTransport.search')"
               filled
               return-object
             >
@@ -159,7 +159,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 2
+              {{ $t('addTransport.pointTwo') }}
             </v-subheader>
           </v-col>
 
@@ -179,8 +179,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место загрузки"
-              placeholder="Поиск"
+              :label="$t('addTransport.selectPlaceLoading')"
+              :placeholder="$t('addTransport.search')"
               filled
               return-object
             >
@@ -221,7 +221,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 3
+              {{ $t('addTransport.pointThree') }}
             </v-subheader>
           </v-col>
 
@@ -242,8 +242,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место загрузки"
-              placeholder="Поиск"
+              :label="$t('addTransport.selectPlaceLoading')"
+              :placeholder="$t('addTransport.search')"
               filled
               return-object
             >
@@ -284,7 +284,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 4
+              {{ $t('addTransport.pointFour') }}
             </v-subheader>
           </v-col>
 
@@ -305,8 +305,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место загрузки"
-              placeholder="Поиск"
+              :label="$t('addTransport.selectPlaceLoading')"
+              :placeholder="$t('addTransport.search')"
               filled
               return-object
             >
@@ -347,7 +347,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 5
+              {{ $t('addTransport.pointFive') }}
             </v-subheader>
           </v-col>
 
@@ -368,8 +368,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место загрузки"
-              placeholder="Поиск"
+              :label="$t('addTransport.selectPlaceLoading')"
+              :placeholder="$t('addTransport.search')"
               filled
               return-object
             >
@@ -412,7 +412,7 @@
               class="marg-b ma-2 white--text"
               @click="addNextFieldPointFrom"
             >
-              Добавить
+              {{ $t('addTransport.add') }}
               <v-icon
                 right
                 white
@@ -430,7 +430,7 @@
             lg="2"
           >
             <v-subheader>
-              Выгрузка
+              {{ $t('addTransport.unloading') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -450,8 +450,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место выгрузки"
-              placeholder="Поиск"
+              :label="$t('addTransport.selectPlaceUnloading')"
+              :placeholder="$t('addTransport.search')"
               filled
               return-object
             >
@@ -478,7 +478,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 2
+              {{ $t('addTransport.pointTwo') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -498,8 +498,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место выгрузки"
-              placeholder="Поиск"
+              :label="$t('addTransport.selectPlaceUnloading')"
+              :placeholder="$t('addTransport.search')"
               filled
               return-object
             >
@@ -540,7 +540,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 3
+              {{ $t('addTransport.pointThree') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -560,8 +560,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место выгрузки"
-              placeholder="Поиск"
+              :label="$t('addTransport.selectPlaceUnloading')"
+              :placeholder="$t('addTransport.search')"
               filled
               return-object
             >
@@ -602,7 +602,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 4
+              {{ $t('addTransport.pointFour') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -622,8 +622,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место выгрузки"
-              placeholder="Поиск"
+              :label="$t('addTransport.selectPlaceUnloading')"
+              :placeholder="$t('addTransport.search')"
               filled
               return-object
             >
@@ -664,7 +664,7 @@
             lg="2"
           >
             <v-subheader>
-              Пункт 5
+              {{ $t('addTransport.pointFive') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -684,8 +684,8 @@
               clearable
               item-text="fields.alternate_names"
               item-value="recordid"
-              label="Выберите место выгрузки"
-              placeholder="Поиск"
+              :label="$t('addTransport.selectPlaceUnloading')"
+              :placeholder="$t('addTransport.search')"
               filled
               return-object
             >
@@ -729,7 +729,7 @@
               class="marg-b ma-2 white--text"
               @click="addNextFieldPointTo"
             >
-              Добавить
+              {{ $t('addTransport.add') }}
               <v-icon
                 right
                 white
@@ -761,7 +761,6 @@
     import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
     import {validationMixin} from 'vuelidate'
     import {required} from 'vuelidate/lib/validators'
-    import {Search} from "../../service/realizationSearch";
 
     export default {
         name: "StepDescDateAndPlace",

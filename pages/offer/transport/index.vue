@@ -13,19 +13,19 @@
               fixed-tabs
             >
               <v-tab href="#one" class="grey--text">
-                Все
+                {{ $t('offer.titleAll') }}
               </v-tab>
               <v-tab href="#two" class="grey--text">
-                Отправленные
+                {{ $t('offer.titleSent') }}
               </v-tab>
               <v-tab href="#three" class="grey--text">
-                Активные
+                {{ $t('offer.titleActive') }}
               </v-tab>
               <v-tab href="#four" class="grey--text">
-                В обработке
+                {{ $t('offer.titleInProcessing') }}
               </v-tab>
               <v-tab href="#five" class="grey--text">
-                Завершённые
+                {{ $t('offer.titleFinished') }}
               </v-tab>
               <v-tabs-slider color="indigo"></v-tabs-slider>
             </v-tabs>
@@ -45,7 +45,7 @@
             <v-toolbar
               flat
             >
-              <v-toolbar-title>Все заявки</v-toolbar-title>
+              <v-toolbar-title>{{ $t('offer.subtitleAllOffers') }}</v-toolbar-title>
               <v-divider
                 class="mx-4"
                 inset
@@ -54,11 +54,11 @@
               <v-spacer></v-spacer>
               <v-dialog v-model="dialogDelete" max-width="500px">
                 <v-card>
-                  <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
+                  <v-card-title class="headline">{{ $t('offer.deleteConfirmation') }}</v-card-title>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="">Cancel</v-btn>
-                    <v-btn color="blue darken-1" text @click="">OK</v-btn>
+                    <v-btn color="blue darken-1" text @click="">{{ $t('offer.cancellation') }}</v-btn>
+                    <v-btn color="blue darken-1" text @click="">{{ $t('offer.ok') }}</v-btn>
                     <v-spacer></v-spacer>
                   </v-card-actions>
                 </v-card>
@@ -96,7 +96,7 @@
             <v-toolbar
               flat
             >
-              <v-toolbar-title>Отправленные заявки</v-toolbar-title>
+              <v-toolbar-title>{{ $t('offer.subtitleSentOffers') }}</v-toolbar-title>
               <v-divider
                 class="mx-4"
                 inset
@@ -105,11 +105,11 @@
               <v-spacer></v-spacer>
               <v-dialog v-model="dialogDelete" max-width="500px">
                 <v-card>
-                  <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
+                  <v-card-title class="headline">{{ $t('offer.deleteConfirmation') }}</v-card-title>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="">Cancel</v-btn>
-                    <v-btn color="blue darken-1" text @click="">OK</v-btn>
+                    <v-btn color="blue darken-1" text @click="">{{ $t('offer.cancellation') }}</v-btn>
+                    <v-btn color="blue darken-1" text @click="">{{ $t('offer.ok') }}</v-btn>
                     <v-spacer></v-spacer>
                   </v-card-actions>
                 </v-card>
@@ -146,7 +146,7 @@
             <v-toolbar
               flat
             >
-              <v-toolbar-title>Активные заявки</v-toolbar-title>
+              <v-toolbar-title>{{ $t('offer.subtitleActiveOffers') }}</v-toolbar-title>
               <v-divider
                 class="mx-4"
                 inset
@@ -155,11 +155,11 @@
               <v-spacer></v-spacer>
               <v-dialog v-model="dialogDelete" max-width="500px">
                 <v-card>
-                  <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
+                  <v-card-title class="headline">{{ $t('offer.deleteConfirmation') }}</v-card-title>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="">Cancel</v-btn>
-                    <v-btn color="blue darken-1" text @click="">OK</v-btn>
+                    <v-btn color="blue darken-1" text @click="">{{ $t('offer.cancellation') }}</v-btn>
+                    <v-btn color="blue darken-1" text @click="">{{ $t('offer.ok') }}</v-btn>
                     <v-spacer></v-spacer>
                   </v-card-actions>
                 </v-card>
@@ -186,16 +186,16 @@
               </template>
               <v-card>
                 <v-card-title class="headline grey lighten-2">
-                  Подтверждение
+                  {{ $t('offer.confirmation') }}
                 </v-card-title>
 
                 <v-card-text>
                   <span>
-                    После принятия заявки, она поступит в обработку.
+                    {{ $t('offer.textAboutInProcessing') }}
                   </span>
                   <br>
                   <span>
-                    Вы уверены, что хотите принять её?
+                    {{ $t('offer.textAboutConfirmation') }}
                   </span>
                 </v-card-text>
 
@@ -208,14 +208,14 @@
                     text
                     @click="dialog = false"
                   >
-                    Отменить
+                    {{ $t('offer.cancel') }}
                   </v-btn>
                   <v-btn
                     color="primary"
                     text
                     @click="addToProcessing(item)"
                   >
-                    Принять
+                    {{ $t('offer.accept') }}
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -257,7 +257,7 @@
             <v-toolbar
               flat
             >
-              <v-toolbar-title>В обработке</v-toolbar-title>
+              <v-toolbar-title>{{ $t('offer.titleInProcessing') }}</v-toolbar-title>
               <v-divider
                 class="mx-4"
                 inset
@@ -292,7 +292,7 @@
             <v-toolbar
               flat
             >
-              <v-toolbar-title>Завершённые</v-toolbar-title>
+              <v-toolbar-title>{{ $t('offer.titleFinished') }}</v-toolbar-title>
               <v-divider
                 class="mx-4"
                 inset
@@ -330,33 +330,8 @@
             return {
                 dialog: false,
                 dialogDelete: false,
-                headers: [
-                    {
-                        text: 'Транспорт',
-                        align: 'start',
-                        sortable: false,
-                        value: 'bodyType',
-                    },
-                    {text: 'Откуда', value: 'loadingPointFrom'},
-                    {text: 'Куда', value: 'loadingPointBy'},
-                    {text: 'Дата', value: 'data'},
-                    {text: 'Оплата', value: 'payment'},
-                    {text: 'Действия', value: 'actions', sortable: false},
-                ],
-                headersInProcessing: [
-                    {
-                        text: 'Транспорт',
-                        align: 'start',
-                        sortable: false,
-                        value: 'bodyType',
-                    },
-                    {text: 'Откуда', value: 'loadingPointFrom'},
-                    {text: 'Куда', value: 'loadingPointBy'},
-                    {text: 'Дата', value: 'data'},
-                    {text: 'Оплата', value: 'payment'},
-                    {text: 'Статус', value: 'status'},
-                    {text: 'Действия', value: 'actions', sortable: false},
-                ],
+                headers: [],
+                headersInProcessing: [],
                 offersTransports: [],
                 sentTransports: [],
                 activeTransports: [],
@@ -368,6 +343,7 @@
             }
         },
         created() {
+            this.filledHeaders();
             this.filledAllOfferOfTransports(this.allOfferTransports, this.getPointsTransports,
                 this.offersTransports);
             this.filledAllOfferOfTransports(this.allSentTransports, this.getPointsAllSentTransports,
@@ -437,6 +413,37 @@
             },
         },
         methods: {
+            filledHeaders() {
+                this.headers = [
+                    {
+                        text: this.$t('offer.transport'),
+                        align: 'start',
+                        sortable: false,
+                        value: 'bodyType',
+                    },
+                    {text: this.$t('offer.fromWhere'), value: 'loadingPointFrom'},
+                    {text: this.$t('offer.whereTo'), value: 'loadingPointBy'},
+                    {text: this.$t('offer.date'), value: 'date'},
+                    {text: this.$t('offer.payment'), value: 'payment'},
+                    {text: this.$t('offer.actions'), value: 'actions', sortable: false}
+                ];
+
+                this.headersInProcessing = [
+                    {
+                        text: this.$t('offer.transport'),
+                        align: 'start',
+                        sortable: false,
+                        value: 'bodyType',
+                    },
+                    {text: this.$t('offer.fromWhere'), value: 'loadingPointFrom'},
+                    {text: this.$t('offer.whereTo'), value: 'loadingPointBy'},
+                    {text: this.$t('offer.date'), value: 'date'},
+                    {text: this.$t('offer.payment'), value: 'payment'},
+                    {text: this.$t('offer.status'), value: 'status'},
+                    {text: this.$t('offer.actions'), value: 'actions', sortable: false}
+                ]
+            },
+
             filledAllOfferOfTransports(allTransports, allPoints, resultTransports) {
                 let paymentForm = '';
                 let paymentTime = '';
@@ -464,14 +471,17 @@
                     });
 
                     data = parseCargoDate.parseDate(allTransports[i].loadingDateFrom,
-                        allTransports[i].loadingDateBy);
+                        allTransports[i].loadingDateBy, this.$i18n.localeProperties.code);
 
                     transport = Object.assign({},
                         {id: allTransports[i].id},
                         {bodyType: allTransports[i].bodyType},
                         {loadingPointBy: allPoints[i].cityTo + ', ' + allPoints[i].countryTo},
                         {loadingPointFrom: allPoints[i].cityFrom + ', ' + allPoints[i].countryFrom},
-                        {data: 'с ' + data.loadingDateFrom + ' по ' + data.loadingDateBy},
+                        {
+                            date: this.$t('view.from') + ' ' + data.loadingDateFrom + ' ' + this.$t('view.by')
+                                + ' ' + data.loadingDateBy
+                        },
                         {status: allTransports[i].status}
                     );
 
@@ -504,7 +514,7 @@
             },
 
             redirectToTransportOffer(transport) {
-                this.$router.push('/offer/transport/' + transport.id)
+                this.$router.push(this.localePath('/offer/transport/' + transport.id))
             }
         }
     }

@@ -27,29 +27,83 @@ export const state = () => ({
     '1', '2', '3', '4', '5',
     '6', '7', '8', '9'
   ],
-  listLoadingCar: [
-    'Верхняя', 'Задняя', 'Боковая',
-    'Со снятием стоек', 'Со снятием поперечин',
-    'С полной растентовкой', 'Без ворот'
-  ],
-  listPermissions: [
-    'TIR', 'CMR', 'По декларации', 'Медкнижка', 'T1'
-  ],
-  typesPayment: ['Сумма', 'Запрос ставки'],
+  loadingCar: {
+    listRu: [
+      'Верхняя', 'Задняя', 'Боковая',
+      'Со снятием стоек', 'Со снятием поперечин',
+      'С полной растентовкой', 'Без ворот'
+    ],
+    listEn: [
+      'Top', 'Back', 'Side',
+      'With racks removal', 'With crossbars removal',
+      'With full cover', 'Without gates'
+    ],
+    listUa: [
+      'Верхнє', 'Заднє', 'Бічне',
+      'Зі зняттям стійок', 'Зі зняттям поперечин',
+      'З повною розтентовкою', 'Без воріт'
+    ]
+  },
+  permission: {
+    listRu:[
+      'TIR', 'CMR', 'По декларации', 'Медкнижка', 'T1'
+    ],
+    listEn:[
+      'TIR', 'CMR', 'By declaration', 'Medical record', 'T1'
+    ],
+    listUa:[
+      'TIR', 'CMR', 'За декларацією', 'Медкнига', 'T1'
+    ],
+  },
+  paymentType: {
+    listRu:[
+      'Сумма', 'Запрос ставки'
+    ],
+    listEn:[
+      'Amount', 'Bid request'
+    ],
+    listUa:[
+      'Сума', 'Запит ставки'
+    ]
+  },
   listCurrency: [
     'EUR', 'USD', 'UAH',
     'BYN', 'RUB', 'KZT',
     'PLN', 'UZS'
   ],
-  listCostPer: [
-    'км', 'сутки'
-  ],
-  listFormPayment: [
-    'наличными', 'безналичными', 'комбинированная', 'карта', 'электронный платёж'
-  ],
-  listTimePayment: [
-    'на загрузке', 'на выгрузке', 'по оригиналам'
-  ],
+  listCostPer: {
+    listRu:[
+      'км', 'сутки'
+    ],
+    listEn:[
+      'km', 'day'
+    ],
+    listUa:[
+      'км', 'добу'
+    ]
+  },
+  paymentForm: {
+    listRu:[
+      'наличными', 'безналичными', 'комбинированная', 'карта', 'электронный платёж'
+    ],
+    listEn:[
+      'cash', 'non-cash', 'combined', 'card', 'electronic payment'
+    ],
+    listUa:[
+      'готівкою', 'безготівкою', 'комбінована', 'карта', 'електронний платіж'
+    ]
+  },
+  paymentTime: {
+    listRu:[
+      'на загрузке', 'на выгрузке', 'по оригиналам'
+    ],
+    listEn:[
+      'on loading', 'unloading', 'by originals'
+    ],
+    listUa:[
+      'на завантаженні', 'при розвантаженні', 'за оригіналами'
+    ]
+  },
   countries: []
 });
 
@@ -118,10 +172,13 @@ export const mutations = {
     const data = this.$cookies.get('resultCargoDataSearch');
 
     if (data !== null && data !== undefined) {
+      console.log((this.$i18n.localeProperties.code !== 'ru' ? this.$i18n.localeProperties.code : ''));
       state.resultSearch = data;
-      state.pathToSearch = '/cargo/search-cargo/search';
+      state.pathToSearch = (this.$i18n.localeProperties.code !== 'ru' ? '/' + this.$i18n.localeProperties.code : '') +
+        '/cargo/search-cargo/search';
     } else {
-      state.pathToSearch = '/cargo/search-cargo';
+      state.pathToSearch = (this.$i18n.localeProperties.code !== 'ru' ? '/' + this.$i18n.localeProperties.code : '') +
+        '/cargo/search-cargo';
     }
   },
 
@@ -303,32 +360,32 @@ export const getters = {
     return state.listArg
   },
 
-  getListLoadingCar: state => {
-    return state.listLoadingCar
+  getLoadingCar: state => {
+    return state.loadingCar
   },
 
-  getListPermissions: state => {
-    return state.listPermissions
+  getPermission: state => {
+    return state.permission
   },
 
-  getTypesPayment: state => {
-    return state.typesPayment
+  getPaymentType: state => {
+    return state.paymentType
   },
 
   getListCurrency: state => {
     return state.listCurrency
   },
 
-  getListCostPer: state => {
+  getCostPer: state => {
     return state.listCostPer
   },
 
-  getListFormPayment: state => {
-    return state.listFormPayment
+  getPaymentForm: state => {
+    return state.paymentForm
   },
 
-  getListTimePayment: state => {
-    return state.listTimePayment
+  getPaymentTime: state => {
+    return state.paymentTime
   },
 
   getCountries: state => {

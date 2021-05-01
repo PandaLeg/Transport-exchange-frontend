@@ -10,7 +10,7 @@
     >
       <v-col class="text-center">
         <h3 class="headline">
-          Дополнительно и Фото
+          {{ $t('addCargo.additionalAndPhoto') }}
         </h3>
       </v-col>
     </v-row>
@@ -23,7 +23,7 @@
             lg="12"
           >
             <v-subheader>
-              Дополнительно
+              {{ $t('addCargo.additional') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -35,7 +35,7 @@
               v-model="additional"
               filled
               name="input-7-4"
-              label="Дополнительная информация"
+              :label="$t('addCargo.additionalInformation')"
             ></v-textarea>
           </v-col>
         </v-row>
@@ -45,7 +45,7 @@
             lg="12"
           >
             <v-subheader>
-              Фото
+              {{ $t('addCargo.photo') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -198,7 +198,7 @@
         depressed
         @click="nextStep(n)"
       >
-        <span>Добавить</span>
+        <span>{{ $t('addCargo.add') }}</span>
       </v-btn>
     </v-card-actions>
   </v-card>

@@ -10,7 +10,7 @@
     >
       <v-col class="text-center">
         <h3 class="headline">
-          Transport and Payment
+          {{ $t('addTransport.transportAndPaymentTitle') }}
         </h3>
       </v-col>
     </v-row>
@@ -25,7 +25,7 @@
         <v-row>
           <v-col>
             <v-subheader inset class="text--white">
-              Транспорт
+              {{ $t('addTransport.transport') }}
             </v-subheader>
             <v-divider inset></v-divider>
           </v-col>
@@ -37,7 +37,7 @@
             lg="2"
           >
             <v-subheader>
-              Тип кузова
+              {{ $t('addTransport.typeBody') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -57,8 +57,8 @@
               clearable
               item-text="name"
               item-value="id"
-              label="Выберите тип кузова"
-              placeholder="Поиск"
+              :label="$t('addTransport.selectBodyType')"
+              :placeholder="$t('addTransport.search')"
               filled
               @change="$v.bodyType.$touch()"
               @blur="$v.bodyType.$touch()"
@@ -83,7 +83,7 @@
             lg="2"
           >
             <v-subheader>
-              Грузоподъёмность
+              {{ $t('addTransport.carryingCapacity') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -95,7 +95,7 @@
               v-model="carryingCapacityFrom"
               :error-messages="carryingCapacityFromErrors"
               color="blue-grey lighten-2"
-              label="От"
+              :label="$t('addTransport.from')"
               filled
               clearable
             ></v-text-field>
@@ -109,7 +109,7 @@
               v-model="carryingCapacityUpTo"
               :error-messages="carryingCapacityUpToErrors"
               color="blue-grey lighten-2"
-              label="До"
+              :label="$t('addTransport.before')"
               filled
               clearable
             ></v-text-field>
@@ -122,7 +122,7 @@
             lg="2"
           >
             <v-subheader>
-              Объём(м3)
+              {{ $t('addTransport.volume') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -135,7 +135,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="От"
+              :label="$t('addTransport.from')"
             ></v-text-field>
           </v-col>
           <v-col
@@ -148,7 +148,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="До"
+              :label="$t('addTransport.before')"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -160,7 +160,7 @@
             lg="1"
           >
             <v-subheader>
-              Габариты
+              {{ $t('addTransport.dimensions') }}
             </v-subheader>
           </v-col>
 
@@ -175,7 +175,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="Длинна"
+              :label="$t('addTransport.length')"
             ></v-text-field>
           </v-col>
 
@@ -189,7 +189,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="Ширина"
+              :label="$t('addTransport.width')"
             ></v-text-field>
           </v-col>
 
@@ -203,7 +203,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="Высота"
+              :label="$t('addTransport.height')"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -227,7 +227,7 @@
               v-model="adr"
               :items="getListArg"
               :menu-props="{ bottom: true, offsetY: true }"
-              hint="Выберите ADR"
+              :hint="$t('addTransport.selectAdr')"
               persistent-hint
               filled
               clearable
@@ -242,7 +242,7 @@
             lg="2"
           >
             <v-subheader>
-              Загрузка
+              {{ $t('addTransport.loading') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -253,7 +253,7 @@
               v-model="typesLoadingTruck"
               :items="getListLoadingCar"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите тип загрузки"
+              :label="$t('addTransport.selectLoadingType')"
               filled
               clearable
               multiple
@@ -268,7 +268,7 @@
             lg="2"
           >
             <v-subheader>
-              Выгрузка
+              {{ $t('addTransport.unloading') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -279,7 +279,7 @@
               v-model="typesUnloadingTruck"
               :items="getListLoadingCar"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите тип выгрузки"
+              :label="$t('addTransport.selectUnloadingType')"
               filled
               clearable
               multiple
@@ -293,7 +293,7 @@
             lg="2"
           >
             <v-subheader>
-              Разрешения
+              {{ $t('addTransport.permissions') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -305,7 +305,7 @@
               v-model="permissions"
               :items="getListPermissions"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите тип разрешения"
+              :label="$t('addTransport.selectPermissionType')"
               filled
               clearable
               multiple
@@ -316,7 +316,7 @@
         <v-row>
           <v-col>
             <v-subheader inset>
-              Оплата
+              {{ $t('addTransport.payment') }}
             </v-subheader>
             <v-divider inset></v-divider>
           </v-col>
@@ -328,7 +328,7 @@
             lg="2"
           >
             <v-subheader>
-              Тип оплаты
+              {{ $t('addTransport.paymentType') }}
             </v-subheader>
           </v-col>
 
@@ -341,7 +341,7 @@
               v-model="typePayment"
               :items="getTypesPayment"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите тип оплаты"
+              :label="$t('addTransport.selectPaymentType')"
               filled
               clearable
             ></v-select>
@@ -355,7 +355,7 @@
             lg="1"
           >
             <v-subheader>
-              Стоимость
+              {{ $t('addTransport.cost') }}
             </v-subheader>
           </v-col>
 
@@ -370,7 +370,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="Сумма"
+              :label="$t('addTransport.sum')"
               :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
             ></v-text-field>
           </v-col>
@@ -384,7 +384,7 @@
               v-model="currency"
               :items="getListCurrency"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Валюта"
+              :label="$t('addTransport.currency')"
               filled
               clearable
               :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
@@ -400,7 +400,7 @@
               v-model="costPer"
               :items="getListCostPer"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Км"
+              :label="$t('addTransport.for')"
               filled
               clearable
               :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
@@ -414,7 +414,7 @@
             lg="2"
           >
             <v-subheader>
-              Форма оплаты
+              {{ $t('addTransport.paymentForm') }}
             </v-subheader>
           </v-col>
 
@@ -427,7 +427,7 @@
               v-model="paymentForm"
               :items="getListFormPayment"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите форму оплаты"
+              :label="$t('addTransport.selectPaymentForm')"
               filled
               clearable
             ></v-select>
@@ -440,7 +440,7 @@
             lg="2"
           >
             <v-subheader>
-              Момент оплаты
+              {{ $t('addTransport.paymentTime') }}
             </v-subheader>
           </v-col>
 
@@ -453,7 +453,7 @@
               v-model="paymentTime"
               :items="getListTimePayment"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите момент оплаты"
+              :label="$t('addTransport.selectPaymentTime')"
               filled
               clearable
             ></v-select>
@@ -466,7 +466,7 @@
             lg="2"
           >
             <v-subheader>
-              Предоплата
+              {{ $t('addTransport.prepayment') }}
             </v-subheader>
           </v-col>
 
@@ -569,19 +569,22 @@
             },
 
             getListArg() {
-                return this.$store.getters['transport/getListArg']
+                return this.$store.getters['transport/getListArg'];
             },
 
             getListLoadingCar() {
-                return this.$store.getters['transport/getListLoadingCar']
+                let loadingCar = this.$store.getters['transport/getLoadingCar'];
+                return this.checkLocaleAndGetList(loadingCar);
             },
 
             getListPermissions() {
-                return this.$store.getters['transport/getListPermissions']
+                let permission = this.$store.getters['transport/getPermission'];
+                return this.checkLocaleAndGetList(permission);
             },
 
             getTypesPayment() {
-                return this.$store.getters['transport/getTypesPayment']
+                let paymentType = this.$store.getters['transport/getPaymentType'];
+                return this.checkLocaleAndGetList(paymentType);
             },
 
             getListCurrency() {
@@ -589,15 +592,18 @@
             },
 
             getListCostPer() {
-                return this.$store.getters['transport/getListCostPer']
+                let costPer = this.$store.getters['transport/getCostPer'];
+                return this.checkLocaleAndGetList(costPer);
             },
 
             getListFormPayment() {
-                return this.$store.getters['transport/getListFormPayment']
+                let paymentForm = this.$store.getters['transport/getPaymentForm'];
+                return this.checkLocaleAndGetList(paymentForm);
             },
 
             getListTimePayment() {
-                return this.$store.getters['transport/getListTimePayment']
+                let paymentTime = this.$store.getters['transport/getPaymentTime'];
+                return this.checkLocaleAndGetList(paymentTime);
             },
 
             bodyTypeErrors() {
@@ -658,6 +664,7 @@
                 Object.assign(this.getInitialTransport, transport);
 
                 let tempPropertiesTransport = Object.assign({}, propertiesTransport);
+
                 this.$store.commit('transport/setPropertiesTransport', tempPropertiesTransport);
 
                 if (n === this.steps) {
@@ -666,6 +673,16 @@
                     this.setE1(n + 1);
                 }
             },
+
+            checkLocaleAndGetList(someObject){
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return someObject.listEn
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return someObject.listUa
+                } else {
+                    return someObject.listRu
+                }
+            }
         }
     }
 </script>

@@ -8,7 +8,7 @@
       <v-card
       >
         <v-card-title>
-          Личные данные
+          {{ $t('settings.personalData') }}
         </v-card-title>
 
         <div class="list-title-information-font ml-5 mt-3">
@@ -18,7 +18,7 @@
               md="3"
               lg="3"
             >
-              ФИО:
+              {{ $t('settings.fullName') }}:
             </v-col>
             <v-col
               cols="12"
@@ -40,7 +40,7 @@
               md="3"
               lg="3"
             >
-              Эл. почта:
+              {{ $t('settings.email') }}:
             </v-col>
             <v-col
               cols="12"
@@ -59,7 +59,7 @@
               md="3"
               lg="3"
             >
-              Номер:
+              {{ $t('settings.phoneNumber') }}:
             </v-col>
             <v-col
               cols="12"
@@ -81,7 +81,7 @@
                 color="primary"
                 @click="redirectEditPersonalData"
               >
-                Редактировать
+                {{ $t('settings.edit') }}
                 <fa-icon :icon="faUserEdit" class="ml-1"/>
               </v-btn>
             </v-col>
@@ -98,7 +98,7 @@
       <v-card
       >
         <v-card-title>
-          Смена пароля
+          {{ $t('settings.changePassword') }}
         </v-card-title>
         <v-row>
           <v-col
@@ -113,7 +113,7 @@
                   md="3"
                   lg="3"
                 >
-                  Пароль:
+                  {{ $t('settings.password') }}:
                 </v-col>
                 <v-col
                   cols="12"
@@ -135,7 +135,7 @@
                     color="primary"
                     @click="redirectEditPassword"
                   >
-                    Редактировать
+                    {{ $t('settings.edit') }}
                     <fa-icon :icon="faUserEdit" class="ml-1"/>
                   </v-btn>
                 </v-col>
@@ -154,7 +154,7 @@
       <v-card
       >
         <v-card-title>
-          Фон профиля
+          {{ $t('settings.backgroundProfile') }}
         </v-card-title>
         <v-row>
           <v-col
@@ -182,7 +182,7 @@
                 color="primary"
                 @click="redirectEditBackgroundProfile"
               >
-                Редактировать
+                {{ $t('settings.edit') }}
                 <fa-icon :icon="faUserEdit" class="ml-1"/>
               </v-btn>
             </v-col>
@@ -226,16 +226,16 @@
             }
         },
         methods:{
-            redirectEditPersonalData(){
-                this.$router.push('/profile/settings/edit-personal-data')
+            redirectEditPersonalData() {
+                this.$router.push(this.localePath({name: 'profile-settings-edit-personal-data'}));
             },
 
             redirectEditBackgroundProfile(){
-                this.$router.push('/profile/settings/edit-background')
+                this.$router.push(this.localePath({name: 'profile-settings-edit-background'}));
             },
 
             redirectEditPassword(){
-                this.$router.push('/profile/settings/edit-password')
+                this.$router.push(this.localePath({name: 'profile-settings-edit-password'}));
             }
         }
     }

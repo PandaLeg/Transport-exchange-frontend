@@ -25,7 +25,7 @@
             text
             @click="redirectSettings"
           >
-            Save
+            {{ $t('settings.save') }}
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
@@ -46,7 +46,7 @@
                     lg="2"
                   >
                     <v-subheader>
-                      Новый пароль:
+                      {{ $t('settings.newPassword') }}:
                     </v-subheader>
                   </v-col>
                   <v-col
@@ -69,7 +69,7 @@
                     lg="2"
                   >
                     <v-subheader>
-                      Новый пароль ещё раз:
+                      {{ $t('settings.newPasswordAgain') }}:
                     </v-subheader>
                   </v-col>
                   <v-col
@@ -96,7 +96,7 @@
                 plain
                 @click="closeDialog"
               >
-                Отменить
+                {{ $t('settings.cancel') }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -111,7 +111,7 @@
     import {required, sameAs} from 'vuelidate/lib/validators'
 
     export default {
-        name: "edit-password",
+        name: "profile-settings-edit-password",
         mixins: [validationMixin],
         data() {
             return {
@@ -154,7 +154,7 @@
         },
         methods: {
             closeDialog() {
-                this.$router.push('/profile/settings')
+                this.$router.push(this.localePath({name: 'profile-settings'}));
             },
 
             redirectSettings() {
@@ -176,7 +176,7 @@
                 this.$store.dispatch('settings/updatePasswordAction', body)
                     .then(
                         () => {
-                            this.$router.push('/profile/settings')
+                            this.$router.push(this.localePath({name: 'profile-settings'}));
                         }, error => {
                             console.log(error);
                         }

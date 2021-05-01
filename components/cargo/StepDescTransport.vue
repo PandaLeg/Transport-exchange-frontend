@@ -10,7 +10,7 @@
     >
       <v-col class="text-center">
         <h3 class="headline">
-          Транспорт и Оплата
+          {{ $t('addCargo.transportAndPayment') }}
         </h3>
       </v-col>
     </v-row>
@@ -25,7 +25,7 @@
         <v-row>
           <v-col>
             <v-subheader inset class="text--white">
-              Транспорт
+              {{ $t('addCargo.transport') }}
             </v-subheader>
             <v-divider inset></v-divider>
           </v-col>
@@ -37,7 +37,7 @@
             lg="2"
           >
             <v-subheader>
-              Тип кузова
+              {{ $t('addCargo.typeBody') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -57,8 +57,8 @@
               clearable
               item-text="name"
               item-value="id"
-              label="Выберите тип кузова"
-              placeholder="Поиск"
+              :label="$t('addCargo.selectBodyType')"
+              :placeholder="$t('addCargo.search')"
               filled
               @change="$v.bodyType.$touch()"
               @blur="$v.bodyType.$touch()"
@@ -84,7 +84,7 @@
             lg="2"
           >
             <v-subheader>
-              Загрузка
+              {{ $t('addCargo.loading') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -95,7 +95,7 @@
               v-model="typesLoadingTruck"
               :items="getListLoadingCar"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите тип загрузки"
+              :label="$t('addCargo.selectLoadingType')"
               filled
               clearable
               multiple
@@ -110,7 +110,7 @@
             lg="2"
           >
             <v-subheader>
-              Выгрузка
+              {{ $t('addCargo.unloading') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -121,7 +121,7 @@
               v-model="typesUnloadingTruck"
               :items="getListLoadingCar"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите тип выгрузки"
+              :label="$t('addCargo.selectUnloadingType')"
               filled
               clearable
               multiple
@@ -135,7 +135,7 @@
             lg="2"
           >
             <v-subheader>
-              Разрешения
+              {{ $t('addCargo.permissions') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -147,7 +147,7 @@
               v-model="permissions"
               :items="getListPermissions"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите тип разрешения"
+              :label="$t('addCargo.selectPermissionType')"
               filled
               clearable
               multiple
@@ -158,7 +158,7 @@
         <v-row>
           <v-col>
             <v-subheader inset>
-              Оплата
+              {{ $t('addCargo.payment') }}
             </v-subheader>
             <v-divider inset></v-divider>
           </v-col>
@@ -170,7 +170,7 @@
             lg="2"
           >
             <v-subheader>
-              Тип оплаты
+              {{ $t('addCargo.typePayment') }}
             </v-subheader>
           </v-col>
 
@@ -183,7 +183,7 @@
               v-model="typePayment"
               :items="getTypesPayment"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите тип оплаты"
+              :label="$t('addCargo.selectPaymentType')"
               filled
               clearable
             ></v-select>
@@ -197,7 +197,7 @@
             lg="1"
           >
             <v-subheader>
-              Стоимость
+              {{ $t('addCargo.cost') }}
             </v-subheader>
           </v-col>
 
@@ -212,7 +212,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="Сумма"
+              :label="$t('addCargo.sum')"
               :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
             ></v-text-field>
           </v-col>
@@ -226,7 +226,7 @@
               v-model="currency"
               :items="getListCurrency"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Валюта"
+              :label="$t('addCargo.currency')"
               filled
               clearable
               :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
@@ -242,7 +242,7 @@
               v-model="costPer"
               :items="getListCostPer"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Км"
+              :label="$t('addCargo.for')"
               filled
               clearable
               :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
@@ -256,7 +256,7 @@
             lg="2"
           >
             <v-subheader>
-              Форма оплаты
+              {{ $t('addCargo.paymentForm') }}
             </v-subheader>
           </v-col>
 
@@ -269,7 +269,7 @@
               v-model="paymentForm"
               :items="getListFormPayment"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите форму оплаты"
+              :label="$t('addCargo.selectPaymentForm')"
               filled
               clearable
             ></v-select>
@@ -282,7 +282,7 @@
             lg="2"
           >
             <v-subheader>
-              Момент оплаты
+              {{ $t('addCargo.paymentTime') }}
             </v-subheader>
           </v-col>
 
@@ -295,7 +295,7 @@
               v-model="paymentTime"
               :items="getListTimePayment"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите момент оплаты"
+              :label="$t('addCargo.selectPaymentTime')"
               filled
               clearable
             ></v-select>
@@ -308,7 +308,7 @@
             lg="2"
           >
             <v-subheader>
-              Предоплата
+              {{ $t('addCargo.prepayment') }}
             </v-subheader>
           </v-col>
 
@@ -373,15 +373,15 @@
                 valid: true
             }
         },
-        validations:{
+        validations: {
             bodyType: {
                 required
             }
         },
-        created(){
+        created() {
             this.bodyTypes = typesBody;
         },
-        computed:{
+        computed: {
             faArrowAltCircleRight() {
                 return faArrowAltCircleRight
             },
@@ -390,24 +390,31 @@
                 return faTruckMoving
             },
 
-            getInitialCargo(){
+            getInitialCargo() {
                 return this.$store.getters['cargo/getInitialCargo']
             },
 
-            getPropertiesCargo(){
+            getPropertiesCargo() {
                 return this.$store.getters['cargo/getPropertiesCargo']
             },
 
+            getListArg() {
+                return this.$store.getters['transport/getListArg'];
+            },
+
             getListLoadingCar() {
-                return this.$store.getters['cargo/getListLoadingCar']
+                let loadingCar = this.$store.getters['cargo/getLoadingCar'];
+                return this.checkLocaleAndGetList(loadingCar);
             },
 
             getListPermissions() {
-                return this.$store.getters['cargo/getListPermissions']
+                let permission = this.$store.getters['cargo/getPermission'];
+                return this.checkLocaleAndGetList(permission);
             },
 
             getTypesPayment() {
-                return this.$store.getters['cargo/getTypesPayment']
+                let paymentType = this.$store.getters['cargo/getPaymentType'];
+                return this.checkLocaleAndGetList(paymentType);
             },
 
             getListCurrency() {
@@ -415,18 +422,21 @@
             },
 
             getListCostPer() {
-                return this.$store.getters['cargo/getListCostPer']
+                let costPer = this.$store.getters['cargo/getCostPer'];
+                return this.checkLocaleAndGetList(costPer);
             },
 
             getListFormPayment() {
-                return this.$store.getters['cargo/getListFormPayment']
+                let paymentForm = this.$store.getters['cargo/getPaymentForm'];
+                return this.checkLocaleAndGetList(paymentForm);
             },
 
             getListTimePayment() {
-                return this.$store.getters['cargo/getListTimePayment']
+                let paymentTime = this.$store.getters['cargo/getPaymentTime'];
+                return this.checkLocaleAndGetList(paymentTime);
             },
 
-            bodyTypeErrors(){
+            bodyTypeErrors() {
                 const errors = [];
 
                 if (!this.$v.bodyType.$dirty) return errors;
@@ -437,7 +447,7 @@
         },
         methods: {
             nextStep(n) {
-                if(this.$v.$invalid){
+                if (this.$v.$invalid) {
                     this.$v.$touch();
                     return;
                 }
@@ -463,6 +473,16 @@
                     this.setE1(n + 1);
                 }
             },
+
+            checkLocaleAndGetList(someObject){
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return someObject.listEn
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return someObject.listUa
+                } else {
+                    return someObject.listRu
+                }
+            }
         }
     }
 </script>

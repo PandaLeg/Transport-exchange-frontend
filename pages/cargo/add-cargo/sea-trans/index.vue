@@ -1,8 +1,40 @@
 <template>
   <v-container>
     <v-row justify="center">
+      <v-col lg="12">
+        <v-stepper
+          v-model="s1"
+          non-linear
+          dark
+        >
+          <v-stepper-header>
+            <template v-for="n in stepsS">
+              <v-stepper-step
+                :key="`${n}-step`"
+                :step="n"
+                editable
+                @click="redirectOtherTypesCargo(n)"
+              >
+                <div v-if="n === 1">
+                  Автотранспорт
+                </div>
+                <div v-else-if="n === 2">
+                  Морской
+                </div>
+                <div v-else>
+                  Ж/Д
+                </div>
+              </v-stepper-step>
+            </template>
+          </v-stepper-header>
+        </v-stepper>
+      </v-col>
+
       <v-col lg="10">
-        <v-stepper v-model="e1">
+        <v-stepper
+          v-if="s1 === 2"
+          v-model="e1"
+        >
           <v-stepper-header>
             <template v-for="n in steps">
               <v-stepper-step
@@ -12,13 +44,13 @@
                 editable
               >
                 <div v-if="n === 1">
-                  Груз & Дата
+                  {{ $t('addCargo.cargo&Date') }}
                 </div>
                 <div v-else-if="n === 2">
-                  Транспорт & Оплата
+                  {{ $t('addCargo.transport&Payment') }}
                 </div>
                 <div v-else>
-                  Дополнительно & Фото
+                  {{ $t('addCargo.additional&Photo') }}
                 </div>
               </v-stepper-step>
 
@@ -47,11 +79,12 @@
 </template>
 
 <script>
-    import StepDescCargo from '../../components/cargo/StepDescCargo.vue'
-    import StepDescTransport from "../../components/cargo/StepDescTransport";
-    import StepDescPhoto from "../../components/cargo/StepDescPhoto";
+    import StepDescCargo from '../../../../components/cargo/StepDescCargo.vue'
+    import StepDescTransport from "../../../../components/cargo/StepDescTransport";
+    import StepDescPhoto from "../../../../components/cargo/StepDescPhoto";
 
     export default {
+        name: 'cargo-add-cargo-sea-trans',
         components: {
             StepDescTransport,
             StepDescCargo,
@@ -60,12 +93,20 @@
         data() {
             return {
                 e1: 1,
-                steps: 3
+                steps: 3,
+                s1: 2,
+                stepsS: 3
             }
         },
         methods: {
             setE1(e1) {
                 this.e1 = e1;
+            },
+
+            redirectOtherTypesCargo(n) {
+                if (n === 1) {
+                    this.$router.push(this.localePath({name: 'cargo-add-cargo-vehicles'}))
+                }
             }
         }
     }

@@ -25,7 +25,7 @@
             text
             @click="redirectSettings"
           >
-            Сохранить
+            {{ $t('settings.save') }}
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
@@ -68,7 +68,7 @@
                       :loading="isSelecting"
                       @click="onLoadingPhoto"
                     >
-                      Добавить
+                      {{ $t('settings.add') }}
                     </v-btn>
                     <input
                       ref="image"
@@ -86,7 +86,7 @@
                     lg="2"
                   >
                     <v-subheader>
-                      Фамилия:
+                      {{ $t('settings.surname') }}:
                     </v-subheader>
                   </v-col>
                   <v-col
@@ -108,7 +108,7 @@
                     lg="2"
                   >
                     <v-subheader>
-                      Имя:
+                      {{ $t('settings.name') }}:
                     </v-subheader>
                   </v-col>
                   <v-col
@@ -130,7 +130,7 @@
                     lg="2"
                   >
                     <v-subheader>
-                      Отчество:
+                      {{ $t('settings.patronymic') }}:
                     </v-subheader>
                   </v-col>
                   <v-col
@@ -152,7 +152,7 @@
                     lg="2"
                   >
                     <v-subheader>
-                      Мобильный телефон:
+                      {{ $t('settings.phone') }}:
                     </v-subheader>
                   </v-col>
                   <v-col
@@ -175,7 +175,7 @@
                     lg="2"
                   >
                     <v-subheader>
-                      Эл. почта:
+                      {{ $t('settings.email') }}:
                     </v-subheader>
                   </v-col>
                   <v-col
@@ -200,7 +200,7 @@
                 plain
                 @click="closeDialog"
               >
-                Отменить
+                {{ $t('settings.cancel') }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -215,7 +215,7 @@
     import profilePageAvatar from '../../../assets/AllisonProfilePage.jpg'
 
     export default {
-        name: "edit-personal-data",
+        name: "profile-settings-edit-personal-data",
         data() {
             return {
                 surname: '',
@@ -258,7 +258,7 @@
         },
         methods: {
             closeDialog() {
-                this.$router.push('/profile/settings')
+                this.$router.push(this.localePath({name: 'profile-settings'}));
             },
 
             async redirectSettings() {
@@ -295,7 +295,7 @@
                     await this.$store.dispatch('getUserAction', token)
                         .then(
                             () => {
-                                this.$router.push('/profile/settings')
+                                this.$router.push(this.localePath({name: 'profile-settings'}));
                             }, error => {
                                 console.log(error);
                             }

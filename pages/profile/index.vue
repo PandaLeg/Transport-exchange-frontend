@@ -60,7 +60,7 @@
                 <v-list-item-title class="title">
                   {{ getCountCargo }}
                 </v-list-item-title>
-                <v-list-item-subtitle>Заявки по грузу</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ $t('profile.cargoOffers') }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-col>
@@ -79,7 +79,7 @@
                 <v-list-item-title class="title">
                   {{ getCountTransports }}
                 </v-list-item-title>
-                <v-list-item-subtitle>Заявка по транспорту</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ $t('profile.transportsOffers') }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-col>
@@ -97,7 +97,7 @@
                 <v-list-item-title class="title">
                   0
                 </v-list-item-title>
-                <v-list-item-subtitle>Успешных</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ $t('profile.successful') }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-col>
@@ -119,7 +119,7 @@
           max-height="400"
         >
           <v-card-title class="blue white--text text-center">
-            <span class="title-information-font">Контактная информация</span>
+            <span class="title-information-font">{{ $t('profile.contactInformation') }}</span>
           </v-card-title>
           <div class="list-title-information-font ml-5 mt-3">
             <v-row>
@@ -128,7 +128,7 @@
                 md="4"
                 lg="4"
               >
-                ФИО:
+                {{ $t('profile.fullName') }}:
               </v-col>
               <v-col
                 cols="12"
@@ -151,7 +151,7 @@
                 md="4"
                 lg="4"
               >
-                Эл. почта:
+                {{ $t('profile.email') }}:
               </v-col>
               <v-col
                 cols="12"
@@ -170,7 +170,7 @@
                 md="4"
                 lg="4"
               >
-                Номер:
+                {{ $t('profile.phoneNumber') }}:
               </v-col>
               <v-col
                 cols="12"
@@ -189,7 +189,7 @@
                 md="4"
                 lg="4"
               >
-                Последнее посещение:
+                {{ $t('profile.lastVisit') }}:
               </v-col>
               <v-col
                 cols="12"
@@ -214,7 +214,7 @@
           max-height="400"
         >
           <v-card-title class="blue white--text text-center">
-            <span class="title-information-font">Информация о предприятии</span>
+            <span class="title-information-font">{{ $t('profile.informationAboutCompany') }}</span>
           </v-card-title>
 
           <div class="list-title-information-font ml-5 mt-3">
@@ -224,7 +224,7 @@
                 md="4"
                 lg="4"
               >
-                Наименование:
+                {{ $t('profile.name') }}:
               </v-col>
               <v-col
                 cols="12"
@@ -245,7 +245,7 @@
                 md="4"
                 lg="4"
               >
-                Страна:
+                {{ $t('profile.country') }}:
               </v-col>
               <v-col
                 cols="12"
@@ -266,7 +266,7 @@
                 md="4"
                 lg="4"
               >
-                Город:
+                {{ $t('profile.city') }}:
               </v-col>
               <v-col
                 cols="12"

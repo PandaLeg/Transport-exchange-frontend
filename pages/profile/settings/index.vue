@@ -22,7 +22,7 @@
     import LegalUserSettings from "../../../components/profile/settings/LegalUserSettings";
 
     export default {
-        name: "index",
+        name: "profile-settings",
         components: {
             UserSettings,
             LegalUserSettings

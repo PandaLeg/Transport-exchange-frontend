@@ -9,7 +9,7 @@
             <nuxt-link :to="{path: getPathToSearch, query: queryResultSearch}"
                        class="subtitle-font nuxt-link-active">
               <fa-icon :icon="faAngleLeft"></fa-icon>
-              К результатам поиска
+              {{ $t('view.toSearchResult') }}
             </nuxt-link>
           </v-card-title>
           <v-divider></v-divider>
@@ -17,12 +17,12 @@
             <v-col
               lg="8"
             >
-              <v-card-subtitle class="spectral-font">Заявка опубликована - 13 марта</v-card-subtitle>
+              <v-card-subtitle class="spectral-font">{{ $t('view.offerPublished') }} - 13 марта</v-card-subtitle>
             </v-col>
 
             <v-col
               lg="4"
-              v-if="userFromCargo.id !== getUser.id && !getCheckUserFromOffer"
+              v-if="getUser !== null && userFromCargo.id !== getUser.id && !getCheckUserFromOffer"
             >
               <v-dialog
                 v-model="dialogSendingOffer"
@@ -37,13 +37,13 @@
                     v-bind="attrs"
                     v-on="on"
                   >
-                    Откликнуться
+                    {{ $t('view.respond') }}
                   </v-btn>
                 </template>
 
                 <v-card>
                   <v-card-title>
-                    <span class="headline">Заявка на груз</span>
+                    <span class="headline">{{ $t('view.cargoOffer') }}</span>
                   </v-card-title>
                   <v-card-text>
                     <v-container>
@@ -55,7 +55,7 @@
                         >
                           <v-text-field
                             v-model="lastName"
-                            label="Фамилия"
+                            :label="$t('view.surname')"
                             disabled
                           ></v-text-field>
                         </v-col>
@@ -66,7 +66,7 @@
                         >
                           <v-text-field
                             v-model="firstName"
-                            label="Имя"
+                            :label="$t('view.name')"
                             disabled
                           ></v-text-field>
                         </v-col>
@@ -77,7 +77,7 @@
                         >
                           <v-text-field
                             v-model="patronymic"
-                            label="Отчество"
+                            :label="$t('view.patronymic')"
                             disabled
                           ></v-text-field>
                         </v-col>
@@ -101,7 +101,7 @@
                         >
                           <v-textarea
                             v-model="additional"
-                            label="Пожелания"
+                            :label="$t('view.wishes')"
                             outlined
                           ></v-textarea>
                         </v-col>
@@ -115,14 +115,14 @@
                       plain
                       @click="dialogSendingOffer = false"
                     >
-                      Закрыть
+                      {{ $t('view.closeBtn') }}
                     </v-btn>
                     <v-btn
                       color="blue darken-1"
                       dark
                       @click="sendOffer"
                     >
-                      Отправить
+                      {{ $t('view.sendBtn') }}
                     </v-btn>
                   </v-card-actions>
                 </v-card>
@@ -134,17 +134,17 @@
             <v-row justify="start">
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Откуда:</span>
+                <span class="subtitle-font">{{ $t('view.fromWhere') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
                 <template v-for="point in getPointsCargo">
                   <span
@@ -159,17 +159,17 @@
             <v-row justify="start">
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Куда:</span>
+                <span class="subtitle-font">{{ $t('view.whereTo') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
                 <template v-for="point in getPointsCargo">
                   <span
@@ -185,17 +185,17 @@
             <v-row justify="start">
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Расстояние:</span>
+                <span class="subtitle-font">{{ $t('view.distance') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
                   <span
                     class="spectral-font text--primary">
@@ -207,21 +207,22 @@
             <v-row justify="start">
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Дата загрузки:</span>
+                <span class="subtitle-font">{{ $t('view.dateLoading') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
                   <span
                     class="spectral-font text--primary">
-                    с {{ parseDate.loadingDateFrom}} по {{ parseDate.loadingDateBy }}
+                    {{ $t('view.from') }} {{ parseDate.loadingDateFrom}} {{ $t('view.by') }}
+                    {{ parseDate.loadingDateBy }}
                   </span>
               </v-col>
             </v-row>
@@ -229,30 +230,30 @@
             <v-row justify="start">
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Масса:</span>
+                <span class="subtitle-font">{{ $t('view.weight') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
                 <span
                   v-if="cargoView.weightFrom === cargoView.weightUpTo ||
                   cargoView.weightFrom === null || cargoView.weightUpTo === null"
                   class="spectral-font text--primary"
                 >
-                    {{ cargoView.weightFrom}} т
+                    {{ cargoView.weightFrom}} {{ $t('view.ton') }}
                 </span>
                 <span
                   v-else
                   class="spectral-font text--primary"
                 >
-                    {{ cargoView.weightFrom}} - {{ cargoView.weightUpTo }} т
+                    {{ cargoView.weightFrom}} - {{ cargoView.weightUpTo }} {{ $t('view.ton') }}
                   </span>
               </v-col>
             </v-row>
@@ -260,30 +261,30 @@
             <v-row justify="start" v-if="cargoView.volumeFrom !== null || cargoView.volumeUpTo !== null">
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Объём:</span>
+                <span class="subtitle-font">{{ $t('view.volume') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
                   <span
                     v-if="cargoView.volumeFrom === cargoView.volumeUpTo ||
                     cargoView.volumeFrom === null || cargoView.volumeUpTo === null"
                     class="spectral-font text--primary"
                   >
-                    {{ cargoView.volumeFrom}} м3
+                    {{ cargoView.volumeFrom}} {{ $t('view.cubicMeters') }}
                   </span>
                 <span
                   v-else
                   class="spectral-font text--primary"
                 >
-                    {{ cargoView.volumeFrom}} - {{ cargoView.volumeUpTo }} м3
+                    {{ cargoView.volumeFrom}} - {{ cargoView.volumeUpTo }} {{ $t('view.cubicMeters') }}
                   </span>
               </v-col>
             </v-row>
@@ -292,60 +293,71 @@
             cargoView.heightCargo !== null">
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Габариты:</span>
+                <span class="subtitle-font">{{ $t('view.dimensions') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
                 <span
                   v-if="cargoView.lengthCargo !== null && cargoView.widthCargo !== null &&
                     cargoView.heightCargo !== null"
                   class="spectral-font text--primary"
                 >
-                  {{ cargoView.lengthCargo }} м д., {{ cargoView.widthCargo }} м ш., {{ cargoView.heightCargo }} м в.
+                  {{ cargoView.lengthCargo }} {{ $t('view.metersLong') }},
+                  {{ cargoView.widthCargo }} {{ $t('view.metersWide') }},
+                  {{ cargoView.heightCargo }} {{ $t('view.metersHigh') }}
                 </span>
                 <span
                   v-else-if="cargoView.lengthCargo !== null && cargoView.widthCargo === null &&
                   cargoView.heightCargo === null"
+                  class="spectral-font text--primary"
                 >
-                   {{ cargoView.lengthCargo }} м д.
+                   {{ cargoView.lengthCargo }} {{ $t('view.metersLong') }}
                 </span>
                 <span
                   v-else-if="cargoView.lengthCargo === null && cargoView.widthCargo !== null &&
                   cargoView.heightCargo === null"
+                  class="spectral-font text--primary"
                 >
-                   {{ cargoView.widthCargo }} м ш.
+                   {{ cargoView.widthCargo }} {{ $t('view.metersWide') }}
                 </span>
                 <span
                   v-else-if="cargoView.lengthCargo === null && cargoView.widthCargo === null &&
                   cargoView.heightCargo !== null"
+                  class="spectral-font text--primary"
                 >
-                   {{ cargoView.heightCargo }} м в.
+                   {{ cargoView.heightCargo }} {{ $t('view.metersHigh') }}
                 </span>
                 <span
                   v-else-if="cargoView.lengthCargo !== null && cargoView.widthCargo !== null &&
                   cargoView.heightCargo === null"
+                  class="spectral-font text--primary"
                 >
-                   {{ cargoView.lengthCargo }} м д., {{ cargoView.widthCargo }} м ш.
+                   {{ cargoView.lengthCargo }} {{ $t('view.metersLong') }},
+                  {{ cargoView.widthCargo }} {{ $t('view.metersWide') }}
                 </span>
                 <span
                   v-else-if="cargoView.lengthCargo !== null && cargoView.widthCargo === null &&
                   cargoView.heightCargo != null"
+                  class="spectral-font text--primary"
                 >
-                   {{ cargoView.lengthCargo }} м д., {{ cargoView.heightCargo }} м в.
+                   {{ cargoView.lengthCargo }} {{ $t('view.metersLong') }},
+                  {{ cargoView.heightCargo }} {{ $t('view.metersHigh') }}
                 </span>
                 <span
                   v-else-if="cargoView.lengthCargo === null && cargoView.widthCargo !== null &&
                   cargoView.heightCargo !== null"
+                  class="spectral-font text--primary"
                 >
-                   {{ cargoView.widthCargo }} м ш., {{ cargoView.heightCargo }} м в.
+                   {{ cargoView.widthCargo }} {{ $t('view.metersWide') }},
+                  {{ cargoView.heightCargo }} {{ $t('view.metersHigh') }}
                 </span>
               </v-col>
             </v-row>
@@ -353,17 +365,17 @@
             <v-row justify="start" v-if="cargoView.adr !== null && cargoView.adr !== ''">
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
                 <span class="subtitle-font">ADR:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
                   <span class="spectral-font text--primary">
                     {{ cargoView.adr}}
@@ -375,23 +387,23 @@
               <v-col
                 lg="12"
               >
-                <span class="photo-font text--primary">Транспорт</span>
+                <span class="photo-font text--primary">{{ $t('view.transport') }}</span>
               </v-col>
             </v-row>
             <v-row>
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Тип кузова:</span>
+                <span class="subtitle-font">{{ $t('view.bodyType') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
                   <span
                     class="spectral-font text--primary">
@@ -405,25 +417,28 @@
             >
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Загрузка:</span>
+                <span class="subtitle-font">{{ $t('view.loading') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
+                <template
+                  v-for="prop in properties"
+                >
                   <span
-                    v-for="prop in cargoView.propertiesCargo"
-                    :key="prop.id"
                     v-if="prop.property === 'loading'"
+                    :key="prop.id"
                     class="spectral-font text--primary">
-                    {{ prop.ruName }}
+                    {{ prop.name }}
                   </span>
+                </template>
               </v-col>
             </v-row>
 
@@ -432,25 +447,28 @@
             >
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Выгрузка:</span>
+                <span class="subtitle-font">{{ $t('view.unloading') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
+                <template
+                  v-for="prop in properties"
+                >
                   <span
-                    v-for="prop in cargoView.propertiesCargo"
-                    :key="prop.id"
                     v-if="prop.property === 'unloading'"
+                    :key="prop.id"
                     class="spectral-font text--primary">
-                    {{ prop.ruName }}
+                    {{ prop.name }}
                   </span>
+                </template>
               </v-col>
             </v-row>
 
@@ -459,25 +477,28 @@
             >
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Разрешения:</span>
+                <span class="subtitle-font">{{ $t('view.permissions') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
+                <template
+                  v-for="prop in properties"
+                >
                   <span
-                    v-for="prop in cargoView.propertiesCargo"
-                    :key="prop.id"
                     v-if="prop.property === 'permissionType'"
+                    :key="prop.id"
                     class="spectral-font text--primary">
-                    {{ prop.ruName }}
+                    {{ prop.name }}
                   </span>
+                </template>
               </v-col>
             </v-row>
 
@@ -486,25 +507,28 @@
             >
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Тип оплаты:</span>
+                <span class="subtitle-font">{{ $t('view.paymentType') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
+                <template
+                  v-for="prop in properties"
+                >
                   <span
-                    v-for="prop in cargoView.propertiesCargo"
-                    :key="prop.id"
                     v-if="prop.property === 'typePayment'"
+                    :key="prop.id"
                     class="spectral-font text--primary">
-                    {{ prop.ruName }}
+                    {{ prop.name }}
                   </span>
+                </template>
               </v-col>
             </v-row>
 
@@ -513,25 +537,28 @@
             >
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Стоимость:</span>
+                <span class="subtitle-font">{{ $t('view.cost') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
+                <template
+                  v-for="prop in properties"
+                >
                   <span
-                    v-for="prop in cargoView.propertiesCargo"
-                    :key="prop.id"
                     v-if="prop.property === 'costPer'"
+                    :key="prop.id"
                     class="spectral-font text--primary">
-                    {{ cargoView.cost }} {{ cargoView.currency }} / {{ prop.ruName }}
+                    {{ cargoView.cost }} {{ cargoView.currency }} / {{ prop.name }}
                   </span>
+                </template>
               </v-col>
             </v-row>
 
@@ -540,25 +567,28 @@
             >
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Форма оплаты:</span>
+                <span class="subtitle-font">{{ $t('view.paymentForm') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
+                <template
+                  v-for="prop in properties"
+                >
                   <span
-                    v-for="prop in cargoView.propertiesCargo"
-                    :key="prop.id"
                     v-if="prop.property === 'paymentForm'"
+                    :key="prop.id"
                     class="spectral-font text--primary">
-                    {{ prop.ruName }}
+                    {{ prop.name }}
                   </span>
+                </template>
               </v-col>
             </v-row>
 
@@ -567,25 +597,28 @@
             >
               <v-col
                 cols="12"
-                sm="2"
-                md="2"
-                lg="2"
+                sm="3"
+                md="3"
+                lg="3"
               >
-                <span class="subtitle-font">Момент оплаты:</span>
+                <span class="subtitle-font">{{ $t('view.paymentTime') }}:</span>
               </v-col>
               <v-col
                 cols="12"
-                sm="10"
-                md="10"
-                lg="10"
+                sm="9"
+                md="9"
+                lg="9"
               >
+                <template
+                  v-for="prop in properties"
+                >
                   <span
-                    v-for="prop in cargoView.propertiesCargo"
-                    :key="prop.id"
                     v-if="prop.property === 'paymentTime'"
+                    :key="prop.id"
                     class="spectral-font text--primary">
-                    {{ prop.ruName }}
+                    {{ prop.name }}
                   </span>
+                </template>
               </v-col>
             </v-row>
 
@@ -593,7 +626,7 @@
               <v-col
                 lg="12"
               >
-                <span class="photo-font text--primary">Фото</span>
+                <span class="photo-font text--primary">{{ $t('view.photo') }}</span>
               </v-col>
             </v-row>
 
@@ -670,11 +703,11 @@
           <v-card-title>
             <nuxt-link :to="{path: getPathToSearch, query: queryResultSearch}"
                        class="subtitle-font nuxt-link-active">
-              Профиль
+              {{ $t('view.profile') }}
             </nuxt-link>
           </v-card-title>
           <v-divider></v-divider>
-          <v-card-title class="photo-font">Контактная информация</v-card-title>
+          <v-card-title class="photo-font">{{ $t('view.contactInformation') }}</v-card-title>
 
           <v-card-text>
             <div class="subtitle-font mt-3">
@@ -684,7 +717,7 @@
                   md="4"
                   lg="4"
                 >
-                  ФИО:
+                  {{ $t('view.fullName') }}:
                 </v-col>
                 <v-col
                   cols="12"
@@ -706,7 +739,7 @@
                   md="4"
                   lg="4"
                 >
-                  Эл. почта:
+                  {{ $t('view.email') }}:
                 </v-col>
                 <v-col
                   cols="12"
@@ -725,7 +758,7 @@
                   md="4"
                   lg="4"
                 >
-                  Местоположение:
+                  {{ $t('view.location') }}:
                 </v-col>
                 <v-col
                   cols="12"
@@ -739,7 +772,7 @@
           </v-card-text>
           <v-card-actions>
             <v-dialog
-              v-if="userFromCargo.id !== getUser.id && getCheckUserFromOffer"
+              v-if="getUser !== null && userFromCargo.id !== getUser.id && getCheckUserFromOffer"
               v-model="dialogSendingMessage"
               persistent
               max-width="600px"
@@ -752,12 +785,12 @@
                   v-bind="attrs"
                   v-on="on"
                 >
-                  Написать
+                  {{ $t('view.writeMessage') }}
                 </v-btn>
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="headline">Сообщение</span>
+                  <span class="headline">{{ $t('view.message') }}</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container>
@@ -769,7 +802,7 @@
                       >
                         <v-textarea
                           v-model="message"
-                          label="Сообщение"
+                          :label="$t('view.message')"
                           outlined
                         ></v-textarea>
                       </v-col>
@@ -783,14 +816,14 @@
                     plain
                     @click="dialogSendingMessage = false"
                   >
-                    Закрыть
+                    {{ $t('view.closeBtn') }}
                   </v-btn>
                   <v-btn
                     color="blue darken-1"
                     dark
                     @click="sendMessage"
                   >
-                    Отправить
+                    {{ $t('view.sendBtn') }}
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -841,6 +874,7 @@
                 email: '',
                 additional: '',
                 message: '',
+                properties: [],
                 checkLoading: false,
                 checkUnloading: false,
                 checkPermissionType: false,
@@ -910,7 +944,7 @@
                 let loadingDateFrom = this.cargoView.loadingDateFrom;
                 let loadingDateBy = this.cargoView.loadingDateBy;
 
-                return parseCargoDate.parseDate(loadingDateFrom, loadingDateBy);
+                return parseCargoDate.parseDate(loadingDateFrom, loadingDateBy, this.$i18n.localeProperties.code);
             },
 
             getPointsCargo() {
@@ -930,6 +964,7 @@
         created() {
             this.$store.commit('cargo/setResultDataSearch');
             this.$store.commit('cargo/setPageSize', 3);
+            this.filteringProperties();
             this.firstName = this.getUser.firstName;
             this.lastName = this.getUser.lastName;
             this.patronymic = this.getUser.patronymic;
@@ -960,6 +995,18 @@
                         this.checkPaymentTime = true;
                     }
 
+                });
+            },
+
+            filteringProperties() {
+                this.cargoView.propertiesCargo.map(prop => {
+                    if (this.$i18n.localeProperties.code === 'en') {
+                        this.properties.push({name: prop.enName, property: prop.property});
+                    } else if (this.$i18n.localeProperties.code === 'ua') {
+                        this.properties.push({name: prop.uaName, property: prop.property});
+                    } else {
+                        this.properties.push({name: prop.ruName, property: prop.property});
+                    }
                 });
             },
 
@@ -1087,14 +1134,12 @@
                 this.message = '';
             }
         },
-
         mounted() {
             const resultData = this.getDataResultSearch;
             const data = {...resultData.data};
             this.queryResultSearch = Object.assign({}, {page: resultData.page}, {pageSize: 3}, data);
             this.$store.commit('cargo/setPageSize', 3);
 
-            this.parseDate;
             this.checkFullnessProperties();
 
             this.initMap();

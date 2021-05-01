@@ -8,7 +8,7 @@
             <fa-icon :icon="faTruckLoading" class="mr-6">
               search
             </fa-icon>
-            <span class="title-font">Поиск груза</span>
+            <span class="title-font">{{ $t('searchCargo.title') }}</span>
           </v-card-title>
           <v-container>
             <v-row>
@@ -28,8 +28,8 @@
                   clearable
                   item-text="ruName"
                   item-value="id"
-                  label="Выберите страну"
-                  hint="Откуда"
+                  :label="$t('searchCargo.selectCountry')"
+                  :hint="$t('searchCargo.fromWhere')"
                   persistent-hint
                   outlined
                   required
@@ -57,8 +57,8 @@
                   clearable
                   item-text="enName"
                   item-value="id"
-                  label="Выберите страну"
-                  hint="Откуда"
+                  :label="$t('searchCargo.selectCountry')"
+                  :hint="$t('searchCargo.fromWhere')"
                   persistent-hint
                   outlined
                   required
@@ -92,8 +92,8 @@
                   clearable
                   item-text="ruName"
                   item-value="id"
-                  label="Выберите страну"
-                  hint="Куда"
+                  :label="$t('searchCargo.selectCountry')"
+                  :hint="$t('searchCargo.whereTo')"
                   persistent-hint
                   outlined
                   required
@@ -121,8 +121,8 @@
                   clearable
                   item-text="enName"
                   item-value="id"
-                  label="Выберите страну"
-                  hint="Куда"
+                  :label="$t('searchCargo.selectCountry')"
+                  :hint="$t('searchCargo.whereTo')"
                   persistent-hint
                   outlined
                   required
@@ -159,8 +159,8 @@
                   clearable
                   item-text="fields.alternate_names"
                   item-value="recordid"
-                  label="Выберите город"
-                  hint="Откуда"
+                  :label="$t('searchCargo.selectCity')"
+                  :hint="$t('searchCargo.fromWhere')"
                   persistent-hint
                   outlined
                   return-object
@@ -195,8 +195,8 @@
                   clearable
                   item-text="fields.alternate_names"
                   item-value="recordid"
-                  label="Выберите город"
-                  hint="Куда"
+                  :label="$t('searchCargo.selectCity')"
+                  :hint="$t('searchCargo.whereTo')"
                   persistent-hint
                   outlined
                   return-object
@@ -231,7 +231,7 @@
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
                       v-model="loadingDateFrom"
-                      label="Дата с"
+                      :label="$t('searchCargo.dateFrom')"
                       prepend-icon="mdi-calendar"
                       class="subtitle-font"
                       readonly
@@ -263,7 +263,7 @@
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
                       v-model="loadingDateBy"
-                      label="Дата по"
+                      :label="$t('searchCargo.dateBy')"
                       prepend-icon="mdi-calendar"
                       class="subtitle-font"
                       readonly
@@ -289,7 +289,7 @@
                 <v-text-field
                   v-model="weightFrom"
                   color="blue-grey lighten-2"
-                  label="Масса от"
+                  :label="$t('searchCargo.weightFrom')"
                   class="subtitle-font"
                   outlined
                   clearable
@@ -303,7 +303,7 @@
                 <v-text-field
                   v-model="weightUpTo"
                   color="blue-grey lighten-2"
-                  label="Масса до"
+                  :label="$t('searchCargo.weightUpTo')"
                   class="subtitle-font"
                   outlined
                   clearable
@@ -318,7 +318,7 @@
                 <v-text-field
                   v-model="volumeFrom"
                   color="blue-grey lighten-2"
-                  label="Объём от"
+                  :label="$t('searchCargo.volumeFrom')"
                   class="subtitle-font"
                   outlined
                   clearable
@@ -332,7 +332,7 @@
                 <v-text-field
                   v-model="volumeUpTo"
                   color="blue-grey lighten-2"
-                  label="Объём до"
+                  :label="$t('searchCargo.volumeUpTo')"
                   class="subtitle-font"
                   outlined
                   clearable
@@ -357,8 +357,8 @@
                   clearable
                   item-text="name"
                   item-value="id"
-                  label="Выберите наименование груза"
-                  placeholder="Поиск"
+                  :label="$t('searchCargo.selectCargoName')"
+                  :hint="$t('searchCargo.search')"
                   outlined
                   required
                   return-object
@@ -392,8 +392,8 @@
                   clearable
                   item-text="name"
                   item-value="id"
-                  label="Выберите тип кузова"
-                  placeholder="Поиск"
+                  :label="$t('searchCargo.selectBodyType')"
+                  :hint="$t('searchCargo.search')"
                   outlined
                   return-object
                 >
@@ -419,7 +419,7 @@
                   v-model="paymentForm"
                   :items="getListFormPayment"
                   :menu-props="{ bottom: true, offsetY: true }"
-                  label="Выберите форму оплаты"
+                  :label="$t('searchCargo.selectPaymentForm')"
                   class="subtitle-font"
                   outlined
                   clearable
@@ -435,7 +435,7 @@
                   v-model="paymentTime"
                   :items="getListTimePayment"
                   :menu-props="{ bottom: true, offsetY: true }"
-                  label="Выберите момент оплаты"
+                  :label="$t('searchCargo.selectPaymentTime')"
                   class="subtitle-font"
                   outlined
                   clearable
@@ -452,7 +452,7 @@
               outlined
               @click="searchCargo"
             >
-              Поиск
+              {{ $t('searchCargo.search') }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -534,11 +534,13 @@
             },
 
             getListFormPayment() {
-                return this.$store.getters['cargo/getListFormPayment']
+                let paymentForm = this.$store.getters['cargo/getPaymentForm'];
+                return this.checkLocaleAndGetList(paymentForm);
             },
 
             getListTimePayment() {
-                return this.$store.getters['cargo/getListTimePayment']
+                let paymentTime = this.$store.getters['cargo/getPaymentTime'];
+                return this.checkLocaleAndGetList(paymentTime);
             },
         },
         watch: {
@@ -650,7 +652,18 @@
                 );
 
                 this.$store.commit('cargo/clearCargoAfterSearch');
-                this.$router.push({path: '/cargo/search-cargo/search', query: cargo})
+                this.$router.push({path: (this.$i18n.localeProperties.code !== 'ru' ? '/' + this.$i18n.localeProperties.code : '') +
+                        '/cargo/search-cargo/search', query: cargo})
+            },
+
+            checkLocaleAndGetList(someObject){
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return someObject.listEn
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return someObject.listUa
+                } else {
+                    return someObject.listRu
+                }
             }
         }
     }

@@ -24,7 +24,7 @@
                   md="2"
                   lg="2"
                 >
-                  <span>Откуда:</span>
+                  <span>{{ $t('searchCargo.fromWhere') }}:</span>
                 </v-col>
                 <v-col
                   cols="12"
@@ -49,7 +49,7 @@
                   md="2"
                   lg="2"
                 >
-                  <span>Куда:</span>
+                  <span>{{ $t('searchCargo.whereTo') }}:</span>
                 </v-col>
 
                 <v-col
@@ -74,7 +74,7 @@
                   md="2"
                   lg="2"
                 >
-                  <span>Дата:</span>
+                  <span>{{ $t('searchCargo.date') }}:</span>
                 </v-col>
 
                 <v-col
@@ -136,10 +136,11 @@
                     volumeUpTo: query.volumeUpTo, nameCargo: query.nameCargo, bodyType: query.bodyType,
                     paymentForm: query.paymentForm, paymentTime: query.paymentTime
                 };
+
                 let body = {
                     data, store,
                     page: query.page - 1,
-                    pageSize: query.pageSize
+                    pageSize: query.pageSize === undefined ? 3 : query.pageSize
                 };
 
                 console.log("PAGE SIZE FETCH", query.pageSize);
@@ -152,6 +153,7 @@
                 store.commit('cargo/setResultDataSearch');
 
                 store.commit('cargo/clearCargoAfterSearch');
+
                 await store.dispatch('cargo/searchCargoAction', body);
             }
         },
@@ -163,9 +165,9 @@
             }
         },
         created() {
-            this.page = this.getCurrentPage;
+            this.page = Number(this.getCurrentPage);
             if (this.getPageSize !== undefined) {
-                this.pageSize = this.getPageSize;
+                this.pageSize = Number(this.getPageSize);
             } else {
                 this.pageSize = 3;
             }
@@ -198,7 +200,8 @@
         },
         methods: {
             redirectCargoViewPage(id) {
-                this.$router.push('/cargo/view/' + id);
+                this.$router.push((this.$i18n.localeProperties.code !== 'ru' ? '/' + this.$i18n.localeProperties.code : '') +
+                    '/cargo/view/' + id);
             },
 
             async nextPage() {
@@ -222,7 +225,8 @@
 
                 await this.$store.dispatch('cargo/searchCargoAction', body);
 
-                await this.$router.push({path: '/cargo/search-cargo/search', query: cargo})
+                await this.$router.push({path: (this.$i18n.localeProperties.code !== 'ru' ? '/' +
+                        this.$i18n.localeProperties.code : '') + '/cargo/search-cargo/search', query: cargo})
             },
 
             pageChange(value) {

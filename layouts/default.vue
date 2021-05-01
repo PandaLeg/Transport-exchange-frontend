@@ -37,13 +37,15 @@
       ></v-divider>
 
       <!-- MAIN -->
-      <v-btn
-        class="mr-5"
-        text
-        @click="redirectMain"
-      >
-        Главная
-      </v-btn>
+      <template>
+        <v-btn
+          @click="redirectMain"
+          class="mr-5"
+          text
+        >
+          {{ $t('navBarPanel.main') }}
+        </v-btn>
+      </template>
 
       <!-- CARGO -->
       <v-menu
@@ -60,7 +62,7 @@
             class="mr-5"
             text
           >
-            Груз
+            {{ $t('navBarPanel.cargo') }}
           </v-btn>
         </template>
 
@@ -68,26 +70,26 @@
           min-width="250"
         >
           <v-list-item
+            :to="localePath('/cargo/add-cargo/vehicles/')"
             link
-            @click="redirectAddCargo"
           >
             <v-list-item-icon>
               <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Добавить груз</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.addCargo') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
           <v-list-item
+            :to="localePath('/cargo/search-cargo')"
             link
-            @click="redirectSearchCargo"
           >
             <v-list-item-icon>
               <fa-icon :icon="faSearch" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Поиск груза</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.searchCargo') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -96,7 +98,7 @@
               <fa-icon :icon="faChartLine" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Статистика</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.statistics') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -117,7 +119,7 @@
             class="mr-5"
             text
           >
-            Транспорт
+            {{ $t('navBarPanel.transport') }}
           </v-btn>
         </template>
 
@@ -125,26 +127,26 @@
           min-width="250"
         >
           <v-list-item
+            :to="localePath('/transport/add-transport')"
             link
-            @click="redirectAddTransport"
           >
             <v-list-item-icon>
               <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Добавить транспорт</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.addTransport') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
           <v-list-item
+            :to="localePath('/transport/search-transport')"
             link
-            @click="redirectSearchTransport"
           >
             <v-list-item-icon>
               <fa-icon :icon="faSearch" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Поиск транспорта</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.searchTransport') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -153,7 +155,7 @@
               <fa-icon :icon="faChartLine" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Статистика</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.statistics') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -174,7 +176,7 @@
             class="mr-5"
             text
           >
-            Заявки
+            {{ $t('navBarPanel.offers') }}
           </v-btn>
         </template>
 
@@ -182,26 +184,26 @@
           min-width="250"
         >
           <v-list-item
+            :to="localePath('/offer/cargo')"
             link
-            @click="redirectCargoOffer"
           >
             <v-list-item-icon>
               <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Заявки по грузу</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.offersCargo') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
           <v-list-item
+            :to="localePath('/offer/transport')"
             link
-            @click="redirectTransportOffer"
           >
             <v-list-item-icon>
               <fa-icon :icon="faSearch" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Заявки по транспорту</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.offersTransport') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -209,11 +211,11 @@
 
       <!-- Chat -->
       <v-btn
+        :to="localePath('/chat')"
         class="mr-5"
         text
-        @click="redirectChat"
       >
-        Чат
+        {{ $t('navBarPanel.chat') }}
       </v-btn>
 
 
@@ -232,7 +234,7 @@
             class="mr-5"
             text
           >
-            Дополнительно
+            {{ $t('navBarPanel.additional') }}
           </v-btn>
         </template>
 
@@ -240,14 +242,14 @@
           min-width="250"
         >
           <v-list-item
+            :to="localePath('/additional/distance-calculation')"
             link
-            @click="redirectDistanceCalculation"
           >
             <v-list-item-icon>
               <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Расчёт расстояния</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.distanceCalculation') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -255,6 +257,73 @@
 
 
       <v-spacer></v-spacer>
+
+      <!-- LOCALE -->
+      <v-menu
+        close-on-click
+        close-on-content-click
+        left
+        offset-x
+        origin="center center"
+        transition="scale-transition"
+        rounded
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            v-bind="attrs"
+            v-on="on"
+            class="mr-5"
+            icon
+          >
+            <v-icon>language</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list
+          min-width="250"
+        >
+          <!-- Languages -->
+          <v-list-item
+            :to="switchLocalePath('ru')"
+            link
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <span>
+                Русский
+              </span>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item
+            :to="switchLocalePath('en')"
+            link
+          >
+            <v-list-item-icon>
+              <v-icon>settings</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <span>
+                Английский
+              </span>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item
+            :to="switchLocalePath('ua')"
+            link
+          >
+            <v-list-item-icon>
+              <v-icon>exit_to_app</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <span>Украинский</span>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-menu>
 
       <!-- Account -->
       <v-menu
@@ -278,8 +347,8 @@
         </template>
 
         <v-list
-          min-width="250"
           v-if="hasToken"
+          min-width="250"
         >
           <!-- USER -->
           <v-list-item>
@@ -298,26 +367,26 @@
 
           <!-- Info -->
           <v-list-item
-            @click="redirectProfile"
+            :to="localePath('/profile')"
             link
           >
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Профиль</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.profile') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
           <v-list-item
-            @click="redirectProfileSettings"
+            :to="localePath('/profile/settings')"
             link
           >
             <v-list-item-icon>
               <v-icon>settings</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Настройки</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.settings') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -329,25 +398,25 @@
               <v-icon>exit_to_app</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Выйти</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.logout') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
 
         <v-list
-          min-width="250"
           v-else
+          min-width="250"
         >
           <!-- USER -->
           <v-list-item
-            @click="authentication"
+            :to="localePath('/authentication')"
             link
           >
             <v-list-item-icon>
               <v-icon>exit_to_app</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-subtitle>Авторизация</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ $t('navBarPanel.authorization') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -437,7 +506,7 @@
         },
         methods: {
             redirectMain() {
-                this.$router.push('/')
+                this.$router.push(this.localePath({name: 'index'}));
             },
 
             redirectAbout() {
@@ -447,54 +516,6 @@
             logout() {
                 this.$store.dispatch('logout');
                 this.$router.push('/authentication')
-            },
-
-            authentication() {
-                this.$router.push('/authentication')
-            },
-
-            redirectProfile() {
-                this.$router.push('/profile')
-            },
-
-            redirectProfileSettings() {
-                this.$router.push('/profile/settings')
-            },
-
-            redirectAddCargo() {
-                this.$router.push('/cargo/add-cargo')
-            },
-
-            redirectAllCargo() {
-                this.$router.push('/cargo')
-            },
-
-            redirectSearchCargo() {
-                this.$router.push('/cargo/search-cargo')
-            },
-
-            redirectAddTransport() {
-                this.$router.push('/transport/add-transport')
-            },
-
-            redirectSearchTransport() {
-                this.$router.push("/transport/search-transport")
-            },
-
-            redirectCargoOffer() {
-                this.$router.push("/offer/cargo")
-            },
-
-            redirectTransportOffer() {
-                this.$router.push("/offer/transport")
-            },
-
-            redirectChat() {
-                this.$router.push("/chat")
-            },
-
-            redirectDistanceCalculation() {
-                this.$router.push("/additional/distance-calculation")
             }
         }
     }

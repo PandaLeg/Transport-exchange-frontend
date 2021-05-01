@@ -29,8 +29,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: "~/plugins/vuelidate", mode: "client" },
-    { src: "~/plugins/googleMaps", ssr: true}
+    {src: "~/plugins/vuelidate", mode: "client"},
+    {src: "~/plugins/googleMaps", ssr: true}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,7 +47,33 @@ export default {
   modules: [
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
-    'nuxt-i18n',
+    ['nuxt-i18n',
+      {
+        locales: [
+          {
+            name: 'Russian',
+            code: 'ru',
+            iso: 'ru-RU',
+            file: 'ru.json'
+          },
+          {
+            name: 'English',
+            code: 'en',
+            iso: 'en-US',
+            file: 'en.json'
+          },
+          {
+            name: 'Ukrainian',
+            code: 'ua',
+            iso: 'ua-UA',
+            file: 'ua.json'
+          },
+        ],
+        lazy: true,
+        langDir: './locales/',
+        defaultLocale: 'ru'
+      }
+    ],
     'nuxt-material-design-icons-iconfont',
     'nuxt-material-design-icons'
   ],
@@ -66,27 +92,6 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
-        }
-      }
-    }
-  },
-
-  i18n: {
-    locales: [
-      {code: 'ru', file}
-    ],
-    defaultLocale: 'en',
-    vueI18n: {
-      fallbackLocale: 'en',
-      messages: {
-        ru: {
-          main: 'Главная'
-        },
-        en: {
-          main: 'Main'
-        },
-        ua: {
-          main: 'Головна'
         }
       }
     }
