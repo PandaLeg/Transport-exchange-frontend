@@ -208,7 +208,7 @@
     import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
 
     export default {
-        name: "StepDescPhoto",
+        name: "StepDescRailwayPhoto",
         props: ['n', 'e1', 'setE1', 'steps'],
         data() {
             return {
@@ -281,7 +281,7 @@
                     {type: "application/json"}));
 
                 await this.$store.dispatch('cargo/addCargoAction', {store: this.$store, formData: this.formData,
-                userToken: this.getToken, typeTransportation: 'roadTransportation'});
+                    userToken: this.getToken, typeTransportation: 'railwayTransportation'});
             },
 
             onLoadingPhoto() {
@@ -345,7 +345,6 @@
                     });
                 }
             }
-
         }
     }
 </script>

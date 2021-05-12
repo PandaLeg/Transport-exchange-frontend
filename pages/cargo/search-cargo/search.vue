@@ -133,8 +133,9 @@
                     countryFrom: query.countryFrom, countryTo: query.countryTo, cityFrom: query.cityFrom,
                     cityTo: query.cityTo, loadingDateFrom: query.loadingDateFrom, loadingDateBy: query.loadingDateBy,
                     weightFrom: query.weightFrom, weightUpTo: query.weightUpTo, volumeFrom: query.volumeFrom,
-                    volumeUpTo: query.volumeUpTo, nameCargo: query.nameCargo, bodyType: query.bodyType,
-                    paymentForm: query.paymentForm, paymentTime: query.paymentTime
+                    volumeUpTo: query.volumeUpTo, typesTransportation: query.typesTransportation,
+                    nameCargo: query.nameCargo, bodyType: query.bodyType, paymentForm: query.paymentForm,
+                    paymentTime: query.paymentTime
                 };
 
                 let body = {
@@ -148,8 +149,10 @@
 
                 store.commit('cargo/setPageSize', query.pageSize);
 
-                store.commit('cargo/setCookieResultSearch', {data, page: query.page, pageSize:
-                        query.pageSize ? query.pageSize : 3});
+                store.commit('cargo/setCookieResultSearch', {
+                    data, page: query.page, pageSize:
+                        query.pageSize ? query.pageSize : 3
+                });
                 store.commit('cargo/setResultDataSearch');
 
                 store.commit('cargo/clearCargoAfterSearch');
@@ -225,8 +228,10 @@
 
                 await this.$store.dispatch('cargo/searchCargoAction', body);
 
-                await this.$router.push({path: (this.$i18n.localeProperties.code !== 'ru' ? '/' +
-                        this.$i18n.localeProperties.code : '') + '/cargo/search-cargo/search', query: cargo})
+                await this.$router.push({
+                    path: (this.$i18n.localeProperties.code !== 'ru' ? '/' +
+                        this.$i18n.localeProperties.code : '') + '/cargo/search-cargo/search', query: cargo
+                })
             },
 
             pageChange(value) {

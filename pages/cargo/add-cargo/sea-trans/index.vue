@@ -16,13 +16,13 @@
                 @click="redirectOtherTypesCargo(n)"
               >
                 <div v-if="n === 1">
-                  Автотранспорт
+                  {{ $t('addCargo.vehiclesTitle') }}
                 </div>
                 <div v-else-if="n === 2">
-                  Морской
+                  {{ $t('addCargo.seaTitle') }}
                 </div>
                 <div v-else>
-                  Ж/Д
+                  {{ $t('addCargo.railwayTitle') }}
                 </div>
               </v-stepper-step>
             </template>
@@ -32,7 +32,6 @@
 
       <v-col lg="10">
         <v-stepper
-          v-if="s1 === 2"
           v-model="e1"
         >
           <v-stepper-header>
@@ -67,9 +66,9 @@
               :key="`${n}-content`"
               :step="n"
             >
-              <step-desc-cargo :n="n" :e1="e1" :setE1="setE1" :steps="steps"></step-desc-cargo>
-              <step-desc-transport :n="n" :e1="e1" :setE1="setE1" :steps="steps"></step-desc-transport>
-              <step-desc-photo :n="n" :e1="e1" :setE1="setE1" :steps="steps"></step-desc-photo>
+              <step-desc-sea-cargo :n="n" :e1="e1" :setE1="setE1" :steps="steps"></step-desc-sea-cargo>
+              <step-desc-sea-transport :n="n" :e1="e1" :setE1="setE1" :steps="steps"></step-desc-sea-transport>
+              <step-desc-sea-photo :n="n" :e1="e1" :setE1="setE1" :steps="steps"></step-desc-sea-photo>
             </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
@@ -79,16 +78,16 @@
 </template>
 
 <script>
-    import StepDescCargo from '../../../../components/cargo/StepDescCargo.vue'
-    import StepDescTransport from "../../../../components/cargo/StepDescTransport";
-    import StepDescPhoto from "../../../../components/cargo/StepDescPhoto";
+    import StepDescSeaCargo from '../../../../components/cargo/sea-trans/StepDescSeaCargo.vue'
+    import StepDescSeaTransport from "../../../../components/cargo/sea-trans/StepDescSeaTransport.vue";
+    import StepDescSeaPhoto from "../../../../components/cargo/sea-trans/StepDescSeaPhoto.vue";
 
     export default {
         name: 'cargo-add-cargo-sea-trans',
         components: {
-            StepDescTransport,
-            StepDescCargo,
-            StepDescPhoto
+            StepDescSeaCargo,
+            StepDescSeaTransport,
+            StepDescSeaPhoto
         },
         data() {
             return {
@@ -105,7 +104,11 @@
 
             redirectOtherTypesCargo(n) {
                 if (n === 1) {
+                    this.$store.commit('cargo/clearInitialCargo');
                     this.$router.push(this.localePath({name: 'cargo-add-cargo-vehicles'}))
+                }else if(n === 3){
+                    this.$store.commit('cargo/clearInitialCargo');
+                    this.$router.push(this.localePath({name: 'cargo-add-cargo-railway-trans'}))
                 }
             }
         }

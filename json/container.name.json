@@ -1,0 +1,72 @@
+{
+  "containers": [
+    {
+      "id": "1",
+      "name": "20 - fut. Standart"
+    },
+    {
+      "id": "2",
+      "name": "40 - fut. Standart"
+    },
+    {
+      "id": "3",
+      "name": "40 - fut. High Cube"
+    },
+    {
+      "id": "4",
+      "name": "45 - fut. High Cube"
+    },
+    {
+      "id": "5",
+      "name": "20 - fut. Pallet Wide"
+    },
+    {
+      "id": "6",
+      "name": "40 - fut. Pallet Wide"
+    },
+    {
+      "id": "7",
+      "name": "20 - fut. Open Top"
+    },
+    {
+      "id": "8",
+      "name": "40 - fut. Open Top"
+    },
+    {
+      "id": "9",
+      "name": "40 - fut. Hard Top"
+    },
+    {
+      "id": "10",
+      "name": "40 - fut. Hard Top"
+    },
+    {
+      "id": "11",
+      "name": "20 - fut. Refer"
+    },
+    {
+      "id": "12",
+      "name": "40 - fut. Refer"
+    },
+    {
+      "id": "13",
+      "name": "20 - fut. Flat Rack"
+    },
+    {
+      "id": "14",
+      "name": "40 - fut. Flat Rack"
+    },
+    {
+      "id": "15",
+      "name": "20 - fut. Platform"
+    },
+    {
+      "id": "16",
+      "name": "40 - fut. Platform"
+    },
+    {
+      "id": "17",
+      "name": "20 - fut. Tank"
+    }
+  ]
+}

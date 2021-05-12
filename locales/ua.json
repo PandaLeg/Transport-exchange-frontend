@@ -20,6 +20,9 @@
     "authorization": "Авторизація"
   },
   "addCargo": {
+    "vehiclesTitle": "Автотранспорт",
+    "seaTitle": "Морський",
+    "railwayTitle": "Залізничний",
     "cargo&Date": "Вантаж & Дата",
     "transport&Payment": "Транспорт & Оплата",
     "additional&Photo": "Додатково & Фото",
@@ -87,6 +90,7 @@
     "weightUpTo": "Маса до",
     "volumeFrom": "Об'єм від",
     "volumeUpTo": "Об'єм до",
+    "typeTransportation": "Тип перевезення",
     "selectCargoName": "Оберіть найменування вантажу",
     "selectBodyType": "Оберіть тип кузова",
     "selectPaymentForm": "Оберіть форму оплати",

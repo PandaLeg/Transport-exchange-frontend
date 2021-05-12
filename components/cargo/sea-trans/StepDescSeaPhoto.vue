@@ -281,7 +281,7 @@
                     {type: "application/json"}));
 
                 await this.$store.dispatch('cargo/addCargoAction', {store: this.$store, formData: this.formData,
-                userToken: this.getToken, typeTransportation: 'roadTransportation'});
+                    userToken: this.getToken, typeTransportation: 'seaTransportation'});
             },
 
             onLoadingPhoto() {
@@ -345,7 +345,6 @@
                     });
                 }
             }
-
         }
     }
 </script>

@@ -245,22 +245,22 @@
                 lg="9"
               >
                 <span
-                  v-if="transportView.carryingCapacityFrom === transportView.carryingCapacityUpTo ||
-                  transportView.carryingCapacityFrom === null || transportView.carryingCapacityUpTo === null"
+                  v-if="transportView.carryingCapacityFrom === transportView.carryingCapacityUpTo"
                   class="spectral-font text--primary"
                 >
-                    {{ transportView.carryingCapacityFrom}} т
+                    {{ transportView.carryingCapacityFrom}} {{ $t('view.ton') }}
                 </span>
                 <span
                   v-else
                   class="spectral-font text--primary"
                 >
-                    {{ transportView.carryingCapacityFrom}} - {{ transportView.carryingCapacityUpTo }} т
+                    {{ transportView.carryingCapacityFrom}} - {{ transportView.carryingCapacityUpTo }}
+                  {{ $t('view.ton') }}
                   </span>
               </v-col>
             </v-row>
 
-            <v-row justify="start" v-if="transportView.volumeFrom !== null || transportView.volumeUpTo !== null">
+            <v-row justify="start" v-if="transportView.volumeFrom !== '' || transportView.volumeUpTo !== ''">
               <v-col
                 cols="12"
                 sm="3"
@@ -276,8 +276,8 @@
                 lg="9"
               >
                   <span
-                    v-if="transportView.volumeFrom === transportView.volumeUpTo ||
-                    transportView.volumeFrom === null || transportView.volumeUpTo === null"
+                    v-if="transportView.volumeFrom !== '' && transportView.volumeUpTo !== '' &&
+                    transportView.volumeFrom === transportView.volumeUpTo"
                     class="spectral-font text--primary"
                   >
                     {{ transportView.volumeFrom}} {{ $t('view.cubicMeters') }}
@@ -291,8 +291,8 @@
               </v-col>
             </v-row>
 
-            <v-row justify="start" v-if="transportView.lengthTransport !== null || transportView.widthTransport !== null ||
-            transportView.heightTransport !== null">
+            <v-row justify="start" v-if="transportView.lengthTransport !== '' || transportView.widthTransport !== '' ||
+            transportView.heightTransport !== ''">
               <v-col
                 cols="12"
                 sm="3"
@@ -308,8 +308,8 @@
                 lg="9"
               >
                 <span
-                  v-if="transportView.lengthTransport !== null && transportView.widthTransport !== null &&
-                    transportView.heightTransport !== null"
+                  v-if="transportView.lengthTransport !== '' && transportView.widthTransport !== '' &&
+                    transportView.heightTransport !== ''"
                   class="spectral-font text--primary"
                 >
                   {{ transportView.lengthTransport }} {{ $t('view.metersLong') }},
@@ -317,45 +317,45 @@
                   {{ transportView.heightTransport }} {{ $t('view.metersHigh') }}
                 </span>
                 <span
-                  v-else-if="transportView.lengthTransport !== null && transportView.widthTransport === null &&
-                  transportView.heightTransport === null"
+                  v-else-if="transportView.lengthTransport !== '' && transportView.widthTransport === '' &&
+                  transportView.heightTransport === ''"
                   class="spectral-font text--primary"
                 >
                    {{ transportView.lengthTransport }} {{ $t('view.metersLong') }}
                 </span>
                 <span
-                  v-else-if="transportView.lengthTransport === null && transportView.widthTransport !== null &&
-                  transportView.heightTransport === null"
+                  v-else-if="transportView.lengthTransport === '' && transportView.widthTransport !== '' &&
+                  transportView.heightTransport === ''"
                   class="spectral-font text--primary"
                 >
                    {{ transportView.widthTransport }} {{ $t('view.metersWide') }}
                 </span>
                 <span
-                  v-else-if="transportView.lengthTransport === null && transportView.widthTransport === null &&
-                  transportView.heightTransport !== null"
+                  v-else-if="transportView.lengthTransport === '' && transportView.widthTransport === '' &&
+                  transportView.heightTransport !== ''"
                   class="spectral-font text--primary"
                 >
                    {{ transportView.heightTransport }} {{ $t('view.metersHigh') }}
                 </span>
                 <span
-                  v-else-if="transportView.lengthTransport !== null && transportView.widthTransport !== null &&
-                  transportView.heightTransport === null"
+                  v-else-if="transportView.lengthTransport !== '' && transportView.widthTransport !== '' &&
+                  transportView.heightTransport === ''"
                   class="spectral-font text--primary"
                 >
                    {{ transportView.lengthTransport }} {{ $t('view.metersLong') }},
                   {{ transportView.widthTransport }} {{ $t('view.metersWide') }}
                 </span>
                 <span
-                  v-else-if="transportView.lengthTransport !== null && transportView.widthTransport === null &&
-                  transportView.heightTransport != null"
+                  v-else-if="transportView.lengthTransport !== '' && transportView.widthTransport === '' &&
+                  transportView.heightTransport != ''"
                   class="spectral-font text--primary"
                 >
                    {{ transportView.lengthTransport }} {{ $t('view.metersLong') }},
                   {{ transportView.heightTransport }} {{ $t('view.metersHigh') }}
                 </span>
                 <span
-                  v-else-if="transportView.lengthTransport === null && transportView.widthTransport !== null &&
-                  transportView.heightTransport !== null"
+                  v-else-if="transportView.lengthTransport === '' && transportView.widthTransport !== '' &&
+                  transportView.heightTransport !== ''"
                   class="spectral-font text--primary"
                 >
                    {{ transportView.widthTransport }} {{ $t('view.metersWide') }},
@@ -364,7 +364,7 @@
               </v-col>
             </v-row>
 
-            <v-row justify="start" v-if="transportView.adr !== null && transportView.adr !== ''">
+            <v-row justify="start" v-if="transportView.adr !== '' && transportView.adr !== ''">
               <v-col
                 cols="12"
                 sm="3"

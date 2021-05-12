@@ -10,7 +10,7 @@
     >
       <v-col class="text-center">
         <h3 class="headline">
-          {{ $t('addTransport.transportAndPaymentTitle') }}
+          {{ $t('addCargo.transportAndPayment') }}
         </h3>
       </v-col>
     </v-row>
@@ -25,7 +25,7 @@
         <v-row>
           <v-col>
             <v-subheader inset class="text--white">
-              {{ $t('addTransport.transport') }}
+              Транспорт и разрешения
             </v-subheader>
             <v-divider inset></v-divider>
           </v-col>
@@ -37,7 +37,7 @@
             lg="2"
           >
             <v-subheader>
-              {{ $t('addTransport.typeBody') }}
+              Тип судна
             </v-subheader>
           </v-col>
           <v-col
@@ -50,15 +50,15 @@
               :items="bodyTypes"
               :loading="isLoading"
               :search-input.sync="searchBodyType"
-              :error-messages="bodyTypeErrors"
+              :error-messages="vesselTypeErrors"
               color="white"
               hide-no-data
               hide-selected
               clearable
               item-text="name"
               item-value="id"
-              :label="$t('addTransport.selectBodyType')"
-              :placeholder="$t('addTransport.search')"
+              label="Выберите тип судна"
+              :placeholder="$t('addCargo.search')"
               filled
               @change="$v.bodyType.$touch()"
               @blur="$v.bodyType.$touch()"
@@ -83,152 +83,19 @@
             lg="2"
           >
             <v-subheader>
-              {{ $t('addTransport.carryingCapacity') }}
+              Инкотермс
             </v-subheader>
           </v-col>
           <v-col
             cols="12"
-            md="5"
-            lg="5"
-          >
-            <v-text-field
-              v-model="carryingCapacityFrom"
-              :error-messages="carryingCapacityFromErrors"
-              color="blue-grey lighten-2"
-              :label="$t('addTransport.from')"
-              filled
-              clearable
-            ></v-text-field>
-          </v-col>
-          <v-col
-            cols="12"
-            md="5"
-            lg="5"
-          >
-            <v-text-field
-              v-model="carryingCapacityUpTo"
-              :error-messages="carryingCapacityUpToErrors"
-              color="blue-grey lighten-2"
-              :label="$t('addTransport.before')"
-              filled
-              clearable
-            ></v-text-field>
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col
-            md="2"
-            lg="2"
-          >
-            <v-subheader>
-              {{ $t('addTransport.volume') }}
-            </v-subheader>
-          </v-col>
-          <v-col
-            cols="12"
-            md="5"
-            lg="5"
-          >
-            <v-text-field
-              v-model="volumeFrom"
-              filled
-              clearable
-              color="blue-grey lighten-2"
-              :label="$t('addTransport.from')"
-            ></v-text-field>
-          </v-col>
-          <v-col
-            cols="12"
-            md="5"
-            lg="5"
-          >
-            <v-text-field
-              v-model="volumeUpTo"
-              filled
-              clearable
-              color="blue-grey lighten-2"
-              :label="$t('addTransport.before')"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-
-        <v-row justify="space-between">
-          <v-col
-            cols="12"
-            md="1"
-            lg="1"
-          >
-            <v-subheader>
-              {{ $t('addTransport.dimensions') }}
-            </v-subheader>
-          </v-col>
-
-          <v-col
-            cols="6"
-            md="3"
-            lg="3"
-            class="ml-lg-8"
-          >
-            <v-text-field
-              v-model="lengthTransport"
-              filled
-              clearable
-              color="blue-grey lighten-2"
-              :label="$t('addTransport.length')"
-            ></v-text-field>
-          </v-col>
-
-          <v-col
-            cols="6"
-            md="3"
-            lg="3"
-          >
-            <v-text-field
-              v-model="widthTransport"
-              filled
-              clearable
-              color="blue-grey lighten-2"
-              :label="$t('addTransport.width')"
-            ></v-text-field>
-          </v-col>
-
-          <v-col
-            cols="12"
-            md="3"
-            lg="3"
-          >
-            <v-text-field
-              v-model="heightTransport"
-              filled
-              clearable
-              color="blue-grey lighten-2"
-              :label="$t('addTransport.height')"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-
-        <v-row align="center">
-          <v-col
-            cols="12"
-            md="2"
-            lg="2"
-          >
-            <v-subheader>
-              ADR
-            </v-subheader>
-          </v-col>
-          <v-col
-            cols="12"
-            lg="10"
             md="10"
+            lg="10"
           >
             <v-select
-              v-model="adr"
-              :items="getListArg"
+              v-model="incoterms"
+              :items="getIncoterms"
               :menu-props="{ bottom: true, offsetY: true }"
-              :hint="$t('addTransport.selectAdr')"
-              persistent-hint
+              label="Выберите тип"
               filled
               clearable
             ></v-select>
@@ -237,63 +104,11 @@
 
         <v-row>
           <v-col
-            cols="12"
             md="2"
             lg="2"
           >
             <v-subheader>
-              {{ $t('addTransport.loading') }}
-            </v-subheader>
-          </v-col>
-          <v-col
-            md="10"
-            lg="10"
-          >
-            <v-combobox
-              v-model="typesLoadingTruck"
-              :items="getListLoadingCar"
-              :menu-props="{ bottom: true, offsetY: true }"
-              :label="$t('addTransport.selectLoadingType')"
-              filled
-              clearable
-              multiple
-            ></v-combobox>
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col
-            cols="12"
-            md="2"
-            lg="2"
-          >
-            <v-subheader>
-              {{ $t('addTransport.unloading') }}
-            </v-subheader>
-          </v-col>
-          <v-col
-            md="10"
-            lg="10"
-          >
-            <v-combobox
-              v-model="typesUnloadingTruck"
-              :items="getListLoadingCar"
-              :menu-props="{ bottom: true, offsetY: true }"
-              :label="$t('addTransport.selectUnloadingType')"
-              filled
-              clearable
-              multiple
-            ></v-combobox>
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col
-            md="2"
-            lg="2"
-          >
-            <v-subheader>
-              {{ $t('addTransport.permissions') }}
+              Загрузка контейнера
             </v-subheader>
           </v-col>
           <v-col
@@ -302,10 +117,10 @@
             lg="10"
           >
             <v-combobox
-              v-model="permissions"
-              :items="getListPermissions"
+              v-model="containerLoading"
+              :items="getLoadingVessel"
               :menu-props="{ bottom: true, offsetY: true }"
-              :label="$t('addTransport.selectPermissionType')"
+              label="Выберите тип загрузки"
               filled
               clearable
               multiple
@@ -316,7 +131,7 @@
         <v-row>
           <v-col>
             <v-subheader inset>
-              {{ $t('addTransport.payment') }}
+              {{ $t('addCargo.payment') }}
             </v-subheader>
             <v-divider inset></v-divider>
           </v-col>
@@ -328,7 +143,7 @@
             lg="2"
           >
             <v-subheader>
-              {{ $t('addTransport.paymentType') }}
+              {{ $t('addCargo.typePayment') }}
             </v-subheader>
           </v-col>
 
@@ -341,7 +156,7 @@
               v-model="typePayment"
               :items="getTypesPayment"
               :menu-props="{ bottom: true, offsetY: true }"
-              :label="$t('addTransport.selectPaymentType')"
+              :label="$t('addCargo.selectPaymentType')"
               filled
               clearable
             ></v-select>
@@ -355,7 +170,7 @@
             lg="1"
           >
             <v-subheader>
-              {{ $t('addTransport.cost') }}
+              {{ $t('addCargo.cost') }}
             </v-subheader>
           </v-col>
 
@@ -370,7 +185,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              :label="$t('addTransport.sum')"
+              :label="$t('addCargo.sum')"
               :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
             ></v-text-field>
           </v-col>
@@ -384,7 +199,7 @@
               v-model="currency"
               :items="getListCurrency"
               :menu-props="{ bottom: true, offsetY: true }"
-              :label="$t('addTransport.currency')"
+              :label="$t('addCargo.currency')"
               filled
               clearable
               :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
@@ -400,7 +215,7 @@
               v-model="costPer"
               :items="getListCostPer"
               :menu-props="{ bottom: true, offsetY: true }"
-              :label="$t('addTransport.for')"
+              :label="$t('addCargo.for')"
               filled
               clearable
               :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
@@ -414,7 +229,7 @@
             lg="2"
           >
             <v-subheader>
-              {{ $t('addTransport.paymentForm') }}
+              {{ $t('addCargo.paymentForm') }}
             </v-subheader>
           </v-col>
 
@@ -427,7 +242,7 @@
               v-model="paymentForm"
               :items="getListFormPayment"
               :menu-props="{ bottom: true, offsetY: true }"
-              :label="$t('addTransport.selectPaymentForm')"
+              :label="$t('addCargo.selectPaymentForm')"
               filled
               clearable
             ></v-select>
@@ -440,7 +255,7 @@
             lg="2"
           >
             <v-subheader>
-              {{ $t('addTransport.paymentTime') }}
+              {{ $t('addCargo.paymentTime') }}
             </v-subheader>
           </v-col>
 
@@ -453,7 +268,7 @@
               v-model="paymentTime"
               :items="getListTimePayment"
               :menu-props="{ bottom: true, offsetY: true }"
-              :label="$t('addTransport.selectPaymentTime')"
+              :label="$t('addCargo.selectPaymentTime')"
               filled
               clearable
             ></v-select>
@@ -466,7 +281,7 @@
             lg="2"
           >
             <v-subheader>
-              {{ $t('addTransport.prepayment') }}
+              {{ $t('addCargo.prepayment') }}
             </v-subheader>
           </v-col>
 
@@ -501,33 +316,24 @@
   </v-card>
 </template>
 
+
 <script>
-    import {typesBody} from '../../json/body.type.json'
-    import {faTruckMoving} from '@fortawesome/free-solid-svg-icons'
     import {faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
+    import {faTruckMoving} from '@fortawesome/free-solid-svg-icons'
+    import {typesVessel} from '../../../json/vessel.type.json'
     import {validationMixin} from 'vuelidate'
     import {required} from 'vuelidate/lib/validators'
 
     export default {
-        name: "StepDescTransport",
         mixins: [validationMixin],
         props: ['n', 'e1', 'setE1', 'steps'],
         data() {
             return {
                 bodyType: null,
-                carryingCapacityFrom: '',
-                carryingCapacityUpTo: '',
-                volumeFrom: '',
-                volumeUpTo: '',
-                lengthTransport: '',
-                widthTransport: '',
-                heightTransport: '',
-                adr: '',
                 bodyTypes: [],
                 searchBodyType: null,
-                typesLoadingTruck: [],
-                typesUnloadingTruck: [],
-                permissions: [],
+                incoterms: [],
+                containerLoading: [],
                 typePayment: '',
                 cost: '',
                 currency: '',
@@ -539,21 +345,13 @@
                 valid: true
             }
         },
-        created() {
-            this.bodyTypes = typesBody;
-        },
         validations: {
             bodyType: {
                 required
-            },
-
-            carryingCapacityFrom: {
-                required
-            },
-
-            carryingCapacityUpTo: {
-                required
             }
+        },
+        created() {
+            this.bodyTypes = typesVessel;
         },
         computed: {
             faArrowAltCircleRight() {
@@ -564,71 +362,61 @@
                 return faTruckMoving
             },
 
-            getInitialTransport() {
-                return this.$store.getters['transport/getInitialTransport']
+            getInitialCargo() {
+                return this.$store.getters['cargo/getInitialCargo']
+            },
+
+            getPropertiesCargo() {
+                return this.$store.getters['cargo/getPropertiesCargo']
             },
 
             getListArg() {
                 return this.$store.getters['transport/getListArg'];
             },
 
-            getListLoadingCar() {
-                let loadingCar = this.$store.getters['transport/getLoadingCar'];
-                return this.checkLocaleAndGetList(loadingCar);
-            },
-
             getListPermissions() {
-                let permission = this.$store.getters['transport/getPermission'];
+                let permission = this.$store.getters['cargo/getPermission'];
                 return this.checkLocaleAndGetList(permission);
             },
 
+            getLoadingVessel() {
+                let loading = this.$store.getters['cargo/getLoadingVessel'];
+                return this.checkLocaleAndGetList(loading);
+            },
+
+            getIncoterms() {
+                return this.$store.getters['cargo/getIncoterms'];
+            },
+
             getTypesPayment() {
-                let paymentType = this.$store.getters['transport/getPaymentType'];
+                let paymentType = this.$store.getters['cargo/getPaymentType'];
                 return this.checkLocaleAndGetList(paymentType);
             },
 
             getListCurrency() {
-                return this.$store.getters['transport/getListCurrency']
+                return this.$store.getters['cargo/getListCurrency']
             },
 
             getListCostPer() {
-                let costPer = this.$store.getters['transport/getCostPer'];
+                let costPer = this.$store.getters['cargo/getCostPer'];
                 return this.checkLocaleAndGetList(costPer);
             },
 
             getListFormPayment() {
-                let paymentForm = this.$store.getters['transport/getPaymentForm'];
+                let paymentForm = this.$store.getters['cargo/getPaymentForm'];
                 return this.checkLocaleAndGetList(paymentForm);
             },
 
             getListTimePayment() {
-                let paymentTime = this.$store.getters['transport/getPaymentTime'];
+                let paymentTime = this.$store.getters['cargo/getPaymentTime'];
                 return this.checkLocaleAndGetList(paymentTime);
             },
 
-            bodyTypeErrors() {
+            vesselTypeErrors() {
                 const errors = [];
 
                 if (!this.$v.bodyType.$dirty) return errors;
                 !this.$v.bodyType.required && errors.push('Body type is required.');
-
-                return errors;
-            },
-
-            carryingCapacityFromErrors() {
-                const errors = [];
-
-                if (!this.$v.carryingCapacityFrom.$dirty) return errors;
-                !this.$v.carryingCapacityFrom.required && errors.push('Carrying capacity from is required.');
-
-                return errors;
-            },
-
-            carryingCapacityUpToErrors() {
-                const errors = [];
-
-                if (!this.$v.carryingCapacityUpTo.$dirty) return errors;
-                !this.$v.carryingCapacityUpTo.required && errors.push('Carrying capacity up to is required.');
 
                 return errors;
             }
@@ -640,32 +428,20 @@
                     return;
                 }
 
-                let transport = {
-                    bodyType: this.bodyType.name,
-                    carryingCapacityFrom: this.carryingCapacityFrom,
-                    carryingCapacityUpTo: this.carryingCapacityUpTo,
-                    volumeFrom: this.volumeFrom,
-                    volumeUpTo: this.volumeUpTo,
-                    lengthTransport: this.lengthTransport,
-                    widthTransport: this.widthTransport,
-                    heightTransport: this.heightTransport,
-                    adr: this.adr,
-                    cost: this.cost,
-                    currency: this.currency,
-                    prepayment: this.prepayment
+                let cargo = {
+                    bodyType: this.bodyType.name, incoterms: this.incoterms, cost: this.cost,
+                    currency: this.currency, prepayment: this.prepayment
                 };
 
-                let propertiesTransport = {
-                    typesLoadingTruck: this.typesLoadingTruck, typesUnloadingTruck: this.typesUnloadingTruck,
-                    permissions: this.permissions, typePayment: this.typePayment, costPer: this.costPer,
+                let propertiesCargo = {
+                    containerLoading: this.containerLoading, typePayment: this.typePayment, costPer: this.costPer,
                     paymentForm: this.paymentForm, paymentTime: this.paymentTime
                 };
 
-                Object.assign(this.getInitialTransport, transport);
+                Object.assign(this.getInitialCargo, cargo);
 
-                let tempPropertiesTransport = Object.assign({}, propertiesTransport);
-
-                this.$store.commit('transport/setPropertiesTransport', tempPropertiesTransport);
+                let tempPropertiesCargo = Object.assign({}, propertiesCargo);
+                this.$store.commit('cargo/setPropertiesCargo', tempPropertiesCargo);
 
                 if (n === this.steps) {
                     this.setE1(1);
@@ -674,7 +450,7 @@
                 }
             },
 
-            checkLocaleAndGetList(someObject){
+            checkLocaleAndGetList(someObject) {
                 if (this.$i18n.localeProperties.code === 'en') {
                     return someObject.listEn
                 } else if (this.$i18n.localeProperties.code === 'ua') {
@@ -686,7 +462,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

@@ -17,7 +17,7 @@
             <v-col
               lg="8"
             >
-              <v-card-subtitle class="spectral-font">{{ $t('view.offerPublished') }} - 13 марта</v-card-subtitle>
+              <v-card-subtitle class="spectral-font">{{ $t('view.offerPublished') }} - 5 мая</v-card-subtitle>
             </v-col>
 
             <v-col
@@ -133,6 +133,52 @@
           <v-card-text>
             <v-row justify="start">
               <v-col
+                v-if="cargoView.typeTransportation === 'seaTransportation'"
+                cols="12"
+                sm="3"
+                md="3"
+                lg="3"
+              >
+                <span class="subtitle-font">Контейнер:</span>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="9"
+                md="9"
+                lg="9"
+              >
+                  <span class="spectral-font text--primary">
+                    {{ cargoView.nameContainer}}
+                  </span>
+              </v-col>
+            </v-row>
+
+            <v-row
+              v-if="cargoView.typeTransportation === 'seaTransportation'"
+              justify="start"
+            >
+              <v-col
+                cols="12"
+                sm="3"
+                md="3"
+                lg="3"
+              >
+                <span class="subtitle-font">Количество:</span>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="9"
+                md="9"
+                lg="9"
+              >
+                  <span class="spectral-font text--primary">
+                    {{ cargoView.count}} шт
+                  </span>
+              </v-col>
+            </v-row>
+
+            <v-row justify="start">
+              <v-col
                 cols="12"
                 sm="3"
                 md="3"
@@ -243,8 +289,7 @@
                 lg="9"
               >
                 <span
-                  v-if="cargoView.weightFrom === cargoView.weightUpTo ||
-                  cargoView.weightFrom === null || cargoView.weightUpTo === null"
+                  v-if="cargoView.weightFrom === cargoView.weightUpTo"
                   class="spectral-font text--primary"
                 >
                     {{ cargoView.weightFrom}} {{ $t('view.ton') }}
@@ -258,7 +303,7 @@
               </v-col>
             </v-row>
 
-            <v-row justify="start" v-if="cargoView.volumeFrom !== null || cargoView.volumeUpTo !== null">
+            <v-row justify="start" v-if="cargoView.volumeFrom !== '' || cargoView.volumeUpTo !== ''">
               <v-col
                 cols="12"
                 sm="3"
@@ -274,11 +319,23 @@
                 lg="9"
               >
                   <span
-                    v-if="cargoView.volumeFrom === cargoView.volumeUpTo ||
-                    cargoView.volumeFrom === null || cargoView.volumeUpTo === null"
+                    v-if="cargoView.volumeFrom !== '' && cargoView.volumeUpTo !== '' &&
+                    cargoView.volumeFrom === cargoView.volumeUpTo"
                     class="spectral-font text--primary"
                   >
                     {{ cargoView.volumeFrom}} {{ $t('view.cubicMeters') }}
+                  </span>
+                <span
+                  v-else-if="cargoView.volumeFrom !== ''"
+                  class="spectral-font text--primary"
+                >
+                    {{ cargoView.volumeFrom}} {{ $t('view.cubicMeters') }}
+                  </span>
+                <span
+                  v-else-if="cargoView.volumeUpTo !== ''"
+                  class="spectral-font text--primary"
+                >
+                    {{ cargoView.volumeUpTo }} {{ $t('view.cubicMeters') }}
                   </span>
                 <span
                   v-else
@@ -289,8 +346,8 @@
               </v-col>
             </v-row>
 
-            <v-row justify="start" v-if="cargoView.lengthCargo !== null || cargoView.widthCargo !== null ||
-            cargoView.heightCargo !== null">
+            <v-row justify="start" v-if="cargoView.lengthCargo !== '' || cargoView.widthCargo !== '' ||
+            cargoView.heightCargo !== ''">
               <v-col
                 cols="12"
                 sm="3"
@@ -306,8 +363,8 @@
                 lg="9"
               >
                 <span
-                  v-if="cargoView.lengthCargo !== null && cargoView.widthCargo !== null &&
-                    cargoView.heightCargo !== null"
+                  v-if="cargoView.lengthCargo !== '' && cargoView.widthCargo !== '' &&
+                    cargoView.heightCargo !== ''"
                   class="spectral-font text--primary"
                 >
                   {{ cargoView.lengthCargo }} {{ $t('view.metersLong') }},
@@ -315,45 +372,45 @@
                   {{ cargoView.heightCargo }} {{ $t('view.metersHigh') }}
                 </span>
                 <span
-                  v-else-if="cargoView.lengthCargo !== null && cargoView.widthCargo === null &&
-                  cargoView.heightCargo === null"
+                  v-else-if="cargoView.lengthCargo !== '' && cargoView.widthCargo === '' &&
+                  cargoView.heightCargo === ''"
                   class="spectral-font text--primary"
                 >
                    {{ cargoView.lengthCargo }} {{ $t('view.metersLong') }}
                 </span>
                 <span
-                  v-else-if="cargoView.lengthCargo === null && cargoView.widthCargo !== null &&
-                  cargoView.heightCargo === null"
+                  v-else-if="cargoView.lengthCargo === '' && cargoView.widthCargo !== '' &&
+                  cargoView.heightCargo === ''"
                   class="spectral-font text--primary"
                 >
                    {{ cargoView.widthCargo }} {{ $t('view.metersWide') }}
                 </span>
                 <span
-                  v-else-if="cargoView.lengthCargo === null && cargoView.widthCargo === null &&
-                  cargoView.heightCargo !== null"
+                  v-else-if="cargoView.lengthCargo === '' && cargoView.widthCargo === '' &&
+                  cargoView.heightCargo !== ''"
                   class="spectral-font text--primary"
                 >
                    {{ cargoView.heightCargo }} {{ $t('view.metersHigh') }}
                 </span>
                 <span
-                  v-else-if="cargoView.lengthCargo !== null && cargoView.widthCargo !== null &&
-                  cargoView.heightCargo === null"
+                  v-else-if="cargoView.lengthCargo !== '' && cargoView.widthCargo !== '' &&
+                  cargoView.heightCargo === ''"
                   class="spectral-font text--primary"
                 >
                    {{ cargoView.lengthCargo }} {{ $t('view.metersLong') }},
                   {{ cargoView.widthCargo }} {{ $t('view.metersWide') }}
                 </span>
                 <span
-                  v-else-if="cargoView.lengthCargo !== null && cargoView.widthCargo === null &&
-                  cargoView.heightCargo != null"
+                  v-else-if="cargoView.lengthCargo !== '' && cargoView.widthCargo === '' &&
+                  cargoView.heightCargo !== ''"
                   class="spectral-font text--primary"
                 >
                    {{ cargoView.lengthCargo }} {{ $t('view.metersLong') }},
                   {{ cargoView.heightCargo }} {{ $t('view.metersHigh') }}
                 </span>
                 <span
-                  v-else-if="cargoView.lengthCargo === null && cargoView.widthCargo !== null &&
-                  cargoView.heightCargo !== null"
+                  v-else-if="cargoView.lengthCargo === '' && cargoView.widthCargo !== '' &&
+                  cargoView.heightCargo !== ''"
                   class="spectral-font text--primary"
                 >
                    {{ cargoView.widthCargo }} {{ $t('view.metersWide') }},
@@ -390,14 +447,34 @@
                 <span class="photo-font text--primary">{{ $t('view.transport') }}</span>
               </v-col>
             </v-row>
-            <v-row>
+            <v-row
+              justify="start"
+            >
               <v-col
                 cols="12"
                 sm="3"
                 md="3"
                 lg="3"
               >
-                <span class="subtitle-font">{{ $t('view.bodyType') }}:</span>
+                <span
+                  v-if="cargoView.typeTransportation === 'roadTransportation'"
+                  class="subtitle-font"
+                >
+                  {{ $t('view.bodyType') }}:
+                </span>
+                <span
+                  v-else-if="cargoView.typeTransportation === 'seaTransportation'"
+                  class="subtitle-font"
+                >
+                  Тип судна:
+                </span>
+                <span
+                  v-else
+                  class="subtitle-font"
+                >
+                  Тип вагона:
+                </span>
+
               </v-col>
               <v-col
                 cols="12"
@@ -408,6 +485,62 @@
                   <span
                     class="spectral-font text--primary">
                     {{ cargoView.bodyType }}
+                  </span>
+              </v-col>
+            </v-row>
+
+            <v-row
+              v-if="cargoView.typeTransportation === 'seaTransportation'"
+              justify="start"
+            >
+              <v-col
+                cols="12"
+                sm="3"
+                md="3"
+                lg="3"
+              >
+                <span class="subtitle-font">Загрузка контейнера:</span>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="9"
+                md="9"
+                lg="9"
+              >
+                <template
+                  v-for="prop in properties"
+                >
+                  <span
+                    v-if="prop.property === 'containerLoading'"
+                    :key="prop.id"
+                    class="spectral-font text--primary">
+                    {{ prop.name }}
+                  </span>
+                </template>
+              </v-col>
+            </v-row>
+
+            <v-row
+              v-if="cargoView.typeTransportation === 'seaTransportation'"
+              justify="start"
+            >
+              <v-col
+                cols="12"
+                sm="3"
+                md="3"
+                lg="3"
+              >
+                <span class="subtitle-font">Инкотермс:</span>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="9"
+                md="9"
+                lg="9"
+              >
+                  <span
+                    class="spectral-font text--primary">
+                    {{ cargoView.incoterms }}
                   </span>
               </v-col>
             </v-row>
@@ -863,7 +996,10 @@
             }
 
             await store.commit('cargo/setCheckUserFromOffer');
-            await store.dispatch('cargo/checkUserSentOfferAction', body);
+            console.log(body.user);
+            if (body.user !== null) {
+                await store.dispatch('cargo/checkUserSentOfferAction', body);
+            }
         },
         data() {
             return {
@@ -965,10 +1101,12 @@
             this.$store.commit('cargo/setResultDataSearch');
             this.$store.commit('cargo/setPageSize', 3);
             this.filteringProperties();
-            this.firstName = this.getUser.firstName;
-            this.lastName = this.getUser.lastName;
-            this.patronymic = this.getUser.patronymic;
-            this.email = this.getUser.email;
+            if (this.getUser !== null) {
+                this.firstName = this.getUser.firstName;
+                this.lastName = this.getUser.lastName;
+                this.patronymic = this.getUser.patronymic;
+                this.email = this.getUser.email;
+            }
         },
         methods: {
             checkFullnessProperties() {
@@ -994,7 +1132,6 @@
                     if (prop.property === 'paymentTime') {
                         this.checkPaymentTime = true;
                     }
-
                 });
             },
 
@@ -1140,6 +1277,7 @@
             this.queryResultSearch = Object.assign({}, {page: resultData.page}, {pageSize: 3}, data);
             this.$store.commit('cargo/setPageSize', 3);
 
+            console.log(this.cargoView);
             this.checkFullnessProperties();
 
             this.initMap();

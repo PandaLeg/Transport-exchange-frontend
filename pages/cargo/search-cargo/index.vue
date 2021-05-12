@@ -339,6 +339,27 @@
                 ></v-text-field>
               </v-col>
             </v-row>
+
+            <v-row>
+              <v-col
+                cols="12"
+                md="12"
+                lg="12"
+              >
+                <v-combobox
+                  v-model="typesTransportation"
+                  :items="getTransportation"
+                  :menu-props="{ bottom: true, offsetY: true }"
+                  color="blue-grey lighten-2"
+                  :label="$t('searchCargo.typeTransportation')"
+                  class="subtitle-font"
+                  outlined
+                  clearable
+                  multiple
+                ></v-combobox>
+              </v-col>
+            </v-row>
+
             <v-row>
               <v-col
                 cols="12"
@@ -493,6 +514,7 @@
                 menu2: false,
                 loadingDateFrom: null,
                 loadingDateBy: null,
+                typesTransportation: null,
                 weightFrom: null,
                 weightUpTo: null,
                 volumeFrom: null,
@@ -531,6 +553,11 @@
 
             getCitiesTo() {
                 return this.citiesTo;
+            },
+
+            getTransportation() {
+                let transportation = this.$store.getters['cargo/getTransportation'];
+                return this.checkLocaleAndGetList(transportation);
             },
 
             getListFormPayment() {
@@ -643,6 +670,9 @@
                         volumeUpTo: this.volumeUpTo ? this.volumeUpTo : undefined,
                     },
                     {
+                        typesTransportation: this.typesTransportation ? this.typesTransportation : undefined
+                    },
+                    {
                         nameCargo: this.nameCargo?.name, bodyType: this.bodyType?.name
                     },
                     {
@@ -652,11 +682,13 @@
                 );
 
                 this.$store.commit('cargo/clearCargoAfterSearch');
-                this.$router.push({path: (this.$i18n.localeProperties.code !== 'ru' ? '/' + this.$i18n.localeProperties.code : '') +
-                        '/cargo/search-cargo/search', query: cargo})
+                this.$router.push({
+                    path: (this.$i18n.localeProperties.code !== 'ru' ? '/' + this.$i18n.localeProperties.code : '') +
+                        '/cargo/search-cargo/search', query: cargo
+                })
             },
 
-            checkLocaleAndGetList(someObject){
+            checkLocaleAndGetList(someObject) {
                 if (this.$i18n.localeProperties.code === 'en') {
                     return someObject.listEn
                 } else if (this.$i18n.localeProperties.code === 'ua') {
@@ -670,16 +702,15 @@
 </script>
 
 <style scoped>
-  @import
-  url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Slab&family=Spectral&family=Vollkorn:wght@600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Slab&family=Spectral&family=Vollkorn:wght@600&display=swap');
 
-  .title-font{
+  .title-font {
     font-family: 'Merriweather', serif;
     font-weight: bold;
     font-size: 24px;
   }
 
-  .subtitle-font{
+  .subtitle-font {
     font-family: 'Roboto Slab', serif;
     font-weight: normal;
   }

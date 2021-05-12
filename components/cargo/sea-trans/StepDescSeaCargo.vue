@@ -46,7 +46,7 @@
           >
             <v-autocomplete
               v-model="name"
-              :items="itemsNamesCargo"
+              :items="listNamesCargo"
               :loading="isLoading"
               :search-input.sync="searchName"
               :error-messages="nameErrors"
@@ -74,6 +74,69 @@
                 </v-list-item-content>
               </template>
             </v-autocomplete>
+          </v-col>
+        </v-row>
+
+        <v-row justify="space-between">
+          <v-col
+            cols="12"
+            md="2"
+            lg="2"
+          >
+            <v-subheader>
+              Тип контейнера
+            </v-subheader>
+          </v-col>
+
+          <v-col
+            cols="6"
+            md="6"
+            lg="6"
+          >
+            <v-autocomplete
+              v-model="nameContainer"
+              :items="listNamesContainers"
+              :loading="isLoading"
+              :search-input.sync="searchName"
+              :error-messages="nameErrors"
+              color="white"
+              hide-no-data
+              hide-selected
+              clearable
+              item-text="name"
+              item-value="id"
+              label="Выберете наименование контейнера"
+              placeholder="Поиск"
+              filled
+              required
+              @change="$v.name.$touch()"
+              @blur="$v.name.$touch()"
+              return-object
+            >
+              <template v-slot:selection="{ attr, on, item, selected }">
+                <span v-text="item.name"></span>
+              </template>
+              <template v-slot:item="{ item }">
+                <v-icon left color="primary">mdi-flag</v-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.name"></v-list-item-title>
+                </v-list-item-content>
+              </template>
+            </v-autocomplete>
+          </v-col>
+
+          <v-col
+            cols="6"
+            md="4"
+            lg="4"
+          >
+            <v-text-field
+              v-model="count"
+              filled
+              clearable
+              color="blue-grey lighten-2"
+              label="Количество (шт)"
+            ></v-text-field>
           </v-col>
         </v-row>
 
@@ -168,7 +231,7 @@
             cols="6"
             md="3"
             lg="3"
-            class="ml-lg-10"
+            class="ml-lg-8"
           >
             <v-text-field
               v-model="lengthCargo"
@@ -215,7 +278,7 @@
             lg="2"
           >
             <v-subheader>
-              ADR
+              IMO(ADR)
             </v-subheader>
           </v-col>
           <v-col
@@ -227,7 +290,7 @@
               v-model="adr"
               :items="getListArg"
               :menu-props="{ bottom: true, offsetY: true }"
-              :hint="$t('addCargo.selectAdr')"
+              hint="Выберите класс IMO"
               persistent-hint
               filled
               clearable
@@ -973,6 +1036,7 @@
 <script>
     import {faArrowAltCircleRight, faFlag, faTruckMoving} from '@fortawesome/free-solid-svg-icons'
     import {names} from '@/json/cargo.name.json'
+    import {containers} from '@/json/container.name.json'
     import {validationMixin} from 'vuelidate'
     import {required} from 'vuelidate/lib/validators'
 
@@ -982,6 +1046,8 @@
         data() {
             return {
                 name: '',
+                nameContainer: '',
+                count: 0,
                 weightFrom: '',
                 weightUpTo: '',
                 volumeFrom: '',
@@ -1038,6 +1104,7 @@
                 entriesFifthUnloadingPoint: [],
                 searchCity: '',
                 listNamesCargo: [],
+                listNamesContainers: [],
                 valid: true,
                 checkFilledTwoPointLoading: false,
                 checkFilledTwoPointUnloading: false,
@@ -1077,6 +1144,7 @@
         },
         created() {
             this.listNamesCargo = names;
+            this.listNamesContainers = containers;
         },
         computed: {
             faArrowAltCircleRight() {
@@ -1105,12 +1173,6 @@
 
             itemsFirstUnloadingPoint() {
                 return this.entriesFirstUnloadingPoint;
-            },
-
-            itemsNamesCargo() {
-                return this.listNamesCargo.map(entry => {
-                    return Object.assign({}, entry)
-                })
             },
 
             nameErrors() {
@@ -1526,14 +1588,6 @@
                         })
                         .finally(() => (this.isLoadingFifthPointTo = false))
                 }
-            },
-
-            searchName(val) {
-
-            },
-
-            searchBodyType(val) {
-
             }
         },
         methods: {
@@ -1653,7 +1707,6 @@
                     return;
                 }
 
-
                 let places = [
                     {
                         cityFrom: this.firstLoadingPoint.fields.name,
@@ -1710,9 +1763,10 @@
                 this.$store.commit('cargo/setPlacesCargo', places);
 
                 let cargo = {
-                    name: this.name.name, weightFrom: this.weightFrom, weightUpTo: this.weightUpTo,
-                    volumeFrom: this.volumeFrom, volumeUpTo: this.volumeUpTo, lengthCargo: this.lengthCargo,
-                    widthCargo: this.widthCargo, heightCargo: this.heightCargo, adr: this.adr,
+                    name: this.name.name, nameContainer: this.nameContainer.name, count: this.count,
+                    weightFrom: this.weightFrom, weightUpTo: this.weightUpTo, volumeFrom: this.volumeFrom,
+                    volumeUpTo: this.volumeUpTo, lengthCargo: this.lengthCargo, widthCargo: this.widthCargo,
+                    heightCargo: this.heightCargo, adr: this.adr,
                     cityFirstLoadingPoint: this.firstLoadingPoint.fields.name,
                     countryFirstLoadingPoint: this.firstLoadingPoint.fields.country,
                     cityFirstUnloadingPoint: this.firstUnloadingPoint.fields.name,

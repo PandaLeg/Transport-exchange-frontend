@@ -20,6 +20,9 @@
     "authorization": "Authorization"
   },
   "addCargo": {
+    "vehiclesTitle": "Vehicles",
+    "seaTitle": "Sea transport",
+    "railwayTitle": "Railway transport",
     "cargo&Date": "Cargo & Date",
     "transport&Payment": "Transport & Payment",
     "additional&Photo": "Additional & Photo",
@@ -87,6 +90,7 @@
     "weightUpTo": "Weight up to",
     "volumeFrom": "Volume from",
     "volumeUpTo": "Volume up to",
+    "typeTransportation": "Type transportation",
     "selectCargoName": "Select cargo name",
     "selectBodyType": "Select body type",
     "selectPaymentForm": "Select payment form",

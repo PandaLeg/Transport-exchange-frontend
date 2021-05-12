@@ -1,4 +1,4 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template>
   <v-card
     dark
     v-if="n === 1"
@@ -14,7 +14,6 @@
         </h3>
       </v-col>
     </v-row>
-
     <v-form
       ref="form"
       v-model="valid"
@@ -46,7 +45,7 @@
           >
             <v-autocomplete
               v-model="name"
-              :items="itemsNamesCargo"
+              :items="listNamesCargo"
               :loading="isLoading"
               :search-input.sync="searchName"
               :error-messages="nameErrors"
@@ -168,7 +167,7 @@
             cols="6"
             md="3"
             lg="3"
-            class="ml-lg-10"
+            class="ml-lg-8"
           >
             <v-text-field
               v-model="lengthCargo"
@@ -227,7 +226,7 @@
               v-model="adr"
               :items="getListArg"
               :menu-props="{ bottom: true, offsetY: true }"
-              :hint="$t('addCargo.selectAdr')"
+              hint="Выберите класс ADR"
               persistent-hint
               filled
               clearable
@@ -1038,6 +1037,7 @@
                 entriesFifthUnloadingPoint: [],
                 searchCity: '',
                 listNamesCargo: [],
+                listNamesContainers: [],
                 valid: true,
                 checkFilledTwoPointLoading: false,
                 checkFilledTwoPointUnloading: false,
@@ -1105,12 +1105,6 @@
 
             itemsFirstUnloadingPoint() {
                 return this.entriesFirstUnloadingPoint;
-            },
-
-            itemsNamesCargo() {
-                return this.listNamesCargo.map(entry => {
-                    return Object.assign({}, entry)
-                })
             },
 
             nameErrors() {
@@ -1219,9 +1213,9 @@
             searchFirstLoadingPoint(val) {
                 let checkFilled = false;
 
-                if (this.itemsFirstLoadingPoint.length > 0) {
-                    for (let i = 0; i < this.itemsFirstLoadingPoint.length; i++) {
-                        if (this.firstLoadingPoint === this.itemsFirstLoadingPoint[i]) {
+                if (this.entriesFirstLoadingPoint.length > 0) {
+                    for (let i = 0; i < this.entriesFirstLoadingPoint.length; i++) {
+                        if (this.firstLoadingPoint === this.entriesFirstLoadingPoint[i]) {
                             checkFilled = true;
                         }
                     }
@@ -1526,14 +1520,6 @@
                         })
                         .finally(() => (this.isLoadingFifthPointTo = false))
                 }
-            },
-
-            searchName(val) {
-
-            },
-
-            searchBodyType(val) {
-
             }
         },
         methods: {
@@ -1653,7 +1639,6 @@
                     return;
                 }
 
-
                 let places = [
                     {
                         cityFrom: this.firstLoadingPoint.fields.name,
@@ -1737,7 +1722,5 @@
 </script>
 
 <style scoped>
-  .marg-b {
-    float: right;
-  }
+
 </style>

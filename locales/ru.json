@@ -20,6 +20,9 @@
     "authorization": "Авторизация"
   },
   "addCargo": {
+    "vehiclesTitle": "Автотранспорт",
+    "seaTitle": "Морской",
+    "railwayTitle": "Ж/Д",
     "cargo&Date": "Груз & Дата",
     "transport&Payment": "Транспорт & Оплата",
     "additional&Photo": "Дополнительно & Фото",
@@ -87,6 +90,7 @@
     "weightUpTo": "Масса до",
     "volumeFrom": "Объём от",
     "volumeUpTo": "Объём до",
+    "typeTransportation": "Тип перевозки",
     "selectCargoName": "Выберите наименование груза",
     "selectBodyType": "Выберите тип кузова",
     "selectPaymentForm": "Выберите форму оплаты",

@@ -29,6 +29,7 @@
           </v-stepper-header>
         </v-stepper>
       </v-col>
+
       <v-col lg="10">
         <v-stepper
           v-model="e1"
@@ -65,9 +66,9 @@
               :key="`${n}-content`"
               :step="n"
             >
-              <step-desc-cargo :n="n" :e1="e1" :setE1="setE1" :steps="steps"></step-desc-cargo>
-              <step-desc-transport :n="n" :e1="e1" :setE1="setE1" :steps="steps"></step-desc-transport>
-              <step-desc-photo :n="n" :e1="e1" :setE1="setE1" :steps="steps"></step-desc-photo>
+              <step-desc-railway-cargo :n="n" :e1="e1" :setE1="setE1" :steps="steps"></step-desc-railway-cargo>
+              <step-desc-railway-transport :n="n" :e1="e1" :setE1="setE1" :steps="steps"></step-desc-railway-transport>
+              <step-desc-railway-photo :n="n" :e1="e1" :setE1="setE1" :steps="steps"></step-desc-railway-photo>
             </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
@@ -77,22 +78,22 @@
 </template>
 
 <script>
-    import StepDescCargo from '../../../../components/cargo/StepDescCargo.vue'
-    import StepDescTransport from "../../../../components/cargo/StepDescTransport";
-    import StepDescPhoto from "../../../../components/cargo/StepDescPhoto";
+    import StepDescRailwayCargo from "../../../../components/cargo/railway-trans/StepDescRailwayCargo.vue";
+    import StepDescRailwayTransport from "../../../../components/cargo/railway-trans/StepDescRailwayTransport";
+    import StepDescRailwayPhoto from "../../../../components/cargo/railway-trans/StepDescRailwayPhoto";
 
     export default {
-        name: 'cargo-add-cargo-vehicles',
+        name: "cargo-add-cargo-railway-trans",
         components: {
-            StepDescTransport,
-            StepDescCargo,
-            StepDescPhoto
+            StepDescRailwayCargo,
+            StepDescRailwayTransport,
+            StepDescRailwayPhoto
         },
         data() {
             return {
                 e1: 1,
-                s1: 1,
                 steps: 3,
+                s1: 3,
                 stepsS: 3
             }
         },
@@ -102,12 +103,12 @@
             },
 
             redirectOtherTypesCargo(n) {
-                if (n === 2) {
+                if (n === 1) {
+                    this.$store.commit('cargo/clearInitialCargo');
+                    this.$router.push(this.localePath({name: 'cargo-add-cargo-vehicles'}))
+                } else if (n === 2) {
                     this.$store.commit('cargo/clearInitialCargo');
                     this.$router.push(this.localePath({name: 'cargo-add-cargo-sea-trans'}))
-                } else if(n === 3){
-                    this.$store.commit('cargo/clearInitialCargo');
-                    this.$router.push(this.localePath({name: 'cargo-add-cargo-railway-trans'}))
                 }
             }
         }

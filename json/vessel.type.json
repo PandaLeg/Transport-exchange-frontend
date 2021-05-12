@@ -1,0 +1,44 @@
+{
+  "typesVessel": [
+    {
+      "id": "1",
+      "name": "Танкер",
+      "check": "open"
+    },
+    {
+      "id": "2",
+      "name": "Газовоз",
+      "check": "open"
+    },
+    {
+      "id": "3",
+      "name": "Сухогруз",
+      "check": "open"
+    },
+    {
+      "id": "4",
+      "name": "Контейнеровоз",
+      "check": "open"
+    },
+    {
+      "id": "5",
+      "name": "Ролкер",
+      "check": "open"
+    },
+    {
+      "id": "6",
+      "name": "Балкер",
+      "check": "open"
+    },
+    {
+      "id": "7",
+      "name": "Рефрежиратор",
+      "check": "open"
+    },
+    {
+      "id": "8",
+      "name": "Лесовоз",
+      "check": "open"
+    }
+  ]
+}
