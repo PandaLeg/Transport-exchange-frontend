@@ -22,6 +22,9 @@ export const state = () => ({
   currentPage: 1,
   totalPages: 0,
   pageSize: 3,
+  pointsInside: [],
+  pointsFrom: [],
+  pointsTo: [],
   listArg: [
     '1', '2', '3', '4', '5',
     '6', '7', '8', '9'
@@ -204,6 +207,12 @@ export const mutations = {
 
   setCheckUserFromOffer(state) {
     state.checkUserFromOffer = false;
+  },
+
+  setCountPlaces(state, data) {
+    state.pointsInside = data.pointsInside;
+    state.pointsFrom = data.pointsFrom;
+    state.pointsTo = data.pointsTo;
   }
 };
 
@@ -270,7 +279,21 @@ export const actions = {
     if (data) {
       commit('checkUserFromOffer', {transports: data, idTransport: body.idTransport});
     }
-  }
+  },
+
+  async getCountPlaces({commit}, countries) {
+    const response = await this.$axios.post(API_URL + 'get-count-places', countries, {
+        headers: {"Content-Type": undefined}
+      }
+    );
+    const data = await response.data;
+
+    console.log("COUNT PLACES", data);
+
+    if (data) {
+      commit('setCountPlaces', data)
+    }
+  },
 };
 
 export const getters = {
@@ -340,6 +363,18 @@ export const getters = {
 
   getPageSize: state => {
     return state.pageSize
+  },
+
+  getPointsInside: state => {
+    return state.pointsInside
+  },
+
+  getPointsFrom: state => {
+    return state.pointsFrom
+  },
+
+  getPointsTo: state => {
+    return state.pointsTo
   },
 
   getListArg: state => {

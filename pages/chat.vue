@@ -32,7 +32,7 @@
               >
               </v-text-field>
             </v-toolbar>
-            <v-list v-if="getLegalUsersChats != null">
+            <!--<v-list v-if="getLegalUsersChats != null">
               <template v-for="legalUser in getLegalUsersChats">
                 <v-list-item
                   :key="legalUser.id"
@@ -55,7 +55,7 @@
                   </v-list-item-icon>
                 </v-list-item>
               </template>
-            </v-list>
+            </v-list>-->
 
             <v-list v-if="getUsersChats != null">
               <template v-for="user in getUsersChats">
@@ -141,9 +141,7 @@
                     :key="item.id"
                   >
                     <v-col
-                      v-if="(item.user !== null &&
-              (item.user === getUser.id || item.user.id === getUser.id)) || (item.legalUser !== null &&
-              (item.legalUser === getUser.id || item.legalUser.id === getUser.id))"
+                      v-if="(item.user !== null && (item.user === getUser.id || item.user.id === getUser.id))"
                       align-self="end"
                       lg="12"
                     >
@@ -274,10 +272,6 @@
                 return this.$store.getters['chat/getUsersChats']
             },
 
-            getLegalUsersChats() {
-                return this.$store.getters['chat/getLegalUsersChats']
-            },
-
             listMessages() {
                 return this.$store.getters['chat/listMessages']
             }
@@ -296,6 +290,7 @@
 
                 console.log("GET USER", this.getUser);
                 console.log("GET USER", user);
+
                 const body = {
                     user: this.getUser,
                     userCompanion: user,

@@ -23,6 +23,9 @@ export const state = () => ({
     totalPages: 0,
     pageSize: 3,
     permissions: [],
+    pointsInside: [],
+    pointsFrom: [],
+    pointsTo: [],
     transportation: {
       listRu: [
         'Автоперевозка', 'Морская перевозка', 'Ж/Д перевозка'
@@ -154,9 +157,8 @@ export const state = () => ({
         [
           'на завантаженні', 'при розвантаженні', 'за оригіналами'
         ]
-    }
-    ,
-    countries: []
+    },
+    countries: [],
   })
 ;
 
@@ -270,6 +272,12 @@ export const mutations = {
 
   setCheckUserFromOffer(state) {
     state.checkUserFromOffer = false;
+  },
+
+  setCountPlaces(state, data) {
+    state.pointsInside = data.pointsInside;
+    state.pointsFrom = data.pointsFrom;
+    state.pointsTo = data.pointsTo;
   }
 };
 
@@ -326,12 +334,11 @@ export const actions = {
   },
 
   async checkUserSentOfferAction({commit}, body) {
-    let checkUserRole = body.user.roles.map(item => item.name).includes('ROLE_USER');
+    /*    let checkUserRole = body.user.roles.map(item => item.name).includes('ROLE_USER');*/
 
     const response = await this.$axios.get(API_URL + 'get-sent-offers-cargo/' + body.user.id, {
       params: {
-        headers: Object.assign(authHeader(body.store)),
-        role: checkUserRole ? 'ROLE_USER' : 'ROLE_LEGAL_USER'
+        headers: Object.assign(authHeader(body.store))
       }
     });
     const data = await response.data;
@@ -355,6 +362,22 @@ export const actions = {
       commit('addCargoMutation', data)
     }
   },
+
+  async getCountPlaces({commit}, countries) {
+    const response = await this.$axios.post(API_URL + 'get-count-places', countries, {
+        headers: {"Content-Type": undefined}
+      }
+    );
+    const data = await response.data;
+
+    console.log("COUNT PLACES", data);
+
+    if (data) {
+      commit('setCountPlaces', data)
+    }
+  },
+
+
 };
 
 export const getters = {
@@ -432,6 +455,18 @@ export const getters = {
 
   getTransportation: state => {
     return state.transportation
+  },
+
+  getPointsInside: state => {
+    return state.pointsInside
+  },
+
+  getPointsFrom: state => {
+    return state.pointsFrom
+  },
+
+  getPointsTo: state => {
+    return state.pointsTo
   },
 
   getListArg: state => {

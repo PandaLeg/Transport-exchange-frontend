@@ -3,502 +3,695 @@
     {
       "id": "f6416be50ed3f25165c04c3d48a1c5ed20efa43e",
       "ruName": "Норвегия",
-      "enName": "Norway"
+      "enName": "Norway",
+      "lat": 59.91273,
+      "lng": 10.74609
     },
     {
       "id": "bb55be8fa32eda06481a4dfe89abd5573d0bddb9",
       "ruName": "Швейцария",
-      "enName": "Switzerland"
+      "enName": "Switzerland",
+      "lat": 46.94809,
+      "lng": 7.44744
     },
     {
       "id": "d34890d5bf383cb5de27e0d78bd4a142232e4f66",
       "ruName": "Индия",
-      "enName": "India"
+      "enName": "India",
+      "lat": 28.63576,
+      "lng": 77.22445
     },
     {
       "id": "902d74358f22154ce402f890652d2aec6675eb95",
       "ruName": "Никарагуа",
-      "enName": "Nicaragua"
+      "enName": "Nicaragua",
+      "lat": 12.13282,
+      "lng": -86.2504
     },
     {
       "id": "5d82b4898d63ad94247898b3992ed5294c57b9eb",
       "ruName": "Хорватия",
-      "enName": "Croatia"
+      "enName": "Croatia",
+      "lat": 45.81444,
+      "lng": 15.97798
     },
     {
       "id": "8f096d7559734cc3e623fd0c2fcb35d8c4ec08d3",
       "ruName": "Греция",
-      "enName": "Greece"
+      "enName": "Greece",
+      "lat": 37.98376,
+      "lng": 23.72784
     },
     {
       "id": "424a3396ada3d102ca56c0e9478b1fc36973d216",
       "ruName": "Коста-Рика",
-      "enName": "Costa Rica"
+      "enName": "Costa Rica",
+      "lat": 9.93333,
+      "lng": -84.08333
     },
     {
       "id": "62e171492b6e0591b0b7f021cd5cc2573d8101c5",
       "ruName": "Дания",
-      "enName": "Denmark"
+      "enName": "Denmark",
+      "lat": 55.67594,
+      "lng": 12.56553
     },
     {
       "id": "4742370e1af6fe79b25c6eb23bda00e71968dc35",
       "ruName": "Латвия",
-      "enName": "Latvia"
+      "enName": "Latvia",
+      "lat": 56.946,
+      "lng": 24.10589
     },
     {
       "id": "fc8a5f88c3bae22f88d36892cc885080ec1adcbd",
       "ruName": "Армения",
-      "enName": "Armenia"
+      "enName": "Armenia",
+      "lat": 40.18111,
+      "lng": 44.51361
     },
     {
       "id": "c5c2975ced2e4c41556fafaf0219ac86d2558cf2",
       "ruName": "Чехия",
-      "enName": "Czech Republic"
+      "enName": "Czech Republic",
+      "lat": 50.08804,
+      "lng": 14.42076
     },
     {
       "id": "cdb9fbbf991e54fd554b3818e56977efc2380788",
       "ruName": "Грузия",
-      "enName": "Georgia"
+      "enName": "Georgia",
+      "lat": 41.69411,
+      "lng": 44.83368
     },
     {
       "id": "3153b3a5998e3c0c44274defe29dccbd6ab5ef05",
       "ruName": "Сербия",
-      "enName": "Serbia"
+      "enName": "Serbia",
+      "lat": 44.80401,
+      "lng": 20.46513
     },
     {
       "id": "89bedf37ad9a2df319b49fe574423062caf6b6f0",
       "ruName": "Черногория",
-      "enName": "Montenegro"
+      "enName": "Montenegro",
+      "lat": 42.44111,
+      "lng": 19.26361
     },
     {
       "id": "70d6d49c5056902ae51a8583dcca1b44a8a8a13b",
       "ruName": "Великобритания",
-      "enName": "United Kingdom"
+      "enName": "United Kingdom",
+      "lat": 51.50853,
+      "lng": -0.12574
     },
     {
       "id": "e6ac209b9b229bd5dbd808647e8d81745f25da0c",
       "ruName": "Лихтенштейн",
-      "enName": "Liechtenstein"
+      "enName": "Liechtenstein",
+      "lat": 47.14151,
+      "lng": 9.52154
     },
     {
       "id": "1ae60338be3ba9b81538715c26f073c71cd72065",
       "ruName": "Македония",
-      "enName": "Macedonia, The former Yugoslav Rep. of"
+      "enName": "Macedonia, The former Yugoslav Rep. of",
+      "lat": 41.99646,
+      "lng": 21.43141
     },
     {
       "id": "9e0aeb01e939b6ecc8ad93f60c03d1e4233cf0eb",
       "ruName": "Франция",
-      "enName": "France"
+      "enName": "France",
+      "lat": 46.85447,
+      "lng": 3.18267
     },
     {
       "id": "96d42a1f94961c367593b569d6c7f66d50f6fb72",
       "ruName": "Монголия",
-      "enName": "Mongolia"
+      "enName": "Mongolia",
+      "lat": 47.90771,
+      "lng": 106.88324
     },
     {
       "id": "26b418a98fdc5428774bc73f939d92cdcf89e1b7",
       "ruName": "Португалия",
-      "enName": "Portugal"
+      "enName": "Portugal",
+      "lat": 38.71667,
+      "lng": -9.13333
     },
     {
       "id": "720288418c5cd9bdf165855dc45a815883889743",
       "ruName": "Венгрия",
-      "enName": "Hungary"
+      "enName": "Hungary",
+      "lat": 47.49835,
+      "lng": 19.04045
     },
     {
       "id": "c6aac7361ca0f5184d088cc3aa0b5e3c451c33d6",
       "ruName": "Боливия",
-      "enName": "Bolivia"
+      "enName": "Bolivia",
+      "lat": -16.5,
+      "lng": -68.15
     },
     {
       "id": "fe69c7e480e83356f978311a32a3ea2bf04d0863",
       "ruName": "Турция",
-      "enName": "Turkey"
+      "enName": "Turkey",
+      "lat": 41.01384,
+      "lng": 28.94966
     },
     {
       "id": "53401d0b2bd912491a29af8ce25a1b81e48450a0",
       "ruName": "Молдавия",
-      "enName": "Moldova, Republic of"
+      "enName": "Moldova, Republic of",
+      "lat": 47.00556,
+      "lng": 28.8575
     },
     {
       "id": "f845b5bd8acce77fde225b0507c4d3b66aff90ae",
       "ruName": "Китай",
-      "enName": "China"
+      "enName": "China",
+      "lat": 39.9075,
+      "lng": 116.39723
     },
     {
       "id": "4b8996522ea11226d8a1fc7ab2c86a14db4f2fee",
       "ruName": "Бахрейн",
-      "enName": "Bahrain"
+      "enName": "Bahrain",
+      "lat": 26.22787,
+      "lng": 50.58565
     },
     {
       "id": "ee61c596e9ecb8a3176499624d98858fb7060fc3",
       "ruName": "Словения",
-      "enName": "Slovenia"
+      "enName": "Slovenia",
+      "lat": 46.05108,
+      "lng": 14.50513
     },
     {
       "id": "2880b292fc201d9f3c522f4d4dbf0eec8e89a506",
       "ruName": "Австрия",
-      "enName": "Austria"
+      "enName": "Austria",
+      "lat": 48.20849,
+      "lng": 16.37208
     },
     {
       "id": "c78d742eddc220287a1a43c4a7f29b6152e6bb0e",
       "ruName": "Киргизия",
-      "enName": "Kyrgyzstan"
+      "enName": "Kyrgyzstan",
+      "lat": 42.87,
+      "lng": 74.59
     },
     {
       "id": "de6ec3d98c0fdf5e6381e6c29f6197957847473e",
       "ruName": "Сирия",
-      "enName": "Syrian Arab Republic"
+      "enName": "Syrian Arab Republic",
+      "lat": 33.5102,
+      "lng": 36.29128
     },
     {
       "id": "cbb3abe8821b9e0762e4eff45286c92f44dc220f",
       "ruName": "Южная Корея",
-      "enName": "Korea, Republic of"
+      "enName": "Korea, Republic of",
+      "lat": 37.566,
+      "lng": 126.9784
     },
     {
       "id": "7eeb552c0777b902cf1bc25997a2d31140f4db97",
       "ruName": "Болгария",
-      "enName": "Bulgaria"
+      "enName": "Bulgaria",
+      "lat": 42.69751,
+      "lng": 23.32415
     },
     {
       "id": "37eb4fa3f626686ce3d1628ba662fdd6539ece6f",
       "ruName": "Объединенные Арабские Эмираты",
-      "enName": "United Arab Emirates"
+      "enName": "United Arab Emirates",
+      "lat": 24.45118,
+      "lng": 54.39696
     },
     {
       "id": "5e023c8298bdf1d66ed0a4e0336d0cadc0c45702",
       "ruName": "Словакия",
-      "enName": "Slovakia"
+      "enName": "Slovakia",
+      "lat": 48.14816,
+      "lng": 17.10674
     },
     {
       "id": "17a2ac9042b3fb8a5309b7544ebffaaf557725b8",
       "ruName": "Казахстан",
-      "enName": "Kazakhstan"
+      "enName": "Kazakhstan",
+      "lat": 51.1801,
+      "lng": 71.44598
     },
     {
       "id": "e7ef0c9eed5eeb3f7dd107fc6a6b3d6c0f3c566d",
       "ruName": "Таджикистан",
-      "enName": "Tajikistan"
+      "enName": "Tajikistan",
+      "lat": 38.53575,
+      "lng": 68.77905
     },
     {
       "id": "134ecda9a14ca999a3ef91dfa8ceafba7209f9a6",
       "ruName": "Кипр",
-      "enName": "Cyprus"
+      "enName": "Cyprus",
+      "lat": 35.17531,
+      "lng": 33.3642
     },
     {
       "id": "fa6b071cffc1a7d31371c95b464ce39e1b3b7090",
       "ruName": "Ирак",
-      "enName": "Iraq"
+      "enName": "Iraq",
+      "lat": 33.34058,
+      "lng": 44.40088
     },
     {
       "id": "3645914a8cec07976f10f2d3399ab49c06ae6337",
       "ruName": "Испания",
-      "enName": "Spain"
+      "enName": "Spain",
+      "lat": 40.4165,
+      "lng": -3.70256
     },
     {
       "id": "f223acee3b20fc20594a1f4eed95584992dad154",
       "ruName": "Северная Корея",
-      "enName": "Korea, Dem. People's Rep. of"
+      "enName": "Korea, Dem. People's Rep. of",
+      "lat": 39.03385,
+      "lng": 125.75432
     },
     {
       "id": "6129c25a6540620a1929df60554dcf14dc060d9c",
       "ruName": "Босния и Герцеговина",
-      "enName": "Bosnia and Herzegovina"
+      "enName": "Bosnia and Herzegovina",
+      "lat": 43.84864,
+      "lng": 18.35644
     },
     {
       "id": "18761a64cf6ffa37cd6647dc0a8301e4ec331a22",
       "ruName": "Непал",
-      "enName": "Nepal"
+      "enName": "Nepal",
+      "lat": 27.70169,
+      "lng": 85.3206
     },
     {
       "id": "47d01182d5f3faa0d77baafafb36d7da35b9a3f8",
       "ruName": "Уругвай",
-      "enName": "Uruguay"
+      "enName": "Uruguay",
+      "lat": 44.94803,
+      "lng": -95.71701
     },
     {
       "id": "5699c9c1ea3e113d6426c18df978755418a82444",
       "ruName": "Азербайджан",
-      "enName": "Azerbaijan"
+      "enName": "Azerbaijan",
+      "lat": 40.37767,
+      "lng": 49.89201
     },
     {
       "id": "6a870d321ceea95c92a50b8c43e3908bfae8dc4d",
       "ruName": "Аргентина",
-      "enName": "Argentina"
+      "enName": "Argentina",
+      "lat": -34.61315,
+      "lng": -58.37723
     },
     {
       "id": "3bc85efb128013656ae5a759519357867a0e17d5",
       "ruName": "Сингапур",
-      "enName": "Singapore"
+      "enName": "Singapore",
+      "lat": 1.28967,
+      "lng": 103.85007
     },
     {
       "id": "b99647514d568967a834910cab25d859ab8a66cb",
       "ruName": "Венесуэла",
-      "enName": "Venezuela, Bolivarian Rep. of"
+      "enName": "Venezuela, Bolivarian Rep. of",
+      "lat": 10.48801,
+      "lng": -66.87919
     },
     {
       "id": "430a13088b3d5c83446e973a284bb3ba4578b41d",
       "ruName": "Ливан",
-      "enName": "Lebanon"
+      "enName": "Lebanon",
+      "lat": 33.89332,
+      "lng": 35.50157
     },
     {
       "id": "5d1e2e3dec4ea2c7638a98e8a61e2873a73aa69f",
       "ruName": "Сан-Марино",
-      "enName": "San Marino"
+      "enName": "San Marino",
+      "lat": 43.93667,
+      "lng": 12.44639
     },
     {
       "id": "8b65a685f27ed8ee04c24272be7a6b799843781d",
       "ruName": "Иран",
-      "enName": "Iran, Islamic Rep. of"
+      "enName": "Iran, Islamic Rep. of",
+      "lat": 35.69439,
+      "lng": 51.42151
     },
     {
       "id": "7546d0fb98136014ea3b6186e0108e43a9875bbb",
       "ruName": "Йемен",
-      "enName": "Yemen"
+      "enName": "Yemen",
+      "lat": 15.35472,
+      "lng": 44.20667
     },
     {
       "id": "b0f53ce68395308daacff40f2da78a5a1df396a9",
       "ruName": "Швеция",
-      "enName": "Sweden"
+      "enName": "Sweden",
+      "lat": 59.32938,
+      "lng": 18.06871
     },
     {
       "id": "0acaa11b41a472d8d331f055cee37d2048a3efd7",
       "ruName": "Пакистан",
-      "enName": "Pakistan"
+      "enName": "Pakistan",
+      "lat": 33.72148,
+      "lng": 73.04329
     },
     {
       "id": "b17d4a8d92b3914e773ebdf53e38812e472da69c",
       "ruName": "Мальта",
-      "enName": "Malta"
+      "enName": "Malta",
+      "lat": 35.89968,
+      "lng": 14.5148
     },
     {
       "id": "a25c1513a799d30722186aae9d328fb32f3b00f4",
       "ruName": "Ирландия",
-      "enName": "Ireland"
+      "enName": "Ireland",
+      "lat": 53.33306,
+      "lng": -6.24889
     },
     {
       "id": "b1e9de43cb1ee6f42ff213ebdecde4343e56d71b",
       "ruName": "Алжир",
-      "enName": "Algeria"
+      "enName": "Algeria",
+      "lat": 36.73225,
+      "lng": 3.08746
     },
     {
       "id": "50dfec1db8c98a61e582a115d2c737fb44666ac0",
       "ruName": "Бразилия",
-      "enName": "Brazil"
+      "enName": "Brazil",
+      "lat": -15.77972,
+      "lng": -47.92972
     },
     {
       "id": "e58e11da3d378bb4d520ea1fe866c7c50545ae75",
       "ruName": "Бельгия",
-      "enName": "Belgium"
+      "enName": "Belgium",
+      "lat": 50.85045,
+      "lng": 4.34878
     },
     {
       "id": "c48af5d39774cd4693a351a9cfb616a0fb5efc00",
       "ruName": "Оман",
-      "enName": "Oman"
+      "enName": "Oman",
+      "lat": 23.58413,
+      "lng": 58.40778
     },
     {
       "id": "608005a350f000955c52085df9080c2962fe17e4",
       "ruName": "Вьетнам",
-      "enName": "Viet Nam"
+      "enName": "Viet Nam",
+      "lat": 21.0245,
+      "lng": 105.84117
     },
     {
       "id": "a3447d28a1a01d16f8226c01c632f6f142714865",
       "ruName": "Австралия",
-      "enName": "Australia"
+      "enName": "Australia",
+      "lat": -35.28346,
+      "lng": 149.12807
     },
     {
       "id": "eba40667c1048f08726377f37f3272bdea086dec",
       "ruName": "Польша",
-      "enName": "Poland"
+      "enName": "Poland",
+      "lat": 52.22977,
+      "lng": 21.01178
     },
     {
       "id": "3d60fd06ad28e4a1ed854741c893e169468d8c2f",
       "ruName": "Исландия",
-      "enName": "Iceland"
+      "enName": "Iceland",
+      "lat": 64.13548,
+      "lng": -21.89541
     },
     {
       "id": "8063d28955ce1858ca5a01d127a7e1a48932133e",
       "ruName": "Парагвай",
-      "enName": "Paraguay"
+      "enName": "Paraguay",
+      "lat": -25.28646,
+      "lng": -57.647
     },
     {
       "id": "35a2973ad0c8b40264ff40a83c816cdcec5b032b",
       "ruName": "Шри-Ланка",
-      "enName": "Sri Lanka"
+      "enName": "Sri Lanka",
+      "lat": 6.88297,
+      "lng": 79.90708
     },
     {
       "id": "1af7338b15b8a24029658730e54edce572a816a4",
       "ruName": "Румыния",
-      "enName": "Romania"
+      "enName": "Romania",
+      "lat": 44.43225,
+      "lng": 26.10626
     },
     {
       "id": "5aba8bbc89bdcd86d20d0f2ba8aa8cd59c513eed",
       "ruName": "Бутан",
-      "enName": "Bhutan"
+      "enName": "Bhutan",
+      "lat": 27.46609,
+      "lng": 89.64191
     },
     {
       "id": "cfb9e9ca0d931b3ed830472643b391b44f1a6a77",
       "ruName": "Канада",
-      "enName": "Canada"
+      "enName": "Canada",
+      "lat": 45.41117,
+      "lng": -75.69812
     },
     {
       "id": "da0f020ac944571242af1a8f904ec7569a93fb46",
       "ruName": "Туркменистан",
-      "enName": "Turkmenistan"
-    },
-    {
-      "id": "35a2973ad0c8b40264ff40a83c816cdcec5b032b",
-      "ruName": "Шри-Ланка",
-      "enName": "Sri Lanka"
+      "enName": "Turkmenistan",
+      "lat": 37.95,
+      "lng": 58.38333
     },
     {
       "id": "accc15da5995b328e48ab9744d51fd9ba2fd9d7d",
       "ruName": "Эстония",
-      "enName": "Estonia"
+      "enName": "Estonia",
+      "lat": 59.43696,
+      "lng": 24.75353
     },
     {
       "id": "952917822adf843668cb5380f3429a6b86420f05",
       "ruName": "Германия",
-      "enName": "Germany"
+      "enName": "Germany",
+      "lat": 52.52437,
+      "lng": 13.41053
     },
     {
       "id": "b9e5971078f44516aae71c0bf0676c52a506e000",
       "ruName": "Украина",
-      "enName": "Ukraine"
+      "enName": "Ukraine",
+      "lat": 50.45466,
+      "lng": 30.5238
     },
     {
       "id": "2fa5f9a146dafacaaf05f7b747fc0e65095fb569",
       "ruName": "Литва",
-      "enName": "Lithuania"
+      "enName": "Lithuania",
+      "lat": 54.68916,
+      "lng": 25.2798
     },
     {
       "id": "8f09821c94576561127487d16a4021586483d6cf",
       "ruName": "Тайланд",
-      "enName": "Thailand"
+      "enName": "Thailand",
+      "lat": 13.75398,
+      "lng": 100.50144
     },
     {
       "id": "e0916455ae6b8e73d0a1467fb2929aeb4462f6dc",
       "ruName": "Финляндия",
-      "enName": "Finland"
+      "enName": "Finland",
+      "lat": 60.16952,
+      "lng": 24.93545
     },
     {
       "id": "4ad4ce6160dbacd79c39f05aa2eba374785e9889",
       "ruName": "Монако",
-      "enName": "Monaco"
+      "enName": "Monaco",
+      "lat": 43.73333,
+      "lng": 7.41667
     },
     {
       "id": "abe6263b16541c9fabef63d15d35956a609801fc",
       "ruName": "Люксембург",
-      "enName": "Luxembourg"
+      "enName": "Luxembourg",
+      "lat": 49.61167,
+      "lng": 6.13
     },
     {
       "id": "e4132734a910bb32fa4902b8b2c4103158cefc44",
       "ruName": "Италия",
-      "enName": "Italy"
+      "enName": "Italy",
+      "lat": 41.89193,
+      "lng": 12.51133
     },
     {
       "id": "02a3a402b317f86f7d438241f47812b3a41103cf",
       "ruName": "Узбекистан",
-      "enName": "Uzbekistan"
+      "enName": "Uzbekistan",
+      "lat": 41.26465,
+      "lng": 69.21627
     },
     {
       "id": "3d4c65a4460aacaa70c4f61843189adff5e8d687",
       "ruName": "Гонконг",
-      "enName": "Hong Kong, China"
+      "enName": "Hong Kong, China",
+      "lat": 22.27832,
+      "lng": 114.17469
     },
     {
       "id": "34a17f2aa0b8d747ed45109822ee91c9167b4c5b",
       "ruName": "Япония",
-      "enName": "Japan"
+      "enName": "Japan",
+      "lat": 35.6895,
+      "lng": 139.69171
     },
     {
       "id": "342f580fcac47e7da2843852d218cf1ecb574557",
       "ruName": "Саудовская Аравия",
-      "enName": "Saudi Arabia"
+      "enName": "Saudi Arabia",
+      "lat": 24.68773,
+      "lng": 46.72185
     },
     {
       "id": "78cedacff83b3f722d0aaaf36b94b4c86fee4eb2",
       "ruName": "Колумбия",
-      "enName": "Colombia"
+      "enName": "Colombia",
+      "lat": 4.60971,
+      "lng": -74.08175
     },
     {
       "id": "48c2cf98bc0100f14e80e2051d669514c15a5843",
       "ruName": "Албания",
-      "enName": "Albania"
+      "enName": "Albania",
+      "lat": 41.3275,
+      "lng": 19.81889
     },
     {
       "id": "2498a6c3ac16c72b05f7387ad486cdf0d9f6866d",
       "ruName": "Бангладеш",
-      "enName": "Bangladesh"
+      "enName": "Bangladesh",
+      "lat": 90.40744,
+      "lng": 23.7104
     },
     {
       "id": "9c6ef2065aa7cc7222e38b4fd0224afa333e63e7",
       "ruName": "Андорра",
-      "enName": "Andorra"
+      "enName": "Andorra",
+      "lat": 42.50779,
+      "lng": 1.52109
     },
     {
       "id": "4d6a2b91b9061eaf9efc483ce4e1456c77d540e4",
       "ruName": "Соединенные Штаты Америки",
-      "enName": "United States"
+      "enName": "United States",
+      "lat": 39.26119,
+      "lng": -81.6718
     },
     {
       "id": "e9ca6edfed5f8a6f4f046fae9d1d6f01836a919c",
       "ruName": "Израиль",
-      "enName": "Israel"
+      "enName": "Israel",
+      "lat": 31.76904,
+      "lng": 35.21633
     },
     {
       "id": "dfbc1a84a8e45c578f853e23821a00001edd659f",
       "ruName": "Египет",
-      "enName": "Egypt"
+      "enName": "Egypt",
+      "lat": 30.06263,
+      "lng": 31.24967
     },
     {
       "id": "24c78f4b4941106e13708779d04358d851a848d9",
       "ruName": "Куба",
-      "enName": "Cuba"
+      "enName": "Cuba",
+      "lat": 23.13302,
+      "lng": -82.38304
     },
     {
       "id": "f5cde0e459cc79abf0e221b575fb92b63a036e00",
       "ruName": "Бруней",
-      "enName": "Brunei Darussalam"
+      "enName": "Brunei Darussalam",
+      "lat": 4.89035,
+      "lng": 114.94006
     },
     {
       "id": "f5cde0e459cc79abf0e221b575fb92b63a036e00",
       "ruName": "Нидерланды",
-      "enName": "Netherlands"
+      "enName": "Netherlands",
+      "lat": 52.37403,
+      "lng": 4.88969
     },
     {
       "id": "75c068b2567e889d669e3308e99225e3b1729313",
       "ruName": "Камбоджа",
-      "enName": "Cambodia"
+      "enName": "Cambodia",
+      "lat": 11.56245,
+      "lng": 104.91601
     },
     {
       "id": "e311535419ee82365d34ffd2b3bd7da39853385d",
       "ruName": "Россия",
-      "enName": "Russian Federation"
+      "enName": "Russian Federation",
+      "lat": 55.75222,
+      "lng": 37.61556
     },
     {
       "id": "7ec9e0d96a95a676767e6e453769eb4b0e692105",
       "ruName": "Малайзия",
-      "enName": "Malaysia"
+      "enName": "Malaysia",
+      "lat": 3.1412,
+      "lng": 101.68653
     },
     {
       "id": "072755bcf0884760bd0ba250aa2bf3f79a3cfc43",
       "ruName": "Афганистан",
-      "enName": "Afghanistan"
+      "enName": "Afghanistan",
+      "lat": 34.52813,
+      "lng": 69.17233
     },
     {
       "id": "dde9239882f214734a037764aa029e536a8a4d14",
       "ruName": "Мексика",
-      "enName": "Mexico"
+      "enName": "Mexico",
+      "lat": 19.42847,
+      "lng": -99.12766
     },
     {
       "id": "7b21907c07a88d756c0dd16cf3a64c68fa829452",
       "ruName": "Беларусь",
-      "enName": "Belarus"
+      "enName": "Belarus",
+      "lat": 53.9,
+      "lng": 27.56667
     },
     {
       "id": "a6aea8c37bc4eafebf384b8025a85296c17a23ab",
       "ruName": "Гватемала",
-      "enName": "Guatemala"
+      "enName": "Guatemala",
+      "lat": 14.64072,
+      "lng": -90.51327
     }
   ]
 }

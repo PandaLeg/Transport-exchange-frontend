@@ -93,7 +93,10 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item link>
+          <v-list-item
+            :to="localePath('/cargo/statistics')"
+            link
+          >
             <v-list-item-icon>
               <fa-icon :icon="faChartLine" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>
@@ -150,7 +153,9 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item link>
+          <v-list-item
+            :to="localePath('/transport/statistics')"
+            link>
             <v-list-item-icon>
               <fa-icon :icon="faChartLine" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
             </v-list-item-icon>

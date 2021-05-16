@@ -111,6 +111,11 @@
                 return this.$store.getters['getUser']
             },
 
+            checkRole(){
+                console.log(this.getUser);
+                return this.getUser.roles.find(i => i.name === 'ROLE_ADMIN')
+            },
+
             getCountCargo() {
                 return this.$store.getters['getCountCargo']
             },

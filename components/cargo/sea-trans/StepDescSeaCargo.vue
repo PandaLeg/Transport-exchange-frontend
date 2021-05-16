@@ -1281,9 +1281,9 @@
             searchFirstLoadingPoint(val) {
                 let checkFilled = false;
 
-                if (this.itemsFirstLoadingPoint.length > 0) {
-                    for (let i = 0; i < this.itemsFirstLoadingPoint.length; i++) {
-                        if (this.firstLoadingPoint === this.itemsFirstLoadingPoint[i]) {
+                if (this.entriesFirstLoadingPoint.length > 0) {
+                    for (let i = 0; i < this.entriesFirstLoadingPoint.length; i++) {
+                        if (this.firstLoadingPoint === this.entriesFirstLoadingPoint[i]) {
                             checkFilled = true;
                         }
                     }

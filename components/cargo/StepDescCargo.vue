@@ -1219,9 +1219,9 @@
             searchFirstLoadingPoint(val) {
                 let checkFilled = false;
 
-                if (this.itemsFirstLoadingPoint.length > 0) {
-                    for (let i = 0; i < this.itemsFirstLoadingPoint.length; i++) {
-                        if (this.firstLoadingPoint === this.itemsFirstLoadingPoint[i]) {
+                if (this.entriesFirstLoadingPoint.length > 0) {
+                    for (let i = 0; i < this.entriesFirstLoadingPoint.length; i++) {
+                        if (this.firstLoadingPoint === this.entriesFirstLoadingPoint[i]) {
                             checkFilled = true;
                         }
                     }
@@ -1235,10 +1235,11 @@
 
                     console.log("FIRST SEARCH", val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
+                            console.log(res);
                             this.entriesFirstLoadingPoint = res.records;
                         })
                         .catch(err => {
@@ -1267,7 +1268,7 @@
 
                     console.log("SECOND SEARCH", val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1298,7 +1299,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1329,7 +1330,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1360,7 +1361,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1375,9 +1376,9 @@
 
             searchFirstUnloadingPoint(val) {
                 let checkFilled = false;
-                if (this.itemsFirstUnloadingPoint.length > 0) {
-                    for (let i = 0; i < this.itemsFirstUnloadingPoint.length; i++) {
-                        if (this.firstUnloadingPoint === this.itemsFirstUnloadingPoint[i]) {
+                if (this.entriesFirstUnloadingPoint.length > 0) {
+                    for (let i = 0; i < this.entriesFirstUnloadingPoint.length; i++) {
+                        if (this.firstUnloadingPoint === this.entriesFirstUnloadingPoint[i]) {
                             checkFilled = true;
                         }
                     }
@@ -1391,7 +1392,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1422,7 +1423,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1453,7 +1454,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1484,7 +1485,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1515,7 +1516,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
