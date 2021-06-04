@@ -177,7 +177,6 @@
         },
         computed: {
             listCargo() {
-                console.log(this.$store.getters['cargo/listCargoAfterSearch']);
                 return this.$store.getters['cargo/listCargoAfterSearch']
             },
 
@@ -250,10 +249,6 @@
 
 <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Slab&family=Spectral&family=Vollkorn:wght@600&display=swap');
-
-  .v-card {
-    transition: opacity .2s ease-in-out;
-  }
 
   .title-font {
     font-family: 'Merriweather', serif;

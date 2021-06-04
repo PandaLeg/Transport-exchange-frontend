@@ -48,13 +48,13 @@ export const state = () => ({
   },
   permission: {
     listRu: [
-      'TIR', 'CMR', 'По декларации', 'Медкнижка', 'T1'
+      'TIR', 'CMR', 'По декларации', 'ЕКМТ', 'T1'
     ],
     listEn: [
-      'TIR', 'CMR', 'By declaration', 'Medical record', 'T1'
+      'TIR', 'CMR', 'By declaration', 'CEMT', 'T1'
     ],
     listUa: [
-      'TIR', 'CMR', 'За декларацією', 'Медкнига', 'T1'
+      'TIR', 'CMR', 'За декларацією', 'ЕКМТ', 'T1'
     ],
   },
   paymentType: {
@@ -228,7 +228,7 @@ export const actions = {
     console.log("Transport Action", data);
 
     if (data) {
-      commit('addTransportMutation', data)
+      return Promise.resolve();
     }
   },
 
@@ -253,6 +253,8 @@ export const actions = {
       commit('setTransportView', data.transport);
       commit('setPointsTransport', data.pointsLUTransport);
       commit('setUserTransport', data.user);
+
+      return Promise.resolve(data);
     }
   },
 

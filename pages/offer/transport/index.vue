@@ -69,7 +69,7 @@
             <v-icon
               small
               class="mr-2"
-              @click=""
+              @click="redirectToUpdateTransport(item.id)"
             >
               mdi-pencil
             </v-icon>
@@ -115,21 +115,6 @@
                 </v-card>
               </v-dialog>
             </v-toolbar>
-          </template>
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              small
-              class="mr-2"
-              @click=""
-            >
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              small
-              @click=""
-            >
-              mdi-delete
-            </v-icon>
           </template>
         </v-data-table>
       </v-col>
@@ -220,27 +205,6 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-            <v-btn
-              icon
-              @click=""
-            >
-              <fa-icon
-                :icon="faEdit"
-                small
-              >
-              </fa-icon>
-            </v-btn>
-
-            <v-btn
-              icon
-              @click=""
-            >
-              <fa-icon
-                :icon="faTrash"
-                small
-              >
-              </fa-icon>
-            </v-btn>
           </template>
         </v-data-table>
       </v-col>
@@ -299,9 +263,6 @@
                 vertical
               ></v-divider>
             </v-toolbar>
-          </template>
-          <template v-slot:item.actions="{ item }">
-
           </template>
         </v-data-table>
       </v-col>
@@ -515,6 +476,10 @@
 
             redirectToTransportOffer(transport) {
                 this.$router.push(this.localePath('/offer/transport/' + transport.id))
+            },
+
+            redirectToUpdateTransport(id) {
+                this.$router.push('/offer/transport/editing/' + id)
             }
         }
     }

@@ -26,9 +26,7 @@
               lg="9"
             >
                 <span class="list-subtitle-information-font">
-                  {{ getUser.firstName }}
-                  {{ getUser.lastName }}
-                  {{ getUser.patronymic }}
+                  {{ getUser.fullName }}
                 </span>
             </v-col>
           </v-row>

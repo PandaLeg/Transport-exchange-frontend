@@ -423,6 +423,28 @@
           </v-card-actions>
         </v-card>
       </v-col>
+
+      <v-col
+        cols="12"
+        md="4"
+        lg="4"
+      >
+        <v-banner two-line>
+          <v-avatar
+            slot="icon"
+            color="red accent-2"
+            size="40"
+          >
+            <v-icon
+              icon="mdi-lock"
+              color="white"
+            >
+              mdi-magnify
+            </v-icon>
+          </v-avatar>
+          Для поиска транспорта, необходимо ввести город или страну.
+        </v-banner>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -534,7 +556,7 @@
 
                     const result = await
                         this.$axios('https://public.opendatasoft.com/api/records/1.0/search/?dataset=' +
-                            'geonames-all-cities-with-a-population-1000&q=' + val + '&lang=ru&rows=50');
+                            'geonames-all-cities-with-a-population-500&q=' + val + '&lang=ru&rows=50');
                     const data = await result.data;
 
                     this.citiesFrom = data.records;
@@ -559,7 +581,7 @@
 
                     const result = await
                         this.$axios('https://public.opendatasoft.com/api/records/1.0/search/?dataset=' +
-                            'geonames-all-cities-with-a-population-1000&q=' + val + '&lang=ru&rows=50');
+                            'geonames-all-cities-with-a-population-500&q=' + val + '&lang=ru&rows=50');
                     const data = await result.data;
 
                     this.citiesTo = data.records;

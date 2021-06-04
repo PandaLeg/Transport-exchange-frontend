@@ -957,7 +957,7 @@
 
                     console.log("FIRST SEARCH", val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -989,7 +989,7 @@
 
                     console.log("SECOND SEARCH", val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1020,7 +1020,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1051,7 +1051,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1082,7 +1082,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1113,7 +1113,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1144,7 +1144,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1175,7 +1175,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1206,7 +1206,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1237,7 +1237,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1413,16 +1413,7 @@
                 this.$store.commit('transport/setPlacesTransport', places);
 
                 let transport = {
-                    cityFirstLoadingPoint: this.firstLoadingPoint.fields.name,
-                    countryFirstLoadingPoint: this.firstLoadingPoint.fields.country,
-                    cityFirstUnloadingPoint: this.firstUnloadingPoint.fields.name,
-                    countryFirstUnloadingPoint: this.firstUnloadingPoint.fields.country,
-                    latFirst: this.firstLoadingPoint.fields.coordinates[0],
-                    lngFirst: this.firstLoadingPoint.fields.coordinates[1],
-                    latSecond: this.firstUnloadingPoint.fields.coordinates[0],
-                    lngSecond: this.firstUnloadingPoint.fields.coordinates[1],
-                    loadingDateFrom: this.loadingDateFrom,
-                    loadingDateBy: this.loadingDateBy
+                    loadingDateFrom: this.loadingDateFrom, loadingDateBy: this.loadingDateBy
                 };
                 Object.assign(this.getInitialTransport, transport);
 

@@ -230,11 +230,11 @@
                 this.$router.push(this.localePath({name: 'profile-settings-edit-personal-data'}));
             },
 
-            redirectEditBackgroundProfile(){
+            redirectEditBackgroundProfile() {
                 this.$router.push(this.localePath({name: 'profile-settings-edit-background'}));
             },
 
-            redirectEditPassword(){
+            redirectEditPassword() {
                 this.$router.push(this.localePath({name: 'profile-settings-edit-password'}));
             }
         }
@@ -242,5 +242,4 @@
 </script>
 
 <style scoped>
-
 </style>

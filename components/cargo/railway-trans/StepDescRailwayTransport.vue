@@ -363,11 +363,6 @@
                 return this.$store.getters['transport/getListArg'];
             },
 
-            getListPermissions() {
-                let permission = this.$store.getters['cargo/getPermission'];
-                return this.checkLocaleAndGetList(permission);
-            },
-
             getLoadingVessel() {
                 let loading = this.$store.getters['cargo/getLoadingVessel'];
                 return this.checkLocaleAndGetList(loading);

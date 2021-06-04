@@ -80,72 +80,102 @@
                   </v-col>
                 </v-row>
 
-                <v-row>
-                  <v-col
-                    md="2"
-                    lg="2"
-                  >
-                    <v-subheader>
-                      {{ $t('settings.surname') }}:
-                    </v-subheader>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="10"
-                    lg="10"
-                  >
-                    <v-text-field
-                      v-model="surname"
-                      color="blue-grey lighten-2"
-                      filled
-                      clearable
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col
-                    md="2"
-                    lg="2"
-                  >
-                    <v-subheader>
-                      {{ $t('settings.name') }}:
-                    </v-subheader>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="10"
-                    lg="10"
-                  >
-                    <v-text-field
-                      v-model="name"
-                      color="blue-grey lighten-2"
-                      filled
-                      clearable
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col
-                    md="2"
-                    lg="2"
-                  >
-                    <v-subheader>
-                      {{ $t('settings.patronymic') }}:
-                    </v-subheader>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="10"
-                    lg="10"
-                  >
-                    <v-text-field
-                      v-model="patronymic"
-                      color="blue-grey lighten-2"
-                      filled
-                      clearable
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
+                <template
+                  v-if="checkRoleUser"
+                >
+                  <v-row>
+                    <v-col
+                      md="2"
+                      lg="2"
+                    >
+                      <v-subheader>
+                        {{ $t('settings.surname') }}:
+                      </v-subheader>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="10"
+                      lg="10"
+                    >
+                      <v-text-field
+                        v-model="lastName"
+                        color="blue-grey lighten-2"
+                        filled
+                        clearable
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col
+                      md="2"
+                      lg="2"
+                    >
+                      <v-subheader>
+                        {{ $t('settings.name') }}:
+                      </v-subheader>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="10"
+                      lg="10"
+                    >
+                      <v-text-field
+                        v-model="firstName"
+                        color="blue-grey lighten-2"
+                        filled
+                        clearable
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col
+                      md="2"
+                      lg="2"
+                    >
+                      <v-subheader>
+                        {{ $t('settings.patronymic') }}:
+                      </v-subheader>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="10"
+                      lg="10"
+                    >
+                      <v-text-field
+                        v-model="patronymic"
+                        color="blue-grey lighten-2"
+                        filled
+                        clearable
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </template>
+                <template
+                  v-else
+                >
+                  <v-row>
+                    <v-col
+                      md="2"
+                      lg="2"
+                    >
+                      <v-subheader>
+                        {{ $t('settings.fullName') }}:
+                      </v-subheader>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="10"
+                      lg="10"
+                    >
+                      <v-text-field
+                        v-model="fullName"
+                        color="blue-grey lighten-2"
+                        filled
+                        clearable
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </template>
                 <v-row>
                   <v-col
                     md="2"
@@ -218,9 +248,10 @@
         name: "profile-settings-edit-personal-data",
         data() {
             return {
-                surname: '',
-                name: '',
+                lastName: '',
+                firstName: '',
                 patronymic: '',
+                fullName: '',
                 phone: '',
                 email: null,
                 isSelecting: false,
@@ -235,6 +266,7 @@
             this.surname = this.getUser.lastName;
             this.name = this.getUser.firstName;
             this.patronymic = this.getUser.patronymic;
+            this.fullName = this.getUser.fullName;
             this.phone = this.getUser.phone;
             this.email = this.getUser.email;
             this.photoUrl = this.getUser.profilePicture ? this.getUser.profilePicture : profilePageAvatar
@@ -252,6 +284,11 @@
                 return this.$store.getters['getToken']
             },
 
+            checkRoleUser() {
+                let user = this.$store.getters['getUser'];
+                return user.roles.map(role => role.name).includes('ROLE_USER');
+            },
+
             profilePicture() {
                 return this.photoUrl
             },
@@ -267,9 +304,10 @@
 
                 const personalData = {
                     id: this.getUser.id,
-                    lastName: this.surname,
-                    firstName: this.name,
+                    lastName: this.lastName,
+                    firstName: this.firstName,
                     patronymic: this.patronymic,
+                    fullName: this.fullName,
                     phone: this.phone,
                     email: this.email
                 };

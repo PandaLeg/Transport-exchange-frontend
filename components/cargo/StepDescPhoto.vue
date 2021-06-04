@@ -196,7 +196,7 @@
       <v-btn
         color="blue-grey darken-3"
         depressed
-        @click="nextStep(n)"
+        @click="addCargo"
       >
         <span>{{ $t('addCargo.add') }}</span>
       </v-btn>
@@ -220,8 +220,7 @@
                 secondPhoto: null,
                 secondImageUrl: '',
                 thirdPhoto: null,
-                thirdImageUrl: '',
-                formData: null
+                thirdImageUrl: ''
             }
         },
         computed: {
@@ -229,7 +228,7 @@
                 return faArrowAltCircleRight
             },
 
-            getUser(){
+            getUser() {
                 return this.$store.getters['getUser']
             },
 
@@ -241,11 +240,11 @@
                 return this.$store.getters['cargo/getInitialCargo']
             },
 
-            getPlacesCargo(){
+            getPlacesCargo() {
                 return this.$store.getters['cargo/getPlacesCargo']
             },
 
-            getPropertiesCargo(){
+            getPropertiesCargo() {
                 return this.$store.getters['cargo/getPropertiesCargo']
             },
 
@@ -259,31 +258,10 @@
 
             urlThirdPhoto() {
                 return this.thirdPhoto ? this.thirdImageUrl : 'https://picsum.photos/510/300?random'
-            },
-
+            }
         },
 
         methods: {
-            async nextStep(n) {
-                Object.assign(this.getInitialCargo, {additional: this.additional});
-
-                this.formData = new FormData();
-                this.formData.append("firstPhoto", this.firstPhoto);
-                this.formData.append("secondPhoto", this.secondPhoto);
-                this.formData.append("thirdPhoto", this.thirdPhoto);
-                this.formData.append("cargo", new Blob([JSON.stringify(this.getInitialCargo)],
-                    {type: "application/json"}));
-
-                this.formData.append("placesCargo", new Blob([JSON.stringify(this.getPlacesCargo)],
-                    {type: "application/json"}));
-
-                this.formData.append("propertiesCargo", new Blob([JSON.stringify(this.getPropertiesCargo)],
-                    {type: "application/json"}));
-
-                await this.$store.dispatch('cargo/addCargoAction', {store: this.$store, formData: this.formData,
-                userToken: this.getToken, typeTransportation: 'roadTransportation'});
-            },
-
             onLoadingPhoto() {
                 this.isSelecting = true;
                 window.addEventListener('focus', () => {
@@ -344,8 +322,35 @@
                         console.log("SELECTED 3", this.thirdPhoto);
                     });
                 }
-            }
+            },
 
+            async addCargo() {
+                Object.assign(this.getInitialCargo, {additional: this.additional});
+
+                let formData = new FormData();
+
+                formData.append("firstPhoto", this.firstPhoto);
+                formData.append("secondPhoto", this.secondPhoto);
+                formData.append("thirdPhoto", this.thirdPhoto);
+
+                formData.append("cargo", new Blob([JSON.stringify(this.getInitialCargo)],
+                    {type: "application/json"}));
+
+                formData.append("placesCargo", new Blob([JSON.stringify(this.getPlacesCargo)],
+                    {type: "application/json"}));
+
+                formData.append("propertiesCargo", new Blob([JSON.stringify(this.getPropertiesCargo)],
+                    {type: "application/json"}));
+
+                await this.$store.dispatch('cargo/addCargoAction', {
+                    store: this.$store, formData: formData,
+                    userToken: this.getToken, typeTransportation: 'roadTransportation'
+                }).then(
+                    () => {
+                        this.$router.push(this.localePath('/cargo/search-cargo'));
+                    }
+                );
+            },
         }
     }
 </script>

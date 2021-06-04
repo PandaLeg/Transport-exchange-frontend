@@ -349,6 +349,7 @@
                 <v-combobox
                   v-model="typesTransportation"
                   :items="getTransportation"
+                  :error-messages="typesTransportationErrors"
                   :menu-props="{ bottom: true, offsetY: true }"
                   color="blue-grey lighten-2"
                   :label="$t('searchCargo.typeTransportation')"
@@ -356,6 +357,8 @@
                   outlined
                   clearable
                   multiple
+                  @change="$v.typesTransportation.$touch()"
+                  @blur="$v.typesTransportation.$touch()"
                 ></v-combobox>
               </v-col>
             </v-row>
@@ -478,6 +481,27 @@
           </v-card-actions>
         </v-card>
       </v-col>
+      <v-col
+        cols="12"
+        md="4"
+        lg="4"
+      >
+        <v-banner two-line>
+          <v-avatar
+            slot="icon"
+            color="primary"
+            size="40"
+          >
+            <v-icon
+              icon="mdi-lock"
+              color="white"
+            >
+              mdi-magnify
+            </v-icon>
+          </v-avatar>
+          {{ $t('searchCargo.bannerText') }}
+        </v-banner>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -488,9 +512,12 @@
     import {countries} from "../../../json/countries.json"
     import {names} from '../../../json/cargo.name.json'
     import {typesBody} from '../../../json/body.type.json'
+    import {validationMixin} from 'vuelidate'
+    import {required} from 'vuelidate/lib/validators'
 
     export default {
         name: "search-cargo",
+        mixins: [validationMixin],
         data() {
             return {
                 countryFrom: null,
@@ -525,6 +552,11 @@
                 paymentTime: null,
                 lang: 'ru',
                 valid: false
+            }
+        },
+        validations: {
+            typesTransportation: {
+                required
             }
         },
         created() {
@@ -569,6 +601,14 @@
                 let paymentTime = this.$store.getters['cargo/getPaymentTime'];
                 return this.checkLocaleAndGetList(paymentTime);
             },
+
+            typesTransportationErrors() {
+                const errors = [];
+                if (!this.$v.typesTransportation.$dirty) return errors;
+                !this.$v.typesTransportation.required && errors.push('Type transportation is required.');
+
+                return errors;
+            }
         },
         watch: {
             countryTo() {
@@ -589,6 +629,7 @@
 
             async searchCityFrom(val) {
                 let checkFilled = false;
+
                 if (this.getCitiesFrom.length > 0) {
                     for (let i = 0; i < this.getCitiesFrom.length; i++) {
                         if (this.cityFrom === this.getCitiesFrom[i]) {
@@ -601,9 +642,8 @@
                 if (!checkFilled) {
                     this.loadingCityFrom = true;
 
-                    const result = await
-                        this.$axios('https://public.opendatasoft.com/api/records/1.0/search/?dataset=' +
-                            'geonames-all-cities-with-a-population-1000&q=' + val + '&lang=ru&rows=50');
+                    const result = await this.$axios('https://public.opendatasoft.com/api/records/1.0/search/?dataset=' +
+                            'geonames-all-cities-with-a-population-500&q=' + val + '&lang=ru&rows=50');
                     const data = await result.data;
 
                     this.citiesFrom = data.records;
@@ -614,6 +654,7 @@
 
             async searchCityTo(val) {
                 let checkFilled = false;
+
                 if (this.getCitiesTo.length > 0) {
                     for (let i = 0; i < this.getCitiesTo.length; i++) {
                         if (this.cityTo === this.getCitiesTo[i]) {
@@ -628,7 +669,7 @@
 
                     const result = await
                         this.$axios('https://public.opendatasoft.com/api/records/1.0/search/?dataset=' +
-                            'geonames-all-cities-with-a-population-1000&q=' + val + '&lang=ru&rows=50');
+                            'geonames-all-cities-with-a-population-500&q=' + val + '&lang=ru&rows=50');
                     const data = await result.data;
 
                     this.citiesTo = data.records;
@@ -648,6 +689,11 @@
             },
 
             searchCargo() {
+                if (this.$v.$invalid) {
+                    this.$v.$touch();
+                    return;
+                }
+
                 const cargo = Object.assign({},
                     {
                         page: 1
@@ -670,7 +716,7 @@
                         volumeUpTo: this.volumeUpTo ? this.volumeUpTo : undefined,
                     },
                     {
-                        typesTransportation: this.typesTransportation ? this.typesTransportation : undefined
+                        typesTransportation: this.typesTransportation
                     },
                     {
                         nameCargo: this.nameCargo?.name, bodyType: this.bodyType?.name

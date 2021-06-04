@@ -229,7 +229,7 @@
                 return faArrowAltCircleRight
             },
 
-            getUser(){
+            getUser() {
                 return this.$store.getters['getUser']
             },
 
@@ -241,11 +241,11 @@
                 return this.$store.getters['cargo/getInitialCargo']
             },
 
-            getPlacesCargo(){
+            getPlacesCargo() {
                 return this.$store.getters['cargo/getPlacesCargo']
             },
 
-            getPropertiesCargo(){
+            getPropertiesCargo() {
                 return this.$store.getters['cargo/getPropertiesCargo']
             },
 
@@ -259,8 +259,7 @@
 
             urlThirdPhoto() {
                 return this.thirdPhoto ? this.thirdImageUrl : 'https://picsum.photos/510/300?random'
-            },
-
+            }
         },
 
         methods: {
@@ -280,8 +279,14 @@
                 this.formData.append("propertiesCargo", new Blob([JSON.stringify(this.getPropertiesCargo)],
                     {type: "application/json"}));
 
-                await this.$store.dispatch('cargo/addCargoAction', {store: this.$store, formData: this.formData,
-                    userToken: this.getToken, typeTransportation: 'railwayTransportation'});
+                await this.$store.dispatch('cargo/addCargoAction', {
+                    store: this.$store, formData: this.formData,
+                    userToken: this.getToken, typeTransportation: 'railwayTransportation'
+                }).then(
+                    () => {
+                        this.$router.push(this.localePath('/cargo/search-cargo'));
+                    }
+                );
             },
 
             onLoadingPhoto() {

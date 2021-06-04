@@ -34,7 +34,10 @@
       </v-card>
     </v-container>
     <v-row v-if="tabs === 'one'">
-      <v-col cols="12" lg="12">
+      <v-col
+        cols="12"
+        lg="12"
+      >
         <v-data-table
           :headers="headers"
           :items="offerCargo"
@@ -69,7 +72,7 @@
             <v-icon
               small
               class="mr-2"
-              @click=""
+              @click="redirectToUpdateCargo(item.id)"
             >
               mdi-pencil
             </v-icon>
@@ -115,21 +118,6 @@
                 </v-card>
               </v-dialog>
             </v-toolbar>
-          </template>
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              small
-              class="mr-2"
-              @click=""
-            >
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              small
-              @click=""
-            >
-              mdi-delete
-            </v-icon>
           </template>
         </v-data-table>
       </v-col>
@@ -220,27 +208,6 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-            <v-btn
-              icon
-              @click=""
-            >
-              <fa-icon
-                :icon="faEdit"
-                small
-              >
-              </fa-icon>
-            </v-btn>
-
-            <v-btn
-              icon
-              @click=""
-            >
-              <fa-icon
-                :icon="faTrash"
-                small
-              >
-              </fa-icon>
-            </v-btn>
           </template>
         </v-data-table>
       </v-col>
@@ -299,9 +266,6 @@
                 vertical
               ></v-divider>
             </v-toolbar>
-          </template>
-          <template v-slot:item.actions="{ item }">
-
           </template>
         </v-data-table>
       </v-col>
@@ -433,15 +397,14 @@
                         text: this.$t('offer.cargo'),
                         align: 'start',
                         sortable: false,
-                        value: 'name',
+                        value: 'bodyType',
                     },
                     {text: this.$t('offer.fromWhere'), value: 'loadingPointFrom'},
                     {text: this.$t('offer.whereTo'), value: 'loadingPointBy'},
                     {text: this.$t('offer.date'), value: 'date'},
                     {text: this.$t('offer.transport'), value: 'bodyType'},
                     {text: this.$t('offer.payment'), value: 'payment'},
-                    {text: this.$t('offer.status'), value: 'status'},
-                    {text: this.$t('offer.actions'), value: 'actions', sortable: false}
+                    {text: this.$t('offer.status'), value: 'status'}
                 ]
             },
 
@@ -517,6 +480,10 @@
 
             redirectToCargoOffer(cargo) {
                 this.$router.push(this.localePath('/offer/cargo/' + cargo.id))
+            },
+
+            redirectToUpdateCargo(id) {
+                this.$router.push('/offer/cargo/editing/' + id)
             }
         }
     }

@@ -167,62 +167,65 @@
       </v-menu>
 
       <!-- Offer -->
-      <v-menu
-        open-on-hover
-        offset-y
-        rounded
-        origin="center center"
-        transition="scale-transition"
+      <template
+        v-if="getUser !== null"
       >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            v-bind="attrs"
-            v-on="on"
-            class="mr-5"
-            text
-          >
-            {{ $t('navBarPanel.offers') }}
-          </v-btn>
-        </template>
-
-        <v-list
-          min-width="250"
+        <v-menu
+          open-on-hover
+          offset-y
+          rounded
+          origin="center center"
+          transition="scale-transition"
         >
-          <v-list-item
-            :to="localePath('/offer/cargo')"
-            link
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              class="mr-5"
+              text
+            >
+              {{ $t('navBarPanel.offers') }}
+            </v-btn>
+          </template>
+
+          <v-list
+            min-width="250"
           >
-            <v-list-item-icon>
-              <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-subtitle>{{ $t('navBarPanel.offersCargo') }}</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
+            <v-list-item
+              :to="localePath('/offer/cargo')"
+              link
+            >
+              <v-list-item-icon>
+                <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-subtitle>{{ $t('navBarPanel.offersCargo') }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
 
-          <v-list-item
-            :to="localePath('/offer/transport')"
-            link
-          >
-            <v-list-item-icon>
-              <fa-icon :icon="faSearch" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-subtitle>{{ $t('navBarPanel.offersTransport') }}</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+            <v-list-item
+              :to="localePath('/offer/transport')"
+              link
+            >
+              <v-list-item-icon>
+                <fa-icon :icon="faSearch" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-subtitle>{{ $t('navBarPanel.offersTransport') }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-menu>
 
-      <!-- Chat -->
-      <v-btn
-        :to="localePath('/chat')"
-        class="mr-5"
-        text
-      >
-        {{ $t('navBarPanel.chat') }}
-      </v-btn>
-
+        <!-- Chat -->
+        <v-btn
+          :to="localePath('/chat')"
+          class="mr-5"
+          text
+        >
+          {{ $t('navBarPanel.chat') }}
+        </v-btn>
+      </template>
 
       <!-- Additional -->
       <v-menu
@@ -311,7 +314,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <span>
-                Английский
+                English
               </span>
             </v-list-item-content>
           </v-list-item>
@@ -324,7 +327,7 @@
               <v-icon>exit_to_app</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <span>Украинский</span>
+              <span>Українська</span>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -352,7 +355,7 @@
         </template>
 
         <v-list
-          v-if="hasToken"
+          v-if="getUser != null && hasToken"
           min-width="250"
         >
           <!-- USER -->

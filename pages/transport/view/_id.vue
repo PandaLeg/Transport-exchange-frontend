@@ -705,11 +705,22 @@
                   md="8"
                   lg="8"
                 >
-                <span class="spectral-font text--primary">
-                  {{ userFromTransport.firstName }}
-                  {{ userFromTransport.lastName }}
-                  {{ userFromTransport.patronymic }}
-                </span>
+                  <template
+                    v-if="checkRoleUser"
+                  >
+                    <span class="spectral-font text--primary">
+                      {{ userFromTransport.fullName }}
+                    </span>
+                  </template>
+                  <template
+                    v-else
+                  >
+                    <span class="spectral-font text--primary">
+                      {{ userFromTransport.firstName }}
+                      {{ userFromTransport.lastName }}
+                      {{ userFromTransport.patronymic }}
+                    </span>
+                  </template>
                 </v-col>
               </v-row>
             </div>
@@ -898,6 +909,10 @@
             this.email = this.getUser.email;
         },
         computed: {
+            faAngleLeft() {
+                return faAngleLeft
+            },
+
             getUser() {
                 return this.$store.getters['getUser']
             },
@@ -910,16 +925,17 @@
                 return this.$store.getters['transport/getUserFromTransport']
             },
 
+            checkRoleUser() {
+                let user = this.$store.getters['transport/getUserFromTransport'];
+                return user.roles.map(role => role.name).includes('ROLE_LEGAL_USER');
+            },
+
             getCheckUserFromOffer() {
                 return this.$store.getters['transport/getCheckUserFromOffer']
             },
 
             checkUser() {
                 return this.$store.getters['transport/checkUser']
-            },
-
-            faAngleLeft() {
-                return faAngleLeft
             },
 
             getPageSize() {

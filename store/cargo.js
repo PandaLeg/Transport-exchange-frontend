@@ -233,7 +233,6 @@ export const mutations = {
     const data = this.$cookies.get('resultCargoDataSearch');
 
     if (data !== null && data !== undefined) {
-      console.log((this.$i18n.localeProperties.code !== 'ru' ? this.$i18n.localeProperties.code : ''));
       state.resultSearch = data;
       state.pathToSearch = (this.$i18n.localeProperties.code !== 'ru' ? '/' + this.$i18n.localeProperties.code : '') +
         '/cargo/search-cargo/search';
@@ -293,7 +292,7 @@ export const actions = {
     console.log("Cargo Action", data);
 
     if (data) {
-      commit('addCargoMutation', data)
+      return Promise.resolve();
     }
   },
 
@@ -321,6 +320,8 @@ export const actions = {
       commit('setCargoView', data.cargo);
       commit('setPointsCargo', data.pointsLUCargo);
       commit('setUserCargo', data.user);
+
+      return Promise.resolve(data);
     }
   },
 

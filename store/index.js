@@ -12,8 +12,11 @@ export const state = () => ({
     user: null,
     token: null,
   },
+  status: false,
   countCargo: 0,
-  countTransports: 0
+  countTransports: 0,
+  barColor: 'rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)',
+  barImage: 'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg'
 });
 
 export const mutations = {
@@ -27,6 +30,10 @@ export const mutations = {
     console.log("Set User", user);
   },
 
+  setStatusUser(state, status) {
+    state.status = status;
+  },
+
   loginFailure(state) {
     state.initialState.loggedIn = false;
     state.initialState.user = null;
@@ -37,11 +44,11 @@ export const mutations = {
     state.initialState.user = null;
   },
 
-  setCountCargo(state, data){
+  setCountCargo(state, data) {
     state.countCargo = data;
   },
 
-  setCountTransports(state, data){
+  setCountTransports(state, data) {
     state.countTransports = data;
   }
 };
@@ -61,8 +68,20 @@ export const actions = {
 
     if (token) {
       await dispatch('getUserAction', token);
-      console.log("nuxtServerInit");
       commit('loginSuccess', token)
+    }
+  },
+
+  async registrationUser({commit}, body) {
+    const response = await this.$axios.post(API_URL_AUTH + 'sign-up-user', body.user,
+      {params: {type: body.type}}
+    );
+    const data = await response.data;
+
+    if (data) {
+      return Promise.resolve();
+    } else {
+      return Promise.reject(data);
     }
   },
 
@@ -74,7 +93,6 @@ export const actions = {
 
     const data = await response.data;
 
-    console.log("DATA AUTH", data);
     if (data) {
       this.$cookies.set('token', JSON.stringify(data), {
         path: '/',
@@ -104,7 +122,8 @@ export const actions = {
     const data = await response.data;
 
     if (data) {
-      commit('setUser', data)
+      commit('setUser', data.user);
+      commit('setStatusUser', data.status);
     }
   },
 
@@ -123,6 +142,7 @@ export const getters = {
   hasToken: state => state.initialState.loggedIn,
   getUser: state => state.initialState.user,
   getToken: state => state.initialState.token,
+  getStatus: state => state.status,
   getCountCargo: state => state.countCargo,
   getCountTransports: state => state.countTransports,
 };

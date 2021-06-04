@@ -977,8 +977,8 @@
     import {required} from 'vuelidate/lib/validators'
 
     export default {
-        mixins: [validationMixin],
         props: ['n', 'e1', 'setE1', 'steps'],
+        mixins: [validationMixin],
         data() {
             return {
                 name: '',
@@ -1714,14 +1714,6 @@
                     name: this.name.name, weightFrom: this.weightFrom, weightUpTo: this.weightUpTo,
                     volumeFrom: this.volumeFrom, volumeUpTo: this.volumeUpTo, lengthCargo: this.lengthCargo,
                     widthCargo: this.widthCargo, heightCargo: this.heightCargo, adr: this.adr,
-                    cityFirstLoadingPoint: this.firstLoadingPoint.fields.name,
-                    countryFirstLoadingPoint: this.firstLoadingPoint.fields.country,
-                    cityFirstUnloadingPoint: this.firstUnloadingPoint.fields.name,
-                    countryFirstUnloadingPoint: this.firstUnloadingPoint.fields.country,
-                    latFirst: this.firstLoadingPoint.fields.coordinates[0],
-                    lngFirst: this.firstLoadingPoint.fields.coordinates[1],
-                    latSecond: this.firstUnloadingPoint.fields.coordinates[0],
-                    lngSecond: this.firstUnloadingPoint.fields.coordinates[1],
                     loadingDateFrom: this.loadingDateFrom,
                     loadingDateBy: this.loadingDateBy
                 };

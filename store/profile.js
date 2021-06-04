@@ -2,6 +2,7 @@ import authHeader from '../service/auth-header'
 
 const API_CARGO = 'http://localhost:9090/cargo/';
 const API_TRANSPORT = 'http://localhost:9090/transport/';
+const API_USER = 'http://localhost:9090/user/';
 
 export const state = () => ({
   countCargo: 0,
@@ -17,11 +18,11 @@ export const mutations = {
     state.countTransports = count;
   },
 
-  clearCountCargo(state){
+  clearCountCargo(state) {
     state.countCargo = 0;
   },
 
-  clearCountTransports(state){
+  clearCountTransports(state) {
     state.countTransports = 0;
   }
 };
@@ -56,6 +57,16 @@ export const actions = {
     if (data) {
       commit('setCountTransportsMutations', data);
     }
+  },
+
+  async sendConfirmationAction({commit}, body) {
+    const response = await this.$axios.post(API_USER + 'send-confirmation/' + body.id, body.confirmation,
+      {
+        headers: Object.assign(authHeader(body.store))
+      });
+    const data = await response.data;
+
+    console.log(data);
   }
 };
 

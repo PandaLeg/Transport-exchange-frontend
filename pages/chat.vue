@@ -32,30 +32,6 @@
               >
               </v-text-field>
             </v-toolbar>
-            <!--<v-list v-if="getLegalUsersChats != null">
-              <template v-for="legalUser in getLegalUsersChats">
-                <v-list-item
-                  :key="legalUser.id"
-                  @click="getMessages(legalUser)"
-                >
-                  <v-list-item-avatar
-                    size="40"
-                  >
-                    <v-img
-                      :src="legalUser.profilePicture ? legalUser.profilePicture : profilePageAvatar"
-                    ></v-img>
-                  </v-list-item-avatar>
-
-                  <v-list-item-content>
-                    <v-list-item-title v-html="legalUser.firstName + ' ' + legalUser.lastName"></v-list-item-title>
-                  </v-list-item-content>
-
-                  <v-list-item-icon>
-                    <v-icon :color="'blue darken-3'">mdi-chat</v-icon>
-                  </v-list-item-icon>
-                </v-list-item>
-              </template>
-            </v-list>-->
 
             <v-list v-if="getUsersChats != null">
               <template v-for="user in getUsersChats">
@@ -208,7 +184,7 @@
 <script>
     import profilePageAvatar from '../assets/AllisonProfilePage.jpg'
     import MessageRow from "../components/chat/MessageRow";
-    import {connect, addHandler} from '../utils/ws'
+    import {connect, addHandler} from '../util/ws'
 
     export default {
         name: "chat",

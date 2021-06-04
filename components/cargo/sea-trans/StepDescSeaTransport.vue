@@ -332,7 +332,7 @@
                 bodyType: null,
                 bodyTypes: [],
                 searchBodyType: null,
-                incoterms: [],
+                incoterms: '',
                 containerLoading: [],
                 typePayment: '',
                 cost: '',

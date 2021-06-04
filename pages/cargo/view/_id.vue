@@ -857,11 +857,22 @@
                   md="8"
                   lg="8"
                 >
-                <span class="spectral-font text--primary">
-                  {{ userFromCargo.firstName }}
-                  {{ userFromCargo.lastName }}
-                  {{ userFromCargo.patronymic }}
-                </span>
+                  <template
+                    v-if="checkRoleUser"
+                  >
+                    <span class="spectral-font text--primary">
+                      {{ userFromCargo.fullName }}
+                    </span>
+                  </template>
+                  <template
+                    v-else
+                  >
+                    <span class="spectral-font text--primary">
+                      {{ userFromCargo.firstName }}
+                      {{ userFromCargo.lastName }}
+                      {{ userFromCargo.patronymic }}
+                    </span>
+                  </template>
                 </v-col>
               </v-row>
             </div>
@@ -1054,6 +1065,11 @@
 
             userFromCargo() {
                 return this.$store.getters['cargo/getUserFromCargo']
+            },
+
+            checkRoleUser() {
+                let user = this.$store.getters['cargo/getUserFromCargo'];
+                return user.roles.map(role => role.name).includes('ROLE_LEGAL_USER');
             },
 
             getCheckUserFromOffer() {
