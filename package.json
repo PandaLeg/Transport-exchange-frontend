@@ -12,21 +12,25 @@
     "@mdi/font": "^5.9.55",
     "@nuxtjs/axios": "^5.12.5",
     "@stomp/stompjs": "^6.1.0",
+    "chart.js": "^2.9.4",
     "cookie-universal-nuxt": "^2.1.4",
     "cookieparser": "^0.1.0",
-    "core-js": "^3.8.2",
+    "hchs-vue-charts": "^1.2.8",
     "nuxt": "^2.14.12",
     "nuxt-i18n": "^6.26.0",
     "nuxt-material-design-icons": "^1.0.4",
     "nuxt-material-design-icons-iconfont": "^1.0.2",
     "sockjs-client": "^1.5.1",
+    "vue-chartjs": "^3.5.1",
     "vue2-google-maps": "^0.10.7",
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {
+    "@babel/runtime-corejs3": "^7.14.7",
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@nuxtjs/fontawesome": "^1.1.2",
-    "@nuxtjs/vuetify": "^1.11.3"
+    "@nuxtjs/vuetify": "^1.11.3",
+    "core-js": "3"
   }
 }

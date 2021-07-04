@@ -17,6 +17,7 @@ export const state = () => ({
   listPointsTransports: [],
   listPointsTransport: [],
   listPhotoTransport: [],
+  listFilesTransport: [],
   resultSearch: {},
   pathToSearch: '',
   currentPage: 1,
@@ -109,6 +110,10 @@ export const state = () => ({
 });
 
 export const mutations = {
+  setInitialTransport(state, transport) {
+    state.initialTransport = transport;
+  },
+
   setPropertiesTransport(state, properties) {
     state.propertiesTransport = properties;
   },
@@ -195,6 +200,10 @@ export const mutations = {
     state.listPhotoTransport = data;
   },
 
+  setFilesTransport(state, data) {
+    state.listFilesTransport = data;
+  },
+
   checkUserFromOffer(state, data) {
     console.log("TRANSPORT FROM OFFER", data.idTransport);
     data.transports.map(item => {
@@ -252,6 +261,7 @@ export const actions = {
     if (data) {
       commit('setTransportView', data.transport);
       commit('setPointsTransport', data.pointsLUTransport);
+      commit('setFilesTransport', data.filesTransport);
       commit('setUserTransport', data.user);
 
       return Promise.resolve(data);
@@ -353,6 +363,10 @@ export const getters = {
 
   getPhotosTransport: state => {
     return state.listPhotoTransport
+  },
+
+  getFilesTransport: state => {
+    return state.listFilesTransport
   },
 
   getCurrentPage: state => {

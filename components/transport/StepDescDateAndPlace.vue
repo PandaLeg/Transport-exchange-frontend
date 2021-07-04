@@ -1415,9 +1415,9 @@
                 let transport = {
                     loadingDateFrom: this.loadingDateFrom, loadingDateBy: this.loadingDateBy
                 };
-                Object.assign(this.getInitialTransport, transport);
 
-                console.log(this.firstLoadingPoint);
+                this.$store.commit('transport/setInitialTransport', Object.assign(this.getInitialTransport, transport));
+
                 if (n === this.steps) {
                     this.setE1(1);
                 } else {

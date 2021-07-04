@@ -1,5 +1,8 @@
 <template>
-  <v-app dark>
+  <v-app
+    v-if="getUser !== null"
+    dark
+  >
     <v-app-bar
       id="app-bar"
       absolute
@@ -130,18 +133,39 @@
             color="white"
             contain
           >
-            <v-img
-              class="list-title"
-              src="https://demos.creative-tim.com/vuetify-material-dashboard/favicon.ico"
-              max-height="30"
-            />
+            <template
+              v-if="avatarProfile !== ''"
+            >
+              <v-img
+                class="list-title"
+                :src="avatarProfile"
+              >
+              </v-img>
+            </template>
+            <template
+              v-else
+            >
+              <v-icon
+                size="10"
+              >
+                mdi-account-circle
+              </v-icon>
+            </template>
           </v-list-item-avatar>
 
           <v-list-item-content>
             <v-list-item-title
+              v-if="checkRoleUser"
               class="list-title"
-              v-text="'VLADYSLAV'"
+              v-text="getUser.fullName.substring(0, getUser.fullName.indexOf(' '))"
             />
+            <v-list-item-title
+              v-else
+              class="list-title"
+              v-text="getUser.firstName"
+            >
+
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -221,6 +245,19 @@
             }
         },
         computed: {
+            getUser() {
+                return this.$store.getters['getUser']
+            },
+
+            checkRoleUser() {
+                let user = this.$store.getters['getUser'];
+                return user.roles.map(role => role.name).includes('ROLE_LEGAL_USER');
+            },
+
+            avatarProfile() {
+                return this.getUser.profilePicture ? this.getUser.profilePicture : ''
+            },
+
             barImage() {
                 return this.$store.state.barImage
             },
@@ -252,9 +289,16 @@
                 this.$router.push(this.localePath('/admin-panel/profile'))
             },
 
-            logout() {
-                this.$store.dispatch('logout');
-                this.$router.push('/authentication')
+            async logout() {
+                const body = {
+                    id: this.getUser.id,
+                    store: this.$store
+                };
+
+                await this.$store.dispatch('logout', body)
+                    .then(() => {
+                        this.$router.push(this.localePath('/authentication'));
+                    });
             }
         }
     }

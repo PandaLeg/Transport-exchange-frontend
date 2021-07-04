@@ -15,7 +15,7 @@
             :class="{ 'on-hover': hover }"
             @click="redirectCargoViewPage(cargo.id)"
           >
-            <v-card-title class="title-font primary--text">{{ cargo.name }}</v-card-title>
+            <v-card-title class="title-font primary--text">{{ getLocalizeCargoName(cargo) }}</v-card-title>
             <v-card-text class="text--primary">
               <v-row>
                 <v-col
@@ -83,13 +83,15 @@
                   md="10"
                   lg="10"
                 >
-                  <span class="date-font">{{ cargo.loadingDateFrom }} : {{ cargo.loadingDateBy }} </span>
+                  <span class="date-font">{{ $t('view.from') }} {{ parseDate(cargo).loadingDateFrom }}
+                    {{ $t('view.by') }} {{ parseDate(cargo).loadingDateBy }}
+                  </span>
                 </v-col>
               </v-row>
             </v-card-text>
 
             <v-divider></v-divider>
-            <v-card-subtitle>3ч назад</v-card-subtitle>
+            <v-card-subtitle>{{ dateAddedCargo(cargo) }}</v-card-subtitle>
           </v-card>
         </v-hover>
       </v-col>
@@ -125,6 +127,8 @@
 </template>
 
 <script>
+    import {parseCargoDate} from '../../../service/cargo/parseDate'
+
     export default {
         name: "cargo-search-cargo-id",
         async fetch({store, query}) {
@@ -140,11 +144,11 @@
 
                 let body = {
                     data, store,
+                    bodyTypeView: query.bodyTypeView,
                     page: query.page - 1,
                     pageSize: query.pageSize === undefined ? 3 : query.pageSize
                 };
 
-                console.log("PAGE SIZE FETCH", query.pageSize);
                 store.commit('cargo/setDataForSearchCargo', {data, page: query.page});
 
                 store.commit('cargo/setPageSize', query.pageSize);
@@ -164,7 +168,7 @@
             return {
                 page: 1,
                 quantityItems: [3, 10, 20, 40, 50],
-                pageSize: 3
+                pageSize: 3,
             }
         },
         created() {
@@ -201,6 +205,31 @@
             }
         },
         methods: {
+            getLocalizeCargoName(cargo){
+                let nameCargo = cargo.typesCargo.find(i => i.type === 'nameCargo');
+
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return nameCargo.enName;
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return nameCargo.uaName;
+                } else {
+                    return nameCargo.ruName;
+                }
+            },
+
+            parseDate(cargo) {
+                let loadingDateFrom = cargo.loadingDateFrom;
+                let loadingDateBy = cargo.loadingDateBy;
+
+                return parseCargoDate.parseDate(loadingDateFrom, loadingDateBy, this.$i18n.localeProperties.code);
+            },
+
+            dateAddedCargo(cargo){
+                let dateAdded = cargo.dateAdded;
+
+                return parseCargoDate.parseDate(dateAdded, null, this.$i18n.localeProperties.code);
+            },
+
             redirectCargoViewPage(id) {
                 this.$router.push((this.$i18n.localeProperties.code !== 'ru' ? '/' + this.$i18n.localeProperties.code : '') +
                     '/cargo/view/' + id);

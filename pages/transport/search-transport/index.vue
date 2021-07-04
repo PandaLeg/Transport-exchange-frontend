@@ -442,7 +442,7 @@
               mdi-magnify
             </v-icon>
           </v-avatar>
-          Для поиска транспорта, необходимо ввести город или страну.
+          {{ $t('searchTransport.bannerText') }}
         </v-banner>
       </v-col>
     </v-row>
@@ -465,7 +465,6 @@
                 countries: [],
                 citiesFrom: [],
                 citiesTo: [],
-                bodyTypes: [],
                 searchCityFrom: null,
                 searchCityTo: null,
                 searchName: null,
@@ -492,7 +491,6 @@
         },
         created() {
             this.countries = countries;
-            this.bodyTypes = typesBody;
         },
         computed: {
             faTruckMoving() {
@@ -511,6 +509,22 @@
 
             getCitiesTo() {
                 return this.citiesTo;
+            },
+
+            bodyTypes(){
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return typesBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.enName})
+                    });
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return typesBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.uaName})
+                    });
+                } else {
+                    return typesBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.ruName})
+                    });
+                }
             },
 
             getListFormPayment() {

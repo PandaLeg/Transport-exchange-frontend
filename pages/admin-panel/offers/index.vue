@@ -204,8 +204,8 @@
                     {text: this.$t('offer.fromWhere'), value: 'loadingPointFrom'},
                     {text: this.$t('offer.whereTo'), value: 'loadingPointBy'},
                     {text: this.$t('offer.date'), value: 'date'},
-                    {text: this.$t('offer.transport'), value: 'bodyType'},
                     {text: this.$t('offer.payment'), value: 'payment'},
+                    {text: this.$t('offer.status'), value: 'status'},
                     {text: this.$t('offer.actions'), value: 'actions', sortable: false}
                 ];
             },
@@ -242,14 +242,14 @@
 
                     cargo = Object.assign({},
                         {id: allCargo[i].id},
-                        {name: allCargo[i].name},
+                        {name: this.localizeName(allCargo[i].typesCargo)},
                         {loadingPointBy: allPoints[i].cityTo + ', ' + allPoints[i].countryTo},
                         {loadingPointFrom: allPoints[i].cityFrom + ', ' + allPoints[i].countryFrom},
                         {
                             date: this.$t('view.from') + ' ' + data.loadingDateFrom + ' ' + this.$t('view.by')
                                 + ' ' + data.loadingDateBy
                         },
-                        {bodyType: allCargo[i].bodyType},
+                        {bodyType: this.localizeBodyType(allCargo[i].typesCargo)},
                         {status: allCargo[i].status},
                     );
 
@@ -279,24 +279,15 @@
                 };
 
                 for (let i = 0; i < allTransports.length; i++) {
-                    allTransports[i].propertiesTransport.map(item => {
-                        if (item.property === 'paymentForm') {
-                            paymentForm = item.ruName
-                        }
-                    });
-
-                    allTransports[i].propertiesTransport.map(item => {
-                        if (item.property === 'paymentTime') {
-                            paymentTime = item.ruName
-                        }
-                    });
+                    paymentForm = this.localizeProperties(allTransports[i].propertiesTransport, 'paymentForm');
+                    paymentTime = this.localizeProperties(allTransports[i].propertiesTransport, 'paymentTime');
 
                     data = parseCargoDate.parseDate(allTransports[i].loadingDateFrom,
                         allTransports[i].loadingDateBy, this.$i18n.localeProperties.code);
 
                     transport = Object.assign({},
                         {id: allTransports[i].id},
-                        {bodyType: allTransports[i].bodyType},
+                        {bodyType: this.localizeBodyType(allTransports[i].typesTransport)},
                         {loadingPointBy: allPoints[i].cityTo + ', ' + allPoints[i].countryTo},
                         {loadingPointFrom: allPoints[i].cityFrom + ', ' + allPoints[i].countryFrom},
                         {
@@ -315,6 +306,63 @@
                     }
 
                     resultTransports.push(transport)
+                }
+            },
+
+            localizeProperties(propertiesCargo, property) {
+                let name = propertiesCargo.find(i => i.property === property);
+
+                if (name !== null && name !== undefined) {
+                    if (this.$i18n.localeProperties.code === 'en') {
+                        return name.enName;
+                    } else if (this.$i18n.localeProperties.code === 'ua') {
+                        return name.uaName;
+                    } else {
+                        return name.ruName;
+                    }
+                }
+            },
+
+            localizeName(types) {
+                let name;
+
+                name = types.find(i => {
+                    if (i.type === 'nameCargo') {
+                        return i;
+                    }
+                });
+
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return name.enName;
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return name.uaName;
+                } else {
+                    return name.ruName;
+                }
+            },
+
+            localizeBodyType(types) {
+                let name;
+
+                name = types.find(i => {
+                    if (i.type === 'bodyType') {
+                        return i;
+                    }
+                    if (i.type === 'vesselType') {
+                        return i;
+                    }
+                    if (i.type === 'carType') {
+                        return i;
+                    }
+                });
+
+
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return name.enName;
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return name.uaName;
+                } else {
+                    return name.ruName;
                 }
             },
 

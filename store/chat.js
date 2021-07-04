@@ -36,6 +36,7 @@ export const actions = {
       {
         headers: Object.assign(authHeader(body.store)),
         params: {
+          idUser: body.user.id,
           idUserCompanion: body.userCompanion.id,
         }
       });
@@ -71,6 +72,7 @@ export const actions = {
     console.log("GET MESSAGES", data);
     if (data) {
       commit('setMessages', data);
+      return Promise.resolve();
     }
   }
 };

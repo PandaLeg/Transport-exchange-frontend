@@ -15,7 +15,7 @@
             :class="{ 'on-hover': hover }"
             @click="redirectTransportViewPage(transport.id)"
           >
-            <v-card-title class="title-font primary--text">{{ transport.bodyType }}</v-card-title>
+            <v-card-title class="title-font primary--text">{{ getLocalizeBodyType(transport) }}</v-card-title>
             <v-card-text class="text--primary">
               <v-row>
                 <v-col
@@ -83,13 +83,15 @@
                   md="10"
                   lg="10"
                 >
-                  <span class="date-font">{{ transport.loadingDateFrom }} : {{ transport.loadingDateBy }} </span>
+                  <span class="date-font">{{ $t('view.from') }} {{ parseDate(transport).loadingDateFrom }}
+                    {{ $t('view.by') }} {{ parseDate(transport).loadingDateBy }}
+                  </span>
                 </v-col>
               </v-row>
             </v-card-text>
 
             <v-divider></v-divider>
-            <v-card-subtitle>3ч назад</v-card-subtitle>
+            <v-card-subtitle>{{ dateAddedTransport(transport) }}</v-card-subtitle>
           </v-card>
         </v-hover>
       </v-col>
@@ -126,6 +128,8 @@
 </template>
 
 <script>
+    import {parseCargoDate} from '../../../service/cargo/parseDate'
+
     export default {
         name: "search",
         async fetch({store, query}) {
@@ -202,6 +206,31 @@
             }
         },
         methods: {
+            getLocalizeBodyType(transport){
+                let bodyType = transport.typesTransport.find(i => i.type === 'bodyType');
+
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return bodyType.enName;
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return bodyType.uaName;
+                } else {
+                    return bodyType.ruName;
+                }
+            },
+
+            parseDate(transport) {
+                let loadingDateFrom = transport.loadingDateFrom;
+                let loadingDateBy = transport.loadingDateBy;
+
+                return parseCargoDate.parseDate(loadingDateFrom, loadingDateBy, this.$i18n.localeProperties.code);
+            },
+
+            dateAddedTransport(transport){
+                let dateAdded = transport.dateAdded;
+
+                return parseCargoDate.parseDate(dateAdded, null, this.$i18n.localeProperties.code);
+            },
+
             redirectTransportViewPage(id) {
                 this.$router.push((this.$i18n.localeProperties.code !== 'ru' ? '/' + this.$i18n.localeProperties.code : '') +
                     '/transport/view/' + id);

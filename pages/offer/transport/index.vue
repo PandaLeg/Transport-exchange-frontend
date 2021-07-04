@@ -75,7 +75,7 @@
             </v-icon>
             <v-icon
               small
-              @click=""
+              @click="deleteTransport(item.id)"
             >
               mdi-delete
             </v-icon>
@@ -267,6 +267,23 @@
         </v-data-table>
       </v-col>
     </v-row>
+    <v-snackbar
+      v-model="snackbar"
+      :multi-line="multiLine"
+    >
+      Удалено успешно!
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="red"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -300,7 +317,9 @@
                 completeTransports: [],
                 editedIndex: -1,
                 tabs: null,
-                tabsClub: null
+                tabsClub: null,
+                multiLine: true,
+                snackbar: false
             }
         },
         created() {
@@ -419,24 +438,15 @@
                 };
 
                 for (let i = 0; i < allTransports.length; i++) {
-                    allTransports[i].propertiesTransport.map(item => {
-                        if (item.property === 'paymentForm') {
-                            paymentForm = item.ruName
-                        }
-                    });
-
-                    allTransports[i].propertiesTransport.map(item => {
-                        if (item.property === 'paymentTime') {
-                            paymentTime = item.ruName
-                        }
-                    });
+                    paymentForm = this.localizeProperties(allTransports[i].propertiesTransport, 'paymentForm');
+                    paymentTime = this.localizeProperties(allTransports[i].propertiesTransport, 'paymentTime');
 
                     data = parseCargoDate.parseDate(allTransports[i].loadingDateFrom,
                         allTransports[i].loadingDateBy, this.$i18n.localeProperties.code);
 
                     transport = Object.assign({},
                         {id: allTransports[i].id},
-                        {bodyType: allTransports[i].bodyType},
+                        {bodyType: this.localizeBodyType(allTransports[i].typesTransport, 'bodyType')},
                         {loadingPointBy: allPoints[i].cityTo + ', ' + allPoints[i].countryTo},
                         {loadingPointFrom: allPoints[i].cityFrom + ', ' + allPoints[i].countryFrom},
                         {
@@ -458,6 +468,32 @@
                 }
             },
 
+            localizeProperties(propertiesTransport, property) {
+                let name = propertiesTransport.find(i => i.property === property);
+
+                if (name !== null && name !== undefined) {
+                    if (this.$i18n.localeProperties.code === 'en') {
+                        return name.enName;
+                    } else if (this.$i18n.localeProperties.code === 'ua') {
+                        return name.uaName;
+                    } else {
+                        return name.ruName;
+                    }
+                }
+            },
+
+            localizeBodyType(typesCargo, type){
+                let name = typesCargo.find(i => i.type === type);
+
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return name.enName;
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return name.uaName;
+                } else {
+                    return name.ruName;
+                }
+            },
+
             async addToProcessing(transport) {
                 console.log(transport);
                 let body = {
@@ -468,6 +504,9 @@
 
                 let itemIndex = this.activeTransports.indexOf(transport);
                 this.activeTransports.splice(itemIndex, 1);
+
+                itemIndex = this.offersTransports.indexOf(transport);
+                this.offersTransports.splice(itemIndex, 1);
 
                 await this.$store.dispatch('offer/changeStatusTransportAction', body);
 
@@ -480,6 +519,20 @@
 
             redirectToUpdateTransport(id) {
                 this.$router.push('/offer/transport/editing/' + id)
+            },
+
+            async deleteTransport(id) {
+                const body = {
+                    id: id,
+                    store: this.$store
+                };
+                console.log(id);
+                await this.$store.dispatch('admin/deleteTransportAction', body).then(() => {
+                    let number = this.offersTransports.findIndex(i => i.id === id);
+                    this.offersTransports.splice(number, 1);
+                    this.snackbar = true;
+                    this.dialogDelete = false;
+                })
             }
         }
     }

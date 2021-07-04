@@ -19,6 +19,13 @@
     "logout": "Вийти",
     "authorization": "Авторизація"
   },
+  "main": {
+    "title": "Сервіс міжнародних перевезень",
+    "titleCargoTotal": "Вантажів всього",
+    "titleCargoToday": "Вантажів сьогодні",
+    "titleTransportTotal": "Транспорту всього",
+    "titleTransportToday": "Транспорту сьогодні"
+  },
   "authAndReg": {
     "titleSignIn": "Авторизація",
     "titleRegisterPage": "Сторінка реєстрації",
@@ -43,7 +50,8 @@
     "companyCode": "Код компанії",
     "fullName": "ПІБ контактної особи",
     "btnIndividual": "Фізична особа",
-    "signUpBtn": "Зареєструватись"
+    "signUpBtn": "Зареєструватись",
+    "errorMessageAuth": "Неправильний email або пароль."
   },
   "addCargo": {
     "vehiclesTitle": "Автотранспорт",
@@ -102,6 +110,18 @@
     "additional": "Додатково",
     "additionalInformation": "Додаткова інформація",
     "photo": "Фото",
+    "containerType": "Тип контейнеру",
+    "selectContainerType": "Оберіть найменування контейнеру",
+    "countContainer": "Кількість (шт)",
+    "imo": "Оберіть клас IMO",
+    "transportAndPermissions": "Транспорт та дозволи",
+    "shipType": "Тип судна",
+    "selectShipType": "Оберіть тип судна",
+    "incoterms": "Інкотермс",
+    "selectType": "Оберіть тип",
+    "loadingContainer": "Завантаження контейнеру",
+    "carType": "Тип вагону",
+    "selectCarType": "Оберіть тип вагону",
     "add": "Додати"
   },
   "searchCargo": {
@@ -157,7 +177,8 @@
     "fullName": "ПІБ",
     "email": "Ел. адреса",
     "location": "Місцезнаходження",
-
+    "documentTitle": "Документи",
+    "documentRedirect": "Переглянути",
     "respond": "Відгукнутись",
     "cargoOffer": "Заявка на вантаж",
     "surname": "Прізвище",
@@ -166,9 +187,10 @@
     "wishes": "Побажання",
     "closeBtn": "Закрити",
     "sendBtn": "Відправити",
-
     "writeMessage": "Написати",
-    "message": "Повідомлення"
+    "message": "Повідомлення",
+    "snackBarOffers": "Заявка успішно відправлена та знаходится у вкладці 'Заявки'",
+    "snackBarMessage": "Повідомлення успішно відправлене"
   },
   "offer": {
     "titleAll": "Всі",
@@ -263,6 +285,7 @@
   },
   "searchTransport": {
     "title": "Поиск транспорта",
+    "bannerText": "Для пошуку транспорту, необхідно ввести місто або країну.",
     "selectCountry": "Оберіть країну",
     "fromWhere": "Звідки",
     "whereTo": "Куди",
@@ -298,16 +321,25 @@
   "profile": {
     "cargoOffers": "Заявки по вантажу",
     "transportsOffers": "Заявки по транспорту",
+    "unfinished": "Незавершені",
     "successful": "Успішних",
     "contactInformation": "Контактна інформація",
     "fullName": "ПІБ",
+    "lastName": "Прізвище",
+    "firstName": "Ім'я",
+    "patronymic": "По батькові",
+    "description": "Опис",
     "email": "Ел. адреса",
     "phoneNumber": "Номер",
     "lastVisit": "Останній візит",
     "informationAboutCompany": "Інформація про компанію",
     "name": "Найменування",
     "country": "Країна",
-    "city": "Місто"
+    "city": "Місто",
+    "сonfirm": "Підтвердити",
+    "сonfirmation": "Підтвердження",
+    "snackbarConfirm": "Підтвердження успішно відправлено",
+    "btnSave": "Відправити"
   },
   "settings": {
     "personalData": "Особисті дані",
@@ -346,11 +378,13 @@
     "companyCode": "Код компанії",
     "titleAllCargo": "Всі вантажі",
     "titleAllTransport": "Весь транспорт",
+    "titleIdentification": "Ідентифікація",
     "titleIdentificationCompany": "Ідентифікація компанії",
     "name": "Найменування",
     "code": "Код",
     "textAboutConfirmation": "Ви впевнені, що хочете підтвердити ідентифікацію?",
     "confirmBtn": "Підтвердити",
+    "snackbarUpdate": "Оновлено",
     "updateBtn": "Оновити"
   }
 }

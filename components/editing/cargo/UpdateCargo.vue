@@ -1510,7 +1510,6 @@
                 nameContainer: '',
                 count: 0,
                 isLoading: false,
-                listNamesCargo: [],
                 listNamesContainers: [],
                 searchName: null,
                 typeTransportation: '',
@@ -1526,6 +1525,7 @@
                 loadingDateBy: '',
                 bodyType: null,
                 bodyTypes: [],
+                type: '',
                 searchBodyType: null,
                 typesLoadingTruck: [],
                 typesUnloadingTruck: [],
@@ -1610,7 +1610,6 @@
             }
         },
         created() {
-            this.listNamesCargo = names;
             this.listNamesContainers = containers;
             this.getCargo();
         },
@@ -1649,6 +1648,22 @@
 
             urlThirdPhoto() {
                 return this.thirdImageUrl ? this.thirdImageUrl : profilePageAvatar;
+            },
+
+            listNamesCargo() {
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return names.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.enName})
+                    });
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return names.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.uaName})
+                    });
+                } else {
+                    return names.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.ruName})
+                    });
+                }
             },
 
             getListLoadingCar() {
@@ -1701,7 +1716,6 @@
         },
         watch: {
             firstLoadingPoint() {
-                console.log(this.firstLoadingPoint);
                 if (this.firstLoadingPoint && this.firstUnloadingPoint && this.countOpenedField !== 6) {
                     this.checkFilledTwoPointLoading = true;
                     this.checkFilledTwoPointUnloading = true;
@@ -1988,8 +2002,8 @@
                                 }
                             }
                         }
-
-                        this.name = this.listNamesCargo.find(item => response.cargo.name === item.name);
+                        console.log(response.cargo);
+                        this.name = this.localizeNameAndBodyType(response.cargo.typesCargo, 'nameCargo');
                         this.weightFrom = response.cargo.weightFrom;
                         this.weightUpTo = response.cargo.weightUpTo;
                         this.volumeFrom = response.cargo.volumeFrom;
@@ -2000,16 +2014,20 @@
                         this.loadingDateFrom = response.cargo.loadingDateFrom;
                         this.loadingDateBy = response.cargo.loadingDateBy;
                         this.adr = response.cargo.adr;
+                        this.nameContainer = containers.find(item => item.name === response.cargo.nameContainer);
+                        this.count = response.cargo.count;
+                        this.incoterms = response.cargo.incoterms;
+                        this.prepayment = response.cargo.prepayment;
 
                         if (response.cargo.typeTransportation === 'roadTransportation') {
-                            this.bodyTypes = typesBody;
+                            this.bodyTypes = this.localeBodyTypes(typesBody);
                         } else if (response.cargo.typeTransportation === 'seaTransportation') {
-                            this.bodyTypes = typesVessel;
+                            this.bodyTypes = this.localeBodyTypes(typesVessel);
                         } else {
-                            this.bodyTypes = typesCar;
+                            this.bodyTypes = this.localeBodyTypes(typesCar);
                         }
 
-                        this.bodyType = this.bodyTypes.find(item => response.cargo.bodyType === item.name);
+                        this.bodyType = this.localizeNameAndBodyType(response.cargo.typesCargo);
                         this.filteringProperties();
                         this.properties.forEach(item => {
                             if (item.property === 'loading') {
@@ -2037,10 +2055,60 @@
                             if (item.property === 'paymentTime') {
                                 this.paymentTime = item.name;
                             }
+
+                            if (item.property === 'containerLoading') {
+                                this.containerLoading.push(item.name);
+                            }
+
                         });
                     }).catch(error => {
                         console.log(error);
                     });
+            },
+
+            localizeNameAndBodyType(typesCargo, type) {
+                let name;
+
+                if (type != null) {
+                    name = typesCargo.find(i => i.type === type);
+                } else {
+                    name = typesCargo.find(i => {
+                        if (i.type === 'bodyType') {
+                            return i;
+                        }
+                        if (i.type === 'vesselType') {
+                            return i;
+                        }
+                        if (i.type === 'carType') {
+                            return i;
+                        }
+                    });
+                    this.type = name.type;
+                }
+
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return Object.assign({}, {id: String(name.id), name: name.enName})
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return Object.assign({}, {id: String(name.id), name: name.uaName})
+                } else {
+                    return Object.assign({}, {id: String(name.id), name: name.ruName})
+                }
+            },
+
+            localeBodyTypes(listBody) {
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return listBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.enName})
+                    });
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return listBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.uaName})
+                    });
+                } else {
+                    return listBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.ruName})
+                    });
+                }
             },
 
             checkLocaleAndGetList(someObject) {
@@ -2345,14 +2413,15 @@
             async updateCargo() {
                 this.formData = new FormData();
 
+                console.log(this.name);
+
                 const cargo = {
-                    id: this.cargoView.id, name: this.name.name, nameContainer: this.nameContainer.name,
+                    id: this.cargoView.id, nameContainer: this.nameContainer?.name,
                     count: this.count, weightFrom: this.weightFrom, weightUpTo: this.weightUpTo,
                     volumeFrom: this.volumeFrom, volumeUpTo: this.volumeUpTo, lengthCargo: this.lengthCargo,
                     widthCargo: this.widthCargo, heightCargo: this.heightCargo, adr: this.adr,
                     loadingDateFrom: this.loadingDateFrom, loadingDateBy: this.loadingDateBy,
-                    bodyType: this.bodyType.name, incoterms: this.incoterms,
-                    cost: this.cost, currency: this.currency, prepayment: this.prepayment
+                    incoterms: this.incoterms, cost: this.cost, currency: this.currency, prepayment: this.prepayment
                 };
 
                 const places = [
@@ -2409,11 +2478,14 @@
                 ];
 
                 const propertiesCargo = {
+                    name: this.name?.name, bodyType: this.bodyType?.name, type: this.type,
                     typesLoadingTruck: this.typesLoadingTruck, typesUnloadingTruck: this.typesUnloadingTruck,
-                    containerLoading: this.containerLoading,
-                    permissions: this.permissions, typePayment: this.typePayment, costPer: this.costPer,
+                    containerLoading: this.containerLoading, permissions: this.permissions,
+                    typePayment: this.typePayment, costPer: this.costPer,
                     paymentForm: this.paymentForm, paymentTime: this.paymentTime
                 };
+
+                console.log(this.type);
 
                 this.formData.append("firstPhoto", this.firstPhoto);
                 this.formData.append("secondPhoto", this.secondPhoto);
@@ -2435,6 +2507,8 @@
 
                 await this.$store.dispatch('admin/updateCargoAction', {
                     store: this.$store, formData: this.formData, typeTransportation: this.cargoView.typeTransportation
+                }).then(() => {
+                    this.$router.push(this.localePath('/offer/cargo'));
                 });
             }
         }

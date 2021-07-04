@@ -2,227 +2,327 @@
   "names": [
     {
       "id": "1",
-      "name": "Металл"
+      "ruName": "Металл",
+      "enName": "Metal",
+      "uaName": "Метал"
     },
     {
       "id": "2",
-      "name": "Стройматериалы"
+      "ruName": "Стройматериалы",
+      "enName": "Building materials",
+      "uaName": "Будматеріали"
     },
     {
       "id": "3",
-      "name": "Древесина"
+      "ruName": "Древесина",
+      "enName": "Wood",
+      "uaName": "Деревина"
     },
     {
       "id": "4",
-      "name": "Транспортные средства"
+      "ruName": "Транспортные средства",
+      "enName": "Vehicles",
+      "uaName": "Транспортні засоби"
     },
     {
       "id": "5",
-      "name": "Оборудование"
+      "ruName": "Оборудование",
+      "enName": "Equipment",
+      "uaName": "Устаткування"
     },
     {
       "id": "6",
-      "name": "Нефть и нефте-продукты"
+      "ruName": "Нефть и нефтепродукты",
+      "enName": "Oil and petroleum products",
+      "uaName": "Нафта і нафтапродукти"
     },
     {
       "id": "7",
-      "name": "Торф и торфяная продукция"
+      "ruName": "Торф и торфяная продукция",
+      "enName": "Peat and peat products",
+      "uaName": "Торф і схожа продукція"
     },
     {
       "id": "8",
-      "name": "Флюсы"
+      "ruName": "Флюсы",
+      "enName": "Fluxes",
+      "uaName": "Флюс"
     },
     {
       "id": "9",
-      "name": "Руда железная и марганцевая"
+      "ruName": "Руда железная и марганцевая",
+      "enName": "Iron and manganese ore",
+      "uaName": "Руда залізна і марганцева"
     },
     {
       "id": "10",
-      "name": "Руда цветная и серное сырье"
+      "ruName": "Руда цветная и серное сырье",
+      "enName": "Non-ferrous ore and sulfur raw materials",
+      "uaName": "Руда кольорова і сірчана сировина"
     },
     {
       "id": "11",
-      "name": "Черные металлы"
+      "ruName": "Черные металлы",
+      "enName": "Ferrous metals",
+      "uaName": "Чорні метали"
     },
     {
       "id": "12",
-      "name": "Сахар"
+      "ruName": "Сахар",
+      "enName": "Sugar",
+      "uaName": "Цукор"
     },
     {
       "id": "13",
-      "name": "Метизы"
+      "ruName": "Метизы",
+      "enName": "Hardware stores",
+      "uaName": "Металовироби"
     },
     {
       "id": "14",
-      "name": "Кокс"
+      "ruName": "Кокс",
+      "enName": "Coke",
+      "uaName": "Кокс"
     },
     {
       "id": "15",
-      "name": "Химическая продукция"
+      "ruName": "Химическая продукция",
+      "enName": "Chemical products",
+      "uaName": "Хімічна продукція"
     },
     {
       "id": "16",
-      "name": "Огнеупоры"
+      "ruName": "Огнеупоры",
+      "enName": "Refractories",
+      "uaName": "Вогнетриви"
     },
     {
       "id": "17",
-      "name": "Цемент"
+      "ruName": "Цемент",
+      "enName": "Cement",
+      "uaName": "Цемент"
     },
     {
       "id": "18",
-      "name": "Мясо"
+      "ruName": "Мясо",
+      "enName": "Meat",
+      "uaName": "Мясо"
     },
     {
       "id": "19",
-      "name": "Рыба"
+      "ruName": "Рыба",
+      "enName": "Fish",
+      "uaName": "Риба"
     },
     {
       "id": "19",
-      "name": "Фрукты"
+      "ruName": "Фрукты",
+      "enName": "Fruits",
+      "uaName": "Фрукти"
     },
     {
       "id": "20",
-      "name": "Овощи"
+      "ruName": "Овощи",
+      "enName": "Vegetables",
+      "uaName": "Овочі"
     },
     {
       "id": "21",
-      "name": "Соль"
+      "ruName": "Соль",
+      "enName": "Salt",
+      "uaName": "Сіль"
     },
     {
       "id": "23",
-      "name": "Грибы"
+      "ruName": "Грибы",
+      "enName": "Mushrooms",
+      "uaName": "Гриби"
     },
     {
       "id": "24",
-      "name": "Ягоды"
+      "ruName": "Ягоды",
+      "enName": "Berries",
+      "uaName": "Ягоди"
     },
     {
       "id": "25",
-      "name": "Хлопок"
+      "ruName": "Хлопок",
+      "enName": "Cotton",
+      "uaName": "Бавовна"
     },
     {
       "id": "26",
-      "name": "Сахарная свекла"
+      "ruName": "Сахарная свекла",
+      "enName": "Sugar beet",
+      "uaName": "Цукровий буряк"
     },
     {
       "id": "27",
-      "name": "Зерно"
+      "ruName": "Зерно",
+      "enName": "Corn",
+      "uaName": "Зерно"
     },
     {
       "id": "28",
-      "name": "Комбикорм"
+      "ruName": "Комбикорм",
+      "enName": "Mixed feed",
+      "uaName": "Комбікорм"
     },
     {
       "id": "29",
-      "name": "Шкуры мокросоленые"
+      "ruName": "Шкуры мокросоленые",
+      "enName": "Wet-salted skins",
+      "uaName": "Шкури мокросолені"
     },
     {
       "id": "30",
-      "name": "Комбикорм"
+      "ruName": "Табачные изделия",
+      "enName": "Tobacco products",
+      "uaName": "Тютюнові вироби"
     },
     {
       "id": "31",
-      "name": "Табачные изделия"
+      "ruName": "Коробки",
+      "enName": "Boxes",
+      "uaName": "Коробки"
+    },
+    {
+      "id": "32",
+      "ruName": "Растения",
+      "enName": "Plants",
+      "uaName": "Рослини"
     },
     {
       "id": "33",
-      "name": "Коробки"
+      "ruName": "Саженцы",
+      "enName": "Saplings",
+      "uaName": "Саджанці"
     },
     {
       "id": "34",
-      "name": "Растения"
+      "ruName": "Бумага",
+      "enName": "Paper",
+      "uaName": "Папір"
     },
     {
       "id": "35",
-      "name": "Саженцы"
+      "ruName": "Биг-бэг",
+      "enName": "FIBC",
+      "uaName": "Біг-Бег"
     },
     {
       "id": "36",
-      "name": "Бумага"
+      "ruName": "Алкогольные напитки",
+      "enName": "Alcoholic drinks",
+      "uaName": "Алкогольні напої"
     },
     {
       "id": "37",
-      "name": "Биг-бэг"
+      "ruName": "Безалкогольные напитки",
+      "enName": "Soft drinks",
+      "uaName": "Безалкогольні напої"
     },
     {
       "id": "38",
-      "name": "Алькогольные напитки"
+      "ruName": "Бытовая техника",
+      "enName": "Appliances",
+      "uaName": "Побутова техніка"
     },
     {
       "id": "39",
-      "name": "Безалкогольные напитки"
+      "ruName": "Ковры",
+      "enName": "Carpets",
+      "uaName": "Килими"
     },
     {
       "id": "40",
-      "name": "Бытовая техника"
+      "ruName": "Канцтовары",
+      "enName": "Stationery",
+      "uaName": "Канцтовари"
     },
     {
       "id": "41",
-      "name": "Ковры"
+      "ruName": "Макулатура",
+      "enName": "Waste paper",
+      "uaName": "Макулатура"
     },
     {
       "id": "42",
-      "name": "Канцтовары"
+      "ruName": "Компьютеры",
+      "enName": "Computers",
+      "uaName": "Компютери"
     },
     {
       "id": "43",
-      "name": "Макулатура"
+      "ruName": "Электроника",
+      "enName": "Electronics",
+      "uaName": "Електроніка"
     },
     {
       "id": "44",
-      "name": "Компьютеры"
+      "ruName": "Одежда",
+      "enName": "Clothes",
+      "uaName": "Одяг"
     },
     {
       "id": "45",
-      "name": "Электроника"
+      "ruName": "Удобрения",
+      "enName": "Fertilizers",
+      "uaName": "Добрива"
     },
     {
       "id": "46",
-      "name": "Одежда"
+      "ruName": "Фанера",
+      "enName": "Plywood",
+      "uaName": "Фанера"
     },
     {
       "id": "47",
-      "name": "Удобрения"
+      "ruName": "Стекло",
+      "enName": "Glass",
+      "uaName": "Скло"
     },
     {
       "id": "48",
-      "name": "Фанера"
+      "ruName": "Медикаменты",
+      "enName": "Medicines",
+      "uaName": "Медикаменти"
     },
     {
       "id": "49",
-      "name": "Стекло"
+      "ruName": "Казеин",
+      "enName": "Casein",
+      "uaName": "Казеїн"
     },
     {
       "id": "50",
-      "name": "Фанера"
+      "ruName": "Древесный уголь",
+      "enName": "Charcoal",
+      "uaName": "Деревне вугілля"
     },
     {
       "id": "51",
-      "name": "Медикаменты"
+      "ruName": "Мебель",
+      "enName": "Furniture",
+      "uaName": "Меблі"
     },
     {
       "id": "52",
-      "name": "Казеин"
+      "ruName": "Живность",
+      "enName": "Animals",
+      "uaName": "Живність"
     },
     {
       "id": "53",
-      "name": "Древесный уголь"
+      "ruName": "Тара",
+      "enName": "Container",
+      "uaName": "Тара"
     },
     {
       "id": "54",
-      "name": "Мебель"
-    },
-    {
-      "id": "55",
-      "name": "Живность"
-    },
-    {
-      "id": "56",
-      "name": "Тара"
-    },
-    {
-      "id": "57",
-      "name": "Упаковка"
+      "ruName": "Упаковка",
+      "enName": "Packaging",
+      "uaName": "Упаковка"
     }
   ]
 }

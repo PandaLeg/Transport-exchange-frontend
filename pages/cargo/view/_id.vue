@@ -17,7 +17,7 @@
             <v-col
               lg="8"
             >
-              <v-card-subtitle class="spectral-font">{{ $t('view.offerPublished') }} - 5 мая</v-card-subtitle>
+              <v-card-subtitle class="spectral-font">{{ $t('view.offerPublished') }} - {{ dateAddedCargo }}</v-card-subtitle>
             </v-col>
 
             <v-col
@@ -36,6 +36,7 @@
                     class="white--text subtitle-font mt-2"
                     v-bind="attrs"
                     v-on="on"
+                    :disabled="checkSendingOffer"
                   >
                     {{ $t('view.respond') }}
                   </v-btn>
@@ -129,7 +130,9 @@
               </v-dialog>
             </v-col>
           </v-row>
-          <v-card-title class="name-font">{{ cargoView.name }}</v-card-title>
+
+          <v-card-title class="name-font">{{ getLocalizeCargoName() }}</v-card-title>
+
           <v-card-text>
             <v-row justify="start">
               <v-col
@@ -484,7 +487,7 @@
               >
                   <span
                     class="spectral-font text--primary">
-                    {{ cargoView.bodyType }}
+                    {{ getLocalizeBodyType() }}
                   </span>
               </v-col>
             </v-row>
@@ -822,6 +825,35 @@
               <v-col
                 lg="12"
               >
+                <span class="photo-font text--primary">{{ $t('view.documentTitle') }}</span>
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col
+                lg="4"
+                v-for="file in getFilesCargo"
+                :key="file.id"
+              >
+                <v-card>
+                  <v-card-title>{{ file.filename }}</v-card-title>
+                  <v-card-actions>
+                    <v-btn
+                      :href="file.fileUrl"
+                      color="primary"
+                      outlined
+                    >
+                      {{ $t('view.documentRedirect') }}
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col
+                lg="12"
+              >
                 <div id="map"></div>
               </v-col>
             </v-row>
@@ -834,7 +866,7 @@
       >
         <v-card>
           <v-card-title>
-            <nuxt-link :to="{path: getPathToSearch, query: queryResultSearch}"
+            <nuxt-link :to="localePath('/profile/' + userFromCargo.id)"
                        class="subtitle-font nuxt-link-active">
               {{ $t('view.profile') }}
             </nuxt-link>
@@ -916,7 +948,7 @@
           </v-card-text>
           <v-card-actions>
             <v-dialog
-              v-if="getUser !== null && userFromCargo.id !== getUser.id && getCheckUserFromOffer"
+              v-if="getUser !== null && userFromCargo.id !== getUser.id"
               v-model="dialogSendingMessage"
               persistent
               max-width="600px"
@@ -976,6 +1008,40 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-snackbar
+      v-model="snackbar"
+      :multi-line="multiLine"
+    >
+      <p>{{ $t('view.snackBarOffers') }}</p>
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="red"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          {{ $t('view.closeBtn') }}
+        </v-btn>
+      </template>
+    </v-snackbar>
+
+    <v-snackbar
+      v-model="snackbarMessage"
+      :multi-line="multiLine"
+    >
+      <p>{{ $t('view.snackBarMessage') }}</p>
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="red"
+          text
+          v-bind="attrs"
+          @click="snackbarMessage = false"
+        >
+          {{ $t('view.closeBtn') }}
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -1007,7 +1073,7 @@
             }
 
             await store.commit('cargo/setCheckUserFromOffer');
-            console.log(body.user);
+
             if (body.user !== null) {
                 await store.dispatch('cargo/checkUserSentOfferAction', body);
             }
@@ -1051,7 +1117,11 @@
                     {lat: 55.75222, lng: 37.61556},
                     {lat: 53.9, lng: 27.56667}
                 ],
-                map: null
+                map: null,
+                multiLine: true,
+                snackbar: false,
+                snackbarMessage: false,
+                checkSendingOffer: false
             }
         },
         computed: {
@@ -1092,6 +1162,12 @@
                 return this.$store.getters['cargo/getPathToSearch']
             },
 
+            dateAddedCargo(){
+                let dateAdded = this.cargoView.dateAdded;
+
+                return parseCargoDate.parseDate(dateAdded, null, this.$i18n.localeProperties.code);
+            },
+
             parseDate() {
                 let loadingDateFrom = this.cargoView.loadingDateFrom;
                 let loadingDateBy = this.cargoView.loadingDateBy;
@@ -1105,6 +1181,10 @@
 
             getPhotoCargo() {
                 return this.$store.getters['cargo/getPhotoCargo']
+            },
+
+            getFilesCargo() {
+                return this.$store.getters['cargo/getFilesCargo']
             },
 
             getDataResultSearch() {
@@ -1125,6 +1205,30 @@
             }
         },
         methods: {
+            getLocalizeCargoName() {
+                let nameCargo = this.cargoView.typesCargo.find(i => i.type === 'nameCargo');
+
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return nameCargo.enName;
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return nameCargo.uaName;
+                } else {
+                    return nameCargo.ruName;
+                }
+            },
+
+            getLocalizeBodyType() {
+                let bodyType = this.cargoView.typesCargo.find(i => i.type === 'bodyType' || 'vesselType' || 'carType');
+
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return bodyType.enName;
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return bodyType.uaName;
+                } else {
+                    return bodyType.ruName;
+                }
+            },
+
             checkFullnessProperties() {
                 this.cargoView.propertiesCargo.forEach(prop => {
                     if (prop.property === 'loading') {
@@ -1260,10 +1364,15 @@
                     store: this.$store
                 };
 
-                await this.$store.dispatch('offer/sendCargoOfferAction', body);
-
-                this.dialogSendingOffer = false;
-                this.additional = '';
+                await this.$store.dispatch('offer/sendCargoOfferAction', body)
+                    .then(() => {
+                        this.checkSendingOffer = true;
+                        this.snackbar = true;
+                        this.dialogSendingOffer = false;
+                        this.additional = '';
+                    }).catch(err => {
+                        console.log(err);
+                    });
             },
 
             async sendMessage() {
@@ -1279,8 +1388,10 @@
                 };
 
                 if (this.message !== '' && this.message !== null) {
-                    console.log('MESSAGE SENDING');
-                    await this.$store.dispatch('chat/sendMessageAction', body);
+                    await this.$store.dispatch('chat/sendMessageAction', body)
+                        .then(() => {
+                            this.snackbarMessage = true;
+                        });
                 }
 
                 this.dialogSendingMessage = false;

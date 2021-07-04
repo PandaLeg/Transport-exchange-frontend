@@ -93,6 +93,7 @@
           >
             <v-text-field
               v-model="carryingCapacityFrom"
+              type="number"
               :error-messages="carryingCapacityFromErrors"
               color="blue-grey lighten-2"
               :label="$t('addTransport.from')"
@@ -107,6 +108,7 @@
           >
             <v-text-field
               v-model="carryingCapacityUpTo"
+              type="number"
               :error-messages="carryingCapacityUpToErrors"
               color="blue-grey lighten-2"
               :label="$t('addTransport.before')"
@@ -132,10 +134,11 @@
           >
             <v-text-field
               v-model="volumeFrom"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addTransport.from')"
+              filled
+              clearable
             ></v-text-field>
           </v-col>
           <v-col
@@ -145,10 +148,11 @@
           >
             <v-text-field
               v-model="volumeUpTo"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addTransport.before')"
+              filled
+              clearable
             ></v-text-field>
           </v-col>
         </v-row>
@@ -172,10 +176,11 @@
           >
             <v-text-field
               v-model="lengthTransport"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addTransport.length')"
+              filled
+              clearable
             ></v-text-field>
           </v-col>
 
@@ -186,10 +191,11 @@
           >
             <v-text-field
               v-model="widthTransport"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addTransport.width')"
+              filled
+              clearable
             ></v-text-field>
           </v-col>
 
@@ -200,10 +206,11 @@
           >
             <v-text-field
               v-model="heightTransport"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addTransport.height')"
+              filled
+              clearable
             ></v-text-field>
           </v-col>
         </v-row>
@@ -367,11 +374,13 @@
           >
             <v-text-field
               v-model="cost"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addTransport.sum')"
-              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
+              filled
+              clearable
+              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки' ||
+              typePayment === 'Bid request' || typePayment === 'Запит ставки'"
             ></v-text-field>
           </v-col>
 
@@ -387,7 +396,8 @@
               :label="$t('addTransport.currency')"
               filled
               clearable
-              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
+              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки' ||
+              typePayment === 'Bid request' || typePayment === 'Запит ставки'"
             ></v-select>
           </v-col>
 
@@ -403,7 +413,8 @@
               :label="$t('addTransport.for')"
               filled
               clearable
-              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
+              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки' ||
+              typePayment === 'Bid request' || typePayment === 'Запит ставки'"
             ></v-select>
           </v-col>
         </v-row>
@@ -477,10 +488,11 @@
           >
             <v-text-field
               v-model="prepayment"
+              type="number"
+              color="blue-grey lighten-2"
+              label="10%"
               filled
               clearable
-              color="blue-grey lighten-2"
-              label="50%"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -515,32 +527,28 @@
         data() {
             return {
                 bodyType: null,
-                carryingCapacityFrom: '',
-                carryingCapacityUpTo: '',
-                volumeFrom: '',
-                volumeUpTo: '',
-                lengthTransport: '',
-                widthTransport: '',
-                heightTransport: '',
-                adr: '',
-                bodyTypes: [],
+                carryingCapacityFrom: null,
+                carryingCapacityUpTo: null,
+                volumeFrom: null,
+                volumeUpTo: null,
+                lengthTransport: null,
+                widthTransport: null,
+                heightTransport: null,
+                adr: null,
                 searchBodyType: null,
                 typesLoadingTruck: [],
                 typesUnloadingTruck: [],
                 permissions: [],
                 typePayment: '',
-                cost: '',
+                cost: null,
                 currency: '',
                 costPer: '',
                 paymentForm: '',
                 paymentTime: '',
-                prepayment: '',
+                prepayment: null,
                 isLoading: false,
                 valid: true
             }
-        },
-        created() {
-            this.bodyTypes = typesBody;
         },
         validations: {
             bodyType: {
@@ -562,6 +570,22 @@
 
             faTruckMoving() {
                 return faTruckMoving
+            },
+
+            bodyTypes(){
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return typesBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.enName})
+                    });
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return typesBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.uaName})
+                    });
+                } else {
+                    return typesBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.ruName})
+                    });
+                }
             },
 
             getInitialTransport() {
@@ -641,27 +665,20 @@
                 }
 
                 let transport = {
-                    bodyType: this.bodyType.name,
-                    carryingCapacityFrom: this.carryingCapacityFrom,
-                    carryingCapacityUpTo: this.carryingCapacityUpTo,
-                    volumeFrom: this.volumeFrom,
-                    volumeUpTo: this.volumeUpTo,
-                    lengthTransport: this.lengthTransport,
-                    widthTransport: this.widthTransport,
-                    heightTransport: this.heightTransport,
-                    adr: this.adr,
-                    cost: this.cost,
-                    currency: this.currency,
-                    prepayment: this.prepayment
+                    carryingCapacityFrom: this.carryingCapacityFrom, carryingCapacityUpTo: this.carryingCapacityUpTo,
+                    volumeFrom: this.volumeFrom, volumeUpTo: this.volumeUpTo, lengthTransport: this.lengthTransport,
+                    widthTransport: this.widthTransport, heightTransport: this.heightTransport, adr: this.adr,
+                    cost: this.cost, currency: this.currency, prepayment: this.prepayment
                 };
 
                 let propertiesTransport = {
-                    typesLoadingTruck: this.typesLoadingTruck, typesUnloadingTruck: this.typesUnloadingTruck,
-                    permissions: this.permissions, typePayment: this.typePayment, costPer: this.costPer,
-                    paymentForm: this.paymentForm, paymentTime: this.paymentTime
+                    bodyType: this.bodyType.name, typesLoadingTruck: this.typesLoadingTruck,
+                    typesUnloadingTruck: this.typesUnloadingTruck, permissions: this.permissions,
+                    typePayment: this.typePayment, costPer: this.costPer, paymentForm: this.paymentForm,
+                    paymentTime: this.paymentTime
                 };
 
-                Object.assign(this.getInitialTransport, transport);
+                this.$store.commit('transport/setInitialTransport', Object.assign(this.getInitialTransport, transport));
 
                 let tempPropertiesTransport = Object.assign({}, propertiesTransport);
 

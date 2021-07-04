@@ -25,7 +25,7 @@
         <v-row>
           <v-col>
             <v-subheader inset class="text--white">
-              Транспорт и разрешения
+              {{ $t('addCargo.transportAndPayment') }}
             </v-subheader>
             <v-divider inset></v-divider>
           </v-col>
@@ -38,7 +38,7 @@
             lg="2"
           >
             <v-subheader>
-              Тип вагона
+              {{ $t('addCargo.carType') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -58,7 +58,7 @@
               clearable
               item-text="name"
               item-value="id"
-              label="Выберите тип вагона"
+              :label="$t('addCargo.carType')"
               :placeholder="$t('addCargo.search')"
               filled
               @change="$v.bodyType.$touch()"
@@ -87,7 +87,7 @@
               filled
               clearable
               color="blue-grey lighten-2"
-              label="Количество (шт)"
+              :label="$t('addCargo.countContainer')"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -98,7 +98,7 @@
             lg="2"
           >
             <v-subheader>
-              Разрешения
+              {{ $t('addCargo.permissions') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -110,7 +110,7 @@
               v-model="permissions"
               :items="getPermissionForTrain"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите тип разрешения"
+              :label="$t('addCargo.selectPermissionType')"
               filled
               clearable
             ></v-select>
@@ -171,11 +171,13 @@
           >
             <v-text-field
               v-model="cost"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addCargo.sum')"
-              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
+              filled
+              clearable
+              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки' ||
+              typePayment === 'Bid request' || typePayment === 'Запит ставки'"
             ></v-text-field>
           </v-col>
 
@@ -191,7 +193,8 @@
               :label="$t('addCargo.currency')"
               filled
               clearable
-              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
+              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки' ||
+              typePayment === 'Bid request' || typePayment === 'Запит ставки'"
             ></v-select>
           </v-col>
 
@@ -207,7 +210,8 @@
               :label="$t('addCargo.for')"
               filled
               clearable
-              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
+              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки' ||
+              typePayment === 'Bid request' || typePayment === 'Запит ставки'"
             ></v-select>
           </v-col>
         </v-row>
@@ -281,10 +285,11 @@
           >
             <v-text-field
               v-model="prepayment"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               label="50%"
+              filled
+              clearable
             ></v-text-field>
           </v-col>
         </v-row>
@@ -319,17 +324,16 @@
         data() {
             return {
                 bodyType: null,
-                bodyTypes: [],
                 count: 0,
                 searchBodyType: null,
                 permissions: [],
                 typePayment: '',
-                cost: '',
+                cost: null,
                 currency: '',
                 costPer: '',
                 paymentForm: '',
                 paymentTime: '',
-                prepayment: '',
+                prepayment: null,
                 isLoading: false,
                 valid: true
             }
@@ -339,9 +343,6 @@
                 required
             }
         },
-        created() {
-            this.bodyTypes = typesCar;
-        },
         computed: {
             faArrowAltCircleRight() {
                 return faArrowAltCircleRight
@@ -349,6 +350,22 @@
 
             faTruckMoving() {
                 return faTruckMoving
+            },
+
+            bodyTypes(){
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return typesCar.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.enName})
+                    });
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return typesCar.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.uaName})
+                    });
+                } else {
+                    return typesCar.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.ruName})
+                    });
+                }
             },
 
             getInitialCargo() {
@@ -414,18 +431,20 @@
                 }
 
                 let cargo = {
-                    bodyType: this.bodyType.name, count: this.count, cost: this.cost, currency: this.currency,
+                    count: this.count, cost: this.cost, currency: this.currency,
                     prepayment: this.prepayment
                 };
 
                 let propertiesCargo = {
-                    permissions: this.permissions, typePayment: this.typePayment, costPer: this.costPer,
+                    bodyType: this.bodyType.name, type: 'carType', permissions: this.permissions,
+                    typePayment: this.typePayment, costPer: this.costPer,
                     paymentForm: this.paymentForm, paymentTime: this.paymentTime
                 };
 
-                Object.assign(this.getInitialCargo, cargo);
+                this.$store.commit('cargo/setInitialCargo', Object.assign(this.getInitialCargo, cargo));
 
-                let tempPropertiesCargo = Object.assign({}, propertiesCargo);
+                let tempPropertiesCargo = Object.assign(this.getPropertiesCargo, propertiesCargo);
+
                 this.$store.commit('cargo/setPropertiesCargo', tempPropertiesCargo);
 
                 if (n === this.steps) {

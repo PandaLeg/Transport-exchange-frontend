@@ -68,6 +68,7 @@
               </v-dialog>
             </v-toolbar>
           </template>
+
           <template v-slot:item.actions="{ item }">
             <v-icon
               small
@@ -76,9 +77,11 @@
             >
               mdi-pencil
             </v-icon>
+
             <v-icon
               small
-              @click=""
+              class="mr-2"
+              @click="deleteCargo(item.id)"
             >
               mdi-delete
             </v-icon>
@@ -270,6 +273,24 @@
         </v-data-table>
       </v-col>
     </v-row>
+
+    <v-snackbar
+      v-model="snackbar"
+      :multi-line="multiLine"
+    >
+      Удалено успешно!
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="red"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -296,6 +317,7 @@
                 dialogDelete: false,
                 headers: [],
                 headersInProcessing: [],
+                headersSentAndActive: [],
                 offerCargo: [],
                 sentCargo: [],
                 activeCargo: [],
@@ -303,7 +325,9 @@
                 completeCargo: [],
                 editedIndex: -1,
                 tabs: null,
-                tabsClub: null
+                tabsClub: null,
+                multiLine: true,
+                snackbar: false
             }
         },
         created() {
@@ -397,14 +421,15 @@
                         text: this.$t('offer.cargo'),
                         align: 'start',
                         sortable: false,
-                        value: 'bodyType',
+                        value: 'name',
                     },
                     {text: this.$t('offer.fromWhere'), value: 'loadingPointFrom'},
                     {text: this.$t('offer.whereTo'), value: 'loadingPointBy'},
                     {text: this.$t('offer.date'), value: 'date'},
                     {text: this.$t('offer.transport'), value: 'bodyType'},
                     {text: this.$t('offer.payment'), value: 'payment'},
-                    {text: this.$t('offer.status'), value: 'status'}
+                    {text: this.$t('offer.status'), value: 'status'},
+                    {text: this.$t('offer.actions'), value: 'actions', sortable: false}
                 ]
             },
 
@@ -423,31 +448,22 @@
                 };
 
                 for (let i = 0; i < allCargo.length; i++) {
-                    allCargo[i].propertiesCargo.map(item => {
-                        if (item.property === 'paymentForm') {
-                            paymentForm = item.ruName
-                        }
-                    });
-
-                    allCargo[i].propertiesCargo.map(item => {
-                        if (item.property === 'paymentTime') {
-                            paymentTime = item.ruName
-                        }
-                    });
+                    paymentForm = this.localizeProperties(allCargo[i].propertiesCargo, 'paymentForm');
+                    paymentTime = this.localizeProperties(allCargo[i].propertiesCargo, 'paymentTime');
 
                     data = parseCargoDate.parseDate(allCargo[i].loadingDateFrom,
                         allCargo[i].loadingDateBy, this.$i18n.localeProperties.code);
 
                     cargo = Object.assign({},
                         {id: allCargo[i].id},
-                        {name: allCargo[i].name},
+                        {name: this.localizeName(allCargo[i].typesCargo)},
                         {loadingPointBy: allPoints[i].cityTo + ', ' + allPoints[i].countryTo},
                         {loadingPointFrom: allPoints[i].cityFrom + ', ' + allPoints[i].countryFrom},
                         {
                             date: this.$t('view.from') + ' ' + data.loadingDateFrom + ' ' + this.$t('view.by')
                                 + ' ' + data.loadingDateBy
                         },
-                        {bodyType: allCargo[i].bodyType},
+                        {bodyType: this.localizeBodyType(allCargo[i].typesCargo)},
                         {status: allCargo[i].status},
                     );
 
@@ -463,6 +479,63 @@
                 }
             },
 
+            localizeProperties(propertiesCargo, property) {
+                let name = propertiesCargo.find(i => i.property === property);
+
+                if (name !== null && name !== undefined) {
+                    if (this.$i18n.localeProperties.code === 'en') {
+                        return name.enName;
+                    } else if (this.$i18n.localeProperties.code === 'ua') {
+                        return name.uaName;
+                    } else {
+                        return name.ruName;
+                    }
+                }
+            },
+
+            localizeName(typesCargo) {
+                let name;
+
+                name = typesCargo.find(i => {
+                    if (i.type === 'nameCargo') {
+                        return i;
+                    }
+                });
+
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return name.enName;
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return name.uaName;
+                } else {
+                    return name.ruName;
+                }
+            },
+
+            localizeBodyType(typesCargo) {
+                let name;
+
+                name = typesCargo.find(i => {
+                    if (i.type === 'bodyType') {
+                        return i;
+                    }
+                    if (i.type === 'vesselType') {
+                        return i;
+                    }
+                    if (i.type === 'carType') {
+                        return i;
+                    }
+                });
+
+
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return name.enName;
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return name.uaName;
+                } else {
+                    return name.ruName;
+                }
+            },
+
             async addToProcessing(cargo) {
                 let body = {
                     cargo: cargo,
@@ -472,6 +545,9 @@
 
                 let itemIndex = this.activeCargo.indexOf(cargo);
                 this.activeCargo.splice(itemIndex, 1);
+
+                itemIndex = this.offerCargo.indexOf(cargo);
+                this.offerCargo.splice(itemIndex, 1);
 
                 await this.$store.dispatch('offer/changeStatusCargoAction', body);
 
@@ -484,6 +560,20 @@
 
             redirectToUpdateCargo(id) {
                 this.$router.push('/offer/cargo/editing/' + id)
+            },
+
+            async deleteCargo(id) {
+                const body = {
+                    id: id,
+                    store: this.$store
+                };
+                console.log(id);
+                await this.$store.dispatch('admin/deleteCargoAction', body).then(() => {
+                    let number = this.offerCargo.findIndex(i => i.id === id);
+                    this.offerCargo.splice(number, 1);
+                    this.snackbar = true;
+                    this.dialogDelete = false;
+                })
             }
         }
     }

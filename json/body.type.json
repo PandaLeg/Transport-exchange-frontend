@@ -1,164 +1,190 @@
 {
   "typesBody": [
     {
-      "id": "1",
-      "name": "Бортовой",
-      "check": "open"
+      "id": "55",
+      "ruName": "Бортовой",
+      "enName": "Side",
+      "uaName": "Бортовий"
     },
     {
-      "id": "2",
-      "name": "Платформа",
-      "check": "open"
+      "id": "56",
+      "ruName": "Платформа",
+      "enName": "Platform",
+      "uaName": "Платформа"
     },
     {
-      "id": "3",
-      "name": "Самосвал",
-      "check": "open"
+      "id": "57",
+      "ruName": "Самосвал",
+      "enName": "Dump truck",
+      "uaName": "Самоскид"
     },
     {
-      "id": "4",
-      "name": "Низкорамный трал",
-      "check": "open"
+      "id": "58",
+      "ruName": "Низкорамный трал",
+      "enName": "Low bed trawl",
+      "uaName": "Низькорамний трал"
     },
     {
-      "id": "5",
-      "name": "Манипулятор",
-      "check": "open"
+      "id": "59",
+      "ruName": "Манипулятор",
+      "enName": "Manipulator",
+      "uaName": "Маніпулятор"
     },
     {
-      "id": "6",
-      "name": "Контейнеровоз",
-      "check": "open"
+      "id": "60",
+      "ruName": "Контейнеровоз",
+      "enName": "Container ship",
+      "uaName": "Контейнеровоз"
     },
     {
-      "id": "7",
-      "name": "Металловоз",
-      "check": "open"
+      "id": "61",
+      "ruName": "Металловоз",
+      "enName": "Metal truck",
+      "uaName": "Металовоз"
     },
     {
-      "id": "8",
-      "name": "Плитовоз",
-      "check": "open"
+      "id": "62",
+      "ruName": "Плитовоз",
+      "enName": "Plate truck",
+      "uaName": "Плитовоз"
     },
     {
-      "id": "9",
-      "name": "Тент",
-      "check": "closed"
+      "id": "63",
+      "ruName": "Тент",
+      "enName": "Awning",
+      "uaName": "Тент"
     },
     {
-      "id": "10",
-      "name": "Рефрижератор",
-      "check": "closed"
+      "id": "64",
+      "ruName": "Рефрижератор",
+      "enName": "Refrigerator",
+      "uaName": "Рефрижератор"
     },
     {
-      "id": "11",
-      "name": "Изотермический",
-      "check": "closed"
+      "id": "65",
+      "ruName": "Изотермический",
+      "enName": "Isothermal",
+      "uaName": "Ізотермічний"
     },
     {
-      "id": "12",
-      "name": "Цельнометаллический",
-      "check": "closed"
+      "id": "66",
+      "ruName": "Цельнометаллический",
+      "enName": "All-metal",
+      "uaName": "Суцільнометалевий"
     },
     {
-      "id": "13",
-      "name": "Химическая автоцистерна",
-      "check": "closed"
+      "id": "67",
+      "ruName": "Химическая автоцистерна",
+      "enName": "Chemical tank truck",
+      "uaName": "Хімічна автоцистерна"
     },
     {
-      "id": "14",
-      "name": "Микроавтобус",
-      "check": "closed"
+      "id": "68",
+      "ruName": "Микроавтобус",
+      "enName": "Minibus",
+      "uaName": "Мікроавтобус"
     },
     {
-      "id": "15",
-      "name": "Автоцистерна",
-      "check": "cistern"
+      "id": "69",
+      "ruName": "Автоцистерна",
+      "enName": "Tanker truck",
+      "uaName": "Автоцистерна"
     },
     {
-      "id": "16",
-      "name": "Бензовоз",
-      "check": "cistern"
+      "id": "70",
+      "ruName": "Бензовоз",
+      "enName": "Gasoline tanker",
+      "uaName": "Метал"
     },
     {
-      "id": "17",
-      "name": "Газовоз",
-      "check": "cistern"
+      "id": "71",
+      "ruName": "Газовоз",
+      "enName": "Gas truck",
+      "uaName": "Газовоз"
     },
     {
-      "id": "18",
-      "name": "Мазутовоз",
-      "check": "cistern"
+      "id": "72",
+      "ruName": "Битумовоз",
+      "enName": "Bitumen truck",
+      "uaName": "Бітумовоз"
     },
     {
-      "id": "19",
-      "name": "Битумовоз",
-      "check": "cistern"
+      "id": "73",
+      "ruName": "Цементовоз",
+      "enName": "Cement truck",
+      "uaName": "Цементовоз"
     },
     {
-      "id": "20",
-      "name": "Цементовоз",
-      "check": "cistern"
+      "id": "74",
+      "ruName": "Масловоз",
+      "enName": "Oil truck",
+      "uaName": "Масловоз"
     },
     {
-      "id": "21",
-      "name": "Масловоз",
-      "check": "cistern"
+      "id": "75",
+      "ruName": "Молоковоз",
+      "enName": "Milk truck",
+      "uaName": "Молоковоз"
     },
     {
-      "id": "22",
-      "name": "Молоковоз",
-      "check": "cistern"
+      "id": "76",
+      "ruName": "Водовоз",
+      "enName": "Water truck",
+      "uaName": "Водовоз"
     },
     {
-      "id": "23",
-      "name": "Водовоз",
-      "check": "cistern"
+      "id": "77",
+      "ruName": "Кормовоз",
+      "enName": "Feed truck",
+      "uaName": "Кормовоз"
     },
     {
-      "id": "24",
-      "name": "Кормовоз",
-      "check": "cistern"
+      "id": "78",
+      "ruName": "Автовоз",
+      "enName": "Car truck",
+      "uaName": "Автовоз"
     },
     {
-      "id": "25",
-      "name": "Автовоз",
-      "check": "spec_equipment"
+      "id": "79",
+      "ruName": "Лесовоз",
+      "enName": "Timber truck",
+      "uaName": "Лісовоз"
     },
     {
-      "id": "26",
-      "name": "Лесовоз",
-      "check": "spec_equipment"
+      "id": "80",
+      "ruName": "Автокран",
+      "enName": "Truck crane",
+      "uaName": "Автокран"
     },
     {
-      "id": "27",
-      "name": "Автокран",
-      "check": "spec_equipment"
+      "id": "81",
+      "ruName": "Мусоровоз",
+      "enName": "Garbage truck",
+      "uaName": "Сміттєвоз"
     },
     {
-      "id": "28",
-      "name": "Мусоровоз",
-      "check": "spec_equipment"
+      "id": "82",
+      "ruName": "Яхтовоз",
+      "enName": "Yacht truck",
+      "uaName": "Яхтовоз"
     },
     {
-      "id": "29",
-      "name": "Яхтовоз",
-      "check": "spec_equipment"
+      "id": "83",
+      "ruName": "Скотовоз",
+      "enName": "Cattle truck",
+      "uaName": "Скотовоз"
     },
     {
-      "id": "30",
-      "name": "Скотовоз",
-      "check": "spec_equipment"
+      "id": "84",
+      "ruName": "Зерновоз",
+      "enName": "Grain truck",
+      "uaName": "Зерновоз"
     },
     {
-      "id": "31",
-      "name": "Зерновоз",
-      "check": "spec_equipment"
-    },
-    {
-      "id": "32",
-      "name": "Тягач",
-      "check": "spec_equipment"
+      "id": "85",
+      "ruName": "Тягач",
+      "enName": "Tractor truck",
+      "uaName": "Тягач"
     }
   ]
 }

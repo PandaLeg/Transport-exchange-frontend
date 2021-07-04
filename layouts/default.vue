@@ -8,17 +8,91 @@
     >
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
+          :to="localePath('/')"
           router
           exact
         >
           <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>mdi-view-dashboard</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title"/>
+            <v-list-item-title v-text="$t('navBarPanel.main')"/>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          v-if="getUser !== null"
+          :to="localePath('/cargo/add-cargo/vehicles/')"
+          link
+        >
+          <v-list-item-icon>
+            <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ $t('navBarPanel.addCargo') }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          :to="localePath('/cargo/search-cargo')"
+          link
+        >
+          <v-list-item-icon>
+            <fa-icon :icon="faSearch" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ $t('navBarPanel.searchCargo') }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          v-if="getUser !== null"
+          :to="localePath('/transport/add-transport')"
+          link
+        >
+          <v-list-item-icon>
+            <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ $t('navBarPanel.addTransport') }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          :to="localePath('/transport/search-transport')"
+          link
+        >
+          <v-list-item-icon>
+            <fa-icon :icon="faSearch" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ $t('navBarPanel.searchTransport') }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          v-if="getUser !== null"
+          :to="localePath('/offer/cargo')"
+          link
+        >
+          <v-list-item-icon>
+            <fa-icon :icon="faTasks" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ $t('navBarPanel.offersCargo') }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          v-if="getUser !== null"
+          :to="localePath('/offer/transport')"
+          link
+        >
+          <v-list-item-icon>
+            <fa-icon :icon="faTasks" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ $t('navBarPanel.offersTransport') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -70,6 +144,7 @@
           min-width="250"
         >
           <v-list-item
+            v-if="getUser !== null"
             :to="localePath('/cargo/add-cargo/vehicles/')"
             link
           >
@@ -130,6 +205,7 @@
           min-width="250"
         >
           <v-list-item
+            v-if="getUser !== null"
             :to="localePath('/transport/add-transport')"
             link
           >
@@ -196,7 +272,7 @@
               link
             >
               <v-list-item-icon>
-                <fa-icon :icon="faPlus" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+                <fa-icon :icon="faTasks" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-subtitle>{{ $t('navBarPanel.offersCargo') }}</v-list-item-subtitle>
@@ -208,7 +284,7 @@
               link
             >
               <v-list-item-icon>
-                <fa-icon :icon="faSearch" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
+                <fa-icon :icon="faTasks" class="ml-1" :style="{ color: 'gray' }"></fa-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-subtitle>{{ $t('navBarPanel.offersTransport') }}</v-list-item-subtitle>
@@ -296,7 +372,7 @@
             link
           >
             <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
+              <v-icon>mdi-web</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <span>
@@ -310,7 +386,7 @@
             link
           >
             <v-list-item-icon>
-              <v-icon>settings</v-icon>
+              <v-icon>mdi-web</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <span>
@@ -324,7 +400,7 @@
             link
           >
             <v-list-item-icon>
-              <v-icon>exit_to_app</v-icon>
+              <v-icon>mdi-web</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <span>Українська</span>
@@ -361,9 +437,23 @@
           <!-- USER -->
           <v-list-item>
             <v-list-item-avatar>
-              <v-img
-                :src="avatarInstitute"
-              ></v-img>
+              <template
+                v-if="avatarProfile !== ''"
+              >
+                <v-img
+                  :src="avatarProfile"
+                >
+                </v-img>
+              </template>
+              <template
+                v-else
+              >
+                <v-icon
+                  size="40"
+                >
+                  mdi-account-circle
+                </v-icon>
+              </template>
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -375,7 +465,7 @@
 
           <!-- Info -->
           <v-list-item
-            :to="localePath('/profile')"
+            :to="localePath('/profile/' + getUser.id)"
             link
           >
             <v-list-item-icon>
@@ -458,8 +548,8 @@
 </template>
 
 <script>
-    import {faChartLine, faPlus, faSearch, faTruck} from '@fortawesome/free-solid-svg-icons'
-    import profilePageAvatar from '../assets/AllisonProfilePage.jpg'
+    import {faChartLine, faPlus, faSearch, faTruck, faTasks} from '@fortawesome/free-solid-svg-icons'
+    import profilePageAvatar from '../assets/User_font_awesome.png'
 
     export default {
         name: 'default',
@@ -469,18 +559,6 @@
                 clipped: false,
                 drawer: false,
                 fixed: false,
-                items: [
-                    {
-                        icon: 'mdi-apps',
-                        title: 'Welcome',
-                        to: '/'
-                    },
-                    {
-                        icon: 'mdi-chart-bubble',
-                        title: 'About',
-                        to: '/about'
-                    }
-                ],
                 miniVariant: false,
                 right: true,
                 rightDrawer: false,
@@ -508,9 +586,17 @@
                 return faChartLine
             },
 
+            faTasks() {
+                return faTasks
+            },
+
             getUser() {
                 return this.$store.getters['getUser']
-            }
+            },
+
+            avatarProfile() {
+                return this.getUser.profilePicture ? this.getUser.profilePicture : ''
+            },
         },
         methods: {
             redirectMain() {
@@ -521,9 +607,16 @@
                 this.$router.push('/about')
             },
 
-            logout() {
-                this.$store.dispatch('logout');
-                this.$router.push('/authentication')
+            async logout() {
+                const body = {
+                    id: this.getUser.id,
+                    store: this.$store
+                };
+
+                await this.$store.dispatch('logout', body)
+                    .then(() => {
+                        this.$router.push(this.localePath('/authentication'));
+                    });
             }
         }
     }

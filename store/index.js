@@ -1,4 +1,5 @@
 import AuthService from '../service/auth.service'
+import authHeader from "../service/auth-header";
 
 const cookieparser = process.server ? require('cookieparser') : undefined;
 
@@ -109,11 +110,19 @@ export const actions = {
     }
   },
 
-  logout({commit}) {
+  async logout({commit}, body) {
+    const response = await this.$axios.put(API_USER_URL + 'change-visit-user/' + body.id, {},  {
+      headers: authHeader(body.store)
+    });
+    const data = await response.data;
+
     this.$cookies.remove('token', {
       path: '/'
     });
-    commit('logout');
+
+    if (data) {
+      commit('logout');
+    }
   },
 
   async getUserAction({commit}, token) {

@@ -161,6 +161,81 @@
                       </v-autocomplete>
                     </v-col>
                   </v-row>
+
+                  <v-row
+                    v-if="checkFilledSecondPointTo"
+                  >
+                    <v-col
+                      cols="12"
+                      lg="11"
+                      md="11"
+                    >
+                      <v-autocomplete
+                        v-model="secondUnloadingPoint"
+                        :items="entriesSecondUnloadingPoint"
+                        :loading="isLoadingSecondPointTo"
+                        :search-input.sync="searchSecondUnloadingPoint"
+                        color="white"
+                        hide-no-data
+                        hide-selected
+                        clearable
+                        item-text="fields.alternate_names"
+                        item-value="recordid"
+                        :label="$t('addCargo.selectPlaceUnloading')"
+                        :placeholder="$t('addCargo.search')"
+                        filled
+                        return-object
+                      >
+                        <template v-slot:selection="{ attr, on, item, selected }">
+                          <span v-text="item.fields.name"></span>
+                        </template>
+                        <template v-slot:item="{ item }">
+                          <v-icon left color="primary">mdi-flag</v-icon>
+                          <v-list-item-content>
+                            <v-list-item-title v-text="item.fields.name"></v-list-item-title>
+                            <v-list-item-subtitle v-text="item.fields.country"></v-list-item-subtitle>
+                          </v-list-item-content>
+                        </template>
+                      </v-autocomplete>
+                    </v-col>
+                    <v-col
+                      md="1"
+                      lg="1"
+                    >
+                      <v-btn
+                        icon
+                        smalll
+                        color="error"
+                        fab
+                        @click="deleteUnloadingPoint('secondUnloading')"
+                      >
+                        <v-icon>delete</v-icon>
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+
+                  <v-row
+                    v-if="checkFilledTwoPointUnloading && countOpenedField !== 6"
+                  >
+                    <v-col
+                      cols="12"
+                      md="11"
+                      lg="11"
+                    >
+                      <v-btn
+                        class="marg-b ma-2 white--text"
+                        @click="addNextFieldPointTo"
+                      >
+                        {{ $t('addCargo.add') }}
+                        <v-icon
+                          right
+                          white
+                        >
+                          add
+                        </v-icon>
+                      </v-btn>
+                    </v-col>
+                  </v-row>
                 </v-container>
               </v-form>
 
@@ -295,19 +370,24 @@
                 firstLoadingPoint: null,
                 secondLoadingPoint: null,
                 firstUnloadingPoint: null,
+                secondUnloadingPoint: null,
                 isLoadingFirstPointFrom: false,
                 isLoadingSecondPointFrom: false,
                 isLoadingFirstPointTo: false,
+                isLoadingSecondPointTo: false,
                 searchFirstLoadingPoint: null,
                 searchSecondLoadingPoint: null,
                 searchFirstUnloadingPoint: null,
+                searchSecondUnloadingPoint: null,
                 entriesFirstLoadingPoint: [],
                 entriesSecondLoadingPoint: [],
                 entriesFirstUnloadingPoint: [],
+                entriesSecondUnloadingPoint: [],
                 valid: false,
                 checkFilledTwoPointLoading: false,
                 checkFilledTwoPointUnloading: false,
                 checkFilledSecondPointFrom: false,
+                checkFilledSecondPointTo: false,
                 countOpenedField: 2,
                 center: {lat: 55.75222, lng: 37.61556},
                 directionsService: null,
@@ -329,6 +409,7 @@
                     this.checkFilledTwoPointUnloading = true;
                 }
             },
+
             firstUnloadingPoint() {
                 if (this.firstLoadingPoint && this.firstUnloadingPoint && this.countOpenedField !== 6) {
                     this.checkFilledTwoPointLoading = true;
@@ -338,6 +419,10 @@
 
             secondLoadingPoint() {
                 this.checkFilledLoadingFields(this.secondLoadingPoint);
+            },
+
+            secondUnloadingPoint() {
+                this.checkFilledUnloadingFields(this.secondUnloadingPoint);
             },
 
             searchFirstLoadingPoint(val) {
@@ -359,7 +444,7 @@
 
                     console.log("FIRST SEARCH", val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -391,7 +476,7 @@
 
                     console.log("SECOND SEARCH", val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -422,7 +507,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -434,6 +519,37 @@
                         .finally(() => (this.isLoadingFirstPointTo = false))
                 }
             },
+
+            searchSecondUnloadingPoint(val) {
+                let checkFilled = false;
+                if (this.entriesSecondUnloadingPoint.length > 0) {
+                    for (let i = 0; i < this.entriesSecondUnloadingPoint.length; i++) {
+                        if (this.secondUnloadingPoint === this.entriesSecondUnloadingPoint[i]) {
+                            checkFilled = true;
+                        }
+                    }
+                }
+
+                if (!checkFilled) {
+                    // Items have already been requested
+                    if (this.isLoadingSecondPointTo) return;
+
+                    this.isLoadingSecondPointTo = true;
+
+                    console.log(val);
+                    // Lazily load input items
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
+                        val + '&lang=ru&rows=50')
+                        .then(res => res.json())
+                        .then(res => {
+                            this.entriesSecondUnloadingPoint = res.records;
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                        .finally(() => (this.isLoadingSecondPointTo = false))
+                }
+            }
         },
         methods: {
             initMap() {
@@ -466,6 +582,7 @@
                     const dr = this.directionsRenderer;
                     let points = [
                         this.secondLoadingPoint,
+                        this.secondUnloadingPoint
                     ];
                     let waypts = [];
 
@@ -561,6 +678,28 @@
                 this.checkFilledTwoPointLoading = false;
             },
 
+            addNextFieldPointTo() {
+                if (this.firstLoadingPoint && this.firstUnloadingPoint && !this.checkFilledSecondPointTo) {
+                    this.checkFilledSecondPointTo = true;
+                    this.countOpenedField++;
+                } else if (this.firstLoadingPoint && this.firstUnloadingPoint && this.checkFilledSecondPointTo
+                    && !this.checkFilledThirdPointTo) {
+                    this.checkFilledThirdPointTo = true;
+                    this.countOpenedField++;
+                } else if (this.firstLoadingPoint && this.firstUnloadingPoint && this.checkFilledSecondPointTo
+                    && this.checkFilledThirdPointTo && !this.checkFilledFourthPointTo) {
+                    this.checkFilledFourthPointTo = true;
+                    this.countOpenedField++;
+                } else if (this.firstLoadingPoint && this.firstUnloadingPoint && this.checkFilledSecondPointTo
+                    && this.checkFilledThirdPointTo && this.checkFilledFourthPointTo
+                    && !this.checkFilledFifthPointTo) {
+                    this.checkFilledFifthPointTo = true;
+                    this.countOpenedField++;
+                }
+
+                this.checkFilledTwoPointUnloading = false;
+            },
+
             deleteLoadingPoint(checkField) {
                 this.checkFilledTwoPointLoading = true;
                 this.checkFilledTwoPointUnloading = true;
@@ -588,11 +727,45 @@
                 this.countOpenedField--;
             },
 
+            deleteUnloadingPoint(checkFilled) {
+                this.checkFilledTwoPointLoading = true;
+                this.checkFilledTwoPointUnloading = true;
+
+                if (checkFilled === 'secondUnloading') {
+                    this.checkFilledSecondPointTo = false;
+                    this.secondUnloadingPoint = null;
+                }
+
+                if (checkFilled === 'thirdUnloading') {
+                    this.checkFilledThirdPointTo = false;
+                    this.thirdUnloadingPoint = null;
+                }
+
+                if (checkFilled === 'fourthUnloading') {
+                    this.checkFilledFourthPointTo = false;
+                    this.fourthUnloadingPoint = null;
+                }
+
+                if (checkFilled === 'fifthUnloading') {
+                    this.checkFilledFifthPointTo = false;
+                    this.fifthUnloadingPoint = null;
+                }
+
+                this.countOpenedField--;
+            },
+
             checkFilledLoadingFields(value) {
                 if (!this.checkFilledTwoPointLoading) {
                     this.checkFilledTwoPointLoading = !!(value && this.countOpenedField !== 6)
                 }
             },
+
+            checkFilledUnloadingFields(value) {
+                if (!this.checkFilledTwoPointUnloading) {
+                    this.checkFilledTwoPointUnloading = !!(value && this.countOpenedField !== 6);
+                }
+            },
+
         },
         mounted() {
             this.initMap();

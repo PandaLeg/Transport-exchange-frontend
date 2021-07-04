@@ -43,7 +43,7 @@
 
                 <v-card>
                   <v-card-title>
-                    <span class="headline">{{ $t('view.cargoOffer') }}</span>
+                    <span class="headline">{{ $t('adminPanel.titleIdentification') }}</span>
                   </v-card-title>
                   <v-card-text>
                     <v-container>
@@ -90,9 +90,7 @@
                 <span
                   class="spectral-font text--primary"
                 >
-                  {{ firstName }}
-                  {{ lastName }}
-                  {{ patronymic }}
+                  {{ fullName }}
                 </span>
               </v-col>
             </v-row>
@@ -203,9 +201,7 @@
         layout: 'admin-bar',
         data() {
             return {
-                firstName: '',
-                lastName: '',
-                patronymic: '',
+                fullName: '',
                 email: '',
                 phone: '',
                 companyName: '',
@@ -244,9 +240,7 @@
                 await this.$store.dispatch('admin/getConfirmationNotificationAction', body)
                     .then(data => {
                         console.log(data);
-                        this.firstName = data.user.firstName;
-                        this.lastName = data.user.lastName;
-                        this.patronymic = data.user.patronymic;
+                        this.fullName = data.user.fullName;
                         this.email = data.user.email;
                         this.phone = data.user.phone;
                         this.companyName = data.user.companyName;

@@ -34,9 +34,7 @@
                   lg="9"
                 >
                   <span class="subtitle-font">
-                    {{ confirmation.user.firstName }}
-                    {{ confirmation.user.lastName }}
-                    {{ confirmation.user.patronymic }}
+                    {{ confirmation.user.fullName }}
                   </span>
                 </v-col>
 

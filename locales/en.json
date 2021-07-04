@@ -19,6 +19,13 @@
     "logout": "Logout",
     "authorization": "Authorization"
   },
+  "main": {
+    "title": "International transportation service",
+    "titleCargoTotal": "Total cargo",
+    "titleCargoToday": "Cargo today",
+    "titleTransportTotal": "Total transport",
+    "titleTransportToday": "Transport today"
+  },
   "authAndReg": {
     "titleSignIn": "Sign-In",
     "titleRegisterPage": "Registration page",
@@ -43,7 +50,8 @@
     "companyCode": "Company code",
     "fullName": "Full name of contact face",
     "btnIndividual": "Individual",
-    "signUpBtn": "Sign Up"
+    "signUpBtn": "Sign Up",
+    "errorMessageAuth": "Incorrect email or password."
   },
   "addCargo": {
     "vehiclesTitle": "Vehicles",
@@ -102,6 +110,18 @@
     "additional": "Additional",
     "additionalInformation": "Additional information",
     "photo": "Photo",
+    "containerType": "Container type",
+    "selectContainerType": "Select container name",
+    "countContainer": "Count (pieces)",
+    "imo": "Select class IMO",
+    "transportAndPermissions": "Transport and permissions",
+    "shipType": "Ship type",
+    "selectShipType": "Select ship type",
+    "incoterms": "Incoterms",
+    "selectType": "Select type",
+    "loadingContainer": "Loading container",
+    "carType": "Car type",
+    "selectCarType": "Select car type",
     "add": "Add"
   },
   "searchCargo": {
@@ -157,7 +177,8 @@
     "fullName": "Full name",
     "email": "Email",
     "location": "Location",
-
+    "documentTitle": "Documents",
+    "documentRedirect": "Look",
     "respond": "Respond",
     "cargoOffer": "Cargo offer",
     "surname": "Surname",
@@ -166,9 +187,10 @@
     "wishes": "Wishes",
     "closeBtn": "Close",
     "sendBtn": "Send",
-
     "writeMessage": "Write message",
-    "message": "Message"
+    "message": "Message",
+    "snackBarOffers": "The offer has been successfully sent and is in the tab 'Offers'",
+    "snackBarMessage": "Message sent successfully"
   },
   "offer": {
     "titleAll": "All",
@@ -263,6 +285,7 @@
   },
   "searchTransport": {
     "title": "Поиск транспорта",
+    "bannerText": "To search for transport, you must enter a city or country.",
     "selectCountry": "Select country",
     "fromWhere": "From where",
     "whereTo": "Where to",
@@ -297,16 +320,25 @@
   "profile": {
     "cargoOffers": "Cargo offers",
     "transportsOffers": "Transport offers",
+    "unfinished": "Unfinished",
     "successful": "Successful",
     "contactInformation": "Contact information",
     "fullName": "Full name",
+    "lastName": "Last name",
+    "firstName": "First name",
+    "patronymic": "Patronymic",
+    "description": "Description",
     "email": "Email",
     "phoneNumber": "Phone",
     "lastVisit": "Last visit",
     "informationAboutCompany": "Information about company",
     "name": "Company name",
     "country": "Country",
-    "city": "City"
+    "city": "City",
+    "сonfirm": "Confirm",
+    "сonfirmation": "Confirmation",
+    "snackbarConfirm": "Confirmation sent successfully",
+    "btnSave": "Sent"
   },
   "settings": {
     "personalData": "Personal data",
@@ -345,11 +377,13 @@
     "companyCode": "Company code",
     "titleAllCargo": "All cargo",
     "titleAllTransport": "All transport",
+    "titleIdentification": "Identification",
     "titleIdentificationCompany": "Identification company",
     "name": "Name",
     "code": "Code",
     "textAboutConfirmation": "Are you sure you want, to verify your identify?",
     "confirmBtn": "Confirm",
+    "snackbarUpdate": "Updated",
     "updateBtn": "Update"
   }
 }

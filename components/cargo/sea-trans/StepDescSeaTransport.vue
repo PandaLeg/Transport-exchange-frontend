@@ -25,7 +25,7 @@
         <v-row>
           <v-col>
             <v-subheader inset class="text--white">
-              Транспорт и разрешения
+              {{ $t('addCargo.transportAndPermissions') }}
             </v-subheader>
             <v-divider inset></v-divider>
           </v-col>
@@ -37,7 +37,7 @@
             lg="2"
           >
             <v-subheader>
-              Тип судна
+              {{ $t('addCargo.shipType') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -57,7 +57,7 @@
               clearable
               item-text="name"
               item-value="id"
-              label="Выберите тип судна"
+              :label="$t('addCargo.selectShipType')"
               :placeholder="$t('addCargo.search')"
               filled
               @change="$v.bodyType.$touch()"
@@ -83,7 +83,7 @@
             lg="2"
           >
             <v-subheader>
-              Инкотермс
+              {{ $t('addCargo.incoterms') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -95,7 +95,7 @@
               v-model="incoterms"
               :items="getIncoterms"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите тип"
+              :label="$t('addCargo.selectType')"
               filled
               clearable
             ></v-select>
@@ -108,7 +108,7 @@
             lg="2"
           >
             <v-subheader>
-              Загрузка контейнера
+              {{ $t('addCargo.loadingContainer') }}
             </v-subheader>
           </v-col>
           <v-col
@@ -120,7 +120,7 @@
               v-model="containerLoading"
               :items="getLoadingVessel"
               :menu-props="{ bottom: true, offsetY: true }"
-              label="Выберите тип загрузки"
+              :label="$t('addCargo.selectLoadingType')"
               filled
               clearable
               multiple
@@ -182,11 +182,13 @@
           >
             <v-text-field
               v-model="cost"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addCargo.sum')"
-              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
+              filled
+              clearable
+              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки' ||
+              typePayment === 'Bid request' || typePayment === 'Запит ставки'"
             ></v-text-field>
           </v-col>
 
@@ -202,7 +204,8 @@
               :label="$t('addCargo.currency')"
               filled
               clearable
-              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
+              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки' ||
+              typePayment === 'Bid request' || typePayment === 'Запит ставки'"
             ></v-select>
           </v-col>
 
@@ -218,7 +221,8 @@
               :label="$t('addCargo.for')"
               filled
               clearable
-              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки'"
+              :disabled="!typePayment || typePayment === '' || typePayment === 'Запрос ставки' ||
+              typePayment === 'Bid request' || typePayment === 'Запит ставки'"
             ></v-select>
           </v-col>
         </v-row>
@@ -292,10 +296,11 @@
           >
             <v-text-field
               v-model="prepayment"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               label="50%"
+              filled
+              clearable
             ></v-text-field>
           </v-col>
         </v-row>
@@ -330,17 +335,16 @@
         data() {
             return {
                 bodyType: null,
-                bodyTypes: [],
                 searchBodyType: null,
                 incoterms: '',
                 containerLoading: [],
                 typePayment: '',
-                cost: '',
+                cost: null,
                 currency: '',
                 costPer: '',
                 paymentForm: '',
                 paymentTime: '',
-                prepayment: '',
+                prepayment: null,
                 isLoading: false,
                 valid: true
             }
@@ -350,9 +354,6 @@
                 required
             }
         },
-        created() {
-            this.bodyTypes = typesVessel;
-        },
         computed: {
             faArrowAltCircleRight() {
                 return faArrowAltCircleRight
@@ -360,6 +361,22 @@
 
             faTruckMoving() {
                 return faTruckMoving
+            },
+
+            bodyTypes(){
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return typesVessel.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.enName})
+                    });
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return typesVessel.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.uaName})
+                    });
+                } else {
+                    return typesVessel.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.ruName})
+                    });
+                }
             },
 
             getInitialCargo() {
@@ -429,18 +446,20 @@
                 }
 
                 let cargo = {
-                    bodyType: this.bodyType.name, incoterms: this.incoterms, cost: this.cost,
+                    incoterms: this.incoterms, cost: this.cost,
                     currency: this.currency, prepayment: this.prepayment
                 };
 
                 let propertiesCargo = {
-                    containerLoading: this.containerLoading, typePayment: this.typePayment, costPer: this.costPer,
-                    paymentForm: this.paymentForm, paymentTime: this.paymentTime
+                    bodyType: this.bodyType.name, type: 'vesselType', containerLoading: this.containerLoading,
+                    typePayment: this.typePayment, costPer: this.costPer, paymentForm: this.paymentForm,
+                    paymentTime: this.paymentTime
                 };
 
-                Object.assign(this.getInitialCargo, cargo);
+                this.$store.commit('cargo/setInitialCargo', Object.assign(this.getInitialCargo, cargo));
 
-                let tempPropertiesCargo = Object.assign({}, propertiesCargo);
+                let tempPropertiesCargo = Object.assign(this.getPropertiesCargo, propertiesCargo);
+
                 this.$store.commit('cargo/setPropertiesCargo', tempPropertiesCargo);
 
                 if (n === this.steps) {

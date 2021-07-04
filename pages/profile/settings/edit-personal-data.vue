@@ -263,8 +263,8 @@
             }
         },
         created() {
-            this.surname = this.getUser.lastName;
-            this.name = this.getUser.firstName;
+            this.lastName = this.getUser.lastName;
+            this.firstName = this.getUser.firstName;
             this.patronymic = this.getUser.patronymic;
             this.fullName = this.getUser.fullName;
             this.phone = this.getUser.phone;

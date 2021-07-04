@@ -19,6 +19,13 @@
     "logout": "Выйти",
     "authorization": "Авторизация"
   },
+  "main": {
+    "title": "Сервис международных перевозок",
+    "titleCargoTotal": "Грузов всего",
+    "titleCargoToday": "Грузов сегодня",
+    "titleTransportTotal": "Транспорта всего",
+    "titleTransportToday": "Транспорта сегодня"
+  },
   "authAndReg": {
     "titleSignIn": "Авторизация",
     "titleRegisterPage": "Страница регистрации",
@@ -43,7 +50,8 @@
     "companyName": "Наименование компании",
     "companyCode": "Код компании",
     "fullName": "ФИО контактного лица",
-    "signUpBtn": "Зарегистрироваться"
+    "signUpBtn": "Зарегистрироваться",
+    "errorMessageAuth": "Неправильный email или пароль."
   },
   "addCargo": {
     "vehiclesTitle": "Автотранспорт",
@@ -102,6 +110,18 @@
     "additional": "Дополнительно",
     "additionalInformation": "Дополнительная информация",
     "photo": "Фото",
+    "containerType": "Тип контейнера",
+    "selectContainerType": "Выберете наименование контейнера",
+    "countContainer": "Количество (шт)",
+    "imo": "Выберите класс IMO",
+    "transportAndPermissions": "Транспорт и разрешения",
+    "shipType": "Тип судна",
+    "selectShipType": "Выберите тип судна",
+    "incoterms": "Инкотермс",
+    "selectType": "Выберите тип",
+    "loadingContainer": "Загрузка контейнера",
+    "carType": "Тип вагона",
+    "selectCarType": "Выберите тип вагона",
     "add": "Добавить"
   },
   "searchCargo": {
@@ -157,6 +177,8 @@
     "fullName": "ФИО",
     "email": "Эл. почта",
     "location": "Местоположение",
+    "documentTitle": "Документы",
+    "documentRedirect": "Посмотреть",
     "respond": "Откликнуться",
     "cargoOffer": "Заявка на груз",
     "surname": "Фамилия",
@@ -166,7 +188,9 @@
     "closeBtn": "Закрыть",
     "sendBtn": "Отправить",
     "writeMessage": "Написать",
-    "message": "Сообщение"
+    "message": "Сообщение",
+    "snackBarOffers": "Заявка успешно отправлена и находится во вкладке 'Заявки'",
+    "snackBarMessage": "Сообщение успешно отправлено"
   },
   "offer": {
     "titleAll": "Все",
@@ -225,7 +249,6 @@
     "pointThree": "Пункт 3",
     "pointFour": "Пункт 4",
     "pointFive": "Пункт 5",
-
     "transport": "Транспорт",
     "typeBody": "Тип кузова",
     "selectBodyType": "Выберите тип кузова",
@@ -254,7 +277,6 @@
     "paymentTime": "Момент оплаты",
     "selectPaymentTime": "Выберите момент оплаты",
     "prepayment": "Предоплата",
-
     "additional": "Дополнительно",
     "additionalInformation": "Дополнительная информация",
     "photo": "Фото",
@@ -262,6 +284,7 @@
   },
   "searchTransport": {
     "title": "Поиск транспорта",
+    "bannerText": "Для поиска транспорта, необходимо ввести город или страну.",
     "selectCountry": "Выберите страну",
     "fromWhere": "Откуда",
     "whereTo": "Куда",
@@ -296,16 +319,25 @@
   "profile": {
     "cargoOffers": "Заявки по грузу",
     "transportsOffers": "Заявки по транспорту",
+    "unfinished": "Незавершённые",
     "successful": "Успешных",
     "contactInformation": "Контактная информация",
     "fullName": "ФИО",
+    "lastName": "Фамилия",
+    "firstName": "Имя",
+    "patronymic": "Отчество",
+    "description": "Описание",
     "email": "Эл. почта",
     "phoneNumber": "Номер",
     "lastVisit": "Последнее посещение",
     "informationAboutCompany": "Информация о предприятии",
     "name": "Наименование",
     "country": "Страна",
-    "city": "Город"
+    "city": "Город",
+    "сonfirm": "Подтвердить",
+    "сonfirmation": "Подтверждение",
+    "snackbarConfirm": "Подтверждение успешно отправлено",
+    "btnSave": "Отправить"
   },
   "settings": {
     "personalData": "Личные данные",
@@ -344,11 +376,13 @@
     "companyCode": "Код компании",
     "titleAllCargo": "Все грузы",
     "titleAllTransport": "Весь транспорт",
+    "titleIdentification": "Идентификация",
     "titleIdentificationCompany": "Идентификация компании",
     "name": "Наименование",
     "code": "Код",
     "textAboutConfirmation": "Вы уверены, что хотите подтвердить идентификацию?",
     "confirmBtn": "Подтвердить",
+    "snackbarUpdate": "Обновлено",
     "updateBtn": "Обновить"
   }
 }

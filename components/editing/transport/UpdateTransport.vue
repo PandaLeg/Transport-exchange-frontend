@@ -1321,7 +1321,6 @@
         data() {
             return {
                 bodyType: null,
-                bodyTypes: [],
                 searchBodyType: null,
                 isLoading: false,
                 carryingCapacityFrom: '',
@@ -1415,7 +1414,6 @@
             }
         },
         created() {
-            this.bodyTypes = typesBody;
             this.getTransport();
         },
         computed: {
@@ -1449,6 +1447,22 @@
 
             getListArg() {
                 return this.$store.getters['transport/getListArg'];
+            },
+
+            bodyTypes() {
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return typesBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.enName})
+                    });
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return typesBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.uaName})
+                    });
+                } else {
+                    return typesBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.ruName})
+                    });
+                }
             },
 
             getListLoadingCar() {
@@ -1778,7 +1792,7 @@
                             }
                         }
 
-                        this.bodyType = this.bodyTypes.find(item => response.transport.bodyType === item.name);
+                        this.bodyType = this.localizeBodyType(response.transport.typesTransport, 'bodyType');
                         this.carryingCapacityFrom = response.transport.carryingCapacityFrom;
                         this.carryingCapacityUpTo = response.transport.carryingCapacityUpTo;
                         this.volumeFrom = response.transport.volumeFrom;
@@ -1820,6 +1834,20 @@
                         });
                         console.log(this.properties)
                     });
+            },
+
+            localizeBodyType(typesTransport, type) {
+                let name;
+
+                name = typesTransport.find(i => i.type === type);
+
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return Object.assign({}, {id: String(name.id), name: name.enName})
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return Object.assign({}, {id: String(name.id), name: name.uaName})
+                } else {
+                    return Object.assign({}, {id: String(name.id), name: name.ruName})
+                }
             },
 
             checkLocaleAndGetList(someObject) {
@@ -2125,7 +2153,7 @@
                 let formData = new FormData();
 
                 let transport = {
-                    id: this.transportView.id, bodyType: this.bodyType.name, loadingDateFrom: this.loadingDateFrom,
+                    id: this.transportView.id, loadingDateFrom: this.loadingDateFrom,
                     loadingDateBy: this.loadingDateBy, carryingCapacityFrom: this.carryingCapacityFrom,
                     carryingCapacityUpTo: this.carryingCapacityUpTo, volumeFrom: this.volumeFrom,
                     volumeUpTo: this.volumeUpTo, lengthTransport: this.lengthTransport,
@@ -2187,9 +2215,10 @@
                 ];
 
                 let propertiesTransport = {
-                    typesLoadingTruck: this.typesLoadingTruck, typesUnloadingTruck: this.typesUnloadingTruck,
-                    permissions: this.permissions, typePayment: this.typePayment, costPer: this.costPer,
-                    paymentForm: this.paymentForm, paymentTime: this.paymentTime
+                    bodyType: this.bodyType.name, typesLoadingTruck: this.typesLoadingTruck,
+                    typesUnloadingTruck: this.typesUnloadingTruck, permissions: this.permissions,
+                    typePayment: this.typePayment, costPer: this.costPer, paymentForm: this.paymentForm,
+                    paymentTime: this.paymentTime
                 };
 
                 formData.append("firstPhoto", this.firstPhoto);
@@ -2212,6 +2241,8 @@
 
                 await this.$store.dispatch('admin/updateTransportAction', {
                     store: this.$store, formData: formData
+                }).then(() => {
+                    this.$router.push(this.localePath('/offer/transport'));
                 });
             }
         }

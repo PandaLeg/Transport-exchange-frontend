@@ -48,7 +48,7 @@
             >
               mdi-clock
             </v-icon>
-            <span class="caption grey--text font-weight-light">last registration 26 minutes ago</span>
+            <span class="caption grey--text font-weight-light">last registration 37 minutes ago</span>
           </v-card-text>
         </v-card>
       </v-col>
@@ -96,7 +96,7 @@
             >
               mdi-clock
             </v-icon>
-            <span class="caption grey--text font-weight-light">last registration 20 minutes ago</span>
+            <span class="caption grey--text font-weight-light">last added 40 minutes ago</span>
           </v-card-text>
         </v-card>
       </v-col>
@@ -144,7 +144,7 @@
             >
               mdi-clock
             </v-icon>
-            <span class="caption grey--text font-weight-light">last registration 40 minutes ago</span>
+            <span class="caption grey--text font-weight-light">last added 40 minutes ago</span>
           </v-card-text>
         </v-card>
       </v-col>
@@ -397,6 +397,7 @@
 <script>
     import {faBox, faTruckMoving} from '@fortawesome/free-solid-svg-icons'
 
+
     export default {
         name: "adminPanel",
         layout: 'admin-bar',
@@ -430,6 +431,36 @@
                     520,
                     756,
                 ],
+                chartData: {
+                    datasets: [{
+                        label: [
+                            'JA',
+                            'FE',
+                            'MA',
+                            'AP',
+                            'MAI',
+                            'JU',
+                            'JUL',
+                            'AU',
+                            'SE',
+                            'OC',
+                            'NO',
+                            'DE',],
+                        data: [
+                            0,
+                            200,
+                            400,
+                            600,
+                            800,
+                            200,
+                            300,
+                            450,
+                            150,
+                            360,
+                            520,
+                            756,]
+                    }]
+                },
                 gradients: [
                     ['#42b3f4'],
                     ['purple', 'violet'],

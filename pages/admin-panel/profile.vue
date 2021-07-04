@@ -194,6 +194,22 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-snackbar
+      v-model="snackbar"
+      :multi-line="multiLine"
+    >
+      <p>{{ $t('adminPanel.snackbarUpdate') }}</p>
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="red"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          {{ $t('view.closeBtn') }}
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -214,7 +230,9 @@
                 photoProfile: null,
                 photoUrl: '',
                 formData: null,
-                valid: true
+                valid: true,
+                multiLine: true,
+                snackbar: false
             }
         },
         created() {
@@ -260,6 +278,7 @@
                     store: this.$store, formData: this.formData
                 }).then(
                     () => {
+                        this.snackbar = true;
                         checkUpdate = true;
                     });
 

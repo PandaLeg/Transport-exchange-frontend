@@ -188,6 +188,53 @@
             </v-hover>
           </v-col>
         </v-row>
+
+        <v-row justify="space-between">
+          <v-col
+            md="12"
+            lg="12"
+          >
+            <v-subheader>
+              {{ $t('view.documentTitle') }}
+            </v-subheader>
+          </v-col>
+          <v-col
+            cols="12"
+            md="4"
+            lg="4"
+          >
+            <v-file-input
+              v-model="firstFile"
+              chips
+              show-size
+              truncate-length="15"
+            ></v-file-input>
+          </v-col>
+          <v-col
+            cols="12"
+            md="4"
+            lg="4"
+          >
+            <v-file-input
+              v-model="secondFile"
+              chips
+              show-size
+              truncate-length="15"
+            ></v-file-input>
+          </v-col>
+          <v-col
+            cols="12"
+            md="4"
+            lg="4"
+          >
+            <v-file-input
+              v-model="thirdFile"
+              chips
+              show-size
+              truncate-length="15"
+            ></v-file-input>
+          </v-col>
+        </v-row>
       </v-container>
     </v-form>
 
@@ -220,7 +267,10 @@
                 secondPhoto: null,
                 secondImageUrl: '',
                 thirdPhoto: null,
-                thirdImageUrl: ''
+                thirdImageUrl: '',
+                firstFile: null,
+                secondFile: null,
+                thirdFile: null
             }
         },
         computed: {
@@ -283,7 +333,6 @@
                     fr.addEventListener('load', () => {
                         this.firstImageUrl = fr.result;
                         this.firstPhoto = files[0];
-                        console.log("SELECTED 1", this.firstPhoto);
                     });
                 }
             },
@@ -301,7 +350,6 @@
                     fr.addEventListener('load', () => {
                         this.secondImageUrl = fr.result;
                         this.secondPhoto = files[0];
-                        console.log("SELECTED 2", this.secondPhoto);
                     });
                 }
             },
@@ -319,13 +367,12 @@
                     fr.addEventListener('load', () => {
                         this.thirdImageUrl = fr.result;
                         this.thirdPhoto = files[0];
-                        console.log("SELECTED 3", this.thirdPhoto);
                     });
                 }
             },
 
             async addCargo() {
-                Object.assign(this.getInitialCargo, {additional: this.additional});
+                let cargo = Object.assign(this.getInitialCargo, {additional: this.additional});
 
                 let formData = new FormData();
 
@@ -333,7 +380,11 @@
                 formData.append("secondPhoto", this.secondPhoto);
                 formData.append("thirdPhoto", this.thirdPhoto);
 
-                formData.append("cargo", new Blob([JSON.stringify(this.getInitialCargo)],
+                formData.append("fistFile", this.firstFile);
+                formData.append("secondFile", this.secondFile);
+                formData.append("thirdFile", this.thirdFile);
+
+                formData.append("cargo", new Blob([JSON.stringify(cargo)],
                     {type: "application/json"}));
 
                 formData.append("placesCargo", new Blob([JSON.stringify(this.getPlacesCargo)],

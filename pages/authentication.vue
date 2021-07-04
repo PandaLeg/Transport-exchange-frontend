@@ -12,6 +12,19 @@
             </v-toolbar>
             <form name="form">
               <v-card-text class="pr-5 pl-5">
+
+                <template
+                  v-if="checkLog"
+                >
+                  <v-alert
+                    dense
+                    outlined
+                    type="error"
+                  >
+                    {{ $t('authAndReg.errorMessageAuth') }}
+                  </v-alert>
+                </template>
+
                 <v-text-field
                   v-model="email"
                   outlined
@@ -21,6 +34,7 @@
                   clearable
                   required
                 ></v-text-field>
+
                 <v-text-field
                   v-model="password"
                   outlined
@@ -34,6 +48,7 @@
                   @click:append="showPassword = !showPassword"
                 ></v-text-field>
               </v-card-text>
+
               <v-card-actions class="pr-5 pl-5">
                 <v-progress-circular
                   v-if="loading"
@@ -56,11 +71,7 @@
                 </v-btn>
               </v-card-actions>
             </form>
-            <!--            <v-row justify="center" class="pt-3">
-                          <NuxtLink to="/">
-                            Home page
-                          </NuxtLink>
-                        </v-row>-->
+
             <v-card-text>
               <v-list>
                 <v-subheader>{{ $t('authAndReg.titleRegisterPage') }}</v-subheader>
@@ -94,24 +105,22 @@
                 showPassword: false,
                 email: '',
                 password: '',
-                loading: false
+                loading: false,
+                checkLog: false
             }
         },
         computed: {
             getUser() {
                 return this.$store.getters['getUser']
-            },
-
-            getBackgroundImage() {
-                return mainPhoto;
             }
         },
         methods: {
             async handleLogin() {
-                this.loading = true;
                 let checkLog = false;
 
                 if (this.email && this.password) {
+                    this.loading = true;
+
                     await this.$store.dispatch('login', {
                         email: this.email,
                         password: this.password
@@ -121,6 +130,7 @@
                                 checkLog = true;
                             }, error => {
                                 console.log(error);
+                                this.checkLog = true;
                                 this.loading = false;
                             }
                         );
@@ -139,6 +149,7 @@
                                     }
                                 }, error => {
                                     console.log(error);
+                                    this.checkLog = true;
                                     this.loading = false;
                                 }
                             );

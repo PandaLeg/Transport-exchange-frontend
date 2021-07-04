@@ -237,15 +237,38 @@ export const actions = {
     console.log(data);
   },
 
-  async updateTransportAction({commit}, body) {
-    const response = await this.$axios.post(API_URL + 'update-transport', body.formData, {
-      headers: Object.assign({}, authHeader(body.store), {"Content-Type": undefined})
+  async deleteCargoAction({commit}, body) {
+    const response = await this.$axios.delete(API_URL + 'delete-cargo',{
+      headers: authHeader(body.store),
+      params: {id: body.id}
     });
     const data = await response.data;
 
     console.log(data);
   },
 
+  async updateTransportAction({commit}, body) {
+    const response = await this.$axios.post(API_URL + 'update-transport', body.formData, {
+      headers: Object.assign({}, authHeader(body.store), {"Content-Type": undefined})
+    });
+    const data = await response.data;
+
+    if(data){
+      return Promise.resolve();
+    }
+  },
+
+  async deleteTransportAction({commit}, body) {
+    const response = await this.$axios.delete(API_URL + 'delete-transport',{
+      headers: authHeader(body.store),
+      params: {id: body.id}
+    });
+    const data = await response.data;
+
+    if(data){
+      return Promise.resolve();
+    }
+  },
 
   async getConfirmationNotificationsAction({commit}, body) {
     const response = await this.$axios.get(API_URL + 'get-confirmations',

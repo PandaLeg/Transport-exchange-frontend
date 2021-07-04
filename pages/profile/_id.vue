@@ -20,13 +20,26 @@
             cols="12"
           >
             <v-avatar
-              class="avatar-profile-and-name"
+              class="avatar-profile-and-name img"
               size="150"
             >
-              <v-img
-                :src="avatarProfile"
+              <template
+                v-if="avatarProfile !== ''"
               >
-              </v-img>
+                <v-img
+                  :src="avatarProfile"
+                >
+                </v-img>
+              </template>
+              <template
+                v-else
+              >
+                <v-icon
+                  size="185"
+                >
+                  mdi-account-circle
+                </v-icon>
+              </template>
             </v-avatar>
           </v-col>
 
@@ -44,14 +57,14 @@
                   <div
                     v-if="checkRoleUser"
                   >
-                    {{ getUser.fullName }}
+                    {{ getUserProfile.fullName }}
                   </div>
                   <div
                     v-else
                   >
-                    {{ getUser.firstName }}
-                    {{ getUser.lastName }}
-                    {{ getUser.patronymic}}
+                    {{ getUserProfile.firstName }}
+                    {{ getUserProfile.lastName }}
+                    {{ getUserProfile.patronymic}}
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
@@ -106,7 +119,25 @@
             >
               <v-list-item-content class="avatar-profile-and-name title-information-font">
                 <v-list-item-title class="title">
-                  0
+                  {{ getCountCargoNotComplete }}
+                </v-list-item-title>
+                <v-list-item-subtitle>{{ $t('profile.unfinished') }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+
+          <v-col
+            justify="center"
+            cols="3"
+          >
+            <v-list-item
+              color="rgba(0, 0, 0, .4)"
+              three-line
+              dark
+            >
+              <v-list-item-content class="avatar-profile-and-name title-information-font">
+                <v-list-item-title class="title">
+                  {{ getCountCargoComplete }}
                 </v-list-item-title>
                 <v-list-item-subtitle>{{ $t('profile.successful') }}</v-list-item-subtitle>
               </v-list-item-content>
@@ -115,6 +146,79 @@
         </v-row>
       </v-img>
     </v-card>
+
+    <v-row
+      align="center"
+      justify="center"
+    >
+      <v-col
+        cols="12"
+        md="12"
+        lg="12"
+      >
+        <v-dialog
+          v-if="getUser !== null && getUserProfile.id !== getUser.id"
+          v-model="dialogSendingMessage"
+          persistent
+          max-width="600px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <div
+              class="text-center"
+            >
+              <v-btn
+                outlined
+                color="red accent-2"
+                class="white--text subtitle-font mt-2"
+                v-bind="attrs"
+                v-on="on"
+              >
+                {{ $t('view.writeMessage') }}
+              </v-btn>
+            </div>
+          </template>
+          <v-card>
+            <v-card-title>
+              <span class="headline">{{ $t('view.message') }}</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col
+                    cols="12"
+                    sm="12"
+                    md="12"
+                  >
+                    <v-textarea
+                      v-model="message"
+                      :label="$t('view.message')"
+                      outlined
+                    ></v-textarea>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="blue darken-1"
+                plain
+                @click="dialogSendingMessage = false"
+              >
+                {{ $t('view.closeBtn') }}
+              </v-btn>
+              <v-btn
+                color="blue darken-1"
+                dark
+                @click="sendMessage"
+              >
+                {{ $t('view.sendBtn') }}
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-col>
+    </v-row>
 
     <v-row
       justify="center"
@@ -150,16 +254,16 @@
                   v-if="checkRoleUser"
                 >
                 <span class="list-subtitle-information-font">
-                  {{ getUser.fullName }}
+                  {{ getUserProfile.fullName }}
                 </span>
                 </template>
                 <template
                   v-else
                 >
                    <span class="list-subtitle-information-font">
-                     {{ getUser.firstName }}
-                     {{ getUser.lastName }}
-                     {{ getUser.patronymic }}
+                     {{ getUserProfile.firstName }}
+                     {{ getUserProfile.lastName }}
+                     {{ getUserProfile.patronymic }}
                 </span>
                 </template>
               </v-col>
@@ -184,7 +288,7 @@
                   lg="8"
                 >
                 <span class="list-subtitle-information-font">
-                  {{ getUser.country }}
+                  {{ getUserProfile.country }}
                 </span>
                 </v-col>
               </v-row>
@@ -205,7 +309,7 @@
                   lg="8"
                 >
                 <span class="list-subtitle-information-font">
-                  {{ getUser.city }}
+                  {{ getUserProfile.city }}
                 </span>
                 </v-col>
               </v-row>
@@ -226,7 +330,7 @@
                 md="8"
                 lg="8"
               >
-                <span class="list-subtitle-information-font">{{ getUser.email }}</span>
+                <span class="list-subtitle-information-font">{{ getUserProfile.email }}</span>
               </v-col>
             </v-row>
           </div>
@@ -245,7 +349,7 @@
                 md="8"
                 lg="8"
               >
-                <span class="list-subtitle-information-font">{{ getUser.phone }}</span>
+                <span class="list-subtitle-information-font">{{ getUserProfile.phone }}</span>
               </v-col>
             </v-row>
           </div>
@@ -264,7 +368,7 @@
                 md="8"
                 lg="8"
               >
-                <span class="list-subtitle-information-font">28.03.21 18:00</span>
+                <span class="list-subtitle-information-font">{{ dateLastVisit }}</span>
               </v-col>
             </v-row>
           </div>
@@ -301,7 +405,7 @@
                 lg="8"
               >
                 <span class="list-subtitle-information-font">
-                  {{ getUser.companyName }}
+                  {{ getUserProfile.companyName }}
                 </span>
               </v-col>
             </v-row>
@@ -322,7 +426,7 @@
                 lg="8"
               >
                 <span class="list-subtitle-information-font">
-                  {{ getUser.country }}
+                  {{ getUserProfile.country }}
                 </span>
               </v-col>
             </v-row>
@@ -343,7 +447,7 @@
                 lg="8"
               >
                 <span class="list-subtitle-information-font">
-                  {{ getUser.city }}
+                  {{ getUserProfile.city }}
                 </span>
               </v-col>
             </v-row>
@@ -359,7 +463,7 @@
                 lg="12"
               >
                 <template
-                  v-if="getUser.status !== null"
+                  v-if="getUserProfile.status !== null"
                 >
                   <v-row>
                     <v-col
@@ -375,13 +479,14 @@
                       lg="8"
                     >
                       <span class="list-subtitle-information-font">
-                        {{ getUser.status }}
+                        {{ getUserProfile.status }}
                       </span>
                     </v-col>
                   </v-row>
                 </template>
+
                 <template
-                  v-else
+                  v-if="getUser.status === null && getUser.id === Number($route.params.id) && checkRoleUser"
                 >
                   <v-dialog
                     v-model="dialog"
@@ -397,12 +502,12 @@
                         v-on="on"
                         :disabled="getStatus"
                       >
-                        Подтвердить
+                        {{ $t('profile.сonfirm') }}
                       </v-btn>
                     </template>
                     <v-card>
                       <v-card-title>
-                        <span class="headline">Подтверждение</span>
+                        <span class="headline">{{ $t('profile.сonfirmation') }}</span>
                       </v-card-title>
                       <v-card-text>
                         <v-container>
@@ -417,7 +522,7 @@
                               >
                                 <v-text-field
                                   v-model="getUser.fullName"
-                                  label="Full name"
+                                  :label="$t('profile.fullName')"
                                   required
                                   disabled
                                 ></v-text-field>
@@ -434,7 +539,7 @@
                               >
                                 <v-text-field
                                   v-model="getUser.firstName"
-                                  label="First name"
+                                  :label="$t('profile.firstName')"
                                   required
                                   disabled
                                 ></v-text-field>
@@ -447,7 +552,7 @@
                               >
                                 <v-text-field
                                   v-model="getUser.lastName"
-                                  label="Last name"
+                                  :label="$t('profile.lastName')"
                                   required
                                   disabled
                                 ></v-text-field>
@@ -460,7 +565,7 @@
                               >
                                 <v-text-field
                                   v-model="getUser.patronymic"
-                                  label="Patronymic"
+                                  :label="$t('profile.patronymic')"
                                   required
                                   disabled
                                 ></v-text-field>
@@ -479,7 +584,7 @@
                             <v-col cols="12">
                               <v-textarea
                                 v-model="description"
-                                label="Description"
+                                :label="$t('profile.description')"
                               ></v-textarea>
                             </v-col>
                           </v-row>
@@ -493,14 +598,14 @@
                           text
                           @click="dialog = false"
                         >
-                          Close
+                          {{ $t('view.closeBtn') }}
                         </v-btn>
                         <v-btn
                           color="blue darken-1"
                           text
                           @click="sendConfirmation"
                         >
-                          Save
+                          {{ $t('profile.btnSave') }}
                         </v-btn>
                       </v-card-actions>
                     </v-card>
@@ -512,25 +617,61 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-snackbar
+      v-model="snackbarMessage"
+      :multi-line="multiLine"
+    >
+      <p>{{ $t('view.snackBarMessage') }}</p>
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="red"
+          text
+          v-bind="attrs"
+          @click="snackbarMessage = false"
+        >
+          {{ $t('view.closeBtn') }}
+        </v-btn>
+      </template>
+    </v-snackbar>
+
+    <v-snackbar
+      v-model="snackbarConfirm"
+      :multi-line="multiLine"
+    >
+      <p>{{ $t('profile.snackbarConfirm') }}</p>
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="red"
+          text
+          v-bind="attrs"
+          @click="snackbarConfirm = false"
+        >
+          {{ $t('view.closeBtn') }}
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
 <script>
-    import profilePageAvatar from '../../assets/AllisonProfilePage.jpg'
+    import profilePageAvatar from '../../assets/User_font_awesome.png'
     import backgroundImageClub from '../../assets/Kaliforniya_1.jpg'
+    import {parseCargoDate} from '../../service/cargo/parseDate'
 
     export default {
-        name: "profile",
-        async fetch({store}) {
+        name: "profile_id",
+        async fetch({store, params}) {
             let body = {
-                user: store.getters['getUser'],
-                store: store
+                id: params.id,
+                store: store,
+                user: store.getters['getUser']
             };
             store.commit('profile/clearCountCargo');
             store.commit('profile/clearCountTransports');
 
             await store.dispatch('profile/getCountCargoAction', body);
             await store.dispatch('profile/getCountTransportAction', body);
+            await store.dispatch('profile/getCountCompleteAction', body);
         },
         data() {
             return {
@@ -554,7 +695,12 @@
                 description: '',
                 tabs: null,
                 tabsClub: null,
-                dialog: false
+                dialog: false,
+                message: '',
+                dialogSendingMessage: false,
+                multiLine: true,
+                snackbarMessage: false,
+                snackbarConfirm: false
             }
         },
         computed: {
@@ -562,8 +708,12 @@
                 return this.$store.getters['getUser']
             },
 
+            getUserProfile() {
+                return this.$store.getters['profile/getUserProfile']
+            },
+
             checkRoleUser() {
-                let user = this.$store.getters['getUser'];
+                let user = this.$store.getters['profile/getUserProfile'];
                 return user.roles.map(role => role.name).includes('ROLE_LEGAL_USER');
             },
 
@@ -579,12 +729,27 @@
                 return this.$store.getters['profile/getCountTransports']
             },
 
+            getCountCargoComplete() {
+                return this.$store.getters['profile/getCountCargoComplete']
+            },
+
+            getCountCargoNotComplete() {
+                return this.$store.getters['profile/getCountCargoNotComplete']
+            },
+
             avatarProfile() {
-                return this.getUser.profilePicture ? this.getUser.profilePicture : profilePageAvatar
+                return this.getUserProfile.profilePicture ? this.getUserProfile.profilePicture : ''
             },
 
             backgroundImageProfile() {
-                return this.getUser.profileBackground ? this.getUser.profileBackground : backgroundImageClub
+                return this.getUserProfile.profileBackground ? this.getUserProfile.profileBackground : backgroundImageClub
+            },
+
+            dateLastVisit(){
+                console.log(this.getUserProfile);
+                let dateAdded = this.getUserProfile.lastVisit;
+
+                return parseCargoDate.parseDate(dateAdded, null, this.$i18n.localeProperties.code);
             },
 
             height() {
@@ -611,13 +776,36 @@
                     confirmation: confirmation,
                     store: this.$store
                 };
-                await this.$store.dispatch('profile/sendConfirmationAction', body);
+                await this.$store.dispatch('profile/sendConfirmationAction', body)
+                    .then(() => {
+                        this.snackbarConfirm = true;
+                    });
                 this.$store.commit('setStatusUser', true);
                 this.dialog = false;
+            },
+
+            async sendMessage() {
+                const chatMessage = Object.assign({}, {
+                    message: this.message
+                });
+
+                const body = {
+                    user: this.getUser,
+                    userCompanion: this.getUserProfile,
+                    chatMessage: chatMessage,
+                    store: this.$store
+                };
+
+                if (this.message !== '' && this.message !== null) {
+                    await this.$store.dispatch('chat/sendMessageAction', body)
+                        .then(() => {
+                            this.snackbarMessage = true;
+                        });
+                }
+
+                this.dialogSendingMessage = false;
+                this.message = '';
             }
-        },
-        mounted() {
-            console.log("PROFILE", this.getUser);
         }
     }
 </script>
@@ -669,6 +857,11 @@
     text-align: center;
     z-index: 3;
     color: #fff;
+  }
+
+  .img {
+    border: 4px solid #555;
+    background-color: white;
   }
 
   .justify-btn {

@@ -431,6 +431,25 @@
                     </v-list-item-content>
                   </template>
                 </v-autocomplete>
+
+                <v-radio-group
+                  v-model="radios"
+                  row
+                >
+                  <v-radio
+                    label="Авто"
+                    value="bodyType"
+                  ></v-radio>
+                  <v-radio
+                    label="Морской"
+                    value="vesselType"
+                  ></v-radio>
+                  <v-radio
+                    label="ЖД"
+                    value="carType"
+                  ></v-radio>
+                </v-radio-group>
+
               </v-col>
             </v-row>
             <v-row>
@@ -512,6 +531,8 @@
     import {countries} from "../../../json/countries.json"
     import {names} from '../../../json/cargo.name.json'
     import {typesBody} from '../../../json/body.type.json'
+    import {typesVessel} from '../../../json/vessel.type.json'
+    import {typesCar} from '../../../json/car.type.json'
     import {validationMixin} from 'vuelidate'
     import {required} from 'vuelidate/lib/validators'
 
@@ -527,8 +548,6 @@
                 countries: [],
                 citiesFrom: [],
                 citiesTo: [],
-                itemsNamesCargo: [],
-                bodyTypes: [],
                 searchCityFrom: null,
                 searchCityTo: null,
                 searchName: null,
@@ -537,6 +556,7 @@
                 loadingCityTo: false,
                 loadingNameCargo: false,
                 loadingBodyType: false,
+                bodyTypes: [],
                 menu: false,
                 menu2: false,
                 loadingDateFrom: null,
@@ -551,7 +571,8 @@
                 paymentForm: null,
                 paymentTime: null,
                 lang: 'ru',
-                valid: false
+                valid: false,
+                radios: 'bodyType'
             }
         },
         validations: {
@@ -561,8 +582,7 @@
         },
         created() {
             this.countries = countries;
-            this.itemsNamesCargo = names;
-            this.bodyTypes = typesBody;
+            this.localeBodyTypes(typesBody);
         },
         computed: {
             faTruckLoading() {
@@ -577,6 +597,22 @@
                 return this.countries.map(country => {
                     return Object.assign({}, country)
                 });
+            },
+
+            itemsNamesCargo() {
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return names.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.enName})
+                    });
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return names.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.uaName})
+                    });
+                } else {
+                    return names.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.ruName})
+                    });
+                }
             },
 
             getCitiesFrom() {
@@ -627,6 +663,16 @@
                 this.checkFullFilledField()
             },
 
+            radios(val) {
+                if (val === 'bodyType') {
+                    this.localeBodyTypes(typesBody);
+                } else if (val === 'vesselType') {
+                    this.localeBodyTypes(typesVessel);
+                } else {
+                    this.localeBodyTypes(typesCar);
+                }
+            },
+
             async searchCityFrom(val) {
                 let checkFilled = false;
 
@@ -643,7 +689,7 @@
                     this.loadingCityFrom = true;
 
                     const result = await this.$axios('https://public.opendatasoft.com/api/records/1.0/search/?dataset=' +
-                            'geonames-all-cities-with-a-population-500&q=' + val + '&lang=ru&rows=50');
+                        'geonames-all-cities-with-a-population-500&q=' + val + '&lang=ru&rows=50');
                     const data = await result.data;
 
                     this.citiesFrom = data.records;
@@ -679,6 +725,22 @@
             }
         },
         methods: {
+            localeBodyTypes(listBody) {
+                if (this.$i18n.localeProperties.code === 'en') {
+                    this.bodyTypes = listBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.enName})
+                    });
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    this.bodyTypes = listBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.uaName})
+                    });
+                } else {
+                    this.bodyTypes = listBody.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.ruName})
+                    });
+                }
+            },
+
             checkFullFilledField() {
                 if (!this.countryTo && !this.countryFrom && !this.cityFrom && !this.cityTo) {
                     this.valid = false;
@@ -719,7 +781,7 @@
                         typesTransportation: this.typesTransportation
                     },
                     {
-                        nameCargo: this.nameCargo?.name, bodyType: this.bodyType?.name
+                        nameCargo: this.nameCargo?.name, bodyType: this.bodyType?.name, bodyTypeView: this.radios
                     },
                     {
                         paymentForm: this.paymentForm ? this.paymentForm : undefined,

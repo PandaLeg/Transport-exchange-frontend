@@ -1,84 +1,100 @@
 {
   "typesCar": [
     {
-      "id": "1",
-      "name": "Вагон-цистерна",
-      "check": "open"
+      "id": "94",
+      "ruName": "Вагон-цистерна",
+      "enName": "Tank car",
+      "uaName": "Вагон-цистерна"
     },
     {
-      "id": "2",
-      "name": "Вагон-цистерна (нефтепродукты)",
-      "check": "open"
+      "id": "95",
+      "ruName": "Вагон-цистерна (нефтепродукты)",
+      "enName": "Tank car (petroleum products)",
+      "uaName": "Вагон-цистерна (нафтопродукти)"
     },
     {
-      "id": "3",
-      "name": "Вагон-цистерна (светлые нефтепродукты)",
-      "check": "open"
+      "id": "96",
+      "ruName": "Вагон-цистерна (светлые нефтепродукты)",
+      "enName": "Tank car (light oil products)",
+      "uaName": "Вагон-цистерна (світлі нафтопродукти)"
     },
     {
-      "id": "4",
-      "name": "Вагон-цистерна (химическая)",
-      "check": "open"
+      "id": "97",
+      "ruName": "Вагон-цистерна (химическая)",
+      "enName": "Tank car (chemical)",
+      "uaName": "Вагон-цистерна (хімічна)"
     },
     {
-      "id": "5",
-      "name": "Крытый вагон",
-      "check": "cistern"
+      "id": "98",
+      "ruName": "Крытый вагон",
+      "enName": "Covered car",
+      "uaName": "Критий вагон"
     },
     {
-      "id": "6",
-      "name": "Крытый вагон (увеличенный)",
-      "check": "cistern"
+      "id": "99",
+      "ruName": "Крытый вагон (увеличенный)",
+      "enName": "Covered car (enlarged)",
+      "uaName": "Критий вагон (збільшений)"
     },
     {
-      "id": "7",
-      "name": "Рефрижератор",
-      "check": "cistern"
+      "id": "100",
+      "ruName": "Рефрижератор",
+      "enName": "Refrigerator",
+      "uaName": "Рефрижератор"
     },
     {
-      "id": "8",
-      "name": "Думпкар",
-      "check": "cistern"
+      "id": "101",
+      "ruName": "Думпкар",
+      "enName": "Dump car",
+      "uaName": "Думпкар"
     },
     {
-      "id": "9",
-      "name": "Полувагон",
-      "check": "cistern"
+      "id": "102",
+      "ruName": "Полувагон",
+      "enName": "Gondola car",
+      "uaName": "Піввагон"
     },
     {
-      "id": "10",
-      "name": "Хоппер",
-      "check": "cistern"
+      "id": "103",
+      "ruName": "Хоппер",
+      "enName": "Hopper",
+      "uaName": "Хоппер"
     },
     {
-      "id": "11",
-      "name": "Хоппер (сыпучие грузы)",
-      "check": "cistern"
+      "id": "104",
+      "ruName": "Хоппер (сыпучие грузы)",
+      "enName": "Hopper (bulk cargo)",
+      "uaName": "Хоппер (сипучі вантажі)"
     },
     {
-      "id": "12",
-      "name": "Хоппер (дозатор)",
-      "check": "spec_equipment"
+      "id": "105",
+      "ruName": "Хоппер (дозатор)",
+      "enName": "Hopper (dispenser)",
+      "uaName": "Хоппер (дозатор)"
     },
     {
-      "id": "13",
-      "name": "Вагон-платформа",
-      "check": "spec_equipment"
+      "id": "106",
+      "ruName": "Вагон-платформа",
+      "enName": "Platform car",
+      "uaName": "Вагон-платформа"
     },
     {
-      "id": "14",
-      "name": "Универсальная вагон-платформа",
-      "check": "spec_equipment"
+      "id": "107",
+      "ruName": "Универсальная вагон-платформа",
+      "enName": "Universal flat car",
+      "uaName": "Універсальна вагон-платформа"
     },
     {
-      "id": "15",
-      "name": "Вагон-платформа (лесовоз)",
-      "check": "spec_equipment"
+      "id": "108",
+      "ruName": "Вагон-платформа (лесовоз)",
+      "enName": "Platform car (timber)",
+      "uaName": "Вагон-платформа (лісовоз)"
     },
     {
-      "id": "16",
-      "name": "Вагон-платформа (контейнеровоз)",
-      "check": "spec_equipment"
+      "id": "109",
+      "ruName": "Вагон-платформа (контейнеровоз)",
+      "enName": "Platform car (container)",
+      "uaName": "Вагон-платформа (контейнеровоз)"
     }
   ]
 }

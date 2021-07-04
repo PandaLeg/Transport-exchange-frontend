@@ -127,9 +127,76 @@
       <v-card>
         <v-card-title>{{ $t('offerExecution.briefInformation') }}</v-card-title>
         <v-card-text>
-          <span>
-            {{ cargoView.name }}
-          </span>
+          <div class="subtitle-font mt-3">
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+                lg="4"
+              >
+                Тип груза:
+              </v-col>
+              <v-col
+                cols="12"
+                md="8"
+                lg="8"
+              >
+                <template>
+                    <span class="spectral-font text--primary">
+                      {{ localizeName }}
+                    </span>
+                </template>
+              </v-col>
+            </v-row>
+          </div>
+
+          <div class="subtitle-font mt-3">
+            <v-row>
+              <v-col
+                cols="12"
+                md="4"
+                lg="4"
+              >
+                Тип кузова:
+              </v-col>
+              <v-col
+                cols="12"
+                md="8"
+                lg="8"
+              >
+                <template>
+                    <span class="spectral-font text--primary">
+                      {{ localizeBodyType }}
+                    </span>
+                </template>
+              </v-col>
+            </v-row>
+          </div>
+
+          <div class="subtitle-font mt-3">
+            <v-row>
+              <v-col
+                cols="12"
+                sm="4"
+                md="4"
+                lg="4"
+              >
+                <span class="subtitle-font">{{ $t('view.dateLoading') }}:</span>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="8"
+                md="8"
+                lg="8"
+              >
+                  <span
+                    class="spectral-font text--primary">
+                    {{ $t('view.from') }} {{ parseDate.loadingDateFrom}} {{ $t('view.by') }}
+                    {{ parseDate.loadingDateBy }}
+                  </span>
+              </v-col>
+            </v-row>
+          </div>
         </v-card-text>
       </v-card>
     </v-col>
@@ -138,6 +205,7 @@
 
 <script>
     import {faTruckLoading, faTruckMoving} from '@fortawesome/free-solid-svg-icons'
+    import {parseCargoDate} from '../../../service/cargo/parseDate'
 
     export default {
         name: "offer-cargo-id",
@@ -157,6 +225,65 @@
             },
 
             cargoView() {
+                return this.$store.getters['cargo/getCargoView']
+            },
+
+            localizeName() {
+                let cargo = this.$store.getters['cargo/getCargoView'];
+
+                let nameCargo = cargo.typesCargo.find(item => {
+                    if (item.type === 'nameCargo') {
+                        return item;
+                    }
+                });
+
+                if (nameCargo) {
+                    if (this.$i18n.localeProperties.code === 'en') {
+                        return nameCargo.enName;
+                    } else if (this.$i18n.localeProperties.code === 'ua') {
+                        return nameCargo.uaName;
+                    } else {
+                        return nameCargo.ruName
+                    }
+                }
+            },
+
+            localizeBodyType() {
+                let cargo = this.$store.getters['cargo/getCargoView'];
+
+                let bodyType = cargo.typesCargo.find(item => {
+                    if (item.type === 'bodyType') {
+                        return item;
+                    }
+                    if(item.type === 'vesselType'){
+                        return item;
+                    }
+                    if(item.type === 'carType'){
+                        return item;
+                    }
+                });
+
+                if (bodyType) {
+                    if (this.$i18n.localeProperties.code === 'en') {
+                        return bodyType.enName;
+                    } else if (this.$i18n.localeProperties.code === 'ua') {
+                        return bodyType.uaName;
+                    } else {
+                        return bodyType.ruName
+                    }
+                }
+            },
+
+            parseDate() {
+                let cargo = this.$store.getters['cargo/getCargoView'];
+
+                let loadingDateFrom = cargo.loadingDateFrom;
+                let loadingDateBy = cargo.loadingDateBy;
+
+                return parseCargoDate.parseDate(loadingDateFrom, loadingDateBy, this.$i18n.localeProperties.code);
+            },
+
+            getCargoType() {
                 return this.$store.getters['cargo/getCargoView']
             }
         },

@@ -1,44 +1,52 @@
 {
   "typesVessel": [
     {
-      "id": "1",
-      "name": "Танкер",
-      "check": "open"
+      "id": "86",
+      "ruName": "Танкер",
+      "enName": "Tanker",
+      "uaName": "Танкер"
     },
     {
-      "id": "2",
-      "name": "Газовоз",
-      "check": "open"
+      "id": "87",
+      "ruName": "Газовоз",
+      "enName": "Gas carrier",
+      "uaName": "Газовоз"
     },
     {
-      "id": "3",
-      "name": "Сухогруз",
-      "check": "open"
+      "id": "88",
+      "ruName": "Сухогруз",
+      "enName": "Cargo ship",
+      "uaName": "Суховантаж"
     },
     {
-      "id": "4",
-      "name": "Контейнеровоз",
-      "check": "open"
+      "id": "89",
+      "ruName": "Контейнеровоз",
+      "enName": "Container ship",
+      "uaName": "Контейнеровоз"
     },
     {
-      "id": "5",
-      "name": "Ролкер",
-      "check": "open"
+      "id": "90",
+      "ruName": "Ролкер",
+      "enName": "ROLL-ON/ROLL-OFF SHIP",
+      "uaName": "Ролкер"
     },
     {
-      "id": "6",
-      "name": "Балкер",
-      "check": "open"
+      "id": "91",
+      "ruName": "Балкер",
+      "enName": "Bulk carrier",
+      "uaName": "Балкер"
     },
     {
-      "id": "7",
-      "name": "Рефрежиратор",
-      "check": "open"
+      "id": "92",
+      "ruName": "Рефрижератор",
+      "enName": "Refrigerator ship",
+      "uaName": "Рефрижератор"
     },
     {
-      "id": "8",
-      "name": "Лесовоз",
-      "check": "open"
+      "id": "93",
+      "ruName": "Лесовоз",
+      "enName": "Timber ship",
+      "uaName": "Лісовоз"
     }
   ]
 }

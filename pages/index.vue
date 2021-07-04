@@ -19,7 +19,7 @@
             cols="12"
           >
             <span class="title-main title-information-font">
-              CARGO&TRANSPORT - сервис международных перевозок. <br>
+              CARGO&TRANSPORT - {{ $t('main.title') }}. <br>
             </span>
           </v-col>
         </v-row>
@@ -31,7 +31,7 @@
         >
           <v-col
             justify="center"
-            cols="4"
+            cols="3"
           >
             <v-card
               dark
@@ -49,8 +49,10 @@
                   </v-list-item-avatar>
 
                   <v-list-item-content>
-                    <v-list-item-title class="card-statistics-font">{{ getCountCargo }}</v-list-item-title>
-                    <v-list-item-subtitle v-text="'Заявок по грузу'"></v-list-item-subtitle>
+                    <v-list-item-title class="card-statistics-font">
+                      {{ getCargoAndTransport.countCargo }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle v-text="$t('main.titleCargoTotal')"></v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
@@ -59,7 +61,37 @@
 
           <v-col
             justify="center"
-            cols="4"
+            cols="3"
+          >
+            <v-card
+              dark
+              class="statistics-card title-information-font"
+              max-width="300"
+            >
+              <v-list>
+                <v-list-item>
+                  <v-list-item-avatar>
+                    <fa-icon
+                      :icon="faBox"
+                      dark
+                    >
+                    </fa-icon>
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title class="card-statistics-font">
+                      {{ getCargoAndTransport.countCargoToday }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle v-text="$t('main.titleCargoToday')"></v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+
+          <v-col
+            justify="center"
+            cols="3"
           >
             <v-card
               dark
@@ -77,8 +109,40 @@
                   </v-list-item-avatar>
 
                   <v-list-item-content>
-                    <v-list-item-title class="card-statistics-font">{{ getCountTransports }}</v-list-item-title>
-                    <v-list-item-subtitle v-text="'Заявок по транспорту'"></v-list-item-subtitle>
+                    <v-list-item-title class="card-statistics-font">
+                      {{ getCargoAndTransport.countTransports }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle v-text="$t('main.titleTransportTotal')"></v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+
+          <v-col
+            justify="center"
+            cols="3"
+          >
+            <v-card
+              dark
+              class="statistics-card title-information-font"
+              max-width="300"
+            >
+              <v-list>
+                <v-list-item>
+                  <v-list-item-avatar>
+                    <fa-icon
+                      :icon="faTruckMoving"
+                      dark
+                    >
+                    </fa-icon>
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title class="card-statistics-font">
+                      {{ getCargoAndTransport.countTransportsToday }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle v-text="$t('main.titleTransportToday')"></v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
@@ -106,17 +170,16 @@
                 avatarProfile: profilePageAvatar
             }
         },
+        created(){
+            this.statisticsCargoAndTransport();
+        },
         computed: {
             getUser() {
                 return this.$store.getters['getUser']
             },
 
-            getCountCargo() {
-                return this.$store.getters['getCountCargo']
-            },
-
-            getCountTransports() {
-                return this.$store.getters['getCountTransports']
+            getCargoAndTransport() {
+                return this.$store.getters['admin/getCargoAndTransport']
             },
 
             faBox() {
@@ -140,6 +203,11 @@
                     case 'xl':
                         return 700;
                 }
+            }
+        },
+        methods:{
+            async statisticsCargoAndTransport(){
+                await this.$store.dispatch('admin/statisticsCountsCargoAndTransportActions');
             }
         }
     }

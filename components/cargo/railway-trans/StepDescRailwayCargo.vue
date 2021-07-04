@@ -92,6 +92,7 @@
           >
             <v-text-field
               v-model="weightFrom"
+              type="number"
               :error-messages="weightFromErrors"
               color="blue-grey lighten-2"
               :label="$t('addCargo.from')"
@@ -106,6 +107,7 @@
           >
             <v-text-field
               v-model="weightUpTo"
+              type="number"
               :error-messages="weightUpToErrors"
               color="blue-grey lighten-2"
               :label="$t('addCargo.before')"
@@ -131,10 +133,11 @@
           >
             <v-text-field
               v-model="volumeFrom"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addCargo.from')"
+              filled
+              clearable
             ></v-text-field>
           </v-col>
           <v-col
@@ -144,10 +147,11 @@
           >
             <v-text-field
               v-model="volumeUpTo"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addCargo.before')"
+              filled
+              clearable
             ></v-text-field>
           </v-col>
         </v-row>
@@ -171,10 +175,11 @@
           >
             <v-text-field
               v-model="lengthCargo"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addCargo.length')"
+              filled
+              clearable
             ></v-text-field>
           </v-col>
 
@@ -185,10 +190,11 @@
           >
             <v-text-field
               v-model="widthCargo"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addCargo.width')"
+              filled
+              clearable
             ></v-text-field>
           </v-col>
 
@@ -199,10 +205,11 @@
           >
             <v-text-field
               v-model="heightCargo"
-              filled
-              clearable
+              type="number"
               color="blue-grey lighten-2"
               :label="$t('addCargo.height')"
+              filled
+              clearable
             ></v-text-field>
           </v-col>
         </v-row>
@@ -226,7 +233,7 @@
               v-model="adr"
               :items="getListArg"
               :menu-props="{ bottom: true, offsetY: true }"
-              hint="Выберите класс ADR"
+              :hint="$t('addCargo.selectAdr')"
               persistent-hint
               filled
               clearable
@@ -981,14 +988,14 @@
         data() {
             return {
                 name: '',
-                weightFrom: '',
-                weightUpTo: '',
-                volumeFrom: '',
-                volumeUpTo: '',
-                lengthCargo: '',
-                widthCargo: '',
-                heightCargo: '',
-                adr: '',
+                weightFrom: null,
+                weightUpTo: null,
+                volumeFrom: null,
+                volumeUpTo: null,
+                lengthCargo: null,
+                widthCargo: null,
+                heightCargo: null,
+                adr: null,
                 firstLoadingPoint: null,
                 secondLoadingPoint: null,
                 thirdLoadingPoint: null,
@@ -1036,7 +1043,6 @@
                 entriesFourthUnloadingPoint: [],
                 entriesFifthUnloadingPoint: [],
                 searchCity: '',
-                listNamesCargo: [],
                 listNamesContainers: [],
                 valid: true,
                 checkFilledTwoPointLoading: false,
@@ -1075,9 +1081,6 @@
                 required
             }
         },
-        created() {
-            this.listNamesCargo = names;
-        },
         computed: {
             faArrowAltCircleRight() {
                 return faArrowAltCircleRight
@@ -1089,6 +1092,22 @@
 
             faTruckMoving() {
                 return faTruckMoving
+            },
+
+            listNamesCargo(){
+                if (this.$i18n.localeProperties.code === 'en') {
+                    return names.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.enName})
+                    });
+                } else if (this.$i18n.localeProperties.code === 'ua') {
+                    return names.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.uaName})
+                    });
+                } else {
+                    return names.map(item => {
+                        return Object.assign({}, {id: item.id, name: item.ruName})
+                    });
+                }
             },
 
             getInitialCargo() {
@@ -1229,7 +1248,7 @@
 
                     console.log("FIRST SEARCH", val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1261,7 +1280,7 @@
 
                     console.log("SECOND SEARCH", val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1292,7 +1311,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1323,7 +1342,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1354,7 +1373,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1385,7 +1404,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1416,7 +1435,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1447,7 +1466,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1478,7 +1497,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1509,7 +1528,7 @@
 
                     console.log(val);
                     // Lazily load input items
-                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-1000&q=' +
+                    fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=' +
                         val + '&lang=ru&rows=50')
                         .then(res => res.json())
                         .then(res => {
@@ -1695,13 +1714,19 @@
                 this.$store.commit('cargo/setPlacesCargo', places);
 
                 let cargo = {
-                    name: this.name.name, weightFrom: this.weightFrom, weightUpTo: this.weightUpTo,
-                    volumeFrom: this.volumeFrom, volumeUpTo: this.volumeUpTo, lengthCargo: this.lengthCargo,
+                    weightFrom: this.weightFrom, weightUpTo: this.weightUpTo, volumeFrom: this.volumeFrom,
+                    volumeUpTo: this.volumeUpTo, lengthCargo: this.lengthCargo,
                     widthCargo: this.widthCargo, heightCargo: this.heightCargo, adr: this.adr,
-                    loadingDateFrom: this.loadingDateFrom,
-                    loadingDateBy: this.loadingDateBy
+                    loadingDateFrom: this.loadingDateFrom, loadingDateBy: this.loadingDateBy
                 };
-                Object.assign(this.getInitialCargo, cargo);
+
+                let propertyCargo = {
+                    name: this.name.name
+                };
+
+                this.$store.commit('cargo/setInitialCargo', Object.assign(this.getInitialCargo, cargo));
+
+                this.$store.commit('cargo/setPropertiesCargo', propertyCargo);
 
                 if (n === this.steps) {
                     this.setE1(1);

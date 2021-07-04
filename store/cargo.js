@@ -4,163 +4,160 @@ import authHeader from '../service/auth-header'
 const API_URL = 'http://localhost:9090/cargo/';
 
 export const state = () => ({
-    initialCargo: {},
-    listPlacesCargo: [],
-    propertiesCargo: {},
-    cargo: [],
-    cargoAfterSearch: [],
-    dataForSearchCargo: {},
-    listPointsAllCargo: [],
-    listPointsCargo: [],
-    listPhotoCargo: [],
-    cargoView: {},
-    user: {},
-    checkUser: false,
-    checkUserFromOffer: false,
-    resultSearch: {},
-    pathToSearch: '',
-    currentPage: 1,
-    totalPages: 0,
-    pageSize: 3,
-    permissions: [],
-    pointsInside: [],
-    pointsFrom: [],
-    pointsTo: [],
-    transportation: {
-      listRu: [
-        'Автоперевозка', 'Морская перевозка', 'Ж/Д перевозка'
-      ],
-      listEn: [
-        'Road transportation', 'Sea transportation', 'Railway transportation'
-      ],
-      listUa: [
-        'Автоперевезення', 'Морське перевезення', 'Залізничне перевезення'
-      ]
-    },
-    listArg: [
-      '1', '2', '3', '4', '5',
-      '6', '7', '8', '9'
+  initialCargo: {},
+  listPlacesCargo: [],
+  propertiesCargo: {},
+  cargo: [],
+  cargoAfterSearch: [],
+  dataForSearchCargo: {},
+  listPointsAllCargo: [],
+  listPointsCargo: [],
+  listPhotoCargo: [],
+  listFilesCargo: [],
+  cargoView: {},
+  user: {},
+  checkUser: false,
+  checkUserFromOffer: false,
+  resultSearch: {},
+  pathToSearch: '',
+  currentPage: 1,
+  totalPages: 0,
+  pageSize: 3,
+  permissions: [],
+  pointsInside: [],
+  pointsFrom: [],
+  pointsTo: [],
+  transportation: {
+    listRu: [
+      'Автоперевозка', 'Морская перевозка', 'Ж/Д перевозка'
     ],
-    loadingCar: {
-      listRu: [
-        'Верхняя', 'Задняя', 'Боковая',
-        'Со снятием стоек', 'Со снятием поперечин',
-        'С полной растентовкой', 'Без ворот'
-      ],
-      listEn: [
-        'Top', 'Back', 'Side',
-        'With racks removal', 'With crossbars removal',
-        'With full cover', 'Without gates'
-      ],
-      listUa: [
-        'Верхнє', 'Заднє', 'Бічне',
-        'Зі зняттям стійок', 'Зі зняттям поперечин',
-        'З повною розтентовкою', 'Без воріт'
-      ]
-    },
-    permission: {
-      listRu: [
-        'TIR', 'CMR', 'По декларации', 'Медкнижка', 'T1'
-      ],
-      listEn: [
-        'TIR', 'CMR', 'By declaration', 'Medical record', 'T1'
-      ],
-      listUa: [
-        'TIR', 'CMR', 'За декларацією', 'Медкнига', 'T1'
-      ],
-    },
-    permissionForTrain: {
-      listRu: [
-        'Ж/Д накладная'
-      ],
-      listEn: [
-        'Railway Bill'
-      ],
-      listUa: [
-        'Залізнична накладна'
-      ],
-    },
-    incoterms: [
-      'CFR', 'CIF', 'CPT', 'CIP',
-      'DAT', 'DAP', 'DDP',
-      'EXW',
-      'FCA', 'FAS', 'FOB'
+    listEn: [
+      'Road transportation', 'Sea transportation', 'Railway transportation'
     ],
-    loadingVessel: {
-      listRu: [
-        'LCL(неполная)', 'FCL(полная)'
+    listUa: [
+      'Автоперевезення', 'Морське перевезення', 'Залізничне перевезення'
+    ]
+  },
+  listArg: [
+    '1', '2', '3', '4', '5',
+    '6', '7', '8', '9'
+  ],
+  loadingCar: {
+    listRu: [
+      'Верхняя', 'Задняя', 'Боковая',
+      'Со снятием стоек', 'Со снятием поперечин',
+      'С полной растентовкой', 'Без ворот'
+    ],
+    listEn: [
+      'Top', 'Back', 'Side',
+      'With racks removal', 'With crossbars removal',
+      'With full cover', 'Without gates'
+    ],
+    listUa: [
+      'Верхнє', 'Заднє', 'Бічне',
+      'Зі зняттям стійок', 'Зі зняттям поперечин',
+      'З повною розтентовкою', 'Без воріт'
+    ]
+  },
+  permission: {
+    listRu: [
+      'TIR', 'CMR', 'По декларации', 'Медкнижка', 'T1'
+    ],
+    listEn: [
+      'TIR', 'CMR', 'By declaration', 'Medical record', 'T1'
+    ],
+    listUa: [
+      'TIR', 'CMR', 'За декларацією', 'Медкнига', 'T1'
+    ],
+  },
+  permissionForTrain: {
+    listRu: [
+      'Ж/Д накладная'
+    ],
+    listEn: [
+      'Railway Bill'
+    ],
+    listUa: [
+      'Залізнична накладна'
+    ],
+  },
+  incoterms: [
+    'CFR', 'CIF', 'CPT', 'CIP',
+    'DAT', 'DAP', 'DDP',
+    'EXW',
+    'FCA', 'FAS', 'FOB'
+  ],
+  loadingVessel: {
+    listRu: [
+      'LCL(неполная)', 'FCL(полная)'
+    ],
+    listEn: [
+      'LCL(incomplete)', 'FCL(full)'
+    ],
+    listUa: [
+      'LCL(неповна)', 'FCL(повна)'
+    ]
+  },
+  paymentType: {
+    listRu: [
+      'Сумма', 'Запрос ставки'
+    ],
+    listEn:
+      [
+        'Amount', 'Bid request'
       ],
-      listEn: [
-        'LCL(incomplete)', 'FCL(full)'
-      ],
-      listUa: [
-        'LCL(неповна)', 'FCL(повна)'
+    listUa:
+      [
+        'Сума', 'Запит ставки'
       ]
-    },
-    paymentType: {
+  },
+  listCurrency: [
+    'EUR', 'USD', 'UAH',
+    'BYN', 'RUB', 'KZT',
+    'PLN', 'UZS'
+  ],
+  listCostPer:
+    {
       listRu: [
-        'Сумма', 'Запрос ставки'
+        'км', 'сутки'
       ],
       listEn:
         [
-          'Amount', 'Bid request'
+          'km', 'day'
         ],
       listUa:
         [
-          'Сума', 'Запит ставки'
-        ]
-    }
-    ,
-    listCurrency: [
-      'EUR', 'USD', 'UAH',
-      'BYN', 'RUB', 'KZT',
-      'PLN', 'UZS'
-    ],
-    listCostPer:
-      {
-        listRu: [
-          'км', 'сутки'
-        ],
-        listEn:
-          [
-            'km', 'day'
-          ],
-        listUa:
-          [
-            'км', 'добу'
-          ]
-      }
-    ,
-    paymentForm: {
-      listRu: [
-        'наличными', 'безналичными', 'комбинированная', 'карта', 'электронный платёж'
-      ],
-      listEn:
-        [
-          'cash', 'non-cash', 'combined', 'card', 'electronic payment'
-        ],
-      listUa:
-        [
-          'готівкою', 'безготівкою', 'комбінована', 'карта', 'електронний платіж'
-        ]
-    }
-    ,
-    paymentTime: {
-      listRu: [
-        'на загрузке', 'на выгрузке', 'по оригиналам'
-      ],
-      listEn:
-        [
-          'on loading', 'unloading', 'by originals'
-        ],
-      listUa:
-        [
-          'на завантаженні', 'при розвантаженні', 'за оригіналами'
+          'км', 'добу'
         ]
     },
-    countries: [],
-  })
-;
+  paymentForm: {
+    listRu: [
+      'наличными', 'безналичными', 'комбинированная', 'карта', 'электронный платёж'
+    ],
+    listEn:
+      [
+        'cash', 'non-cash', 'combined', 'card', 'electronic payment'
+      ],
+    listUa:
+      [
+        'готівкою', 'безготівкою', 'комбінована', 'карта', 'електронний платіж'
+      ]
+  },
+  paymentTime: {
+    listRu: [
+      'на загрузке', 'на выгрузке', 'по оригиналам'
+    ],
+    listEn:
+      [
+        'on loading', 'unloading', 'by originals'
+      ],
+    listUa:
+      [
+        'на завантаженні', 'при розвантаженні', 'за оригіналами'
+      ]
+  },
+  countries: [],
+});
 
 export const mutations = {
   setInitialCargo(state, cargo) {
@@ -259,6 +256,10 @@ export const mutations = {
     state.listPhotoCargo = data;
   },
 
+  setFilesCargo(state, data) {
+    state.listFilesCargo = data;
+  },
+
   checkUserFromOffer(state, data) {
     console.log("CARGO FROM OFFER", data.idCargo);
     data.cargo.map(item => {
@@ -300,10 +301,11 @@ export const actions = {
     const response = await this.$axios.post(API_URL + 'search-cargo', body.data,
       {
         headers: Object.assign(authHeader(body.store)),
-        params: {page: body.page, pageSize: body.pageSize}
+        params: {bodyTypeView: body.bodyTypeView, page: body.page, pageSize: body.pageSize}
       });
     const data = await response.data;
 
+    console.log(data);
     if (data) {
       commit('searchCargoMutation', data.cargo);
       commit('setPointsAllCargo', data.pointsLUCargo);
@@ -319,6 +321,7 @@ export const actions = {
     if (data) {
       commit('setCargoView', data.cargo);
       commit('setPointsCargo', data.pointsLUCargo);
+      commit('setFilesCargo', data.filesCargo);
       commit('setUserCargo', data.user);
 
       return Promise.resolve(data);
@@ -329,6 +332,7 @@ export const actions = {
     const response = await this.$axios.get(API_URL + 'get-photos-cargo/' + id);
     const data = await response.data;
 
+    console.log("PHOTO", data);
     if (data) {
       commit('setPhotosCargo', data);
     }
@@ -428,6 +432,10 @@ export const getters = {
 
   getPhotoCargo: state => {
     return state.listPhotoCargo
+  },
+
+  getFilesCargo: state => {
+    return state.listFilesCargo
   },
 
   getInitialCargo: state => {
